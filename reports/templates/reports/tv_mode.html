@@ -1,0 +1,791 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نمای تلویزیون — کارا</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'reports/css/tv-mode.css' %}?v=11">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+    window.KaraDashboard = window.KaraDashboard || {};
+    window.KaraDashboard.currencyUnit = "{{ currency_unit|default:'تومان' }}";
+    </script>
+</head>
+<body class="tv-body">
+    <div class="tv-orb tv-orb-a" aria-hidden="true"></div>
+    <div class="tv-orb tv-orb-b" aria-hidden="true"></div>
+
+    <div id="tvRoot" class="tv-root"
+         data-api-url="{% url 'reports:api_tv' %}"
+         data-interval="{{ slide_interval }}"
+         data-refresh="{{ refresh_seconds }}">
+
+        <header class="tv-header">
+            <div class="tv-brand">
+                <span class="tv-brand-mark"><i class="bi bi-broadcast"></i></span>
+                <span class="tv-brand-copy">
+                    <strong>کارا</strong>
+                    <small>نمای مدیریتی زنده</small>
+                </span>
+                <span class="tv-live-badge" id="tvLiveBadge"><span class="tv-live-dot"></span><span class="tv-live-text">زنده</span></span>
+            </div>
+            <div class="tv-status">
+                <span class="tv-clock" id="tvClock">--:--</span>
+                <span class="tv-status-sep" aria-hidden="true"></span>
+                <span id="tvSyncLabel">به‌روزرسانی: {{ connection.last_sync_label }}</span>
+                <span id="tvConnStatus" class="tv-conn status-{{ connection.status }}">{{ connection.status_label }}</span>
+            </div>
+            <div class="tv-controls">
+                <button type="button" id="tvPauseBtn" class="tv-btn" title="توقف / ادامه (Space)" aria-label="توقف چرخش"><i class="bi bi-pause-fill"></i></button>
+                <button type="button" id="tvFullscreenBtn" class="tv-btn" title="تمام‌صفحه (F)" aria-label="تمام‌صفحه"><i class="bi bi-fullscreen"></i></button>
+            </div>
+        </header>
+
+        <main class="tv-stage">
+
+            {# ========== 1. نبض ========== #}
+            <section class="tv-slide active" data-slide="pulse" data-label="نبض کسب‌وکار">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">وضعیت کلی</span>
+                        <h2 class="tv-slide-title">نبض کسب‌وکار</h2>
+                    </div>
+                    <p class="tv-slide-sub">{{ period_subtitle|default:"کل داده‌ها · منبع گزارش فروش ویزیتور" }}</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if has_company_data %}
+                    <div class="tv-pulse">
+                        <div class="tv-pulse-hero">
+                            <div class="tv-pulse-glow" aria-hidden="true"></div>
+                            <div class="tv-pulse-hero-top">
+                                <span class="tv-pulse-label"><i class="bi bi-activity"></i> فروش خالص</span>
+                                {% with cmp=comparisons.total_pure_sale %}
+                                {% if cmp.is_comparable %}
+                                <div class="tv-hero-delta delta-{{ cmp.direction }}">
+                                    {% if cmp.direction == "up" %}<i class="bi bi-arrow-up-short"></i>
+                                    {% elif cmp.direction == "down" %}<i class="bi bi-arrow-down-short"></i>
+                                    {% else %}<i class="bi bi-dash"></i>{% endif %}
+                                    {% if cmp.percent_change is not None %}{{ cmp.percent_change }}٪{% else %}—{% endif %}
+                                    دوره قبل
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                            <div class="tv-pulse-value" data-count="{{ pulse.total_pure_sale.numeric|default:0 }}">
+                                {{ pulse.total_pure_sale.formatted|default:"—" }}
+                                <span class="tv-pulse-unit">{{ currency_unit }}</span>
+                            </div>
+                            <div class="tv-pulse-hero-foot">
+                                <div class="tv-pulse-mini">
+                                    <span>فروش نهایی</span>
+                                    <strong>{{ pulse.total_sale.formatted|default:"—" }}</strong>
+                                </div>
+                                <div class="tv-pulse-mini">
+                                    <span>سفارش نهایی</span>
+                                    <strong>{{ pulse.final_order_count.formatted|default:"—" }}</strong>
+                                </div>
+                                <div class="tv-pulse-mini">
+                                    <span>ویزیتور فعال</span>
+                                    <strong>{{ pulse.active_visitors.formatted|default:"—" }}</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tv-pulse-rail">
+                            <article class="tv-kpi tone-warn">
+                                <i class="bi bi-arrow-return-left"></i>
+                                <div>
+                                    <small>نرخ برگشت</small>
+                                    <strong>{{ pulse.reversion_rate.formatted|default:"—" }}<em>٪</em></strong>
+                                </div>
+                            </article>
+                            <article class="tv-kpi">
+                                <i class="bi bi-receipt"></i>
+                                <div>
+                                    <small>میانگین سفارش</small>
+                                    <strong>{{ pulse.avg_order_value.formatted|default:"—" }}<em>{{ currency_unit }}</em></strong>
+                                </div>
+                            </article>
+                            <article class="tv-kpi tone-danger">
+                                <i class="bi bi-box-arrow-in-down"></i>
+                                <div>
+                                    <small>برگشت فروش</small>
+                                    <strong>{{ pulse.sale_reversion.formatted|default:"—" }}<em>{{ currency_unit }}</em></strong>
+                                </div>
+                            </article>
+                            <article class="tv-kpi tone-danger">
+                                <i class="bi bi-truck"></i>
+                                <div>
+                                    <small>برگشت توزیع</small>
+                                    <strong>{{ pulse.distribution_reversion.formatted|default:"—" }}<em>{{ currency_unit }}</em></strong>
+                                </div>
+                            </article>
+                            {% if profitability.can_show_profit and pulse.operating_profit.formatted %}
+                            <article class="tv-kpi tone-ok">
+                                <i class="bi bi-graph-up-arrow"></i>
+                                <div>
+                                    <small>سود عملیاتی</small>
+                                    <strong>{{ pulse.operating_profit.formatted }}<em>{{ currency_unit }}</em></strong>
+                                </div>
+                            </article>
+                            {% endif %}
+                            {% if profitability.can_show_profit and pulse.net_profit.formatted %}
+                            <article class="tv-kpi tone-ok">
+                                <i class="bi bi-cash-stack"></i>
+                                <div>
+                                    <small>سود خالص</small>
+                                    <strong>{{ pulse.net_profit.formatted }}<em>{{ currency_unit }}</em></strong>
+                                </div>
+                            </article>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% if not profitability.can_show_profit %}
+                    <div class="tv-notice">
+                        <i class="bi bi-shield-exclamation"></i>
+                        <span>{{ profitability.message }}</span>
+                    </div>
+                    {% endif %}
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-inbox"></i>
+                        <span>داده‌ای همگام نشده — همگام‌سازی را اجرا کنید.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 2. روند ========== #}
+            <section class="tv-slide" data-slide="trend" data-label="روند فروش">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">تحلیل زمانی</span>
+                        <h2 class="tv-slide-title">روند فروش خالص</h2>
+                    </div>
+                    <p class="tv-slide-sub">{{ trend_subtitle|default:"نمودار روزانه · کل داده‌ها" }}</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if trend %}
+                    <div class="tv-trend">
+                        <aside class="tv-trend-side">
+                            <div class="tv-trend-stat">
+                                <span>آخرین روز</span>
+                                <strong id="tvTrendLatest">—</strong>
+                            </div>
+                            <div class="tv-trend-stat">
+                                <span>اوج دوره</span>
+                                <strong id="tvTrendPeak">—</strong>
+                            </div>
+                            <div class="tv-trend-stat">
+                                <span>میانگین روزانه</span>
+                                <strong id="tvTrendAvg">—</strong>
+                            </div>
+                            <div class="tv-trend-stat muted">
+                                <span>نقاط نمودار</span>
+                                <strong id="tvTrendPoints">{{ trend_points|default:trend|length }}</strong>
+                            </div>
+                        </aside>
+                        <div class="tv-chart-panel tv-trend-chart">
+                            <canvas id="tvTrendChart"></canvas>
+                            {{ trend|json_script:"tv-trend-data" }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-graph-up"></i>
+                        <span>برای نمایش روند، لایه تحلیلی و تاریخچه را بازسازی کنید.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 3. ویزیتورها ========== #}
+            <section class="tv-slide" data-slide="visitors" data-label="ویزیتورهای برتر">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">عملکرد فروش</span>
+                        <h2 class="tv-slide-title">ویزیتورهای برتر</h2>
+                    </div>
+                    <p class="tv-slide-sub">{{ preset_label|default:"کل داده‌ها" }} · {{ currency_unit }}</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if visitor_board.items %}
+                    <div class="tv-rank-board">
+                        {% with v=visitor_board.leader %}
+                        {% if v %}
+                        <article class="tv-rank-hero medal-gold">
+                            <div class="tv-rank-hero-main">
+                                <span class="tv-rank-hero-tag"><i class="bi bi-trophy-fill"></i> قهرمان</span>
+                                <div class="tv-rank-hero-who">
+                                    <span class="tv-rank-hero-avatar">{{ v.initials }}</span>
+                                    <div>
+                                        <h3>{{ v.name }}</h3>
+                                        <p>{% if v.head_visitor %}{{ v.head_visitor }} · {% endif %}{{ v.order_count }} سفارش</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tv-rank-hero-sale">
+                                <span>فروش نهایی</span>
+                                <strong>{{ v.total_sale_formatted }} <small>{{ currency_unit }}</small></strong>
+                            </div>
+                            <div class="tv-rank-hero-facts">
+                                <div><span>سهم</span><strong>{{ v.share_percent|floatformat:1 }}٪</strong></div>
+                                <div><span>خالص</span><strong>{{ v.pure_sale_formatted }}</strong></div>
+                                <div><span>میانگین</span><strong>{{ v.avg_order_formatted }}</strong></div>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endwith %}
+
+                        <div class="tv-rank-panel">
+                            <div class="tv-rank-panel-head">
+                                <h3>رتبه‌بندی</h3>
+                                <p>جمع {{ visitor_board.total_sale_formatted }} {{ currency_unit }} · {{ visitor_board.count }} نفر</p>
+                            </div>
+                            <ul class="tv-rank-list" style="--n: {{ visitor_board.count }}">
+                                {% for v in visitor_board.items %}
+                                <li class="tv-rank-row {% if forloop.first %}is-leader{% endif %}" style="--i:{{ forloop.counter }}; --bar:{{ v.bar_percent|floatformat:0 }}%">
+                                    <span class="tv-rank-num">{{ v.rank }}</span>
+                                    <div class="tv-rank-person">
+                                        <strong>{{ v.name }}</strong>
+                                        <div class="tv-rank-bar" aria-hidden="true"><span></span></div>
+                                    </div>
+                                    <span class="tv-rank-orders">{{ v.order_count }} سفارش</span>
+                                    <span class="tv-rank-sale">{{ v.total_sale_formatted }}</span>
+                                    <span class="tv-rank-share">{{ v.share_percent|floatformat:1 }}٪</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="tv-empty"><i class="bi bi-people"></i><span>داده‌ای برای رتبه‌بندی ویزیتور نیست.</span></div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 4. سرپرستان ========== #}
+            <section class="tv-slide" data-slide="supervisors" data-label="سرپرستان برتر">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">عملکرد تیمی</span>
+                        <h2 class="tv-slide-title">سرپرستان برتر</h2>
+                    </div>
+                    <p class="tv-slide-sub">{{ preset_label|default:"کل داده‌ها" }} · {{ currency_unit }}</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if supervisor_board.items %}
+                    <div class="tv-rank-board has-chart">
+                        {% with s=supervisor_board.leader %}
+                        {% if s %}
+                        <article class="tv-rank-hero medal-teal">
+                            <div class="tv-rank-hero-main">
+                                <span class="tv-rank-hero-tag"><i class="bi bi-trophy-fill"></i> تیم پیشتاز</span>
+                                <div class="tv-rank-hero-who">
+                                    <span class="tv-rank-hero-avatar teal">{{ s.initials }}</span>
+                                    <div>
+                                        <h3>{{ s.name }}</h3>
+                                        <p>کد {{ s.code }} · {{ s.order_count }} سفارش</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tv-rank-hero-sale">
+                                <span>فروش نهایی تیم</span>
+                                <strong>{{ s.total_sale_formatted }} <small>{{ currency_unit }}</small></strong>
+                            </div>
+                            <div class="tv-rank-hero-facts">
+                                <div><span>سهم</span><strong>{{ s.share_percent|floatformat:1 }}٪</strong></div>
+                                <div><span>خالص</span><strong>{{ s.pure_sale_formatted }}</strong></div>
+                                <div class="warn"><span>برگشت</span><strong>{{ s.distribution_reversion }}</strong></div>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endwith %}
+
+                        <div class="tv-rank-body">
+                            <div class="tv-rank-panel">
+                                <div class="tv-rank-panel-head">
+                                    <h3>رتبه‌بندی تیم‌ها</h3>
+                                    <p>جمع {{ supervisor_board.total_sale_formatted }} {{ currency_unit }} · {{ supervisor_board.count }} تیم</p>
+                                </div>
+                                <ul class="tv-rank-list" style="--n: {{ supervisor_board.count }}">
+                                    {% for s in supervisor_board.items %}
+                                    <li class="tv-rank-row {% if forloop.first %}is-leader{% endif %}" style="--i:{{ forloop.counter }}; --bar:{{ s.bar_percent|floatformat:0 }}%">
+                                        <span class="tv-rank-num">{{ s.rank }}</span>
+                                        <div class="tv-rank-person">
+                                            <strong>{{ s.name }}</strong>
+                                            <div class="tv-rank-bar" aria-hidden="true"><span></span></div>
+                                        </div>
+                                        <span class="tv-rank-orders">{{ s.order_count }} سفارش</span>
+                                        <span class="tv-rank-sale">{{ s.total_sale_formatted }}</span>
+                                        <span class="tv-rank-share">{{ s.share_percent|floatformat:1 }}٪</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <aside class="tv-rank-chart">
+                                <h3 class="tv-panel-title">سهم فروش</h3>
+                                <div class="tv-sup-ring">
+                                    <canvas id="tvSupervisorShareChart" aria-label="سهم تیم‌ها"></canvas>
+                                    <div class="tv-share-ring-center">
+                                        <span class="label">تیم اول</span>
+                                        <span class="value">{{ supervisor_board.leader_share|floatformat:0 }}٪</span>
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                    {{ supervisor_board.chart|json_script:"tv-supervisor-share-data" }}
+                    {% else %}
+                    <div class="tv-empty"><i class="bi bi-person-badge"></i><span>داده‌ای برای سرپرستان نیست.</span></div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 5. جغرافیا ========== #}
+            <section class="tv-slide" data-slide="geo" data-label="جغرافیا">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">پراکندگی فروش</span>
+                        <h2 class="tv-slide-title">شهر و منطقه</h2>
+                    </div>
+                    <p class="tv-slide-sub">سهم نسبی از فروش خالص · {{ preset_label|default:"کل داده‌ها" }}</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if geo.available %}
+                    <div class="tv-geo">
+                        <div class="tv-geo-col">
+                            <div class="tv-geo-col-head">
+                                <i class="bi bi-buildings"></i>
+                                <h3>شهرهای برتر</h3>
+                            </div>
+                            {% if geo.cities %}
+                            {% with c=geo.cities.0 %}
+                            <article class="tv-geo-hero">
+                                <span class="tv-geo-rank">۱</span>
+                                <div class="tv-geo-hero-copy">
+                                    <strong>{{ c.name }}</strong>
+                                    <span>پیشتاز جغرافیایی</span>
+                                </div>
+                                <div class="tv-geo-hero-val">{{ c.formatted }} <small>{{ currency_unit }}</small></div>
+                            </article>
+                            {% endwith %}
+                            <ul class="tv-geo-list">
+                                {% for c in geo.cities %}
+                                {% if not forloop.first %}
+                                <li style="--i:{{ forloop.counter }}">
+                                    <span class="rank">{{ forloop.counter }}</span>
+                                    <div class="body">
+                                        <div class="row">
+                                            <strong>{{ c.name }}</strong>
+                                            <em>{{ c.formatted }}</em>
+                                        </div>
+                                        <div class="track">
+                                            {% if geo.cities.0.amount %}
+                                            <span style="width:{% widthratio c.amount geo.cities.0.amount 100 %}%"></span>
+                                            {% elif geo.cities.0.value %}
+                                            <span style="width:{% widthratio c.value geo.cities.0.value 100 %}%"></span>
+                                            {% else %}
+                                            <span style="width:40%"></span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <div class="tv-empty compact"><span>بدون داده شهر</span></div>
+                            {% endif %}
+                        </div>
+
+                        <div class="tv-geo-col">
+                            <div class="tv-geo-col-head">
+                                <i class="bi bi-geo-alt"></i>
+                                <h3>مناطق برتر</h3>
+                            </div>
+                            {% if geo.zones %}
+                            {% with z=geo.zones.0 %}
+                            <article class="tv-geo-hero zone">
+                                <span class="tv-geo-rank">۱</span>
+                                <div class="tv-geo-hero-copy">
+                                    <strong>{{ z.name }}</strong>
+                                    <span>منطقه پیشتاز</span>
+                                </div>
+                                <div class="tv-geo-hero-val">{{ z.formatted }} <small>{{ currency_unit }}</small></div>
+                            </article>
+                            {% endwith %}
+                            <ul class="tv-geo-list">
+                                {% for z in geo.zones %}
+                                {% if not forloop.first %}
+                                <li style="--i:{{ forloop.counter }}">
+                                    <span class="rank">{{ forloop.counter }}</span>
+                                    <div class="body">
+                                        <div class="row">
+                                            <strong>{{ z.name }}</strong>
+                                            <em>{{ z.formatted }}</em>
+                                        </div>
+                                        <div class="track">
+                                            {% if geo.zones.0.amount %}
+                                            <span style="width:{% widthratio z.amount geo.zones.0.amount 100 %}%"></span>
+                                            {% elif geo.zones.0.value %}
+                                            <span style="width:{% widthratio z.value geo.zones.0.value 100 %}%"></span>
+                                            {% else %}
+                                            <span style="width:40%"></span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <div class="tv-empty compact"><span>بدون داده منطقه</span></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>داده شهر/منطقه نیازمند همگام‌سازی گزارش تفکیکی فروش است.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 6. ماهانه ========== #}
+            <section class="tv-slide" data-slide="monthly" data-label="فروش ماهانه">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">نمای سالانه</span>
+                        <h2 class="tv-slide-title">فروش ماهانه {% if monthly_sales.fiscal_year %}{{ monthly_sales.fiscal_year }}{% endif %}</h2>
+                    </div>
+                    <p class="tv-slide-sub">مقایسه ماه‌های سال مالی</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if monthly_sales.available %}
+                    <div class="tv-monthly">
+                        <div class="tv-monthly-meta">
+                            <div class="tv-stat-chip wide">
+                                <span class="tv-stat-chip-label">جمع سال مالی</span>
+                                <span class="tv-stat-chip-value accent">{{ monthly_sales.total_formatted }} <small>{{ currency_unit }}</small></span>
+                            </div>
+                            <div class="tv-stat-chip">
+                                <span class="tv-stat-chip-label">بهترین ماه</span>
+                                <span class="tv-stat-chip-value copper" id="tvBestMonth">—</span>
+                            </div>
+                            <div class="tv-stat-chip">
+                                <span class="tv-stat-chip-label">ماه جاری</span>
+                                <span class="tv-stat-chip-value" id="tvCurrentMonth">—</span>
+                            </div>
+                        </div>
+                        <div class="tv-chart-panel">
+                            <canvas id="tvMonthlyChart"></canvas>
+                            {{ monthly_sales.series|json_script:"tv-monthly-data" }}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-bar-chart"></i>
+                        <span>گزارش ماهانه فروش را همگام‌سازی کنید.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 7. کالا ========== #}
+            <section class="tv-slide" data-slide="products" data-label="کالا">
+                <div class="tv-slide-head tv-products-head">
+                    <div>
+                        <span class="tv-slide-kicker">سبد فروش</span>
+                        <h2 class="tv-slide-title">کالا و گروه کالا</h2>
+                    </div>
+                    <div class="tv-products-head-meta">
+                        {% if profitability.can_show_profit and pulse.operating_profit.formatted %}
+                        <div class="tv-pill">
+                            <small>سود عملیاتی</small>
+                            <strong>{{ pulse.operating_profit.formatted }}</strong>
+                        </div>
+                        {% endif %}
+                        <p class="tv-slide-sub">فروش خالص مثبت · برگشت جدا</p>
+                    </div>
+                </div>
+                <div class="tv-slide-body">
+                    {% if top_products or product_groups or top_product_reversions or top_product_profits %}
+                    <div class="tv-products-board{% if top_product_profits %} has-profit{% endif %}">
+                        <section class="tv-board-col tv-board-products">
+                            <header class="tv-board-head">
+                                <h3>پرفروش‌ترین کالاها</h3>
+                                <span>فروش خالص</span>
+                            </header>
+                            {% if top_products %}
+                            {% with leader=top_products.0 %}
+                            <article class="tv-product-hero">
+                                <div class="tv-product-hero-rank">۱</div>
+                                <div class="tv-product-hero-copy">
+                                    <strong>{{ leader.name }}</strong>
+                                    <span>{{ leader.group }}</span>
+                                </div>
+                                <div class="tv-product-hero-value">{{ leader.pure_sale_formatted }}</div>
+                            </article>
+                            <ol class="tv-product-rest">
+                                {% for p in top_products %}
+                                {% if not forloop.first %}
+                                <li>
+                                    <span class="num">{{ p.rank }}</span>
+                                    <div class="copy">
+                                        <strong>{{ p.name }}</strong>
+                                        <span>{{ p.group }}</span>
+                                        {% if leader.pure_sale %}
+                                        <div class="bar"><span style="width:{% widthratio p.pure_sale leader.pure_sale 100 %}%"></span></div>
+                                        {% endif %}
+                                    </div>
+                                    <em>{{ p.pure_sale_formatted }}</em>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ol>
+                            {% endwith %}
+                            {% else %}
+                            <div class="tv-empty compact"><span>فروش خالص مثبتی نیست</span></div>
+                            {% endif %}
+                        </section>
+
+                        <section class="tv-board-col tv-board-groups">
+                            <header class="tv-board-head">
+                                <h3>گروه‌های کالا</h3>
+                                <span>سهم از سبد</span>
+                            </header>
+                            {% if product_groups %}
+                            <ul class="tv-group-bars">
+                                {% for g in product_groups %}
+                                <li>
+                                    <div class="tv-group-top">
+                                        <strong>{{ g.name }}</strong>
+                                        <span>{{ g.share_percent|floatformat:0 }}٪</span>
+                                    </div>
+                                    <div class="tv-group-track">
+                                        <div class="tv-group-fill" style="width:{{ g.share_percent|floatformat:0 }}%"></div>
+                                    </div>
+                                    <div class="tv-group-amt">{{ g.formatted }}</div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <div class="tv-empty compact"><span>گروهی همگام نشده</span></div>
+                            {% endif %}
+                        </section>
+
+                        {% if top_product_profits %}
+                        <section class="tv-board-col tv-board-profits">
+                            <header class="tv-board-head">
+                                <h3>پرسودترین کالاها</h3>
+                                <span>سود کالا</span>
+                            </header>
+                            {% with leader=top_product_profits.0 %}
+                            <article class="tv-product-hero profit">
+                                <div class="tv-product-hero-rank">۱</div>
+                                <div class="tv-product-hero-copy">
+                                    <strong>{{ leader.name }}</strong>
+                                    <span>{{ leader.group }} · حاشیه {{ leader.margin_formatted }}٪</span>
+                                </div>
+                                <div class="tv-product-hero-value">{{ leader.benefit_formatted }}</div>
+                            </article>
+                            <ol class="tv-product-rest">
+                                {% for p in top_product_profits %}
+                                {% if not forloop.first %}
+                                <li>
+                                    <span class="num">{{ p.rank }}</span>
+                                    <div class="copy">
+                                        <strong>{{ p.name }}</strong>
+                                        <span>{{ p.group }} · {{ p.margin_formatted }}٪</span>
+                                    </div>
+                                    <em class="profit">{{ p.benefit_formatted }}</em>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ol>
+                            {% endwith %}
+                        </section>
+                        {% else %}
+                        <section class="tv-board-col tv-board-returns">
+                            <header class="tv-board-head">
+                                <h3>بیشترین برگشت</h3>
+                                <span>مبلغ برگشت</span>
+                            </header>
+                            {% if top_product_reversions %}
+                            <ol class="tv-return-list">
+                                {% for p in top_product_reversions %}
+                                <li>
+                                    <span class="num">{{ forloop.counter }}</span>
+                                    <div class="copy">
+                                        <strong>{{ p.name }}</strong>
+                                        <span>{{ p.group }}</span>
+                                    </div>
+                                    <em>{{ p.sale_reversion_formatted }}</em>
+                                </li>
+                                {% endfor %}
+                            </ol>
+                            {% else %}
+                            <div class="tv-empty compact"><span>برگشتی ثبت نشده — برای سود کالا، گزارش تفکیکی را همگام کنید</span></div>
+                            {% endif %}
+                        </section>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-box-seam"></i>
+                        <span>گزارش فروش کالا / گروه کالا را همگام‌سازی کنید.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 8. نتیجه‌گیری ========== #}
+            <section class="tv-slide" data-slide="insights" data-label="نتیجه‌گیری">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">هوش مدیریتی</span>
+                        <h2 class="tv-slide-title">جمع‌بندی دوره</h2>
+                    </div>
+                    <p class="tv-slide-sub">بر اساس داده‌های همگام‌شده محلی</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if insights %}
+                    <div class="tv-insight-grid">
+                        {% for item in insights %}
+                        <article class="tv-insight-card tone-{{ item.tone }}" style="--i:{{ forloop.counter }}">
+                            <div class="tv-insight-icon"><i class="bi {{ item.icon }}"></i></div>
+                            <div class="tv-insight-copy">
+                                <strong>{{ item.title }}</strong>
+                                <p>{{ item.body }}</p>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-lightbulb"></i>
+                        <span>برای نتیجه‌گیری مدیریتی، همگام‌سازی و بازسازی تحلیلی را اجرا کنید.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 9. مطالبات ========== #}
+            <section class="tv-slide" data-slide="receivables" data-label="مطالبات">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">وضعیت مالی</span>
+                        <h2 class="tv-slide-title">مطالبات و معوقات</h2>
+                    </div>
+                    <p class="tv-slide-sub">{% if receivables.business_date_label %}تا {{ receivables.business_date_label }}{% else %}مانده حساب و جدول سنی{% endif %}</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if receivables.available %}
+                    <div class="tv-finance">
+                        <div class="tv-fin-hero">
+                            <article class="tv-fin-card danger">
+                                <i class="bi bi-exclamation-octagon"></i>
+                                <small>جمع معوقات</small>
+                                <strong>{{ receivables.total_outstanding_formatted }}<em>{{ currency_unit }}</em></strong>
+                            </article>
+                            <article class="tv-fin-card">
+                                <i class="bi bi-wallet2"></i>
+                                <small>مانده حساب مشتریان</small>
+                                <strong>{{ receivables.partner_balance_formatted }}<em>{{ currency_unit }}</em></strong>
+                            </article>
+                            <article class="tv-fin-card">
+                                <i class="bi bi-people"></i>
+                                <small>تعداد مشتری</small>
+                                <strong>{{ receivables.partner_count }}</strong>
+                            </article>
+                        </div>
+                        {% if receivables.buckets %}
+                        <div class="tv-chart-panel tv-bucket-chart">
+                            <div class="tv-chart-meta">
+                                <span>توزیع باکت‌های معوقه</span>
+                                <span>{{ receivables.row_count }} ردیف</span>
+                            </div>
+                            <canvas id="tvBucketsChart"></canvas>
+                            {{ receivables.buckets|json_script:"tv-buckets-data" }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="tv-empty">
+                        <i class="bi bi-cash-coin"></i>
+                        <span>گزارش‌های مطالبات را از مرکز همگام‌سازی اجرا کنید.</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {# ========== 10. هشدارها ========== #}
+            <section class="tv-slide" data-slide="alerts" data-label="هشدارها">
+                <div class="tv-slide-head">
+                    <div>
+                        <span class="tv-slide-kicker">نظارت</span>
+                        <h2 class="tv-slide-title">هشدارهای مدیریتی</h2>
+                    </div>
+                    <p class="tv-slide-sub">موارد نیازمند توجه فوری</p>
+                </div>
+                <div class="tv-slide-body">
+                    {% if alerts %}
+                    <div class="tv-alert-grid">
+                        {% for a in alerts %}
+                        <article class="tv-alert-card severity-{{ a.severity }}" style="--i:{{ forloop.counter }}">
+                            <div class="tv-alert-top">
+                                <span class="tv-alert-sev">
+                                    {% if a.severity == "critical" %}بحرانی
+                                    {% elif a.severity == "warning" %}هشدار
+                                    {% else %}اطلاع{% endif %}
+                                </span>
+                                <i class="bi {% if a.severity == 'critical' %}bi-exclamation-triangle-fill{% elif a.severity == 'warning' %}bi-exclamation-circle{% else %}bi-info-circle{% endif %}"></i>
+                            </div>
+                            <strong>{{ a.title }}</strong>
+                            <p>{{ a.description }}</p>
+                            {% if a.current_value %}
+                            <div class="tv-alert-value">{{ a.current_value }}</div>
+                            {% endif %}
+                        </article>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <div class="tv-calm">
+                        <div class="tv-calm-ring" aria-hidden="true"></div>
+                        <i class="bi bi-shield-check"></i>
+                        <h3>وضعیت آرام</h3>
+                        <p>هشدار باز مدیریتی وجود ندارد.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="tv-footer">
+            <div class="tv-progress-track" aria-hidden="true">
+                <div class="tv-progress-fill" id="tvProgress"></div>
+            </div>
+            <div class="tv-footer-row">
+                <div class="tv-dots" id="tvDots"></div>
+                <div class="tv-slide-label" id="tvSlideLabel"><strong>۱</strong> / ۱۰ · نبض کسب‌وکار</div>
+                <div class="tv-hotkeys" aria-hidden="true">
+                    <span>←→ جابه‌جایی</span>
+                    <span>Space توقف</span>
+                    <span>F تمام‌صفحه</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{% static 'reports/js/tv-mode.js' %}?v=11"></script>
+</body>
+</html>

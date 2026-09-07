@@ -1,0 +1,12 @@
+cookies.txt
+credentials.txt
+_env_ids.txt
+data/
+.env
+db.sqlite3
+db.sqlite3-*
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/

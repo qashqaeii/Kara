@@ -1,0 +1,10 @@
+<header class="page-header">
+    <div class="page-header-copy">
+        {% if page_eyebrow %}<span class="page-eyebrow">{{ page_eyebrow }}</span>{% endif %}
+        <h1 class="page-title">{{ page_title }}</h1>
+        {% if page_desc %}<p class="page-desc">{{ page_desc }}</p>{% endif %}
+    </div>
+    {% if page_actions_html %}
+    <div class="page-header-actions">{{ page_actions_html }}</div>
+    {% endif %}
+</header>

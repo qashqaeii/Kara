@@ -1,0 +1,59 @@
+{% if top_performers %}
+<div class="rd-leaders">
+    {% if not compact %}
+    <div class="rd-podium" aria-hidden="true">
+        {% for person in top_performers %}
+        {% if person.rank == 2 %}
+        <div class="rd-podium-slot rank-2">
+            <div class="rd-avatar">{{ person.name|slice:":1" }}</div>
+            <div class="rd-podium-bar"><span>۲</span></div>
+            <strong class="rd-podium-name">{{ person.name }}</strong>
+            <small class="rd-podium-sale">{{ person.total_sale_formatted }}</small>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for person in top_performers %}
+        {% if person.rank == 1 %}
+        <div class="rd-podium-slot rank-1">
+            <div class="rd-crown"><i class="bi bi-gem"></i></div>
+            <div class="rd-avatar">{{ person.name|slice:":1" }}</div>
+            <div class="rd-podium-bar"><span>۱</span></div>
+            <strong class="rd-podium-name">{{ person.name }}</strong>
+            <small class="rd-podium-sale">{{ person.total_sale_formatted }}</small>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for person in top_performers %}
+        {% if person.rank == 3 %}
+        <div class="rd-podium-slot rank-3">
+            <div class="rd-avatar">{{ person.name|slice:":1" }}</div>
+            <div class="rd-podium-bar"><span>۳</span></div>
+            <strong class="rd-podium-name">{{ person.name }}</strong>
+            <small class="rd-podium-sale">{{ person.total_sale_formatted }}</small>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <ul class="rd-ladder">
+        {% for person in top_performers %}
+        <li class="rank-{{ person.rank }}">
+            <span class="rd-rank">{{ person.rank }}</span>
+            <div>
+                <strong>{{ person.name }}</strong>
+                <small>{{ person.code }}</small>
+            </div>
+            <div class="rd-stat">
+                {{ person.total_sale_formatted }}
+                {% if not compact and person.order_count %}
+                <span>{{ person.order_count }} سفارش</span>
+                {% endif %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% elif show_empty %}
+<p class="rd-empty-note">داده‌ای برای رتبه‌بندی وجود ندارد.</p>
+{% endif %}

@@ -1,0 +1,291 @@
+/* Supervisor detail page — team command view */
+
+.svd-header { align-items: flex-start; }
+
+.svd-avatar {
+    background: linear-gradient(145deg, #0f766e 0%, #134e4a 55%, #b45309 130%);
+    box-shadow: 0 10px 28px rgba(15, 118, 110, 0.28);
+}
+
+.svd-hero {
+    background:
+        radial-gradient(1200px 280px at 100% -20%, rgba(180, 83, 9, 0.12), transparent 55%),
+        radial-gradient(900px 260px at 0% 0%, rgba(15, 118, 110, 0.14), transparent 50%),
+        var(--kara-surface);
+}
+
+.svd-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem 1.1rem;
+    margin-top: 1rem;
+}
+
+.svd-hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+    color: var(--kara-text-muted);
+}
+
+.svd-hero-meta i { color: var(--kara-teal, #0f766e); }
+
+.svd-hero-side article:nth-child(2n) { border-left: none; }
+
+.svd-stat-rail {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--kara-space-3);
+}
+
+.svd-stat-rail article {
+    display: flex;
+    gap: var(--kara-space-3);
+    align-items: flex-start;
+    padding: var(--kara-space-3);
+    border-radius: var(--kara-radius);
+    background: var(--kara-surface);
+    border: 1px solid var(--kara-border);
+    box-shadow: var(--kara-shadow-sm);
+    min-height: var(--kara-kpi-min-h);
+}
+
+.svd-stat-rail i {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--kara-radius-sm);
+    display: grid;
+    place-items: center;
+    background: rgba(15, 118, 110, 0.1);
+    color: #0f766e;
+    flex: 0 0 auto;
+}
+
+.svd-stat-rail span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--kara-text-muted);
+    margin-bottom: 0.15rem;
+}
+
+.svd-stat-rail strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--kara-text);
+    line-height: 1.3;
+}
+
+.svd-stat-rail small {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+    color: var(--kara-text-muted);
+}
+
+.svd-chart-lg {
+    height: 320px;
+    min-height: 300px;
+}
+
+.svd-roster,
+.svd-history {
+    overflow: hidden;
+}
+
+.svd-table-wrap {
+    overflow-x: auto;
+    border-radius: 14px;
+    border: 1px solid var(--kara-border);
+}
+
+.svd-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.svd-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+    color: var(--kara-text-muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    text-align: right;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--kara-border);
+    white-space: nowrap;
+}
+
+.svd-table thead th.num,
+.svd-table td.num {
+    text-align: left;
+    font-variant-numeric: tabular-nums;
+}
+
+.svd-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.svd-table tbody tr:hover {
+    background: rgba(15, 118, 110, 0.04);
+}
+
+.svd-table tbody tr.is-top {
+    background: linear-gradient(90deg, rgba(15, 118, 110, 0.06), transparent 55%);
+}
+
+.svd-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(12, 18, 34, 0.06);
+    vertical-align: middle;
+}
+
+.svd-table tbody tr:last-child td { border-bottom: none; }
+
+.svd-rank {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.85rem;
+    height: 1.85rem;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #334155;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.svd-rank.r1 { background: #fef3c7; color: #92400e; }
+.svd-rank.r2 { background: #e2e8f0; color: #475569; }
+.svd-rank.r3 { background: #ffedd5; color: #9a3412; }
+
+.svd-person {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.svd-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: #0f766e;
+    box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+}
+
+.svd-person strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--kara-text);
+}
+
+.svd-person em {
+    display: block;
+    font-style: normal;
+    font-size: 0.75rem;
+    color: var(--kara-text-muted);
+}
+
+.svd-share {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-width: 8.5rem;
+}
+
+.svd-share-track {
+    flex: 1;
+    height: 0.45rem;
+    border-radius: 999px;
+    background: rgba(12, 18, 34, 0.06);
+    overflow: hidden;
+}
+
+.svd-share-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #0f766e, #14b8a6);
+}
+
+.svd-share span {
+    font-size: 0.75rem;
+    color: var(--kara-text-muted);
+    min-width: 2.6rem;
+}
+
+.svd-money {
+    font-weight: 700;
+    color: var(--kara-text);
+}
+
+.svd-rev {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.svd-rev.is-mid {
+    background: #ffedd5;
+    color: #9a3412;
+}
+
+.svd-rev.is-high {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.svd-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0f766e;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.svd-link:hover { color: #b45309; }
+
+.svd-date {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.svd-heat {
+    width: min(100%, 9rem);
+    height: 0.55rem;
+    border-radius: 999px;
+    background: rgba(12, 18, 34, 0.06);
+    overflow: hidden;
+}
+
+.svd-heat-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #99f6e4, #0f766e 55%, #b45309);
+}
+
+.svd-history-table tbody tr:nth-child(even) {
+    background: rgba(12, 18, 34, 0.015);
+}
+
+@media (max-width: 991px) {
+    .svd-stat-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+    .svd-stat-rail { grid-template-columns: 1fr; }
+    .svd-hero-meta { gap: 0.45rem 0.75rem; }
+}

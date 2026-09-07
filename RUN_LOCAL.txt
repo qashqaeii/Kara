@@ -1,0 +1,115 @@
+دستورهای اجرای لوکال — داشبورد کارا
+سیستم: Windows / PowerShell
+پوشه پروژه: E:\local\NEWWWWWWWWW\KARA
+
+==================================================
+1) اولین بار (نصب)
+==================================================
+
+cd E:\local\NEWWWWWWWWW\KARA
+
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+
+pip install -r requirements.txt
+
+copy .env.example .env
+  (بعد در فایل .env مقدار KARA_USERNAME و KARA_PASSWORD را بگذار)
+
+python manage.py migrate
+python manage.py createsuperuser
+
+
+==================================================
+2) هر بار اجرا (روزانه)
+==================================================
+
+cd E:\local\NEWWWWWWWWW\KARA
+.\.venv\Scripts\Activate.ps1
+
+python manage.py runserver
+
+آدرس‌ها:
+  داشبورد:     http://127.0.0.1:8000/
+  TV Mode:     http://127.0.0.1:8000/tv/
+  مرکز همگام:  http://127.0.0.1:8000/reports/sync/
+  ادمین:       http://127.0.0.1:8000/admin/
+
+
+==================================================
+3) اتصال و همگام‌سازی با کارا
+==================================================
+
+python manage.py kara_sync --test-connection
+python manage.py kara_sync --report visitor_sale
+python manage.py kara_sync --all
+
+با بازه تاریخ شمسی:
+python manage.py kara_sync --all --from-date=1405/01/01 --to-date=1405/01/31
+
+هشدارها:
+python manage.py kara_sync --evaluate-alerts
+
+
+==================================================
+4) دستورهای کمکی
+==================================================
+
+تست‌ها:
+python manage.py test reports
+
+بک‌فیل روزبه‌روز:
+python manage.py kara_backfill --from-date=1405/01/01 --to-date=1405/04/30 --delay=2
+
+بازسازی شاخص‌های تحلیلی:
+python manage.py rebuild_analytics
+
+پاکسازی حجم دیتابیس:
+python manage.py prune_db --vacuum
+
+ورود JSON آزمایشی از پوشه data:
+python manage.py import_json_reports
+
+
+==================================================
+5) ربات بله — راه‌اندازی و ورود ویزیتورها
+==================================================
+
+در .env:
+  BALE_BOT_TOKEN=...
+  BALE_BOT_ENABLED=True
+
+بعد از sync ویزیتورها، ساخت حساب ورود ربات:
+python manage.py provision_bot_visitors --dry-run
+python manage.py provision_bot_visitors --all
+
+نکته: اگر database is locked دیدید، runserver/ربات را موقتاً متوقف کنید (Ctrl+C)
+یا چند ثانیه صبر کنید و دوباره اجرا کنید.
+
+تنظیم/تغییر رمز یک ویزیتور (پیش‌فرض: همان کد پرسنلی):
+python manage.py set_bot_password 20400028
+python manage.py set_bot_password 20400028 12345678
+
+اجرای ربات:
+python manage.py run_bale_bot
+
+نکته: runserver و run_bale_bot را همزمان اجرا کنید (ترمینال جدا).
+اگر دکمه‌ها کار نکرد، ربات را Ctrl+C و دوباره run_bale_bot بزنید.
+
+ورود ویزیتور در ربات:
+  1) کد پرسنلی
+  2) رمز اختصاصی ربات (نه رمز داشبورد — داشبورد لاگین ندارد)
+
+مدیریت در ادمین:
+  /admin/ → اعتبارهای ورود ربات ویزیتور
+
+
+==================================================
+نکته
+==================================================
+
+اگر PowerShell اجازه اجرای Activate.ps1 را نداد:
+  Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+اگر venv نداری و پکیج‌ها روی Python سیستم نصب است،
+همان python manage.py runserver کافی است.

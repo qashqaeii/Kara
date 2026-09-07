@@ -1,0 +1,213 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}مرکز همگام‌سازی — کارا{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/sync.css' %}?v=3">
+{% endblock %}
+
+{% block content %}
+<div class="sc-page" id="scPage" data-csrf="{{ csrf_token }}">
+
+<header class="sc-command">
+    <div class="sc-command-copy">
+        <span class="sc-eyebrow">لایه یکپارچه‌سازی</span>
+        <h1>همگام‌سازی کارا</h1>
+        <p>اتصال، تازگی داده و زمان‌بندی جداگانه هر گزارش — داشبورد فقط از دیتابیس محلی می‌خواند.</p>
+    </div>
+    <div class="sc-command-actions">
+        <div class="conn-badge status-{{ connection.status }}">
+            <span class="conn-dot"></span>
+            {{ connection.status_label }}
+        </div>
+        <button id="btnTestConn" class="btn btn-outline-kara" type="button"
+                data-url="{% url 'reports:api_test_connection' %}">
+            <i class="bi bi-broadcast-pin"></i>
+            <span>تست اتصال</span>
+        </button>
+        <button id="btnSyncAll" class="btn btn-kara" type="button"
+                data-url="{% url 'reports:api_sync_run' %}">
+            <i class="bi bi-arrow-repeat"></i>
+            <span>همگام‌سازی همه</span>
+        </button>
+    </div>
+</header>
+
+<section class="sc-stage" aria-label="وضعیت اتصال">
+    <div class="sc-stage-glow" aria-hidden="true"></div>
+    <div class="sc-stage-main">
+        <p class="sc-kicker">وضعیت اتصال</p>
+        <div class="sc-conn-row">
+            <div class="sc-conn-pulse is-{{ connection.status }}" aria-hidden="true">
+                <i class="bi bi-hdd-network"></i>
+            </div>
+            <div>
+                <p class="sc-conn-title">{{ connection.status_label }}</p>
+                <p class="sc-conn-sub">آخرین همگام‌سازی موفق: {{ connection.last_sync_label }}</p>
+            </div>
+        </div>
+        <div class="sc-meta-grid">
+            <div class="sc-meta">
+                <span>واحد پولی نمایش</span>
+                <strong>{{ currency_unit }}</strong>
+            </div>
+            <div class="sc-meta">
+                <span>آخرین ورود</span>
+                <strong>{% if connection.last_login_at_display %}{{ connection.last_login_at_display }}{% else %}—{% endif %}</strong>
+            </div>
+            <div class="sc-meta">
+                <span>حالت زمان‌بندی</span>
+                <strong>{{ summary.mode_label }}</strong>
+            </div>
+            <div class="sc-meta">
+                <span>آخرین خطا</span>
+                <strong class="{% if connection.last_error %}is-danger{% endif %}">{% if connection.last_error %}{{ connection.last_error|truncatechars:120 }}{% else %}—{% endif %}</strong>
+            </div>
+        </div>
+    </div>
+    <div class="sc-stage-side">
+        <article class="sc-stat is-ok">
+            <span>به‌روز</span>
+            <strong>{{ summary.fresh_count }}</strong>
+            <small>از {{ summary.report_count }} گزارش</small>
+        </article>
+        <article class="sc-stat is-warn">
+            <span>نزدیک موعد</span>
+            <strong>{{ summary.aging_count }}</strong>
+            <small>کمتر از ۲× بازه</small>
+        </article>
+        <article class="sc-stat {% if summary.overdue_count %}is-bad{% endif %}">
+            <span>منقضی / بدون داده</span>
+            <strong>{{ summary.overdue_count }}</strong>
+            <small>نیاز به توجه</small>
+        </article>
+        <article class="sc-stat">
+            <span>نرخ موفقیت</span>
+            <strong>{{ summary.success_rate }}٪</strong>
+            <small>{{ summary.success_n }} موفق · {{ summary.failed_n }} ناموفق</small>
+        </article>
+    </div>
+</section>
+
+<div class="sc-schedule">
+    <div class="sc-schedule-icon"><i class="bi bi-clock-history"></i></div>
+    <div class="sc-schedule-copy">
+        <strong>{% if summary.scheduler_enabled %}زمان‌بند فعال{% else %}زمان‌بند غیرفعال{% endif %}</strong>
+        <p>
+            هر گزارش با بازه پیشنهادی خودش همگام می‌شود؛ شروع‌ها با فاصلهٔ {{ summary.stagger_seconds }} ثانیه پخش می‌شوند تا فشار همزمان روی پایگاه کارا کم شود.
+        </p>
+    </div>
+    <div class="sc-schedule-chips">
+        <span class="sc-chip"><i class="bi bi-layers"></i> بازه‌ها: {{ summary.interval_band }}</span>
+        <span class="sc-chip"><i class="bi bi-cpu"></i> {{ summary.scheduler_jobs }} جاب زمان‌بند</span>
+        {% if summary.running_n %}
+        <span class="sc-chip"><i class="bi bi-hourglass-split"></i> {{ summary.running_n }} در حال اجرا</span>
+        {% endif %}
+    </div>
+</div>
+
+<div class="sc-section-head">
+    <h2>گزارش‌های فعال</h2>
+    <p>نوار پیشرفت = نسبت سن داده به بازهٔ پیشنهادی</p>
+</div>
+
+<div class="sc-report-grid">
+    {% for r in reports %}
+    <article class="sc-report {{ r.freshness }}" data-report="{{ r.key }}" style="animation-delay: {{ forloop.counter0|add:1 }}0ms">
+        <div class="sc-report-top">
+            <div>
+                <h3 class="sc-report-title">{{ r.title }}</h3>
+                {% if r.is_primary %}<span class="sc-primary-tag">منبع KPI اصلی</span>{% endif %}
+            </div>
+            <span class="sc-freshness {{ r.freshness }}">{{ r.freshness_label }}</span>
+        </div>
+        <div class="sc-ttl" title="{{ r.progress }}٪ از بازه"><i style="width: {{ r.progress }}%"></i></div>
+        <dl class="sc-report-facts">
+            <dt>آخرین دریافت</dt>
+            <dd>{{ r.age_label }}</dd>
+            <dt>زمان</dt>
+            <dd>{{ r.fetched_label }}</dd>
+            <dt>ردیف</dt>
+            <dd>{{ r.rows_count }}</dd>
+            <dt>بازه</dt>
+            <dd>{{ r.interval_label }}</dd>
+            <dt>اجرای بعدی</dt>
+            <dd>{{ r.next_run_label }}</dd>
+            <dt>آخرین جاب</dt>
+            <dd>{{ r.last_job_status_label }}</dd>
+        </dl>
+        {% if r.last_job_error %}
+        <p class="sc-report-error">{{ r.last_job_error|truncatechars:140 }}</p>
+        {% endif %}
+        <div class="sc-report-foot">
+            <span class="sc-report-hint">{% if r.enabled %}فعال{% else %}غیرفعال{% endif %}</span>
+            <button class="btn btn-sm btn-outline-kara btn-sync-one" type="button"
+                    data-report="{{ r.key }}"
+                    data-title="{{ r.title }}"
+                    data-url="{% url 'reports:api_sync_run' %}">
+                همگام‌سازی
+            </button>
+        </div>
+    </article>
+    {% empty %}
+    <p class="text-muted">گزارش فعالی ثبت نشده است.</p>
+    {% endfor %}
+</div>
+
+<section class="sc-history" aria-label="تاریخچه همگام‌سازی">
+    <div class="sc-history-toolbar">
+        <div>
+            <strong class="d-block" style="font-family:var(--kara-font-display);color:var(--kara-primary)">تاریخچه همگام‌سازی</strong>
+            <div class="sc-filter-tabs mt-2" role="tablist">
+                <button type="button" class="is-active" data-history-filter="all">همه</button>
+                <button type="button" data-history-filter="ok">موفق</button>
+                <button type="button" data-history-filter="fail">ناموفق</button>
+                <button type="button" data-history-filter="run">در حال اجرا</button>
+            </div>
+        </div>
+        <p class="sc-cli mb-0">خط فرمان: <code>python manage.py kara_sync --all</code></p>
+    </div>
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead>
+                <tr>
+                    <th>زمان</th>
+                    <th>گزارش</th>
+                    <th>وضعیت</th>
+                    <th>دریافت</th>
+                    <th>درج</th>
+                    <th>ردشده</th>
+                    <th>منبع</th>
+                    <th>پیام</th>
+                </tr>
+            </thead>
+            <tbody id="scHistoryBody">
+                {% for h in history %}
+                <tr class="{% if h.is_fail %}is-fail{% elif h.is_run %}is-run{% endif %}"
+                    data-status="{{ h.job.status }}">
+                    <td class="text-nowrap">{{ h.job.started_at|jalali_dts }}</td>
+                    <td>{{ h.report_title }}</td>
+                    <td>
+                        <span class="sc-job-status {{ h.job.status }}">{{ h.status_label }}</span>
+                    </td>
+                    <td>{{ h.job.received_count }}</td>
+                    <td>{{ h.job.inserted_count }}</td>
+                    <td>{{ h.job.skipped_count }}</td>
+                    <td>{{ h.trigger_label }}</td>
+                    <td class="small text-muted">{{ h.message }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="8" class="text-muted py-4 text-center">هنوز همگام‌سازی‌ای ثبت نشده است.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/sync-center.js' %}?v=1"></script>
+{% endblock %}

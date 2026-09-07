@@ -1,0 +1,435 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}عملکرد من{% endblock %}
+
+{% block content %}
+<header class="page-header ax-header me-header">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">پنل شخصی</span>
+        <h1 class="page-title">عملکرد من</h1>
+        <p class="page-desc">
+            {{ mode_label }} · {{ user_display }} · نقش: {{ scope.role|fa_role }}
+            <span class="me-sep">·</span> {{ preset_label }}
+        </p>
+        <p class="me-hint">{{ mode_hint }}</p>
+    </div>
+    <div class="page-header-actions">
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                {% for value, label in period_options %}
+                <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        {% for link in quick_links %}
+        <a href="{% if link.args %}{% url link.url_name link.args.0 %}{% else %}{% url link.url_name %}{% endif %}"
+           class="btn btn-outline-kara"
+           {% if link.blank %}target="_blank" rel="noopener"{% endif %}>
+            <i class="bi {{ link.icon }}"></i> {{ link.label }}
+        </a>
+        {% endfor %}
+    </div>
+</header>
+
+{% if connection %}
+<div class="me-status" aria-label="وضعیت داده">
+    <span class="me-status-dot {% if connection.status == 'connected' %}is-ok{% endif %}"></span>
+    <span>{{ connection.status_label|default:"وضعیت همگام‌سازی" }}</span>
+    {% if connection.last_sync_label %}
+    <span class="me-status-ago">به‌روزرسانی: {{ connection.last_sync_label }}</span>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if mode == "observer" %}
+
+{% if has_company_data %}
+<section class="ax-summary me-pulse" aria-label="شاخص‌های سازمان">
+    <article class="ax-summary-cell">
+        <span>{{ pulse.total_pure_sale.label|default:"فروش خالص" }}</span>
+        <strong>{{ pulse.total_pure_sale.formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>{{ pulse.total_sale.label|default:"فروش نهایی" }}</span>
+        <strong>{{ pulse.total_sale.formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>{{ pulse.final_order_count.label|default:"سفارش نهایی" }}</span>
+        <strong>{{ pulse.final_order_count.formatted }}</strong>
+    </article>
+    <article class="ax-summary-cell">
+        <span>{{ pulse.avg_order_value.label|default:"میانگین سفارش" }}</span>
+        <strong>{{ pulse.avg_order_value.formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>{{ pulse.active_visitors.label|default:"ویزیتور فعال" }}</span>
+        <strong>{{ pulse.active_visitors.formatted }}</strong>
+    </article>
+    <article class="ax-summary-cell {% if pulse.reversion_rate.raw %}is-warn{% endif %}">
+        <span>{{ pulse.reversion_rate.label|default:"نرخ برگشت" }}</span>
+        <strong>{{ pulse.reversion_rate.formatted }}</strong>
+    </article>
+</section>
+{% endif %}
+
+{% if visitor_podium|length >= 3 %}
+<section class="ax-podium-wrap mb-4" aria-label="سکو برترین ویزیتورها">
+    <div class="ax-podium">
+        <div class="ax-podium-slot rank-2">
+            <span class="ax-podium-place">۲</span>
+            <strong class="ax-podium-name">{{ visitor_podium.1.name }}</strong>
+            <span class="ax-podium-meta">{{ visitor_podium.1.head_visitor|default:visitor_podium.1.code }}</span>
+            <span class="ax-podium-value">{{ visitor_podium.1.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ visitor_podium.1.order_count }} سفارش</span>
+        </div>
+        <div class="ax-podium-slot rank-1">
+            <i class="bi bi-trophy-fill ax-podium-crown"></i>
+            <span class="ax-podium-place">۱</span>
+            <strong class="ax-podium-name">{{ visitor_podium.0.name }}</strong>
+            <span class="ax-podium-meta">{{ visitor_podium.0.head_visitor|default:visitor_podium.0.code }}</span>
+            <span class="ax-podium-value">{{ visitor_podium.0.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ visitor_podium.0.order_count }} سفارش · {{ visitor_summary.top_share }}٪ سهم</span>
+        </div>
+        <div class="ax-podium-slot rank-3">
+            <span class="ax-podium-place">۳</span>
+            <strong class="ax-podium-name">{{ visitor_podium.2.name }}</strong>
+            <span class="ax-podium-meta">{{ visitor_podium.2.head_visitor|default:visitor_podium.2.code }}</span>
+            <span class="ax-podium-value">{{ visitor_podium.2.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ visitor_podium.2.order_count }} سفارش</span>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-5">
+        <div class="ax-charts-stack">
+            {% if visitor_chart %}
+            <section class="panel-block ax-chart-panel">
+                <div class="section-head mb-3">
+                    <h2 class="section-title">مقایسه فروش برتر</h2>
+                    <p class="section-desc">۸ ویزیتور اول · {{ preset_label }}</p>
+                </div>
+                <div class="ax-chart-frame ax-chart-frame-sm">
+                    <canvas id="meSalesChart" aria-label="نمودار فروش ویزیتورها"></canvas>
+                </div>
+                {{ visitor_chart|json_script:"me-sales-chart-data" }}
+            </section>
+            {% endif %}
+
+            {% if team_chart %}
+            <section class="panel-block ax-chart-panel">
+                <div class="section-head mb-3">
+                    <h2 class="section-title">سهم تیم‌ها</h2>
+                    <p class="section-desc">تجمیع فروش بر اساس سرپرست</p>
+                </div>
+                <div class="ax-chart-frame ax-chart-frame-doughnut ax-chart-frame-sm">
+                    <canvas id="meTeamChart" aria-label="نمودار سهم تیم‌ها"></canvas>
+                </div>
+                {{ team_chart|json_script:"me-team-chart-data" }}
+            </section>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+                <div>
+                    <h2 class="section-title">رتبه‌بندی ویزیتورها</h2>
+                    <p class="section-desc">
+                        {{ visitor_summary.count }} نفر · جمع {{ visitor_summary.total_formatted }} {{ currency_unit }}
+                    </p>
+                </div>
+                <label class="ax-search">
+                    <i class="bi bi-search"></i>
+                    <input type="search" id="meTableFilter" placeholder="جستجوی نام یا سرپرست…" autocomplete="off">
+                </label>
+            </div>
+            <div class="table-responsive ranking-table-wrap">
+                <table class="table table-sm align-middle ranking-table ax-table" id="meRankTable">
+                    <thead>
+                        <tr>
+                            <th>رتبه</th>
+                            <th>ویزیتور</th>
+                            <th>سرپرست</th>
+                            <th class="text-start">فروش</th>
+                            <th>سهم</th>
+                            <th class="text-start">سفارش</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in visitors %}
+                        <tr data-filter="{{ item.name }} {{ item.code }} {{ item.head_visitor }}">
+                            <td><span class="rank-badge {% if item.rank <= 3 %}rank-top-{{ item.rank }}{% endif %}">{{ item.rank }}</span></td>
+                            <td>
+                                <strong>{{ item.name }}</strong>
+                                <div class="small text-muted">{{ item.code }}</div>
+                            </td>
+                            <td class="small">{{ item.head_visitor|default:"—" }}</td>
+                            <td class="text-start fw-semibold">{{ item.total_sale_formatted }}</td>
+                            <td style="min-width:6.5rem">
+                                <div class="ax-share-track" title="{{ item.share_of_leader }}٪ نسبت به رتبه ۱">
+                                    <div class="ax-share-fill" style="width:{{ item.share_of_leader }}%"></div>
+                                </div>
+                            </td>
+                            <td class="text-start">{{ item.order_count }}</td>
+                            <td>
+                                {% if item.code %}
+                                <a class="ax-detail-link" href="{% url 'reports:analytics_salesperson_detail' item.code %}">
+                                    جزئیات <i class="bi bi-arrow-left"></i>
+                                </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="ax-filter-empty d-none" id="meFilterEmpty">موردی با این جستجو پیدا نشد.</p>
+        </section>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3">
+                <h2 class="section-title">سرپرستان برتر</h2>
+                <p class="section-desc">{{ supervisor_summary.count }} تیم · {{ supervisor_summary.total_formatted }} {{ currency_unit }}</p>
+            </div>
+            {% if supervisors %}
+            <ul class="me-mini-list">
+                {% for s in supervisors %}
+                <li>
+                    <span class="me-mini-rank">{{ s.rank }}</span>
+                    <div class="me-mini-body">
+                        <strong>{% if s.code %}<a href="{% url 'reports:analytics_supervisor_detail' s.code %}">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</strong>
+                        <div class="ax-share-track"><div class="ax-share-fill" style="width:{{ s.share_of_leader }}%"></div></div>
+                    </div>
+                    <div class="me-mini-vals">
+                        <span class="sale">{{ s.total_sale_formatted }}</span>
+                        <span class="meta">{{ s.order_count }} سفارش</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted mb-0">داده‌ای برای سرپرستان نیست.</p>
+            {% endif %}
+        </section>
+    </div>
+
+    <div class="col-lg-4">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3">
+                <h2 class="section-title">شهرهای برتر</h2>
+                <p class="section-desc">سهم نسبی از فروش خالص</p>
+            </div>
+            {% if geo.available and geo.cities %}
+            <ul class="me-mini-list">
+                {% for c in geo.cities %}
+                <li>
+                    <span class="me-mini-rank">{{ forloop.counter }}</span>
+                    <div class="me-mini-body">
+                        <strong>{{ c.name }}</strong>
+                        <div class="ax-share-track"><div class="ax-share-fill" style="width:{{ c.bar_percent|default:40 }}%"></div></div>
+                    </div>
+                    <div class="me-mini-vals">
+                        <span class="sale">{{ c.formatted }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted mb-0">داده جغرافیایی در دسترس نیست.</p>
+            {% endif %}
+            <div class="mt-3">
+                <a href="{% url 'reports:analytics_regions' %}" class="ax-detail-link">جغرافیا <i class="bi bi-arrow-left"></i></a>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-lg-4">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3">
+                <h2 class="section-title">کالاهای برتر</h2>
+                <p class="section-desc">بر اساس فروش خالص</p>
+            </div>
+            {% if products %}
+            <ul class="me-mini-list">
+                {% for p in products %}
+                <li>
+                    <span class="me-mini-rank">{{ p.rank|default:forloop.counter }}</span>
+                    <div class="me-mini-body">
+                        <strong>{{ p.name }}</strong>
+                        <span class="meta">{{ p.group|default:"" }}</span>
+                    </div>
+                    <div class="me-mini-vals">
+                        <span class="sale">{{ p.pure_sale_formatted|default:"—" }}</span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted mb-0">داده کالایی در دسترس نیست.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+{% if insights or alerts %}
+<div class="row g-4 mb-2">
+    {% if insights %}
+    <div class="col-lg-7">
+        <section class="panel-block">
+            <div class="section-head mb-3">
+                <h2 class="section-title">نکات تحلیلی</h2>
+                <p class="section-desc">خلاصه وضعیت بر اساس داده‌های فعلی</p>
+            </div>
+            <ul class="me-insight-list">
+                {% for tip in insights %}
+                <li>
+                    <i class="bi bi-lightbulb"></i>
+                    <div>
+                        <strong>{{ tip.title|default:"نکته" }}</strong>
+                        <p>{{ tip.body }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+    {% endif %}
+    {% if alerts %}
+    <div class="col-lg-5">
+        <section class="panel-block">
+            <div class="section-head mb-3">
+                <h2 class="section-title">هشدارها</h2>
+                <p class="section-desc">موارد نیازمند توجه</p>
+            </div>
+            <ul class="me-alert-list">
+                {% for a in alerts %}
+                <li class="sev-{{ a.severity|default:'info' }}">
+                    <strong>{{ a.title }}</strong>
+                    <p>{{ a.description }}</p>
+                    {% if a.current_value %}<span class="me-alert-val">{{ a.current_value }}</span>{% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+{% elif mode == "personal" and detail.has_data %}
+{% with d=detail %}
+<section class="me-identity panel-block mb-4">
+    <div class="me-identity-avatar">{{ d.initials }}</div>
+    <div class="me-identity-copy">
+        <h2>{{ d.name }}</h2>
+        <p>کد {{ d.personnel_code }} · سرپرست {{ d.supervisor_name }} · {{ d.day_count }} روز · {{ d.active_days }} روز فعال</p>
+        {% if my_row %}<p class="me-my-rank">رتبه فعلی در جدول: <strong>{{ my_row.rank }}</strong></p>{% endif %}
+    </div>
+    <div class="me-identity-sale">
+        <span>فروش نهایی من</span>
+        <strong>{{ d.kpis.total_sale.formatted }} <small>{{ currency_unit }}</small></strong>
+    </div>
+</section>
+
+<section class="ax-summary mb-4" aria-label="شاخص‌های من">
+    <article class="ax-summary-cell"><span>فروش خالص</span><strong>{{ d.kpis.total_pure_sale.formatted }}</strong><small>{{ currency_unit }}</small></article>
+    <article class="ax-summary-cell"><span>سفارش</span><strong>{{ d.kpis.orders.formatted }}</strong></article>
+    <article class="ax-summary-cell"><span>میانگین سفارش</span><strong>{{ d.kpis.avg_order.formatted }}</strong><small>{{ currency_unit }}</small></article>
+    <article class="ax-summary-cell is-warn"><span>نرخ برگشت</span><strong>{{ d.kpis.reversion_rate.formatted }}</strong></article>
+</section>
+
+{% if peers %}
+<section class="panel-block">
+    <div class="section-head mb-3">
+        <h2 class="section-title">جایگاه من در رتبه‌بندی</h2>
+        <p class="section-desc">مقایسه با ویزیتورهای برتر</p>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-sm align-middle ranking-table">
+            <thead><tr><th>رتبه</th><th>نام</th><th class="text-start">فروش</th><th class="text-start">سفارش</th></tr></thead>
+            <tbody>
+                {% for item in peers %}
+                <tr class="{% if item.code == d.personnel_code %}me-is-me{% endif %}">
+                    <td><span class="rank-badge">{{ item.rank }}</span></td>
+                    <td><strong>{{ item.name }}</strong></td>
+                    <td class="text-start fw-semibold">{{ item.total_sale_formatted }}</td>
+                    <td class="text-start">{{ item.order_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+{% endwith %}
+
+{% elif mode == "team" and detail.has_data %}
+{% with d=detail %}
+<section class="me-identity panel-block mb-4">
+    <div class="me-identity-avatar teal">{{ d.initials|default:"ت" }}</div>
+    <div class="me-identity-copy">
+        <h2>{{ d.name }}</h2>
+        <p>کد تیم {{ d.personnel_code|default:scope.supervisor_code }} · عملکرد سرپرستی</p>
+    </div>
+</section>
+<section class="ax-summary mb-4">
+    {% if d.kpis.total_sale %}<article class="ax-summary-cell"><span>فروش تیم</span><strong>{{ d.kpis.total_sale.formatted }}</strong><small>{{ currency_unit }}</small></article>{% endif %}
+    {% if d.kpis.total_pure_sale %}<article class="ax-summary-cell"><span>خالص</span><strong>{{ d.kpis.total_pure_sale.formatted }}</strong><small>{{ currency_unit }}</small></article>{% endif %}
+    {% if d.kpis.orders %}<article class="ax-summary-cell"><span>سفارش</span><strong>{{ d.kpis.orders.formatted }}</strong></article>{% endif %}
+    {% if d.kpis.team_size %}<article class="ax-summary-cell"><span>اندازه تیم</span><strong>{{ d.kpis.team_size.formatted }}</strong></article>{% endif %}
+</section>
+{% endwith %}
+
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-person-circle"></i>
+    <h2>داده‌ای برای نمایش نیست</h2>
+    <p>همگام‌سازی گزارش‌ها را اجرا کنید یا بازه زمانی دیگری انتخاب کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+
+<p class="me-footer-note">لایه تحلیلی مدیریتی روی سیستم کارا · داده‌ها از دیتابیس محلی خوانده می‌شوند</p>
+{% endblock %}
+
+{% block extra_js %}
+{% if mode == "observer" %}
+<script src="{% static 'reports/js/analytics-rank.js' %}?v=4"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (!window.KaraAnalyticsRank) return;
+    KaraAnalyticsRank.init({
+        filterId: "meTableFilter",
+        tableId: "meRankTable",
+        emptyId: "meFilterEmpty",
+        charts: [
+            {
+                chartId: "meSalesChart",
+                dataId: "me-sales-chart-data",
+                label: "فروش",
+                horizontal: true,
+            },
+            {
+                type: "doughnut",
+                chartId: "meTeamChart",
+                dataId: "me-team-chart-data",
+                label: "سهم تیم",
+            }
+        ]
+    });
+});
+</script>
+{% endif %}
+{% endblock %}

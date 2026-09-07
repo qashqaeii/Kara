@@ -1,0 +1,234 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}ویزیتورها — تحلیل{% endblock %}
+
+{% block content %}
+<header class="page-header ax-header">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">تحلیل فروش</span>
+        <h1 class="page-title">ویزیتورها</h1>
+        <p class="page-desc">رتبه‌بندی عملکرد فردی · {{ preset_label }} · منبع گزارش فروش ویزیتور</p>
+    </div>
+    <div class="page-header-actions">
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                {% for value, label in period_options %}
+                <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <a href="{% url 'reports:tv_mode' %}" class="btn btn-outline-kara" target="_blank" rel="noopener"><i class="bi bi-tv"></i> تلویزیون</a>
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+    </div>
+</header>
+
+{% if items %}
+<section class="ax-summary" aria-label="خلاصه ویزیتورها">
+    <article class="ax-summary-cell">
+        <span>تعداد ویزیتور</span>
+        <strong>{{ summary.count }}</strong>
+    </article>
+    <article class="ax-summary-cell">
+        <span>جمع فروش</span>
+        <strong>{{ summary.total_formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>میانگین فروش</span>
+        <strong>{{ summary.avg_formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell ax-summary-lead">
+        <span>پیشتاز</span>
+        <strong>{{ summary.top_name }}</strong>
+        <small>{{ summary.top_share }}٪ از کل · {{ summary.top_formatted }}</small>
+    </article>
+</section>
+
+{% if podium|length >= 3 %}
+<section class="ax-podium-wrap mb-4" aria-label="سکو برترین‌ها">
+    <div class="ax-podium">
+        <div class="ax-podium-slot rank-2">
+            <span class="ax-podium-place">۲</span>
+            <strong class="ax-podium-name">{{ podium.1.name }}</strong>
+            <span class="ax-podium-meta">{{ podium.1.head_visitor|default:podium.1.code }}</span>
+            <span class="ax-podium-value">{{ podium.1.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ podium.1.order_count }} سفارش</span>
+        </div>
+        <div class="ax-podium-slot rank-1">
+            <i class="bi bi-trophy-fill ax-podium-crown"></i>
+            <span class="ax-podium-place">۱</span>
+            <strong class="ax-podium-name">{{ podium.0.name }}</strong>
+            <span class="ax-podium-meta">{{ podium.0.head_visitor|default:podium.0.code }}</span>
+            <span class="ax-podium-value">{{ podium.0.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ podium.0.order_count }} سفارش · برگشت {{ podium.0.reversion_rate }}٪</span>
+        </div>
+        <div class="ax-podium-slot rank-3">
+            <span class="ax-podium-place">۳</span>
+            <strong class="ax-podium-name">{{ podium.2.name }}</strong>
+            <span class="ax-podium-meta">{{ podium.2.head_visitor|default:podium.2.code }}</span>
+            <span class="ax-podium-value">{{ podium.2.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ podium.2.order_count }} سفارش</span>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-5">
+        <div class="ax-charts-stack">
+            <section class="panel-block ax-chart-panel">
+                <div class="section-head mb-3">
+                    <h2 class="section-title">مقایسه ۸ نفر برتر</h2>
+                    <p class="section-desc">فروش نهایی در بازه انتخابی</p>
+                </div>
+                <div class="ax-chart-frame ax-chart-frame-sm">
+                    <canvas id="axSalesChart" aria-label="نمودار مقایسه ویزیتورها"></canvas>
+                </div>
+                {% if chart_data %}
+                <ul class="ax-chart-fallback" aria-hidden="true">
+                    {% for row in chart_data %}
+                    <li>
+                        <span class="ax-fb-name">{{ row.name }}</span>
+                        <div class="ax-fb-track"><div class="ax-fb-fill" style="width:{% widthratio row.value chart_data.0.value 100 %}%"></div></div>
+                        <span class="ax-fb-val">{{ row.formatted }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {{ chart_data|json_script:"ax-sales-chart-data" }}
+            </section>
+
+            {% if team_chart_data %}
+            <section class="panel-block ax-chart-panel">
+                <div class="section-head mb-3">
+                    <h2 class="section-title">سهم تیم‌ها</h2>
+                    <p class="section-desc">تجمیع فروش ویزیتورها بر اساس سرپرست</p>
+                </div>
+                <div class="ax-chart-frame ax-chart-frame-doughnut ax-chart-frame-sm">
+                    <canvas id="axTeamChart" aria-label="نمودار سهم تیم‌ها"></canvas>
+                </div>
+                {{ team_chart_data|json_script:"ax-team-chart-data" }}
+            </section>
+            {% endif %}
+
+            {% if orders_chart_data %}
+            <section class="panel-block ax-chart-panel">
+                <div class="section-head mb-3">
+                    <h2 class="section-title">بیشترین سفارش</h2>
+                    <p class="section-desc">تعداد سفارش نهایی — ۸ نفر برتر</p>
+                </div>
+                <div class="ax-chart-frame ax-chart-frame-sm">
+                    <canvas id="axOrdersChart" aria-label="نمودار تعداد سفارش"></canvas>
+                </div>
+                {{ orders_chart_data|json_script:"ax-orders-chart-data" }}
+            </section>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+                <div>
+                    <h2 class="section-title">جدول رتبه‌بندی</h2>
+                    <p class="section-desc">{{ summary.count }} ویزیتور · قابل جستجو</p>
+                </div>
+                <label class="ax-search">
+                    <i class="bi bi-search"></i>
+                    <input type="search" id="axTableFilter" placeholder="جستجوی نام، کد یا سرپرست…" autocomplete="off">
+                </label>
+            </div>
+            <div class="table-responsive ranking-table-wrap">
+                <table class="table table-sm align-middle ranking-table ax-table" id="axRankTable">
+                    <thead>
+                        <tr>
+                            <th>رتبه</th>
+                            <th>ویزیتور</th>
+                            <th>سرپرست</th>
+                            <th class="text-start">فروش</th>
+                            <th>سهم</th>
+                            <th class="text-start">سفارش</th>
+                            <th>برگشت</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr data-filter="{{ item.name }} {{ item.code }} {{ item.head_visitor }}">
+                            <td><span class="rank-badge {% if item.rank <= 3 %}rank-top-{{ item.rank }}{% endif %}">{{ item.rank }}</span></td>
+                            <td>
+                                <strong>{{ item.name }}</strong>
+                                <div class="small text-muted">{{ item.code }}</div>
+                            </td>
+                            <td class="small">{{ item.head_visitor|default:"—" }}</td>
+                            <td class="text-start fw-semibold">{{ item.total_sale_formatted }}</td>
+                            <td style="min-width:7rem">
+                                <div class="ax-share-track" title="{{ item.share_of_leader }}٪ نسبت به رتبه ۱">
+                                    <div class="ax-share-fill" style="width:{{ item.share_of_leader }}%"></div>
+                                </div>
+                            </td>
+                            <td class="text-start">{{ item.order_count }}</td>
+                            <td>
+                                <span class="ax-rev {% if item.reversion_rate >= 3 %}is-high{% elif item.reversion_rate > 0 %}is-mid{% endif %}">
+                                    {{ item.reversion_rate|default:"—" }}٪
+                                </span>
+                            </td>
+                            <td>
+                                <a class="ax-detail-link" href="{% url 'reports:analytics_salesperson_detail' item.code %}">
+                                    جزئیات <i class="bi bi-arrow-left"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="ax-filter-empty d-none" id="axFilterEmpty">موردی با این جستجو پیدا نشد.</p>
+        </section>
+    </div>
+</div>
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-person-badge"></i>
+    <h2>هنوز رتبه‌بندی ویزیتور آماده نیست</h2>
+    <p>همگام‌سازی گزارش فروش ویزیتور و بازسازی لایه تحلیلی را اجرا کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/analytics-rank.js' %}?v=4"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (!window.KaraAnalyticsRank) return;
+    KaraAnalyticsRank.init({
+        filterId: "axTableFilter",
+        tableId: "axRankTable",
+        emptyId: "axFilterEmpty",
+        charts: [
+            {
+                chartId: "axSalesChart",
+                dataId: "ax-sales-chart-data",
+                label: "فروش",
+                horizontal: true,
+            },
+            {
+                type: "doughnut",
+                chartId: "axTeamChart",
+                dataId: "ax-team-chart-data",
+            },
+            {
+                chartId: "axOrdersChart",
+                dataId: "ax-orders-chart-data",
+                label: "سفارش",
+                horizontal: true,
+                money: false,
+                unit: "سفارش",
+            },
+        ],
+    });
+});
+</script>
+{% endblock %}

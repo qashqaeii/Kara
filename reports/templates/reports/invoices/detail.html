@@ -1,0 +1,149 @@
+{% extends "reports/base.html" %}
+{% load static %}
+
+{% block title %}فاکتور {{ invoice.order_pre_code }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/invoices.css' %}?v=2">
+{% endblock %}
+
+{% block content %}
+<div class="inv-detail-page">
+    <nav aria-label="مسیر">
+        <ol class="kara-crumb">
+            <li><a href="{% url 'reports:invoices' %}">فاکتورها</a></li>
+            <li aria-current="page">{{ invoice.order_pre_code }}</li>
+        </ol>
+    </nav>
+
+    <header class="inv-detail-head">
+        <div class="inv-detail-head-main">
+            <span class="page-eyebrow">جزئیات فاکتور</span>
+            <div class="inv-detail-title-row">
+                <h1 class="page-title">فاکتور {{ invoice.order_pre_code }}</h1>
+                <strong class="inv-detail-amount">{{ invoice.amount_label }}</strong>
+            </div>
+            <p class="inv-detail-meta">
+                <span>{{ invoice.partner_name }}</span>
+                <span>{{ invoice.order_date }}</span>
+                <span>{{ invoice.status_label }}</span>
+                <span>{{ invoice.items_count }} قلم</span>
+                {% if invoice.has_line_items %}
+                <span class="inv-sync-ok inv-sync-inline"><i class="bi bi-check-circle"></i> {{ invoice.line_items_total }} قلم sync</span>
+                {% elif invoice.line_items_synced %}
+                <span class="inv-sync-ok inv-sync-warn inv-sync-inline"><i class="bi bi-exclamation-circle"></i> اقلام sync نشده</span>
+                {% endif %}
+            </p>
+        </div>
+        <div class="inv-detail-head-actions">
+            <a href="{% url 'reports:invoices' %}" class="btn btn-outline-kara btn-sm">
+                <i class="bi bi-arrow-right"></i> بازگشت
+            </a>
+        </div>
+    </header>
+
+    <div class="inv-detail-grid">
+        <section class="kara-card">
+            <div class="kara-card-header"><h2>خلاصه</h2></div>
+            <div class="kara-card-body inv-summary-body">
+                <dl class="kara-dl kara-dl-compact inv-dl-grid">
+                    <dt>کد فاکتور</dt><dd>{{ invoice.order_code }}</dd>
+                    <dt>مشتری</dt><dd>{{ invoice.partner_name }}</dd>
+                    <dt>کد مشتری</dt><dd>{{ invoice.partner_code }}</dd>
+                    <dt>ویزیتور</dt><dd>{{ invoice.visitor_name }} ({{ invoice.visitor_code }})</dd>
+                </dl>
+                {% if invoice.extra.partner_address %}
+                <p class="inv-address small text-muted mb-0"><i class="bi bi-geo-alt"></i> {{ invoice.extra.partner_address }}</p>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="kara-card">
+            <div class="kara-card-header"><h2>خلاصه مالی</h2></div>
+            <div class="kara-card-body inv-summary-body">
+                <ul class="kara-kv-list kara-kv-list-compact">
+                    {% for row in invoice.financial_breakdown %}
+                    <li>
+                        <span class="kara-kv-label">{{ row.label }}</span>
+                        <strong class="kara-kv-value is-money">{{ row.value }}</strong>
+                    </li>
+                    {% empty %}
+                    <li class="text-muted inv-empty-note">اطلاعات مالی تکمیلی موجود نیست.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <section class="kara-card inv-lines-card">
+        <div class="kara-card-header">
+            <h2>ریز اقلام</h2>
+            {% if invoice.line_items_pages > 1 %}
+            <span class="small text-muted">صفحه {{ invoice.line_items_page }} از {{ invoice.line_items_pages }}</span>
+            {% endif %}
+        </div>
+        <div class="kara-card-body p-0">
+            <div class="table-responsive ranking-table-wrap">
+                <table class="table table-sm align-middle kara-table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>کد کالا</th>
+                            <th>نام کالا</th>
+                            <th>گروه</th>
+                            <th class="text-num">تعداد</th>
+                            <th class="text-num">فی</th>
+                            <th class="text-num">مبلغ</th>
+                            <th class="text-num">بهای خرید</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for line in invoice.line_items %}
+                        <tr>
+                            <td>{{ line.index }}</td>
+                            <td>{{ line.stuff_code }}</td>
+                            <td>{{ line.name }}</td>
+                            <td>{{ line.group }}</td>
+                            <td class="text-num">{{ line.quantity }} {{ line.unit }}</td>
+                            <td class="text-num">{{ line.unit_fee|default:"—" }}</td>
+                            <td class="text-num">{{ line.amount }}</td>
+                            <td class="text-num">{{ line.buy_price|default:"—" }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-3">اقلامی برای نمایش نیست.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% if invoice.line_items_pages > 1 %}
+        <div class="kara-card-footer d-flex justify-content-center gap-2 py-2">
+            {% if invoice.line_items_page > 1 %}
+            <a class="btn btn-sm btn-outline-kara" href="?lines_page={{ invoice.line_items_page|add:'-1' }}">قبلی</a>
+            {% endif %}
+            {% if invoice.line_items_page < invoice.line_items_pages %}
+            <a class="btn btn-sm btn-outline-kara" href="?lines_page={{ invoice.line_items_page|add:'1' }}">بعدی</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </section>
+
+    <details class="inv-raw-details">
+        <summary>تمام فیلدهای خام کارا <span class="text-muted">({{ raw_fields|length }} فیلد)</span></summary>
+        <section class="kara-card inv-raw-card">
+            <div class="kara-card-body p-0">
+                <div class="kara-kv-grid kara-kv-grid--raw">
+                    {% for field in raw_fields %}
+                    <div class="kara-kv-row">
+                        <span class="kara-kv-label">{{ field.label }}</span>
+                        <span class="kara-kv-value">{{ field.value }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </details>
+</div>
+{% endblock %}

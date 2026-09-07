@@ -1,0 +1,183 @@
+{% extends "reports/base.html" %}
+{% load static %}
+
+{% block title %}سرپرستان — تحلیل{% endblock %}
+
+{% block content %}
+<header class="page-header ax-header">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">تحلیل فروش</span>
+        <h1 class="page-title">سرپرستان</h1>
+        <p class="page-desc">عملکرد تیمی · {{ preset_label }} · جدا از شاخص کل شرکت</p>
+    </div>
+    <div class="page-header-actions">
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                {% for value, label in period_options %}
+                <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <a href="{% url 'reports:analytics_salespersons' %}?period={{ preset }}" class="btn btn-outline-kara">ویزیتورها</a>
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+    </div>
+</header>
+
+{% if items %}
+<section class="ax-summary" aria-label="خلاصه سرپرستان">
+    <article class="ax-summary-cell">
+        <span>تعداد سرپرست</span>
+        <strong>{{ summary.count }}</strong>
+    </article>
+    <article class="ax-summary-cell">
+        <span>جمع فروش تیمی</span>
+        <strong>{{ summary.total_formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>میانگین تیم</span>
+        <strong>{{ summary.avg_formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell ax-summary-lead">
+        <span>سرپرست برتر</span>
+        <strong>{{ summary.top_name }}</strong>
+        <small>{{ summary.top_share }}٪ از کل · {{ summary.orders }} سفارش مجموع</small>
+    </article>
+</section>
+
+{% if podium|length >= 3 %}
+<section class="ax-podium-wrap mb-4 ax-podium-teal" aria-label="سکو سرپرستان">
+    <div class="ax-podium">
+        <div class="ax-podium-slot rank-2">
+            <span class="ax-podium-place">۲</span>
+            <strong class="ax-podium-name">{{ podium.1.name }}</strong>
+            <span class="ax-podium-meta">کد {{ podium.1.code }}</span>
+            <span class="ax-podium-value">{{ podium.1.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ podium.1.order_count }} سفارش</span>
+        </div>
+        <div class="ax-podium-slot rank-1">
+            <i class="bi bi-award-fill ax-podium-crown"></i>
+            <span class="ax-podium-place">۱</span>
+            <strong class="ax-podium-name">{{ podium.0.name }}</strong>
+            <span class="ax-podium-meta">کد {{ podium.0.code }}</span>
+            <span class="ax-podium-value">{{ podium.0.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ podium.0.order_count }} سفارش</span>
+        </div>
+        <div class="ax-podium-slot rank-3">
+            <span class="ax-podium-place">۳</span>
+            <strong class="ax-podium-name">{{ podium.2.name }}</strong>
+            <span class="ax-podium-meta">کد {{ podium.2.code }}</span>
+            <span class="ax-podium-value">{{ podium.2.total_sale_formatted }}</span>
+            <span class="ax-podium-sub">{{ podium.2.order_count }} سفارش</span>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-5">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">مقایسه تیم‌ها</h2>
+                <p class="section-desc">فروش تجمیعی سرپرستان برتر</p>
+            </div>
+            <div class="ax-chart-frame">
+                <canvas id="axSupervisorsChart" aria-label="نمودار مقایسه سرپرستان"></canvas>
+            </div>
+            {% if chart_data %}
+            <ul class="ax-chart-fallback" aria-hidden="true">
+                {% for row in chart_data %}
+                <li>
+                    <span class="ax-fb-name">{{ row.name }}</span>
+                    <div class="ax-fb-track"><div class="ax-fb-fill ax-fb-fill-copper" style="width:{% widthratio row.value chart_data.0.value 100 %}%"></div></div>
+                    <span class="ax-fb-val">{{ row.formatted }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {{ chart_data|json_script:"ax-supervisors-chart-data" }}
+        </section>
+    </div>
+    <div class="col-lg-7">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+                <div>
+                    <h2 class="section-title">رتبه‌بندی سرپرستان</h2>
+                    <p class="section-desc">نمای تیمی — برای جزئیات تیم روی لینک کلیک کنید</p>
+                </div>
+                <label class="ax-search">
+                    <i class="bi bi-search"></i>
+                    <input type="search" id="axTableFilter" placeholder="جستجوی نام یا کد…" autocomplete="off">
+                </label>
+            </div>
+            <div class="table-responsive ranking-table-wrap">
+                <table class="table table-sm align-middle ranking-table ax-table" id="axRankTable">
+                    <thead>
+                        <tr>
+                            <th>رتبه</th>
+                            <th>سرپرست</th>
+                            <th class="text-start">فروش تیمی</th>
+                            <th>سهم از پیشتاز</th>
+                            <th class="text-start">سفارش</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr data-filter="{{ item.name }} {{ item.code }}">
+                            <td><span class="rank-badge {% if item.rank <= 3 %}rank-top-{{ item.rank }}{% endif %}">{{ item.rank }}</span></td>
+                            <td>
+                                <strong>{{ item.name }}</strong>
+                                <div class="small text-muted">{{ item.code }}</div>
+                            </td>
+                            <td class="text-start fw-semibold">{{ item.total_sale_formatted }}</td>
+                            <td style="min-width:8rem">
+                                <div class="ax-share-track">
+                                    <div class="ax-share-fill ax-share-fill-copper" style="width:{{ item.share_of_leader }}%"></div>
+                                </div>
+                                <div class="small text-muted mt-1">{{ item.share_of_leader }}٪</div>
+                            </td>
+                            <td class="text-start">{{ item.order_count }}</td>
+                            <td>
+                                <a class="ax-detail-link" href="{% url 'reports:analytics_supervisor_detail' item.code %}">
+                                    تیم <i class="bi bi-arrow-left"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="ax-filter-empty d-none" id="axFilterEmpty">موردی با این جستجو پیدا نشد.</p>
+        </section>
+    </div>
+</div>
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-people"></i>
+    <h2>داده سرپرست موجود نیست</h2>
+    <p>گزارش فروش سرپرست را همگام‌سازی کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/analytics-rank.js' %}?v=3"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.KaraAnalyticsRank) {
+        KaraAnalyticsRank.init({
+            chartId: "axSupervisorsChart",
+            dataId: "ax-supervisors-chart-data",
+            filterId: "axTableFilter",
+            tableId: "axRankTable",
+            emptyId: "axFilterEmpty",
+            label: "فروش تیمی",
+            accent: "#b45309",
+        });
+    }
+});
+</script>
+{% endblock %}

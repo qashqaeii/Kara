@@ -1,0 +1,327 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}{{ name }} — پرونده سرپرست{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/supervisor-detail.css' %}?v=3">
+{% endblock %}
+
+{% block content %}
+<nav aria-label="مسیر">
+    <ol class="kara-crumb">
+        <li><a href="{% url 'reports:dashboard' %}">نمای کلی</a></li>
+        <li><a href="{% url 'reports:analytics_supervisors' %}?period={{ preset }}">سرپرستان</a></li>
+        <li aria-current="page">{{ name }}</li>
+    </ol>
+</nav>
+<header class="page-header ax-header svd-header">
+    <div class="page-header-copy spd-identity">
+        <div class="spd-avatar svd-avatar" aria-hidden="true">{{ initials }}</div>
+        <div>
+            <span class="page-eyebrow">پرونده عملکرد سرپرست</span>
+            <h1 class="page-title">{{ name }}</h1>
+            <p class="page-desc">
+                کد {{ supervisor_code }}
+                · {{ preset_label }}
+                {% if date_from_label != "—" %}· {{ date_from_label }} تا {{ date_to_label }}{% endif %}
+                · {{ kpis.team_size.formatted }} ویزیتور
+            </p>
+        </div>
+    </div>
+    <div class="page-header-actions">
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                {% for value, label in period_options %}
+                <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <a href="{% url 'reports:analytics_supervisors' %}?period={{ preset }}" class="btn btn-outline-kara">لیست سرپرستان</a>
+        <a href="{% url 'reports:analytics_salespersons' %}?period={{ preset }}" class="btn btn-outline-kara">ویزیتورها</a>
+    </div>
+</header>
+
+{% if period_note %}
+<div class="alert alert-info kara-alert mb-3">{{ period_note }}</div>
+{% endif %}
+
+{% if has_data %}
+<section class="spd-hero svd-hero mb-4">
+    <div class="spd-hero-main">
+        <span class="spd-hero-label">فروش تیم · {{ preset_label }}</span>
+        <div class="spd-hero-value">
+            {{ kpis.total_sale.formatted }}
+            <small>{{ unit }}</small>
+        </div>
+        {% if rank.rank %}
+        <div class="spd-rank-chip {% if rank.is_top3 %}is-gold{% elif rank.is_top10 %}is-teal{% endif %}">
+            <i class="bi bi-award-fill"></i>
+            رتبه {{ rank.label }}
+            {% if rank.percentile %}· صدک {{ rank.percentile }}{% endif %}
+        </div>
+        {% endif %}
+        <div class="svd-hero-meta">
+            <span><i class="bi bi-people-fill"></i> {{ kpis.active_count.formatted }} فعال از {{ kpis.team_size.formatted }}</span>
+            <span><i class="bi bi-receipt"></i> {{ kpis.orders.formatted }} سفارش</span>
+            <span><i class="bi bi-pie-chart-fill"></i> تمرکز ۳تای برتر {{ concentration.top3_share }}٪</span>
+        </div>
+    </div>
+    <div class="spd-hero-side svd-hero-side">
+        <article>
+            <span>فروش خالص</span>
+            <strong>{{ kpis.total_pure_sale.formatted }}</strong>
+        </article>
+        <article>
+            <span>میانگین نفر</span>
+            <strong>{{ kpis.avg_per_person.formatted }}</strong>
+        </article>
+        <article>
+            <span>پوشش فعال</span>
+            <strong>{{ kpis.coverage.formatted }}٪</strong>
+        </article>
+        <article class="{% if kpis.reversion_rate.numeric >= 5 %}is-warn{% endif %}">
+            <span>نرخ برگشت</span>
+            <strong>{{ kpis.reversion_rate.formatted }}٪</strong>
+        </article>
+    </div>
+</section>
+
+<section class="svd-stat-rail mb-4" aria-label="شاخص‌های تیم">
+    <article>
+        <i class="bi bi-person-check"></i>
+        <div>
+            <span>پیشتاز تیم</span>
+            <strong>{{ best_member.name|default:"—" }}</strong>
+            <small>{{ best_member.total_sale_formatted|default:"—" }} {{ unit }}</small>
+        </div>
+    </article>
+    <article>
+        <i class="bi bi-graph-up-arrow"></i>
+        <div>
+            <span>سهم نفر اول</span>
+            <strong>{{ concentration.top1_share }}٪</strong>
+            <small>از کل فروش تیم</small>
+        </div>
+    </article>
+    <article>
+        <i class="bi bi-diagram-3"></i>
+        <div>
+            <span>تمرکز ۳ نفر برتر</span>
+            <strong>{{ concentration.top3_share }}٪</strong>
+            <small>{% if concentration.top3_share >= 70 %}تمرکز بالا{% else %}توزیع متعادل‌تر{% endif %}</small>
+        </div>
+    </article>
+    <article>
+        <i class="bi bi-lightning-charge"></i>
+        <div>
+            <span>فرصت مربی‌گری</span>
+            <strong>{{ weak_member.name|default:"—" }}</strong>
+            <small>{{ weak_member.total_sale_formatted|default:"—" }} {{ unit }}</small>
+        </div>
+    </article>
+</section>
+
+{% if insights %}
+<section class="insight-grid mb-4">
+    {% for item in insights %}
+    <article class="insight-card tone-{{ item.tone }}">
+        <i class="bi {{ item.icon }}"></i>
+        <div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.body }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-7">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">روند فروش تیم</h2>
+                <p class="section-desc">فروش روزانه سرپرست در بازه</p>
+            </div>
+            <div class="ax-chart-frame svd-chart-lg">
+                <canvas id="svdSaleChart" aria-label="روند فروش تیم"></canvas>
+            </div>
+            {{ chart_sale|json_script:"svd-sale-data" }}
+        </section>
+    </div>
+    <div class="col-lg-5">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">سهم اعضای تیم</h2>
+                <p class="section-desc">ترکیب فروش فردی</p>
+            </div>
+            <div class="ax-chart-frame ax-chart-frame-doughnut">
+                <canvas id="svdShareChart" aria-label="سهم اعضای تیم"></canvas>
+            </div>
+            {{ share_chart|json_script:"svd-share-data" }}
+        </section>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">سفارش روزانه تیم</h2>
+                <p class="section-desc">تعداد سفارش نهایی</p>
+            </div>
+            <div class="ax-chart-frame">
+                <canvas id="svdOrdersTrend" aria-label="سفارش روزانه"></canvas>
+            </div>
+            {{ chart_orders_trend|json_script:"svd-orders-trend-data" }}
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">بیشترین سفارش در تیم</h2>
+                <p class="section-desc">رتبه‌بندی تعداد سفارش نهایی</p>
+            </div>
+            <div class="ax-chart-frame">
+                <canvas id="svdOrdersRank" aria-label="رتبه سفارش اعضای تیم"></canvas>
+            </div>
+            {{ orders_chart|json_script:"svd-orders-rank-data" }}
+        </section>
+    </div>
+</div>
+
+<section class="panel-block svd-roster mb-4">
+    <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+        <div>
+            <h2 class="section-title">ترکیب تیم</h2>
+            <p class="section-desc">{{ kpis.team_size.formatted }} ویزیتور · قابل جستجو · لینک به پرونده فردی</p>
+        </div>
+        <label class="ax-search">
+            <i class="bi bi-search"></i>
+            <input type="search" id="svdTeamFilter" placeholder="جستجوی نام یا کد ویزیتور…" autocomplete="off">
+        </label>
+    </div>
+
+    <div class="svd-table-wrap">
+        <table class="svd-table" id="svdTeamTable">
+            <thead>
+                <tr>
+                    <th>رتبه</th>
+                    <th>ویزیتور</th>
+                    <th>سهم از تیم</th>
+                    <th class="num">فروش</th>
+                    <th class="num">سفارش</th>
+                    <th class="num">برگشت</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in team_members %}
+                <tr data-filter="{{ m.name }} {{ m.code }}" class="{% if forloop.counter <= 3 %}is-top{% endif %}">
+                    <td>
+                        <span class="svd-rank {% if m.rank <= 3 %}r{{ m.rank }}{% endif %}">{{ m.rank }}</span>
+                    </td>
+                    <td>
+                        <div class="svd-person">
+                            <span class="svd-dot" aria-hidden="true"></span>
+                            <div>
+                                <strong>{{ m.name }}</strong>
+                                <em>{{ m.code }}</em>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="svd-share">
+                            <div class="svd-share-track">
+                                <div class="svd-share-fill" style="width:{{ m.team_share }}%"></div>
+                            </div>
+                            <span>{{ m.team_share }}٪</span>
+                        </div>
+                    </td>
+                    <td class="num svd-money">{{ m.total_sale_formatted }}</td>
+                    <td class="num">{{ m.order_count }}</td>
+                    <td class="num">
+                        <span class="svd-rev {% if m.reversion_rate >= 5 %}is-high{% elif m.reversion_rate > 0 %}is-mid{% endif %}">
+                            {% if m.reversion_rate != None %}{{ m.reversion_rate }}٪{% else %}—{% endif %}
+                        </span>
+                    </td>
+                    <td>
+                        <a class="svd-link" href="{% url 'reports:analytics_salesperson_detail' m.code %}?period={{ preset }}">
+                            پرونده <i class="bi bi-arrow-left"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-muted text-center py-4">عضو تیمی یافت نشد</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="ax-filter-empty d-none" id="svdTeamEmpty">موردی با این جستجو پیدا نشد.</p>
+</section>
+
+{% if history %}
+<section class="panel-block svd-history">
+    <div class="section-head mb-3">
+        <h2 class="section-title">تاریخچه روزانه سرپرست</h2>
+        <p class="section-desc">{{ history|length }} روز ثبت‌شده · شدت رنگ متناسب با بهترین روز</p>
+    </div>
+    <div class="svd-table-wrap">
+        <table class="svd-table svd-history-table">
+            <thead>
+                <tr>
+                    <th>تاریخ</th>
+                    <th>شدت فروش</th>
+                    <th class="num">فروش</th>
+                    <th class="num">خالص</th>
+                    <th class="num">سفارش</th>
+                    <th class="num">فعال / کل</th>
+                    <th class="num">میانگین نفر</th>
+                    <th class="num">برگشت</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in history %}
+                <tr>
+                    <td class="svd-date">{{ h.date_label }}</td>
+                    <td>
+                        <div class="svd-heat" title="{{ h.share_of_best }}٪ از بهترین روز">
+                            <div class="svd-heat-fill" style="width:{{ h.share_of_best }}%"></div>
+                        </div>
+                    </td>
+                    <td class="num svd-money">{{ h.total_sale_formatted }}</td>
+                    <td class="num">{{ h.total_pure_formatted }}</td>
+                    <td class="num">{{ h.order_count }}</td>
+                    <td class="num">{{ h.active_count }} / {{ h.team_size }}</td>
+                    <td class="num">{{ h.avg_per_person_formatted }}</td>
+                    <td class="num">
+                        <span class="svd-rev {% if h.reversion_rate >= 5 %}is-high{% endif %}">{{ h.reversion_rate }}٪</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endif %}
+
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-person-badge"></i>
+    <h2>داده‌ای برای این سرپرست نیست</h2>
+    <p>همگام‌سازی گزارش سرپرست / ویزیتور را اجرا کنید یا بازه دیگری انتخاب کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">همگام‌سازی</a>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/supervisor-detail.js' %}?v=1"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.KaraSupervisorDetail) {
+        KaraSupervisorDetail.init();
+    }
+});
+</script>
+{% endblock %}

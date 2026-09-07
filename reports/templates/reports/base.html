@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}داشبورد مدیریتی کارا{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{% static 'reports/css/custom.css' %}?v=9">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="kara-body">
+    <div class="kara-bg" aria-hidden="true">
+        <div class="kara-wash"></div>
+        <div class="kara-grid"></div>
+    </div>
+
+    <header class="kara-header sticky-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid px-3 px-lg-4">
+                <a class="navbar-brand kara-brand" href="{% if kara_nav.dashboard %}{% url 'reports:dashboard' %}{% else %}{% url 'reports:my_performance' %}{% endif %}">
+                    <span class="brand-mark"><i class="bi bi-graph-up-arrow"></i></span>
+                    <span class="brand-copy">
+                        <strong>کارا</strong>
+                        <small>نظارت مدیریتی فروش</small>
+                    </span>
+                </a>
+                <button class="navbar-toggler kara-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="منو">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="kara-nav-groups me-auto kara-nav">
+                        {% if kara_nav.dashboard %}
+                        <ul class="nav-group">
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'dashboard' %} active{% endif %}" href="{% url 'reports:dashboard' %}">
+                                    <i class="bi bi-speedometer2"></i><span>نمای کلی</span>
+                                </a>
+                            </li>
+                            {% if kara_nav.tv %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'tv_mode' %} active{% endif %}" href="{% url 'reports:tv_mode' %}" target="_blank" rel="noopener">
+                                    <i class="bi bi-tv"></i><span>تلویزیون</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                        <ul class="nav-group">
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'my_performance' %} active{% endif %}" href="{% url 'reports:my_performance' %}">
+                                    <i class="bi bi-person-circle"></i><span>عملکرد من</span>
+                                </a>
+                            </li>
+                            {% if kara_nav.invoices %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if 'invoice' in request.resolver_match.url_name %} active{% endif %}" href="{% url 'reports:invoices' %}">
+                                    <i class="bi bi-receipt"></i><span>فاکتورها</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% if kara_nav.salesperson or kara_nav.supervisor or kara_nav.regions or kara_nav.receivables %}
+                        <span class="nav-group-divider d-none d-lg-block" aria-hidden="true"></span>
+                        <ul class="nav-group">
+                            {% if kara_nav.salesperson %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if 'analytics_salesperson' in request.resolver_match.url_name %} active{% endif %}" href="{% url 'reports:analytics_salespersons' %}">
+                                    <i class="bi bi-person-badge"></i><span>ویزیتورها</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if kara_nav.supervisor %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if 'analytics_supervisor' in request.resolver_match.url_name %} active{% endif %}" href="{% url 'reports:analytics_supervisors' %}">
+                                    <i class="bi bi-people"></i><span>سرپرستان</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if kara_nav.regions %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'analytics_regions' %} active{% endif %}" href="{% url 'reports:analytics_regions' %}">
+                                    <i class="bi bi-geo-alt"></i><span>شهر و منطقه</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if kara_nav.receivables %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'analytics_receivables' %} active{% endif %}" href="{% url 'reports:analytics_receivables' %}">
+                                    <i class="bi bi-cash-coin"></i><span>مطالبات</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                        {% if kara_nav.explorer or kara_nav.sync %}
+                        <span class="nav-group-divider d-none d-lg-block" aria-hidden="true"></span>
+                        <ul class="nav-group">
+                            {% if kara_nav.explorer %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'data_explorer' %} active{% endif %}" href="{% url 'reports:data_explorer' %}">
+                                    <i class="bi bi-table"></i><span>کاوش داده</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if kara_nav.sync %}
+                            <li class="nav-item">
+                                <a class="nav-link{% if request.resolver_match.url_name == 'sync_center' %} active{% endif %}" href="{% url 'reports:sync_center' %}">
+                                    <i class="bi bi-arrow-repeat"></i><span>همگام‌سازی</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div id="liveStatusBadge" class="live-status-badge" title="وضعیت آخرین همگام‌سازی">
+                            <span class="live-dot"></span>
+                            <span id="liveStatusText">در حال بارگذاری...</span>
+                        </div>
+                        {% if user.is_authenticated %}
+                        <div class="dropdown kara-user-menu">
+                            <button class="btn btn-sm btn-outline-kara dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-check"></i> {{ kara_user_display|default:user.username }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><span class="dropdown-item-text small text-muted">{{ kara_role_label }}{% if kara_personnel_code %} · {{ kara_personnel_code }}{% endif %}</span></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="post" action="{% url 'reports:logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item text-danger">خروج</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="kara-main container-fluid px-3 px-lg-4 py-4">
+        {% if messages %}
+            <div class="kara-alerts mb-4">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show kara-alert" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="kara-footer">
+        <div class="container-fluid px-3 px-lg-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <small>لایه تحلیلی مدیریتی روی سیستم کارا</small>
+            <small class="text-muted">داده‌ها از دیتابیس محلی خوانده می‌شوند</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+    window.KaraDashboard = window.KaraDashboard || {};
+    window.KaraDashboard.currencyUnit = "{{ currency_unit|default:'تومان' }}";
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

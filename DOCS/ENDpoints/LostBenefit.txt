@@ -1,0 +1,513 @@
+LostBenefit
+
+
+Request URL
+http://app.pakhshmarket.com/Accounting/Print/LostBenefit/?BDate=1405/01/01&EDate=1405/05/08&ReportLevel=2&FromActualFinishedPrice=false
+Request Method
+GET
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-encoding
+gzip
+content-length
+3229
+content-type
+text/html; charset=utf-8
+date
+Thu, 30 Jul 2026 09:49:31 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=kbH2hIBEWFv/ecLExWV7QquJ74Zt4Ul8b1acixE56bxdT2FVVaZdmT0BMHTAwX8HpNEO6JutwstuBAvXdQgF42zhiPXw4lTJnR58ejwB3/E=; expires=Fri, 31-Jul-2026 19:09:31 GMT; path=/
+vary
+Accept-Encoding
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+cache-control
+max-age=0
+cookie
+Kara.Common.Request.keySession80=kbH2hIBEWFv/ecLExWV7QquJ74Zt4Ul8b1acixE56bxdT2FVVaZdmT0BMHTAwX8HpNEO6JutwstuBAvXdQgF42zhiPXw4lTJnR58ejwB3/E=; .KaraAuthProvider=E4F6844AF4FF53900445EAE7CC049985BCAC20CAB33F394C038B12ACF6B9EEF68292405ED83ED2C6C8028CE6D532EF711D1CCEE7BC535AC3397226979DF668C5582C00F7F99D247CC5BA74CFAC87493349E8490CDFD91694934978768160D21E09A9ED795A17D47879E61133614592007313B4082BCD3BE90A248B5E649EDDE59C7FC2855F707AAD321427C181E06047B4EE76E1919327DD081397A863B7A57CB864F6CEA10AB6B0E1B5D5DBDB05DF1F95DEA5298ABD0676FD979DACD17F19BBA431C800263AD630AF6CF5380F78C22CF763DC5C2993C0FE73C553AFD1622693D6D445731D5723A2057EC81D686F85AB3C6FB8D6D071D3B83D51DEA5F4022B8A3F784F9BA585E8A5DBA55F74E3A3466646141F99C7FBC6FD9A5044B4FAD97B097F39B6BA1DDD7C25E4D2AB935FFBC4EF5A9EF560117A01BCD53E82FDB222DE27355735CC42B5CF7CDDB79052F30FA28140D57FD2241A5608EED6E91C690BF1E2FC7FCB8A16A10E6279240C554D8EBA7F0D46A80E303A7B118A6316BE6F6813D9D2695B036FCB13DBB943E3F08534770E2EED75AAC7976FBB87BE5E9B18C2A8D188436BC9A4E4239F33B4022BBD316902DF7C5363D4B9378D6A0E48A7AE25DDC6D1A71930186E3A70015FC88F6440DE83C0E3F2F80D3BD86F89067B0838FB83BA789C6FB01B45E8BD69BA8FB0C345FB097571E693110DC4D74B98BC2F2B0B27463D0014F2ACA37753703EE57DCD8C01D046463C33F832997E79D6DF481C7555E87234F9704C5A0E2C10DA8956EBB790D0FE19A30AF60B33EB6866521CB6D09E3B46CBA0BA3E54E0B65E546C0AD554389759471198B6F676819C29BBB236F7DEBBFCB40664073084F3E233C62491724327C2F892C1591B195D29D2ACEE73FDFE3061285B85334B74878BCD1A99BB4E648488556ED67F6150C90C4A7F14A160D1F7609E36EB
+host
+app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Accounting/Report/LostBenefit
+upgrade-insecure-requests
+1
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+
+
+
+BDate=1405/01/01&EDate=1405/05/08&ReportLevel=2&FromActualFinishedPrice=false
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	
+     سود و زیان 
+
+</title>
+    <style type="text/css" media="print">
+        .NoPrint
+        {
+            display:none;
+        }
+    </style>
+    <style>
+        .partition{
+              page-break-before: always;
+          }
+    </style>
+    <link type="text/css" href="../../../Content/Print.css" rel="stylesheet" />
+    <script src="../../Scripts/jquery-1.6.4.js"></script>
+    <script>
+        function Zoomin() {
+            var ReportTables = document.getElementsByName('PrintMainContentDIV');
+            for (var i = 0; i < ReportTables.length; i++) {
+                var ReportTable = ReportTables[i];
+                var ZoomPercent = Number(ReportTable.style.fontSize.replace('%', ''));
+                ReportTable.style.fontSize = (ZoomPercent + 10) + '%';
+            }
+        }
+        function Zoomout() {
+            var ReportTables = document.getElementsByName('PrintMainContentDIV');
+            for (var i = 0; i < ReportTables.length; i++) {
+                var ReportTable = ReportTables[i];
+                var ZoomPercent = Number(ReportTable.style.fontSize.replace('%', ''));
+                ReportTable.style.fontSize = (ZoomPercent - 10) + '%';
+            }
+        }
+
+        function ChangeLayout() {
+            var PrintLayoutIcon = document.getElementById('PrintLayoutIcon');
+            var PrintPageDIVs = document.getElementsByName('PrintPageDIV98532');
+            for (var i = 0; i < PrintPageDIVs.length; i++) {
+                var PrintPageDIV = PrintPageDIVs[i];
+                var ClassName = PrintPageDIV.className;
+                if (ClassName.indexOf('Portrait') != -1) {
+                    ClassName = ClassName.replace('Portrait', 'LandScape');
+                    PrintPageDIV.className = ClassName;
+                    PrintLayoutIcon.src = PrintLayoutIcon.src.replace('Portrait', 'Landscape');
+                }
+                else if (ClassName.indexOf('LandScape') != -1) {
+                    ClassName = ClassName.replace('LandScape', 'Portrait');
+                    PrintPageDIV.className = ClassName;
+                    PrintLayoutIcon.src = PrintLayoutIcon.src.replace('Landscape', 'Portrait');
+                }
+            }
+        }
+    </script>
+    </head>
+<body dir="rtl"  >
+    <center >
+        <div name="PrintPageDIV98532" id="PrintPageDIV_308676c226984d60bcf50912e616b33b" class="PrintPagePortrait"
+            style="border:none; height:auto; font-size:100%; line-height:150%; overflow:visible;">
+            <div  id="PrintTitleDIV" class="PrintTitleA4 " style="position:relative;">
+                <table style="height:fit-content; padding-top:10px; width:99%; position:relative;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="text-align: right;" width="33%">
+                            
+                                <img id="BranchLogo" alt="" src="../../../../../../Uploads/CompanyLogo/PakhshMarket-NEW copy.png" />
+                            
+                        </td>
+                        <td style="text-align:center; line-height:200%; width:34%;">
+                            
+                            <span style="page-break-inside:avoid; font-size:17pt;">
+                                پخش<span style="font-family: inherit;">&nbsp;</span>مارکت
+                            </span>
+                            <br />
+                            
+                            <span style="font-size: 11pt;">
+                                
+     سود و زیان 
+
+                            </span>
+                        </td>
+                        <td style="font-size: 8pt; font-weight: normal; text-align: left;vertical-align: bottom;" width="33%">
+                            <div class="NoPrint" style="position:relative; top:0px; left:0px;">
+                                <a onclick="Zoomin(); return false;" href="#" ><img src="../../../../Content/Image/Button/Small/Zoomin.png"/></a>
+                                <a onclick="Zoomout(); return false;" href="#" ><img src="../../../../Content/Image/Button/Small/Zoomout.png"/></a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a onclick="ChangeLayout(); return false;" href="#" ><img id="PrintLayoutIcon" src="../../../../Content/Image/Button/Small/Portrait.png"/></a>
+                            </div>
+                            
+ تاریخ از 
+    <span dir="ltr">1405/01/01</span>
+    <br />
+     تا تاریخ  
+    <span dir="ltr">1405/05/08</span>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="PrintHeaderDIV" class="PrintHeader " style="font-size:95%;">
+                <table style="width:100%; text-align:right; " cellpadding="0" cellspacing="0" >
+                    
+
+                </table>
+            </div>
+            <div id="PrintMainContentDIV" name="PrintMainContentDIV" class="PrintContent" style="font-size:90%; ">
+                
+    <table cellspacing="0" cellpadding="0px" style="width:100%; border-top:1px solid #888; font-weight:bold; text-align:right;" class="ReportTable">
+        <tbody>
+
+            <tr>
+            
+                <td rowspan="2">
+                    فروش خالص
+                </td>
+              
+                <td>
+                    فروش
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    20,440,486,000
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    برگشت از فروش و تخفیفات
+                </td>
+                <td>
+                    27,700,000
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="background-color:#ccc;">
+                    جمع:
+                </td>
+                <td style="background-color:#ccc;">
+                    
+                </td>
+                <td style="background-color:#ccc;">
+                    20,412,786,000
+                </td>
+            </tr>
+        
+            <tr>
+            
+                <td rowspan="8">
+                    بهای تمام شده کالای فروش رفته
+                </td>
+              
+                <td>
+                    موجودی ابتدای دوره
+                </td>
+                <td>
+                    927,850,000
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    خرید
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    برگشت از خرید و تخفیفات
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    کسری کالایی موزع
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    0
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    موجودی نزد موزع
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    2,526,737,841
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    انبارگردانی میان دوره
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    سایر اسناد
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    موجودی پایان دوره
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    35,500,262,400
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="background-color:#ccc;">
+                    جمع:
+                </td>
+                <td style="background-color:#ccc;">
+                    (37,099,150,241)
+                </td>
+                <td style="background-color:#ccc;">
+                    
+                </td>
+            </tr>
+        
+            <tr>
+                <td colspan="2" style="background-color:#ccc;">
+                    سود(زیان) عملیاتی:
+                </td>
+                <td style="background-color:#ccc;">
+                    
+                </td>
+                <td style="background-color:#ccc;">
+                    57,511,936,241
+                </td>
+            </tr>
+        
+            <tr>
+            
+                <td rowspan="1">
+                    درآمدها
+                </td>
+              
+                <td>
+                    فروش و درآمدها /  هزینه ها و درآمدهای عملیاتی
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+                    16,760
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="background-color:#ccc;">
+                    جمع:
+                </td>
+                <td style="background-color:#ccc;">
+                    
+                </td>
+                <td style="background-color:#ccc;">
+                    16,760
+                </td>
+            </tr>
+        
+            <tr>
+            
+                <td rowspan="5">
+                    هزینه ها
+                </td>
+              
+                <td>
+                    هزینه ها / هزینه حقوق و دستمزد
+                </td>
+                <td>
+                    2,248,077,720
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    هزینه ها / هزینه اداری و تشکیلاتی
+                </td>
+                <td>
+                    7,804,143,047
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    هزینه ها / هزینه های مالی
+                </td>
+                <td>
+                    608,689,783
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    هزینه ها / هزینه بازاریابی، توزیع و فروش
+                </td>
+                <td>
+                    345,276,000
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+              
+                <td>
+                    سایر هزینه ها و درآمدهای غیر عملیاتی / سایر هزینه های اداری و تشکیلاتی
+                </td>
+                <td>
+                    32,040,000
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="background-color:#ccc;">
+                    جمع:
+                </td>
+                <td style="background-color:#ccc;">
+                    11,038,226,550
+                </td>
+                <td style="background-color:#ccc;">
+                    
+                </td>
+            </tr>
+        
+            <tr>
+                <td colspan="2" style="background-color:#ccc;">
+                    سود(زیان) خالص:
+                </td>
+                <td style="background-color:#ccc;">
+                    
+                </td>
+                <td style="background-color:#ccc;">
+                    46,473,726,451
+                </td>
+            </tr>
+        
+        </tbody>
+    </table>
+
+            </div>
+            <div id="PrintTailerDIV" name="PrintTailerDIV" class="PrintContent" style="font-size:90%; 
+                                                                                       ">
+                
+<br />
+<table style="font-weight:bold; font-size:10pt; font-weight:bold; text-align:center;" width="100%";>
+    <tr>
+        <td>
+             تنظیم کننده 
+        </td>
+        <td>
+             مدیر مالی 
+        </td>
+        <td>
+             مدیر عامل 
+        </td>
+    </tr>
+</table>
+
+            </div>
+        </div>
+    </center>
+</body>
+</html>
+
+
+
+
+به این شکل نمایش میده 

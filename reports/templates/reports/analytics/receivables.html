@@ -1,0 +1,454 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}مطالبات و معوقات{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/receivables.css' %}?v=5">
+{% endblock %}
+
+{% block content %}
+<header class="page-header ax-header recv-top">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">ریسک اعتباری · وصول مطالبات</span>
+        <h1 class="page-title">مطالبات و معوقات</h1>
+        <p class="page-desc">
+            سن‌بندی سفارش‌های تسویه‌نشده و مانده حساب مشتریان
+            {% if business_date_label and business_date_label != "—" %}
+            · به‌روز تا {{ business_date_label }}
+            {% endif %}
+        </p>
+    </div>
+    <div class="page-header-actions">
+        <a href="{% url 'reports:tv_mode' %}" class="btn btn-outline-kara" target="_blank" rel="noopener"><i class="bi bi-tv"></i> تلویزیون</a>
+        <a href="{% url 'reports:sync_center' %}" class="btn btn-outline-kara">همگام‌سازی</a>
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+    </div>
+</header>
+
+{% if available %}
+<section class="recv-stage" aria-label="خلاصه مطالبات">
+    <div class="recv-stage-glow" aria-hidden="true"></div>
+    <div class="recv-stage-grid">
+        <div class="recv-stage-hero">
+            <p class="recv-kicker">جمع معوقات جدول سنی</p>
+            <div class="recv-mega">
+                <span class="recv-mega-num">{{ kpis.total_outstanding.formatted }}</span>
+                <span class="recv-mega-unit">{{ unit }}</span>
+            </div>
+            <div class="recv-chips">
+                <span class="recv-chip"><i class="bi bi-layers"></i>{{ kpis.row_count }} ردیف</span>
+                <span class="recv-chip"><i class="bi bi-person-badge"></i>{{ kpis.visitor_count }} ویزیتور</span>
+                <span class="recv-chip"><i class="bi bi-geo-alt"></i>{{ kpis.city_count }} شهر</span>
+                {% if concentration.available %}
+                <span class="recv-chip is-accent"><i class="bi bi-pie-chart"></i>تمرکز ۳تای برتر {{ concentration.top3_share }}٪</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="recv-stage-meter" style="--fresh:{{ bands.fresh.share }};--watch:{{ bands.watch.share }};--critical:{{ bands.critical.share }};">
+            <div class="recv-ring" aria-hidden="true">
+                <div class="recv-ring-hole">
+                    <strong>{% if bands.watch.share >= bands.fresh.share %}{{ bands.watch.share }}{% else %}{{ bands.fresh.share }}{% endif %}٪</strong>
+                    <span>باند غالب</span>
+                </div>
+            </div>
+            <ul class="recv-ring-legend">
+                <li class="is-fresh"><b></b><span>{{ bands.fresh.label }}</span><em>{{ bands.fresh.share }}٪</em></li>
+                <li class="is-watch"><b></b><span>{{ bands.watch.label }}</span><em>{{ bands.watch.share }}٪</em></li>
+                <li class="is-critical"><b></b><span>{{ bands.critical.label }}</span><em>{{ bands.critical.share }}٪</em></li>
+            </ul>
+        </div>
+
+        <div class="recv-stage-bands">
+            <article class="recv-band-card is-fresh">
+                <header>
+                    <span>جاری</span>
+                    <em>{{ bands.fresh.share }}٪</em>
+                </header>
+                <strong>{{ bands.fresh.formatted }}</strong>
+                <div class="recv-band-track"><i style="width:{{ bands.fresh.share }}%"></i></div>
+                <p>{{ bands.fresh.label }}</p>
+            </article>
+            <article class="recv-band-card is-watch">
+                <header>
+                    <span>هشدار</span>
+                    <em>{{ bands.watch.share }}٪</em>
+                </header>
+                <strong>{{ bands.watch.formatted }}</strong>
+                <div class="recv-band-track"><i style="width:{{ bands.watch.share }}%"></i></div>
+                <p>{{ bands.watch.label }}</p>
+            </article>
+            <article class="recv-band-card is-critical">
+                <header>
+                    <span>بحرانی</span>
+                    <em>{{ bands.critical.share }}٪</em>
+                </header>
+                <strong>{{ bands.critical.formatted }}</strong>
+                <div class="recv-band-track"><i style="width:{{ bands.critical.share }}%"></i></div>
+                <p>{{ bands.critical.label }}</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="recv-stat-row" aria-label="شاخص‌های کلیدی">
+    <article class="recv-stat">
+        <i class="bi bi-wallet2"></i>
+        <div>
+            <span>مانده حساب مشتریان</span>
+            <strong>{{ kpis.partner_balance.formatted }}</strong>
+            <small>{{ unit }} · {{ kpis.partner_count }} مشتری</small>
+        </div>
+    </article>
+    <article class="recv-stat">
+        <i class="bi bi-calculator"></i>
+        <div>
+            <span>میانگین هر ردیف</span>
+            <strong>{{ kpis.avg_per_row.formatted }}</strong>
+            <small>{{ unit }}</small>
+        </div>
+    </article>
+    <article class="recv-stat is-teal">
+        <i class="bi bi-lightning-charge"></i>
+        <div>
+            <span>سهم جاری</span>
+            <strong>{{ kpis.fresh_share }}٪</strong>
+            <small>باکت ۱ تا ۳</small>
+        </div>
+    </article>
+    <article class="recv-stat {% if kpis.critical_share >= 10 %}is-danger{% else %}is-copper{% endif %}">
+        <i class="bi bi-exclamation-triangle"></i>
+        <div>
+            <span>سهم بحرانی</span>
+            <strong>{{ kpis.critical_share }}٪</strong>
+            <small>باکت ۷ و بیشتر</small>
+        </div>
+    </article>
+    {% if concentration.available %}
+    <article class="recv-stat is-lead">
+        <i class="bi bi-bullseye"></i>
+        <div>
+            <span>تمرکز ریسک</span>
+            <strong>{{ concentration.top3_share }}٪</strong>
+            <small>{{ concentration.top_name }}</small>
+        </div>
+    </article>
+    {% endif %}
+</section>
+
+{% if insights %}
+<section class="recv-insight-rail" aria-label="بینش‌ها">
+    {% for item in insights %}
+    <article class="recv-insight tone-{{ item.tone }}">
+        <div class="recv-insight-ico"><i class="bi {{ item.icon }}"></i></div>
+        <div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.body }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-xl-8">
+        <section class="recv-panel recv-panel-chart">
+            <div class="recv-panel-head">
+                <div>
+                    <h2>توزیع ۱۲ باکت سنی</h2>
+                    <p>ماه ۱ تازه‌ترین مانده · ماه ۱۲ قدیمی‌ترین</p>
+                </div>
+                <div class="recv-legend-pills">
+                    <span class="is-fresh">جاری</span>
+                    <span class="is-watch">هشدار</span>
+                    <span class="is-critical">بحرانی</span>
+                </div>
+            </div>
+            <div class="recv-chart-shell">
+                <canvas id="recvBucketsChart" aria-label="نمودار باکت‌ها"></canvas>
+            </div>
+            {{ chart_buckets|json_script:"recv-buckets-data" }}
+            <ol class="recv-bucket-board">
+                {% for b in buckets %}
+                {% if b.amount > 0 %}
+                <li class="risk-{{ b.risk }}" style="--w:{{ b.bar }}%">
+                    <div class="recv-bb-top">
+                        <span class="recv-bb-name">{{ b.label }} <small>{{ b.hint }}</small></span>
+                        <span class="recv-bb-amt">{{ b.formatted }} <em>{{ b.share }}٪</em></span>
+                    </div>
+                    <div class="recv-bb-bar"><i></i></div>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ol>
+        </section>
+    </div>
+    <div class="col-xl-4">
+        <section class="recv-panel recv-panel-risk h-100">
+            <div class="recv-panel-head">
+                <div>
+                    <h2>پروفایل ریسک</h2>
+                    <p>ترکیب سه باند سنی</p>
+                </div>
+            </div>
+            <div class="recv-risk-viz" style="--fresh:{{ bands.fresh.share }};--watch:{{ bands.watch.share }};--critical:{{ bands.critical.share }};">
+                <div class="recv-risk-orb">
+                    <canvas id="recvBandsChart" aria-hidden="true"></canvas>
+                    <div class="recv-risk-center">
+                        <strong>{{ bands.watch.formatted }}</strong>
+                        <span>باند هشدار</span>
+                    </div>
+                </div>
+                {{ chart_bands|json_script:"recv-bands-data" }}
+                <div class="recv-risk-stack">
+                    <div class="is-fresh"><span>جاری</span><strong>{{ bands.fresh.formatted }}</strong><em>{{ bands.fresh.share }}٪</em></div>
+                    <div class="is-watch"><span>۴–۶ ماه</span><strong>{{ bands.watch.formatted }}</strong><em>{{ bands.watch.share }}٪</em></div>
+                    <div class="is-critical"><span>۷+ ماه</span><strong>{{ bands.critical.formatted }}</strong><em>{{ bands.critical.share }}٪</em></div>
+                </div>
+            </div>
+            {% if history|length > 1 %}
+            <div class="recv-mini-trend">
+                <h3>روند معوقات</h3>
+                <div class="recv-mini-trend-frame">
+                    <canvas id="recvTrendChart"></canvas>
+                </div>
+                {{ history|json_script:"recv-history-data" }}
+            </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <section class="recv-panel h-100">
+            <div class="recv-panel-head">
+                <div>
+                    <h2>ویزیتورهای پرمعوق</h2>
+                    <p>رتبه‌بندی تجمیعی</p>
+                </div>
+            </div>
+            <ol class="recv-ladder">
+                {% for v in visitors %}
+                <li class="{% if forloop.counter <= 3 %}is-podium podium-{{ forloop.counter }}{% endif %}">
+                    <span class="recv-ladder-rank">{{ v.rank }}</span>
+                    <div class="recv-ladder-body">
+                        {% if v.code and v.code != "—" %}
+                        <a href="{% url 'reports:analytics_salesperson_detail' v.code %}" class="recv-ladder-name">{{ v.name }}</a>
+                        {% else %}
+                        <span class="recv-ladder-name">{{ v.name }}</span>
+                        {% endif %}
+                        <div class="recv-stack" title="تازه / میانی / بحرانی">
+                            <i class="f" style="width:{{ v.fresh_share }}%"></i>
+                            <i class="w" style="width:{{ v.watch_share }}%"></i>
+                            <i class="c" style="width:{{ v.critical_share }}%"></i>
+                        </div>
+                        <span class="recv-ladder-meta">{{ v.rows }} ردیف · سهم {{ v.share }}٪</span>
+                    </div>
+                    <div class="recv-ladder-val">
+                        <strong>{{ v.formatted }}</strong>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="recv-empty">داده‌ای نیست</li>
+                {% endfor %}
+            </ol>
+        </section>
+    </div>
+    <div class="col-lg-4">
+        <section class="recv-panel h-100">
+            <div class="recv-panel-head">
+                <div>
+                    <h2>شهرها</h2>
+                    <p>تمرکز جغرافیایی معوق</p>
+                </div>
+            </div>
+            <ol class="recv-ladder">
+                {% for c in cities %}
+                <li>
+                    <span class="recv-ladder-rank">{{ c.rank }}</span>
+                    <div class="recv-ladder-body">
+                        <span class="recv-ladder-name">{{ c.name }}</span>
+                        <div class="recv-thin-bar"><i style="width:{{ c.bar }}%"></i></div>
+                        <span class="recv-ladder-meta">{{ c.rows }} ردیف</span>
+                    </div>
+                    <div class="recv-ladder-val">
+                        <strong>{{ c.formatted }}</strong>
+                        <small>{{ c.share }}٪</small>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="recv-empty">شهری نیست</li>
+                {% endfor %}
+            </ol>
+        </section>
+    </div>
+    <div class="col-lg-4">
+        <section class="recv-panel h-100">
+            <div class="recv-panel-head">
+                <div>
+                    <h2>مناطق</h2>
+                    <p>نقاط داغ وصول</p>
+                </div>
+            </div>
+            <ol class="recv-ladder">
+                {% for z in zones %}
+                <li>
+                    <span class="recv-ladder-rank">{{ z.rank }}</span>
+                    <div class="recv-ladder-body">
+                        <span class="recv-ladder-name">{{ z.name }}</span>
+                        <div class="recv-thin-bar is-copper"><i style="width:{{ z.bar }}%"></i></div>
+                        <span class="recv-ladder-meta">بحرانی {{ z.critical_share }}٪</span>
+                    </div>
+                    <div class="recv-ladder-val">
+                        <strong>{{ z.formatted }}</strong>
+                        <small>{{ z.share }}٪</small>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="recv-empty">منطقه‌ای نیست</li>
+                {% endfor %}
+            </ol>
+        </section>
+    </div>
+</div>
+
+{% if balances.available %}
+<section class="recv-balance-duo mb-4">
+    <article class="recv-panel">
+        <div class="recv-panel-head">
+            <div>
+                <h2>بیشترین مانده مثبت</h2>
+                <p>{{ balances.debtor_count }} مشتری · جمع {{ balances.positive_formatted }}</p>
+            </div>
+        </div>
+        <ol class="recv-balance-list">
+            {% for p in balances.top_debtors %}
+            <li>
+                <span class="recv-balance-i">{{ forloop.counter }}</span>
+                <div>
+                    <strong>{{ p.name }}</strong>
+                    <small>{{ p.code }}</small>
+                </div>
+                <em>{{ p.formatted }}</em>
+            </li>
+            {% empty %}
+            <li class="recv-empty">موردی نیست</li>
+            {% endfor %}
+        </ol>
+    </article>
+    <article class="recv-panel">
+        <div class="recv-panel-head">
+            <div>
+                <h2>مانده منفی / بستانکار</h2>
+                <p>{{ balances.creditor_count }} مورد · {{ balances.negative_formatted }} · {{ balances.zero_count }} بدون مانده</p>
+            </div>
+        </div>
+        <ol class="recv-balance-list is-neg">
+            {% for p in balances.top_creditors %}
+            <li>
+                <span class="recv-balance-i">{{ forloop.counter }}</span>
+                <div>
+                    <strong>{{ p.name }}</strong>
+                    <small>{{ p.code }}</small>
+                </div>
+                <em>{{ p.formatted }}</em>
+            </li>
+            {% empty %}
+            <li class="recv-empty">مانده منفی نیست</li>
+            {% endfor %}
+        </ol>
+    </article>
+</section>
+{% endif %}
+
+<section class="recv-panel recv-detail-panel">
+    <div class="recv-panel-head recv-detail-head">
+        <div>
+            <h2>جزئیات ردیف‌های جدول سنی</h2>
+            <p>{{ detail_rows|length }} ردیف · ویزیتور × شهر × منطقه</p>
+        </div>
+        <div class="recv-detail-tools">
+            <div class="recv-risk-filters" role="group" aria-label="فیلتر ریسک">
+                <button type="button" class="is-active" data-risk="all">همه</button>
+                <button type="button" data-risk="fresh">جاری</button>
+                <button type="button" data-risk="watch">هشدار</button>
+                <button type="button" data-risk="critical">بحرانی</button>
+            </div>
+            <label class="recv-search">
+                <i class="bi bi-search"></i>
+                <input type="search" id="recvRowFilter" placeholder="جستجو…" autocomplete="off">
+            </label>
+        </div>
+    </div>
+    <div class="recv-table-wrap">
+        <table class="recv-table" id="recvDetailTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ویزیتور</th>
+                    <th>شهر</th>
+                    <th>منطقه</th>
+                    <th class="is-num">معوق</th>
+                    <th>سهم از کل</th>
+                    <th>باکت غالب</th>
+                    <th class="is-num">بحرانی ۷+</th>
+                    <th>ریسک</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in detail_rows %}
+                <tr data-filter="{{ row.filter_hay }}" data-risk="{{ row.risk }}" class="risk-{{ row.risk }}">
+                    <td class="recv-td-rank">{{ forloop.counter }}</td>
+                    <td>
+                        {% if row.visitor_code %}
+                        <a class="recv-person" href="{% url 'reports:analytics_salesperson_detail' row.visitor_code %}">{{ row.visitor_name }}</a>
+                        {% else %}
+                        <span class="recv-person">{{ row.visitor_name }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ row.city_name }}</td>
+                    <td>{{ row.zone_name }}</td>
+                    <td class="is-num recv-money">{{ row.formatted }}</td>
+                    <td>
+                        <div class="recv-share">
+                            <div class="recv-share-track"><i style="width:{{ row.bar }}%"></i></div>
+                            <span>{{ row.share }}٪</span>
+                        </div>
+                    </td>
+                    <td><span class="recv-bucket-tag">{{ row.dominant_label }}</span></td>
+                    <td class="is-num">{{ row.critical_formatted }}</td>
+                    <td>
+                        <span class="recv-pill risk-{{ row.risk }}">
+                            {% if row.risk == "critical" %}بحرانی{% elif row.risk == "watch" %}هشدار{% else %}جاری{% endif %}
+                        </span>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="9" class="recv-empty">ردیفی ثبت نشده</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="recv-filter-empty d-none" id="recvRowEmpty">ردیفی با این فیلتر پیدا نشد.</p>
+</section>
+
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-cash-coin"></i>
+    <h2>هنوز داده مطالبات همگام نشده</h2>
+    <p>گزارش‌های «مانده حساب مشتریان» و «جدول سنی معوقات» را از مرکز همگام‌سازی اجرا کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/receivables-page.js' %}?v=3"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.KaraReceivablesPage) KaraReceivablesPage.init();
+});
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "reports/base.html" %}
+
+{% block title %}برگشتی‌ها — تحلیل{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">تحلیل فروش</span>
+        <h1 class="page-title">برگشتی‌ها</h1>
+        <p class="page-desc">برگشت از فروش و توزیع</p>
+    </div>
+    <div class="page-header-actions">
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+    </div>
+</header>
+
+<div class="summary-strip">
+    <div class="summary-cell">
+        <div class="text-muted">برگشت از فروش</div>
+        <strong>{{ kpis.sale_reversion.formatted }}</strong>
+    </div>
+    <div class="summary-cell">
+        <div class="text-muted">برگشت از توزیع</div>
+        <strong>{{ kpis.distribution_reversion.formatted }}</strong>
+    </div>
+    <div class="summary-cell">
+        <div class="text-muted">نرخ برگشت</div>
+        <strong>{{ kpis.reversion_rate.formatted }}٪</strong>
+    </div>
+</div>
+{% endblock %}

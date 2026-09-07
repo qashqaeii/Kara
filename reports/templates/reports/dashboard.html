@@ -1,0 +1,529 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}داشبورد مدیریتی — کارا{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/dashboard.css' %}?v=3">
+{% endblock %}
+
+{% block content %}
+<header class="db-command">
+    <div class="db-command-copy">
+        <span class="db-eyebrow">KARA · لایه تحلیلی</span>
+        <h1>نمای کلی فروش</h1>
+        <p>
+            به‌روزرسانی‌شده {{ connection.last_sync_label }}
+            {% if refresh_interval %} · خودکار هر {{ refresh_interval }} دقیقه{% endif %}
+            <span id="liveStatusText" class="db-live-label"></span>
+        </p>
+    </div>
+    <div class="db-command-actions">
+        <div class="conn-badge status-{{ connection.status }}">
+            <span class="conn-dot"></span>
+            {{ connection.status_label }}
+        </div>
+        <div id="refreshCountdown" class="db-countdown">
+            <span>بعدی</span>
+            <strong id="countdownText">--:--</strong>
+        </div>
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                <option value="all" {% if preset == 'all' or not preset %}selected{% endif %}>کل داده‌ها</option>
+                <option value="today" {% if preset == 'today' %}selected{% endif %}>امروز</option>
+                <option value="yesterday" {% if preset == 'yesterday' %}selected{% endif %}>دیروز</option>
+                <option value="current_week" {% if preset == 'current_week' %}selected{% endif %}>هفته جاری</option>
+                <option value="current_month" {% if preset == 'current_month' %}selected{% endif %}>ماه جاری</option>
+                <option value="last_7_days" {% if preset == 'last_7_days' %}selected{% endif %}>۷ روز اخیر</option>
+                <option value="last_30_days" {% if preset == 'last_30_days' %}selected{% endif %}>۳۰ روز اخیر</option>
+            </select>
+        </form>
+        <button id="btnRefreshAll" class="btn btn-kara" type="button">
+            <i class="bi bi-arrow-repeat"></i>
+            <span>همگام‌سازی</span>
+        </button>
+        <a href="{% url 'reports:tv_mode' %}" class="btn btn-outline-kara" target="_blank" rel="noopener"><i class="bi bi-tv"></i></a>
+    </div>
+</header>
+
+<div id="refreshAlert" class="refresh-banner d-none mb-4" role="alert">
+    <div class="spinner-border spinner-border-sm" role="status"></div>
+    <span>در حال همگام‌سازی گزارش‌ها با سیستم کارا...</span>
+</div>
+
+{% if connection.status == 'stale' or connection.status == 'network_error' or connection.status == 'kara_error' or connection.status == 'needs_relogin' %}
+<div class="stale-banner mb-4">
+    <i class="bi bi-exclamation-triangle"></i>
+    <div>
+        <strong>{{ connection.status_label }}</strong>
+        <p class="mb-0">داشبورد آخرین داده ذخیره‌شده را نمایش می‌دهد.
+        {% if connection.last_error %}<span class="text-muted">{{ connection.last_error|truncatechars:120 }}</span>{% endif %}
+        </p>
+    </div>
+</div>
+{% endif %}
+
+{% if company_kpis %}
+{% with pure=company_kpis.total_pure_sale sale=company_kpis.total_sale orders=company_kpis.final_order_count rev=company_kpis.reversion_rate visitors=company_kpis.active_visitors %}
+<section class="db-stage" id="aggregateKpis" aria-label="شاخص اصلی">
+    <div class="db-stage-glow" aria-hidden="true"></div>
+    <div class="db-stage-main">
+        <p class="db-kicker">{{ pure.label|default:"فروش خالص" }}</p>
+        <div class="db-mega">
+            <strong class="db-mega-num" data-kpi="total_pure_sale">{{ pure.formatted|default:"—" }}</strong>
+            <span class="db-mega-unit">{{ currency_unit }}</span>
+        </div>
+        {% if pure.comparison and pure.comparison.is_comparable %}
+        <div class="db-delta delta-{{ pure.comparison.direction }}">
+            <i class="bi bi-arrow-{% if pure.comparison.direction == 'up' %}up{% elif pure.comparison.direction == 'down' %}down{% else %}right{% endif %}-short"></i>
+            {% if pure.comparison.percent_change is not None %}{{ pure.comparison.percent_change }}٪{% else %}—{% endif %}
+            <span>نسبت به دوره قبل</span>
+        </div>
+        {% endif %}
+        <div class="db-quick">
+            <a href="{% url 'reports:analytics_salespersons' %}"><i class="bi bi-people"></i> ویزیتورها</a>
+            <a href="{% url 'reports:analytics_receivables' %}"><i class="bi bi-cash-coin"></i> مطالبات</a>
+            <a href="{% url 'reports:analytics_regions' %}"><i class="bi bi-geo"></i> جغرافیا</a>
+        </div>
+    </div>
+    <div class="db-stage-side">
+        {% if sale %}
+        <article class="db-side-kpi">
+            <span>{{ sale.label }}</span>
+            <strong data-kpi="total_sale">{{ sale.formatted }}</strong>
+            <small>{{ currency_unit }}</small>
+        </article>
+        {% endif %}
+        {% if orders %}
+        <article class="db-side-kpi">
+            <span>{{ orders.label }}</span>
+            <strong data-kpi="final_order_count">{{ orders.formatted }}</strong>
+        </article>
+        {% endif %}
+        {% if rev %}
+        <article class="db-side-kpi {% if rev.numeric >= 5 %}is-warn{% endif %}">
+            <span>{{ rev.label }}</span>
+            <strong data-kpi="reversion_rate">{{ rev.formatted }}</strong>
+            <small>٪</small>
+        </article>
+        {% endif %}
+        {% if visitors %}
+        <article class="db-side-kpi">
+            <span>{{ visitors.label }}</span>
+            <strong data-kpi="active_visitors">{{ visitors.formatted }}</strong>
+        </article>
+        {% endif %}
+    </div>
+</section>
+{% endwith %}
+
+{% if company_kpis.settlement_remainder or company_kpis.avg_order_value %}
+<section class="db-stat-row" aria-label="شاخص‌های تکمیلی">
+    {% if company_kpis.avg_order_value %}
+    <article class="db-stat">
+        <i class="bi bi-receipt"></i>
+        <div>
+            <span>{{ company_kpis.avg_order_value.label }}</span>
+            <strong data-kpi="avg_order_value">{{ company_kpis.avg_order_value.formatted }}</strong>
+            <small>{{ currency_unit }}</small>
+        </div>
+    </article>
+    {% endif %}
+    {% if company_kpis.settlement_remainder %}
+    <article class="db-stat">
+        <i class="bi bi-wallet2"></i>
+        <div>
+            <span>{{ company_kpis.settlement_remainder.label }}</span>
+            <strong data-kpi="settlement_remainder">{{ company_kpis.settlement_remainder.formatted }}</strong>
+            <small>{{ currency_unit }}</small>
+        </div>
+    </article>
+    {% endif %}
+    {% if company_kpis.sale_reversion %}
+    <article class="db-stat">
+        <i class="bi bi-arrow-return-left"></i>
+        <div>
+            <span>{{ company_kpis.sale_reversion.label }}</span>
+            <strong data-kpi="sale_reversion">{{ company_kpis.sale_reversion.formatted }}</strong>
+            <small>{{ currency_unit }}</small>
+        </div>
+    </article>
+    {% endif %}
+    {% if company_kpis.distribution_reversion %}
+    <article class="db-stat">
+        <i class="bi bi-truck"></i>
+        <div>
+            <span>{{ company_kpis.distribution_reversion.label }}</span>
+            <strong data-kpi="distribution_reversion">{{ company_kpis.distribution_reversion.formatted }}</strong>
+            <small>{{ currency_unit }}</small>
+        </div>
+    </article>
+    {% endif %}
+</section>
+{% endif %}
+
+{% if profitability and profitability.can_show_profit %}
+{% if company_kpis.operating_profit or company_kpis.gross_profit or company_kpis.net_profit %}
+<section class="db-profit-row" aria-label="سودآوری">
+    {% if company_kpis.operating_profit %}
+    <article>
+        <span>{{ company_kpis.operating_profit.label }}</span>
+        <strong data-kpi="operating_profit">{{ company_kpis.operating_profit.formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    {% endif %}
+    {% if company_kpis.operating_margin_rate %}
+    <article>
+        <span>{{ company_kpis.operating_margin_rate.label }}</span>
+        <strong data-kpi="operating_margin_rate">{{ company_kpis.operating_margin_rate.formatted }}</strong>
+        <small>٪</small>
+    </article>
+    {% endif %}
+    {% if company_kpis.net_profit %}
+    <article>
+        <span>{{ company_kpis.net_profit.label }}</span>
+        <strong data-kpi="net_profit">{{ company_kpis.net_profit.formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    {% endif %}
+    {% if company_kpis.gross_profit %}
+    <article>
+        <span>{{ company_kpis.gross_profit.label }}</span>
+        <strong data-kpi="gross_profit">{{ company_kpis.gross_profit.formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    {% endif %}
+    {% if company_kpis.gross_margin_rate %}
+    <article>
+        <span>{{ company_kpis.gross_margin_rate.label }}</span>
+        <strong data-kpi="gross_margin_rate">{{ company_kpis.gross_margin_rate.formatted }}</strong>
+        <small>٪</small>
+    </article>
+    {% endif %}
+</section>
+{% endif %}
+{% elif profitability and not profitability.can_show_profit %}
+<div class="profitability-banner mb-4" role="status">
+    <i class="bi bi-shield-exclamation"></i>
+    <div>
+        <strong>سود و حاشیه سود نمایش داده نمی‌شود</strong>
+        <p class="mb-0">{{ profitability.message }}</p>
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+<section class="empty-state mb-4">
+    <i class="bi bi-inbox"></i>
+    <h2>هنوز داده‌ای همگام نشده</h2>
+    <p>برای نمایش شاخص‌ها، همگام‌سازی را اجرا کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+
+{% if insights %}
+<section class="db-insight-rail mb-4" aria-label="نتیجه‌گیری مدیریتی">
+    {% for item in insights %}
+    <article class="db-insight tone-{{ item.tone }}">
+        <div class="db-insight-ico"><i class="bi {{ item.icon }}"></i></div>
+        <div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.body }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endif %}
+
+{% if trend or monthly_sales.available %}
+<div class="row g-4 mb-4">
+    {% if trend %}
+    <div class="col-lg-7">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>روند فروش خالص</h2>
+                    <p>۷ روز اخیر</p>
+                </div>
+            </div>
+            <div class="db-chart-frame">
+                <canvas id="dashboardTrend" aria-label="روند فروش"></canvas>
+            </div>
+            {{ trend|json_script:"dashboard-trend-data" }}
+        </section>
+    </div>
+    {% endif %}
+    {% if monthly_sales.available %}
+    <div class="col-lg-{% if trend %}5{% else %}12{% endif %}">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>فروش ماهانه</h2>
+                    <p>سال {{ monthly_sales.fiscal_year }} · {{ monthly_sales.total_formatted }} {{ currency_unit }}</p>
+                </div>
+            </div>
+            <div class="db-chart-frame">
+                <canvas id="dashboardMonthly" aria-label="فروش ماهانه"></canvas>
+            </div>
+            {{ monthly_sales.series|json_script:"dashboard-monthly-data" }}
+        </section>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if not has_history and company_kpis %}
+<div class="alert alert-info mb-4 kara-alert">
+    برای مقایسه دوره‌ای و نمودار روند واقعی، بازسازی لایه تحلیلی و سپس پر کردن تاریخی را اجرا کنید.
+</div>
+{% endif %}
+
+{% if alerts %}
+<section class="db-alert-stack mb-4" aria-label="هشدارها">
+    {% for alert in alerts %}
+    <div class="db-alert severity-{{ alert.severity }}">
+        <span class="db-alert-tag">{{ alert.severity|fa_severity }}</span>
+        <div>
+            <strong>{{ alert.title }}</strong>
+            <p>{{ alert.description }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-7">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>رتبه‌بندی ویزیتورها</h2>
+                    <p>فروش نهایی در بازه انتخابی</p>
+                </div>
+                <a class="db-link" href="{% url 'reports:analytics_salespersons' %}">همه ←</a>
+            </div>
+            {% if visitor_ranking %}
+            <ol class="db-ladder">
+                {% for item in visitor_ranking %}
+                <li class="{% if forloop.counter <= 3 %}is-top{% endif %}">
+                    <span class="db-rank">{{ item.rank }}</span>
+                    <div class="db-ladder-copy">
+                        <a href="{% url 'reports:analytics_salesperson_detail' item.code %}"><strong>{{ item.name }}</strong></a>
+                        <span>{{ item.head_visitor|default:item.code }}</span>
+                    </div>
+                    <div class="db-ladder-val">
+                        <strong>{{ item.total_sale_formatted }}</strong>
+                        <small>{{ item.order_count }} سفارش</small>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="text-muted mb-0">داده‌ای برای رتبه‌بندی نیست.</p>
+            {% endif %}
+        </section>
+    </div>
+    <div class="col-lg-5">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>سرپرستان</h2>
+                    <p>عملکرد تیمی</p>
+                </div>
+                <a class="db-link" href="{% url 'reports:analytics_supervisors' %}">همه ←</a>
+            </div>
+            {% if head_visitor_ranking %}
+            <ol class="db-ladder">
+                {% for item in head_visitor_ranking %}
+                <li class="{% if forloop.counter <= 3 %}is-top{% endif %}">
+                    <span class="db-rank">{{ item.rank }}</span>
+                    <div class="db-ladder-copy">
+                        <strong>{{ item.name }}</strong>
+                        <span>{{ item.code }}</span>
+                    </div>
+                    <div class="db-ladder-val">
+                        <strong>{{ item.total_sale_formatted }}</strong>
+                        <small>{{ item.order_count }} سفارش</small>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="text-muted mb-0">داده‌ای برای سرپرستان نیست.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+{% if top_products or product_groups %}
+<div class="row g-4 mb-4">
+    <div class="col-lg-7">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>پرفروش‌ترین کالاها</h2>
+                    <p>فروش خالص مثبت</p>
+                </div>
+            </div>
+            {% if top_products %}
+            <ol class="db-ladder">
+                {% for p in top_products %}
+                <li>
+                    <span class="db-rank">{{ p.rank }}</span>
+                    <div class="db-ladder-copy">
+                        <strong>{{ p.name }}</strong>
+                        <span>{{ p.group }}</span>
+                    </div>
+                    <div class="db-ladder-val">
+                        <strong>{{ p.pure_sale_formatted }}</strong>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="text-muted mb-0">در این بازه فروش خالص مثبتی ثبت نشده.</p>
+            {% endif %}
+            {% if top_product_reversions %}
+            <div class="db-subblock">
+                <h3>بیشترین برگشت کالا</h3>
+                <ol class="db-ladder is-compact">
+                    {% for p in top_product_reversions %}
+                    <li>
+                        <span class="db-rank">{{ forloop.counter }}</span>
+                        <div class="db-ladder-copy"><strong>{{ p.name }}</strong></div>
+                        <div class="db-ladder-val"><strong class="is-neg">{{ p.sale_reversion_formatted }}</strong></div>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+    <div class="col-lg-5">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>سهم گروه‌های کالا</h2>
+                    <p>بر اساس فروش خالص</p>
+                </div>
+            </div>
+            {% if product_groups %}
+            <div class="db-chart-frame db-donut-frame">
+                <canvas id="dashboardGroups" aria-label="گروه‌های کالا"></canvas>
+            </div>
+            {{ product_groups|json_script:"dashboard-groups-data" }}
+            <ol class="db-ladder is-compact">
+                {% for g in product_groups %}
+                <li>
+                    <span class="db-swatch" style="--c:{{ forloop.counter }}"></span>
+                    <div class="db-ladder-copy"><strong>{{ g.name }}</strong></div>
+                    <div class="db-ladder-val"><strong>{{ g.formatted }}</strong></div>
+                </li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="text-muted mb-0">گروه کالایی همگام نشده.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endif %}
+
+{% if receivables.available or geo_summary.available %}
+<div class="row g-4 mb-4">
+    {% if receivables.available %}
+    <div class="col-lg-5">
+        <section class="db-panel db-recv h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>مطالبات</h2>
+                    <p>معوقات و مانده حساب</p>
+                </div>
+                <a class="db-link" href="{% url 'reports:analytics_receivables' %}">جزئیات ←</a>
+            </div>
+            <div class="db-recv-grid">
+                <article>
+                    <span>جمع معوقات</span>
+                    <strong>{{ receivables.total_outstanding_formatted }}</strong>
+                </article>
+                <article>
+                    <span>مانده حساب</span>
+                    <strong>{{ receivables.partner_balance_formatted }}</strong>
+                </article>
+                <article>
+                    <span>مشتری</span>
+                    <strong>{{ receivables.partner_count }}</strong>
+                </article>
+            </div>
+        </section>
+    </div>
+    {% endif %}
+    {% if geo_summary.available %}
+    <div class="col-lg-{% if receivables.available %}7{% else %}12{% endif %}">
+        <section class="db-panel h-100">
+            <div class="db-panel-head">
+                <div>
+                    <h2>جغرافیا</h2>
+                    <p>شهر و منطقه برتر</p>
+                </div>
+                <a class="db-link" href="{% url 'reports:analytics_regions' %}">تحلیل ←</a>
+            </div>
+            <div class="db-geo-duo">
+                <div>
+                    <h3>شهرها</h3>
+                    <ol class="db-ladder is-compact">
+                        {% for c in geo_summary.cities %}
+                        <li>
+                            <span class="db-rank">{{ forloop.counter }}</span>
+                            <div class="db-ladder-copy"><strong>{{ c.name }}</strong></div>
+                            <div class="db-ladder-val"><strong>{{ c.formatted }}</strong></div>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+                <div>
+                    <h3>مناطق</h3>
+                    <ol class="db-ladder is-compact">
+                        {% for z in geo_summary.zones %}
+                        <li>
+                            <span class="db-rank">{{ forloop.counter }}</span>
+                            <div class="db-ladder-copy"><strong>{{ z.name }}</strong></div>
+                            <div class="db-ladder-val"><strong>{{ z.formatted }}</strong></div>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </section>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+<section class="db-footer-links">
+    <a href="{% url 'reports:tv_mode' %}" class="btn btn-kara" target="_blank" rel="noopener"><i class="bi bi-tv"></i> نمای تلویزیون</a>
+    <a href="{% url 'reports:data_explorer' %}" class="btn btn-outline-kara"><i class="bi bi-table"></i> کاوش داده</a>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-outline-kara"><i class="bi bi-arrow-repeat"></i> همگام‌سازی</a>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/live-dashboard.js' %}?v=3"></script>
+<script src="{% static 'reports/js/dashboard-charts.js' %}?v=2"></script>
+<script>
+window.KaraDashboard = window.KaraDashboard || {};
+window.KaraDashboard.currencyUnit = "{{ currency_unit|default:'تومان' }}";
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.KaraLiveDashboard) {
+        KaraLiveDashboard.init({
+            apiUrl: "{% url 'reports:api_dashboard' %}",
+            refreshUrl: "{% url 'reports:api_refresh_all' %}",
+            csrfToken: "{{ csrf_token }}",
+            intervalMinutes: {{ refresh_interval|default:5 }},
+            period: "{{ preset|default:'all' }}",
+        });
+    }
+    if (window.KaraDashboardCharts) KaraDashboardCharts.init();
+});
+</script>
+{% endblock %}

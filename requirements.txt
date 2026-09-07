@@ -1,0 +1,20 @@
+# Django
+Django>=4.2,<5.0
+
+# Kara integration
+requests>=2.31.0
+
+# Environment
+python-dotenv>=1.0.0
+
+# Export
+openpyxl>=3.1.0
+
+# Persian calendar
+jdatetime>=5.0.0
+
+# Auto-refresh scheduler
+APScheduler>=3.10.0
+
+# Bale bot (Telegram-compatible API)
+pyTelegramBotAPI>=4.14.0

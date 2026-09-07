@@ -1,0 +1,643 @@
+/* Sync / integration center — charcoal-teal operations console */
+
+.sc-page {
+    --sc-ink: var(--kara-primary);
+    --sc-line: var(--kara-border);
+    --sc-fresh: #0f766e;
+    --sc-aging: #b45309;
+    --sc-stale: #b91c1c;
+    --sc-miss: #64748b;
+}
+
+.sc-command {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--kara-space-3) var(--kara-space-4);
+    margin-bottom: var(--kara-section-gap);
+    padding: var(--kara-space-4);
+    background: var(--kara-surface);
+    border: 1px solid var(--kara-border);
+    border-radius: var(--kara-radius);
+    box-shadow: var(--kara-shadow-sm);
+    animation: scIn 0.45s ease both;
+}
+
+.sc-eyebrow {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--kara-accent);
+    margin-bottom: 0.35rem;
+}
+
+.sc-command-copy h1 {
+    margin: 0;
+    font-family: var(--kara-font-display);
+    font-size: clamp(1.55rem, 2.4vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--kara-primary);
+}
+
+.sc-command-copy p {
+    margin: 0.35rem 0 0;
+    color: var(--kara-text-muted);
+    font-size: 0.9rem;
+    max-width: 38rem;
+}
+
+.sc-command-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+/* Hero stage — connection pulse */
+.sc-stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--kara-space-3);
+    margin-bottom: var(--kara-section-gap);
+    padding: var(--kara-space-4);
+    border-radius: var(--kara-radius-lg);
+    border: 1px solid var(--kara-border);
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse 70% 90% at 100% 0%, rgba(15, 118, 110, 0.12), transparent 55%),
+        radial-gradient(ellipse 50% 70% at 0% 100%, rgba(180, 83, 9, 0.08), transparent 50%),
+        linear-gradient(145deg, #f7f9fa 0%, #eef3f4 100%);
+    animation: scIn 0.5s ease 0.05s both;
+}
+
+.sc-stage-glow {
+    position: absolute;
+    inset: auto -20% -40% 40%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(15, 118, 110, 0.15), transparent 65%);
+    pointer-events: none;
+    animation: scPulse 6s ease-in-out infinite;
+}
+
+.sc-stage-main {
+    position: relative;
+    z-index: 1;
+}
+
+.sc-kicker {
+    margin: 0 0 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--kara-text-muted);
+    text-transform: uppercase;
+}
+
+.sc-conn-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
+}
+
+.sc-conn-pulse {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 2px solid rgba(15, 118, 110, 0.35);
+    background: rgba(15, 118, 110, 0.08);
+    position: relative;
+}
+
+.sc-conn-pulse::after {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(15, 118, 110, 0.25);
+    animation: scRing 2.4s ease-out infinite;
+}
+
+.sc-conn-pulse.is-stale,
+.sc-conn-pulse.is-network_error,
+.sc-conn-pulse.is-kara_error,
+.sc-conn-pulse.is-needs_relogin {
+    border-color: rgba(185, 28, 28, 0.4);
+    background: rgba(185, 28, 28, 0.08);
+}
+.sc-conn-pulse.is-stale::after,
+.sc-conn-pulse.is-network_error::after,
+.sc-conn-pulse.is-kara_error::after,
+.sc-conn-pulse.is-needs_relogin::after {
+    border-color: rgba(185, 28, 28, 0.3);
+}
+
+.sc-conn-pulse i {
+    font-size: 1.25rem;
+    color: var(--kara-accent);
+}
+
+.sc-conn-title {
+    margin: 0;
+    font-family: var(--kara-font-display);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--kara-primary);
+    line-height: 1.2;
+}
+
+.sc-conn-sub {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    color: var(--kara-text-muted);
+}
+
+.sc-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem 0.85rem;
+}
+
+.sc-meta {
+    padding: 0.55rem 0.7rem;
+    border-radius: var(--kara-radius-sm);
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--kara-border);
+}
+
+.sc-meta span {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--kara-text-muted);
+    margin-bottom: 0.15rem;
+}
+
+.sc-meta strong {
+    font-family: var(--kara-font-display);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--kara-text);
+    font-variant-numeric: tabular-nums;
+}
+
+.sc-meta strong.is-danger {
+    color: var(--kara-danger);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.sc-stage-side {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    align-content: start;
+}
+
+.sc-stat {
+    padding: 0.85rem 0.9rem;
+    border-radius: var(--kara-radius);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--kara-border);
+    animation: scIn 0.45s ease both;
+}
+
+.sc-stat:nth-child(1) { animation-delay: 0.08s; }
+.sc-stat:nth-child(2) { animation-delay: 0.12s; }
+.sc-stat:nth-child(3) { animation-delay: 0.16s; }
+.sc-stat:nth-child(4) { animation-delay: 0.2s; }
+
+.sc-stat span {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--kara-text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.sc-stat strong {
+    font-family: var(--kara-font-display);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--kara-primary);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+
+.sc-stat small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    color: var(--kara-text-muted);
+}
+
+.sc-stat.is-ok strong { color: var(--sc-fresh); }
+.sc-stat.is-warn strong { color: var(--sc-aging); }
+.sc-stat.is-bad strong { color: var(--sc-stale); }
+
+/* Schedule banner */
+.sc-schedule {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: 1.15rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--kara-radius);
+    border: 1px solid var(--kara-border);
+    background: var(--kara-surface);
+    animation: scIn 0.5s ease 0.1s both;
+}
+
+.sc-schedule-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: rgba(15, 118, 110, 0.1);
+    color: var(--kara-accent);
+    flex-shrink: 0;
+}
+
+.sc-schedule-copy {
+    flex: 1 1 14rem;
+    min-width: 0;
+}
+
+.sc-schedule-copy strong {
+    display: block;
+    font-family: var(--kara-font-display);
+    font-size: 0.95rem;
+    color: var(--kara-primary);
+}
+
+.sc-schedule-copy p {
+    margin: 0.15rem 0 0;
+    font-size: 0.8rem;
+    color: var(--kara-text-muted);
+}
+
+.sc-schedule-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.sc-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.28rem 0.65rem;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: rgba(12, 18, 34, 0.04);
+    border: 1px solid var(--kara-border);
+    color: var(--kara-text);
+}
+
+.sc-chip i { color: var(--kara-accent); font-size: 0.85rem; }
+
+/* Report grid */
+.sc-section-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0 0 0.85rem;
+}
+
+.sc-section-head h2 {
+    margin: 0;
+    font-family: var(--kara-font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--kara-primary);
+}
+
+.sc-section-head p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--kara-text-muted);
+}
+
+.sc-report-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.35rem;
+}
+
+.sc-report {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1rem 1.05rem 0.95rem;
+    border-radius: var(--kara-radius);
+    border: 1px solid var(--kara-border);
+    background: var(--kara-surface);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    animation: scIn 0.45s ease both;
+}
+
+.sc-report:hover {
+    border-color: rgba(15, 118, 110, 0.35);
+    transform: translateY(-2px);
+    box-shadow: var(--kara-shadow);
+}
+
+.sc-report-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.sc-report-title {
+    margin: 0;
+    font-family: var(--kara-font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--kara-text);
+    line-height: 1.35;
+}
+
+.sc-freshness {
+    flex-shrink: 0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.sc-freshness.fresh {
+    background: rgba(15, 118, 110, 0.12);
+    color: var(--sc-fresh);
+}
+.sc-freshness.aging {
+    background: rgba(180, 83, 9, 0.12);
+    color: var(--sc-aging);
+}
+.sc-freshness.stale,
+.sc-freshness.missing {
+    background: rgba(185, 28, 28, 0.1);
+    color: var(--sc-stale);
+}
+
+.sc-ttl {
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(12, 18, 34, 0.06);
+    overflow: hidden;
+}
+
+.sc-ttl > i {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--kara-accent), var(--kara-accent-2));
+    transition: width 0.4s ease;
+}
+
+.sc-report.fresh .sc-ttl > i { background: linear-gradient(90deg, #0f766e, #14b8a6); }
+.sc-report.aging .sc-ttl > i { background: linear-gradient(90deg, #b45309, #d97706); }
+.sc-report.stale .sc-ttl > i,
+.sc-report.missing .sc-ttl > i { background: linear-gradient(90deg, #b91c1c, #ef4444); }
+
+.sc-report-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 0.55rem;
+    font-size: 0.75rem;
+}
+
+.sc-report-facts dt {
+    margin: 0;
+    color: var(--kara-text-muted);
+    font-weight: 500;
+}
+
+.sc-report-facts dd {
+    margin: 0;
+    font-weight: 600;
+    color: var(--kara-text);
+    font-variant-numeric: tabular-nums;
+    text-align: left;
+}
+
+.sc-report-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 0.35rem;
+    border-top: 1px dashed var(--kara-border);
+}
+
+.sc-report-foot .btn {
+    font-size: 0.78rem;
+    padding: 0.28rem 0.7rem;
+}
+
+.sc-report-hint {
+    font-size: 0.7rem;
+    color: var(--kara-text-muted);
+}
+
+.sc-report-error {
+    margin: 0;
+    font-size: 0.72rem;
+    color: var(--kara-danger);
+    line-height: 1.4;
+}
+
+.sc-primary-tag {
+    display: inline-block;
+    margin-top: 0.2rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--kara-copper);
+}
+
+/* History */
+.sc-history {
+    border-radius: var(--kara-radius);
+    border: 1px solid var(--kara-border);
+    background: var(--kara-surface);
+    overflow: hidden;
+    animation: scIn 0.5s ease 0.15s both;
+}
+
+.sc-history-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.05rem;
+    border-bottom: 1px solid var(--kara-border);
+    background: rgba(12, 18, 34, 0.015);
+}
+
+.sc-filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.sc-filter-tabs button {
+    border: 1px solid var(--kara-border);
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.28rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--kara-text-muted);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.sc-filter-tabs button.is-active,
+.sc-filter-tabs button:hover {
+    background: rgba(15, 118, 110, 0.1);
+    border-color: rgba(15, 118, 110, 0.3);
+    color: var(--kara-primary);
+}
+
+.sc-cli {
+    font-size: 0.72rem;
+    color: var(--kara-text-muted);
+}
+
+.sc-cli code {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(12, 18, 34, 0.05);
+}
+
+.sc-history table {
+    margin: 0;
+    font-size: 0.82rem;
+}
+
+.sc-history thead th {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--kara-text-muted);
+    white-space: nowrap;
+    border-bottom-color: var(--kara-border);
+    background: rgba(12, 18, 34, 0.02);
+}
+
+.sc-history tbody tr {
+    transition: background 0.15s;
+}
+
+.sc-history tbody tr.is-fail {
+    background: rgba(185, 28, 28, 0.04);
+}
+
+.sc-history tbody tr.is-run {
+    background: rgba(180, 83, 9, 0.05);
+}
+
+.sc-history tbody tr[hidden] {
+    display: none;
+}
+
+.sc-job-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.sc-job-status.success {
+    background: rgba(15, 118, 110, 0.12);
+    color: var(--sc-fresh);
+}
+.sc-job-status.failed {
+    background: rgba(185, 28, 28, 0.1);
+    color: var(--sc-stale);
+}
+.sc-job-status.running {
+    background: rgba(180, 83, 9, 0.12);
+    color: var(--sc-aging);
+}
+
+.sc-toast {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(120%);
+    z-index: 1080;
+    padding: 0.7rem 1.15rem;
+    border-radius: 10px;
+    background: var(--kara-primary);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(12, 18, 34, 0.25);
+    transition: transform 0.35s ease;
+    pointer-events: none;
+}
+
+.sc-toast.is-show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.sc-toast.is-error {
+    background: var(--kara-danger);
+}
+
+@keyframes scIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes scPulse {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+@keyframes scRing {
+    0% { transform: scale(0.85); opacity: 0.7; }
+    100% { transform: scale(1.35); opacity: 0; }
+}
+
+@media (max-width: 900px) {
+    .sc-stage {
+        grid-template-columns: 1fr;
+    }
+    .sc-stage-side {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .sc-meta-grid,
+    .sc-stage-side,
+    .sc-report-facts {
+        grid-template-columns: 1fr;
+    }
+    .sc-report-facts dd {
+        text-align: right;
+    }
+}

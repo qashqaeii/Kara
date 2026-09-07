@@ -1,0 +1,62 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}کاوش داده — کارا{% endblock %}
+
+{% block content %}
+<header class="page-header">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">ابزار کنترل داده</span>
+        <h1 class="page-title">کاوش داده</h1>
+        <p class="page-desc">بررسی ردیف‌ها، خروجی و تطبیق با کارا — نه داشبورد اصلی مدیریت</p>
+    </div>
+    <div class="page-header-actions">
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+        <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">همگام‌سازی</a>
+    </div>
+</header>
+
+<section>
+    <div class="section-head mb-3">
+        <h2 class="section-title">گزارش‌های موجود</h2>
+        <p class="section-desc">هر گزارش نمای جداگانه است — جمع‌زدن شاخص‌ها ممنوع</p>
+    </div>
+    <div class="row g-4">
+        {% for report in reports %}
+        <div class="col-lg-6">
+            <article class="report-panel h-100 {% if report.is_primary %}is-primary{% endif %}">
+                <header class="report-panel-header">
+                    <div>
+                        <span class="report-tag">{% if report.is_primary %}منبع شاخص شرکت{% else %}نمای تحلیلی{% endif %}</span>
+                        <h3 class="report-panel-title">{{ report.title }}</h3>
+                    </div>
+                    <span class="status-pill {% if report.has_data %}is-ready{% else %}is-idle{% endif %}">
+                        {% if report.has_data %}آماده{% else %}بدون داده{% endif %}
+                    </span>
+                </header>
+                <div class="report-panel-body">
+                    <div class="report-meta-row">
+                        <div class="meta-chip">
+                            <i class="bi bi-clock-history"></i>
+                            <span>{% if report.fetched_at %}{{ report.fetched_at|jalali_dt }}{% else %}—{% endif %}</span>
+                        </div>
+                        <div class="meta-chip">
+                            <i class="bi bi-layers"></i>
+                            <span>{{ report.rows_count }} ردیف</span>
+                        </div>
+                    </div>
+                </div>
+                <footer class="report-panel-footer">
+                    <a href="{% url 'reports:report_detail' slug=report.slug %}" class="btn btn-sm btn-outline-kara">مشاهده جدول</a>
+                    {% if report.has_data %}
+                    <a href="{% url 'reports:export_excel' report_key=report.key %}" class="btn btn-sm btn-kara">خروجی اکسل</a>
+                    {% endif %}
+                </footer>
+            </article>
+        </div>
+        {% empty %}
+        <div class="col-12"><p class="text-muted">گزارش فعالی تعریف نشده است.</p></div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

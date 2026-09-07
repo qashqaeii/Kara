@@ -1,0 +1,166 @@
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+2260
+content-type
+application/json; charset=utf-8
+date
+Thu, 30 Jul 2026 07:47:16 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=NZcg696e7ZeE+pP+/UxqCjuCKugPt9gbJ7lhfKrahSmssF99Kbdy5N9uFgTaSepyFi2/erRYuBrILDHxuJfmNjJEmhrGRE644kRSUajZyFc=; expires=Fri, 31-Jul-2026 17:07:16 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+678
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=NZcg696e7ZeE+pP+/UxqCjuCKugPt9gbJ7lhfKrahSmssF99Kbdy5N9uFgTaSepyFi2/erRYuBrILDHxuJfmNjJEmhrGRE644kRSUajZyFc=; .KaraAuthProvider=D106BA0DCDF6816E9B07EFAF843AFE0F1278A401E72CD31A771A00E70D9BFECB9E31BF51579C5A89814D52E5765DF558557E3B72BCF74E9CD050E0A47C1E879EA949DAECC9B87BFEA801ECCAC7089A6195D51625092ADAD87BC1470F768A39FF5A4D53201ED3F6F4D489EB53BA6192893DD0C0623192F04E8C2C6BBDABE94B8536F9CEDF3D5DB61AF17065F8DB64A2DF382CB7A632933866106445CA7B10B0BC9D8FE724C3BCB811181A425DAE37BDBCF0CF180BD8A15D7236F5AF8015C03AE076F7643BE54B18F71CC5699558EFD33644F276DB4C5C477BEB185166A1B1B028C6D1D0225E467A497D2C63749E43D5CD8F875962CB5B981019DA46F6E9BDA4A68DB17F219974E996872BD71EC505BECF07E38089633734C5DF1D08A965D69992AA7B3C8F4FBB6C388ED9BAB498D3C704DCF07C381B387532B8E2DCB515592AC77E2189AD6A277167A916FDF4872815A4061837BBF0C7A0F13507C0694B2E1A7C81D3343B0F758F846B3E6B1664BEE03D16BBB4B497D6B46DB373673D44080872FDF939EC990E907AC1B039C40D0C91BBB8192F7BAFFADD6B9BC2A6E4B3916435E66019E895338964F81D429E550AE0480C8F06E3B9FE8CDE5F0EC231D09B8D8D0533C76A14E7151888CC8F41B5FF45444EDE358D0F415BD3877F4422DED37F220316C6931FF1DCC1B8A1E45BE25E3CD61C492807189CEB88EEBD008B24C85D92571FD6AF04C46B0B46B81E04CF9DFAE2FA9509FEB915BCFA43D69670DCFDDCBA0F5839A868098C2D41B3A5D0EA1AF34F6A69F5FBD44A9A871F18F9027218230DE0A2E23FC30DDF09CFA38A19AB9D96317E3E3417157327B51FBC9BD316428AA361B19E6920900C7E8F4D9167B185195A67B044DB09A2E525BAAA826C8CF47F1296F551E54E54FCD3990B97D305A43C59989CE8CBC85CAA8C4F76D2C577B77B035F1DD40F
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/Stuffs
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+
+GridName=SaleReportStuffsGrid&GridTitle=%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4+%D9%81%D8%B1%D9%88%D8%B4+%DA%A9%D8%A7%D9%84%D8%A7&GridJSFrom=1&GridJSCount=25&GridJSTotal=0&SortColumn=&SortOrder=none&ColumnFilterString=&BindingClass=Kara.BLL.Sale.Report&BindingMethod=GetReportBinding_Stuffs&BindingArguments=BDate%3D%26EDate%3D%26BPreOrderInsertDate%3D%26EPreOrderInsertDate%3D%26ZoneId%3D%26BPartnerCode%3D%26EPartnerCode%3D%26BPersonnelCode%3D%26EPersonnelCode%3D%26BStuffCode%3D%26EStuffCode%3D%26ReportBasedOn%3DInserted%7CConfirmed%7CTotal%7CShipment%7CConfirmedShipment%7CTotalReversion%7CWaitingForAccountingConfirm%7CFinal%7C%26IncludeFreeProductPrices%3Dfalse%26&ExportType=Grid
+
+
+{
+    "GridViewJSTotal": 2,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 2,
+    "Data": [
+        {
+            "Key": 1,
+            "Value": {
+                "StuffCode": "50000900",
+                "StuffName": "تن ماهی 180 گرمی برند جویا تن",
+                "StuffGroupName": "کنسرو و غذای آماده",
+                "StuffSubGroupName": "انواع کنسرو تن ماهی",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "SaleStuffQuantity": "0",
+                "SaleUnitPrice": "0",
+                "SalePrice": "0",
+                "SaleDiscountAmount": "0",
+                "SaleVAT": "0",
+                "SaleSubtractedPrice": "0",
+                "SaleAddedPrice": "0",
+                "SaleSum": "0",
+                "FreeSaleStuffQuantity": "0",
+                "SaleReversionStuffQuantity": "12",
+                "SaleReversionUnitPrice": "1,750,000",
+                "SaleReversionPrice": "21,000,000",
+                "SaleReversionDiscountAmount": "0",
+                "SaleReversionVAT": "0",
+                "SaleReversionSubtractedPrice": "0",
+                "SaleReversionAddedPrice": "0",
+                "SaleReversionSum": "21,000,000",
+                "FreeSaleReversionStuffQuantity": "0",
+                "PureSale": "-21,000,000"
+            }
+        },
+        {
+            "Key": 2,
+            "Value": {
+                "StuffCode": "50003500",
+                "StuffName": "کیک صبحانه ماربل اسپیلی 100 گرمی 30 عددی",
+                "StuffGroupName": "کیک، کلوچه و بیسکویت",
+                "StuffSubGroupName": "انواع کیک",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "SaleStuffQuantity": "0",
+                "SaleUnitPrice": "0",
+                "SalePrice": "0",
+                "SaleDiscountAmount": "0",
+                "SaleVAT": "0",
+                "SaleSubtractedPrice": "0",
+                "SaleAddedPrice": "0",
+                "SaleSum": "0",
+                "FreeSaleStuffQuantity": "0",
+                "SaleReversionStuffQuantity": "14",
+                "SaleReversionUnitPrice": "460,000",
+                "SaleReversionPrice": "6,440,000",
+                "SaleReversionDiscountAmount": "0",
+                "SaleReversionVAT": "0",
+                "SaleReversionSubtractedPrice": "0",
+                "SaleReversionAddedPrice": "0",
+                "SaleReversionSum": "6,440,000",
+                "FreeSaleReversionStuffQuantity": "0",
+                "PureSale": "-6,440,000"
+            }
+        }
+    ],
+    "SumRowData": {
+        "StuffCode": null,
+        "StuffName": null,
+        "StuffGroupName": null,
+        "StuffSubGroupName": null,
+        "BatchNumber": null,
+        "ExpirationDate": null,
+        "SaleStuffQuantity": "0",
+        "SaleUnitPrice": null,
+        "SalePrice": "0",
+        "SaleDiscountAmount": "0",
+        "SaleVAT": "0",
+        "SaleSubtractedPrice": "0",
+        "SaleAddedPrice": "0",
+        "SaleSum": "0",
+        "FreeSaleStuffQuantity": "0",
+        "SaleReversionStuffQuantity": "26",
+        "SaleReversionUnitPrice": null,
+        "SaleReversionPrice": "27,440,000",
+        "SaleReversionDiscountAmount": "0",
+        "SaleReversionVAT": "0",
+        "SaleReversionSubtractedPrice": "0",
+        "SaleReversionAddedPrice": "0",
+        "SaleReversionSum": "27,440,000",
+        "FreeSaleReversionStuffQuantity": "0",
+        "PureSale": "-27,440,000"
+    },
+    "OtherInformations": []
+}
+
+

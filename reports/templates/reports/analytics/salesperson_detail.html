@@ -1,0 +1,320 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}{{ name }} — جزئیات ویزیتور{% endblock %}
+
+{% block content %}
+<nav aria-label="مسیر">
+    <ol class="kara-crumb">
+        <li><a href="{% url 'reports:dashboard' %}">نمای کلی</a></li>
+        <li><a href="{% url 'reports:analytics_salespersons' %}?period={{ preset }}">ویزیتورها</a></li>
+        <li aria-current="page">{{ name }}</li>
+    </ol>
+</nav>
+<header class="page-header ax-header spd-header">
+    <div class="page-header-copy spd-identity">
+        <div class="spd-avatar" aria-hidden="true">{{ initials }}</div>
+        <div>
+            <span class="page-eyebrow">پرونده عملکرد ویزیتور</span>
+            <h1 class="page-title">{{ name }}</h1>
+            <p class="page-desc">
+                کد {{ personnel_code }}
+                {% if supervisor_name and supervisor_name != "—" %}
+                · سرپرست
+                {% if supervisor_code %}
+                <a href="{% url 'reports:analytics_supervisor_detail' supervisor_code %}">{{ supervisor_name }}</a>
+                {% else %}{{ supervisor_name }}{% endif %}
+                {% endif %}
+                · {{ date_from_label }} تا {{ date_to_label }}
+            </p>
+        </div>
+    </div>
+    <div class="page-header-actions">
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                {% for value, label in period_options %}
+                <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <a href="{% url 'reports:analytics_salespersons' %}?period={{ preset }}" class="btn btn-outline-kara">لیست ویزیتورها</a>
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+    </div>
+</header>
+
+{% if period_note %}
+<div class="alert alert-info kara-alert mb-3">{{ period_note }}</div>
+{% endif %}
+
+{% if has_data %}
+<section class="spd-hero mb-4">
+    <div class="spd-hero-main">
+        <span class="spd-hero-label">فروش خالص · {{ preset_label }}</span>
+        <div class="spd-hero-value">
+            {{ kpis.total_pure_sale.formatted }}
+            <small>{{ unit }}</small>
+        </div>
+        {% if rank.rank %}
+        <div class="spd-rank-chip {% if rank.is_top3 %}is-gold{% elif rank.is_top10 %}is-teal{% endif %}">
+            <i class="bi bi-trophy-fill"></i>
+            رتبه {{ rank.label }}
+            {% if rank.percentile %}· صدک {{ rank.percentile }}{% endif %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="spd-hero-side">
+        <article>
+            <span>فروش نهایی</span>
+            <strong>{{ kpis.total_sale.formatted }}</strong>
+        </article>
+        <article>
+            <span>سفارش نهایی</span>
+            <strong>{{ kpis.orders.formatted }}</strong>
+        </article>
+        <article>
+            <span>میانگین سفارش</span>
+            <strong>{{ kpis.avg_order.formatted }}</strong>
+        </article>
+        <article class="{% if kpis.reversion_rate.numeric >= 5 %}is-warn{% endif %}">
+            <span>نرخ برگشت</span>
+            <strong>{{ kpis.reversion_rate.formatted }}٪</strong>
+        </article>
+    </div>
+</section>
+
+<section class="ax-summary spd-kpi-strip" aria-label="شاخص‌های تکمیلی">
+    <article class="ax-summary-cell">
+        <span>میانگین روزانه خالص</span>
+        <strong>{{ kpis.avg_daily_pure.formatted }}</strong>
+        <small>{{ unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>برگشت فروش</span>
+        <strong>{{ kpis.sale_reversion.formatted }}</strong>
+        <small>{{ unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>برگشت توزیع</span>
+        <strong>{{ kpis.distribution_reversion.formatted }}</strong>
+        <small>{{ unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>پیش‌سفارش</span>
+        <strong>{{ kpis.preorders.formatted }}</strong>
+    </article>
+    <article class="ax-summary-cell">
+        <span>نرخ فعالیت</span>
+        <strong>{{ kpis.activity_rate.formatted }}٪</strong>
+        <small>{{ active_days }} از {{ day_count }} روز</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>ثبات عملکرد</span>
+        <strong>{% if consistency.available %}{{ consistency.score }}{% else %}—{% endif %}</strong>
+        <small>{% if consistency.available %}{{ consistency.label }}{% else %}داده کافی نیست{% endif %}</small>
+    </article>
+</section>
+
+{% if snapshot.has_snapshot %}
+<section class="spd-meta-strip mb-4" aria-label="اطلاعات تکمیلی اسنپ‌شات">
+    <div>
+        <span>تعداد طرف‌حساب (اسنپ‌شات)</span>
+        <strong>{{ snapshot.partner_count }}</strong>
+    </div>
+    <div>
+        <span>مانده تسویه</span>
+        <strong>{{ snapshot.settlement_formatted }} <small>{{ unit }}</small></strong>
+    </div>
+</section>
+{% endif %}
+
+{% if insights %}
+<section class="insight-grid mb-4">
+    {% for item in insights %}
+    <article class="insight-card tone-{{ item.tone }}">
+        <i class="bi {{ item.icon }}"></i>
+        <div>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.body }}</p>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endif %}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+                <div>
+                    <h2 class="section-title">روند فروش خالص</h2>
+                    <p class="section-desc">روزانه در بازه انتخابی</p>
+                </div>
+                <div class="spd-day-pills">
+                    <span class="spd-pill is-good">بهترین: {{ best_day.date_label }} · {{ best_day.formatted }}</span>
+                    <span class="spd-pill">ضعیف‌ترین: {{ worst_day.date_label }} · {{ worst_day.formatted }}</span>
+                </div>
+            </div>
+            <div class="ax-chart-frame spd-chart-lg">
+                <canvas id="spdPureChart"></canvas>
+            </div>
+            {{ chart_pure|json_script:"spd-pure-data" }}
+        </section>
+    </div>
+    <div class="col-lg-3">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">سفارش روزانه</h2>
+                <p class="section-desc">تعداد سفارش نهایی</p>
+            </div>
+            <div class="ax-chart-frame">
+                <canvas id="spdOrdersChart"></canvas>
+            </div>
+            {{ chart_orders|json_script:"spd-orders-data" }}
+        </section>
+    </div>
+    <div class="col-lg-3">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">نرخ برگشت</h2>
+                <p class="section-desc">درصد روزانه</p>
+            </div>
+            <div class="ax-chart-frame">
+                <canvas id="spdRevChart"></canvas>
+            </div>
+            {{ chart_reversion|json_script:"spd-rev-data" }}
+        </section>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">ترکیب فروش و برگشت</h2>
+                <p class="section-desc">سهم خالص در برابر برگشت‌ها</p>
+            </div>
+            <div class="ax-chart-frame spd-donut-frame">
+                <canvas id="spdCompChart"></canvas>
+            </div>
+            {{ composition|json_script:"spd-comp-data" }}
+        </section>
+    </div>
+    <div class="col-lg-8">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3">
+                <h2 class="section-title">مقایسه با تیم سرپرست</h2>
+                <p class="section-desc">
+                    {% if team.available %}
+                    {{ team.team_size }} نفر در تیم {{ supervisor_name }}
+                    {% if team.team_rank %}· رتبه تیمی {{ team.team_rank }}{% endif %}
+                    {% else %}سرپرست مشخص نیست یا داده تیمی نیست{% endif %}
+                </p>
+            </div>
+            {% if team.available %}
+            {% if team.vs_avg_percent is not None %}
+            <div class="spd-team-vs mb-3 {% if team.vs_avg_percent >= 0 %}is-up{% else %}is-down{% endif %}">
+                <strong>
+                    {% if team.vs_avg_percent >= 0 %}+{% endif %}{{ team.vs_avg_percent }}٪
+                </strong>
+                <span>نسبت به میانگین تیم ({{ team.avg_formatted }} {{ unit }})</span>
+            </div>
+            {% endif %}
+            <ol class="spd-team-list">
+                {% for t in team.teammates %}
+                <li class="{% if t.is_self %}is-self{% endif %}">
+                    <span class="num">{{ forloop.counter }}</span>
+                    <div class="copy">
+                        {% if t.is_self %}
+                        <strong>{{ t.name }} <em>شما</em></strong>
+                        {% else %}
+                        <a href="{% url 'reports:analytics_salesperson_detail' t.code %}?period={{ preset }}"><strong>{{ t.name }}</strong></a>
+                        {% endif %}
+                        <span>{{ t.orders }} سفارش</span>
+                    </div>
+                    <span class="val">{{ t.formatted }}</span>
+                </li>
+                {% endfor %}
+            </ol>
+            {% else %}
+            <p class="text-muted mb-0">برای مقایسه تیمی، همگام‌سازی گزارش ویزیتور با سرپرست لازم است.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+
+<section class="panel-block">
+    <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+        <div>
+            <h2 class="section-title">تاریخچه روزانه</h2>
+            <p class="section-desc">{{ day_count }} روز · قابل جستجو</p>
+        </div>
+        <label class="ax-search">
+            <i class="bi bi-search"></i>
+            <input type="search" id="spdHistoryFilter" placeholder="جستجوی تاریخ…" autocomplete="off">
+        </label>
+    </div>
+    <div class="table-responsive ranking-table-wrap">
+        <table class="table table-sm align-middle ranking-table ax-table" id="spdHistoryTable">
+            <thead>
+                <tr>
+                    <th>تاریخ</th>
+                    <th class="text-start">فروش خالص</th>
+                    <th>سهم از بهترین روز</th>
+                    <th class="text-start">فروش نهایی</th>
+                    <th class="text-start">سفارش</th>
+                    <th class="text-start">پیش‌سفارش</th>
+                    <th class="text-start">میانگین</th>
+                    <th class="text-start">برگشت فروش</th>
+                    <th class="text-start">برگشت توزیع</th>
+                    <th>نرخ برگشت</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history %}
+                <tr data-filter="{{ row.date_label }}">
+                    <td><strong>{{ row.date_label }}</strong></td>
+                    <td class="text-start fw-semibold">{{ row.total_pure_sale_formatted }}</td>
+                    <td style="min-width:8rem">
+                        <div class="ax-share-track">
+                            <div class="ax-share-fill" style="width:{{ row.share_of_best }}%"></div>
+                        </div>
+                    </td>
+                    <td class="text-start">{{ row.total_sale_formatted }}</td>
+                    <td class="text-start">{{ row.order_count }}</td>
+                    <td class="text-start">{{ row.preorder_count }}</td>
+                    <td class="text-start">{{ row.avg_order_formatted }}</td>
+                    <td class="text-start">{{ row.sale_reversion_formatted }}</td>
+                    <td class="text-start">{{ row.distribution_reversion_formatted }}</td>
+                    <td>
+                        <span class="ax-rev {% if row.reversion_rate >= 5 %}is-high{% elif row.reversion_rate > 0 %}is-mid{% endif %}">
+                            {{ row.reversion_rate }}٪
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="ax-filter-empty d-none" id="spdHistoryEmpty">ردیفی پیدا نشد.</p>
+</section>
+
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-person-badge"></i>
+    <h2>برای این ویزیتور داده‌ای نیست</h2>
+    <p>کد {{ personnel_code }} در لایه تحلیلی یافت نشد. همگام‌سازی گزارش فروش ویزیتور را اجرا کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/salesperson-detail.js' %}?v=2"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.KaraSalespersonDetail) {
+        KaraSalespersonDetail.init();
+    }
+});
+</script>
+{% endblock %}

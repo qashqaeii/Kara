@@ -1,0 +1,210 @@
+{% extends "reports/base.html" %}
+{% load report_filters static %}
+
+{% block title %}{{ config.title }} — کارا{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/report-detail.css' %}?v=3">
+{% endblock %}
+
+{% block content %}
+<div class="rd-page">
+
+<header class="rd-command">
+    <div class="rd-command-glow" aria-hidden="true"></div>
+    <div class="rd-command-copy">
+        <ol class="rd-crumb">
+            <li><a href="{% url 'reports:dashboard' %}">نمای کلی</a></li>
+            <li>{{ config.title }}</li>
+        </ol>
+        <span class="rd-eyebrow">جزئیات گزارش · لایه داده</span>
+        <h1>{{ config.title }}</h1>
+        {% if report_filter.is_filtered %}
+        <span class="rd-filter-pill">
+            <i class="bi bi-person-fill"></i>
+            {{ report_filter.personnel_name|default:report_filter.personnel_code }}
+            · {{ report_filter.personnel_code }}
+        </span>
+        {% endif %}
+        <div class="rd-meta">
+            {% if snapshot %}
+            <span><i class="bi bi-clock"></i> {{ snapshot.fetched_at|jalali_dt }}</span>
+            <span><i class="bi bi-table"></i> {{ row_count }} ردیف · {{ column_count }} ستون</span>
+            {% else %}
+            <span><i class="bi bi-inbox"></i> هنوز داده‌ای همگام نشده</span>
+            {% endif %}
+            {% if connection %}
+            <span>
+                <i class="bi bi-hdd-network"></i>
+                {{ connection.status_label }}
+                {% if connection.last_sync_label %} · {{ connection.last_sync_label }}{% endif %}
+            </span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="rd-command-actions">
+        <form method="post" action="{% url 'reports:refresh' report_key=config.key %}" id="refreshForm">
+            {% csrf_token %}
+            <input type="hidden" name="personnel_code" id="hiddenPersonnelCode" value="{{ report_filter.personnel_code }}">
+            <input type="hidden" name="personnel_name" id="hiddenPersonnelName" value="{{ report_filter.personnel_name }}">
+            <button type="submit" class="btn btn-kara">
+                <i class="bi bi-arrow-repeat"></i>
+                <span>بروزرسانی</span>
+            </button>
+        </form>
+        {% if snapshot %}
+        <a href="{% url 'reports:export_excel' report_key=config.key %}?personnel_code={{ report_filter.personnel_code }}&personnel_name={{ report_filter.personnel_name|urlencode }}" class="btn btn-outline-kara">
+            <i class="bi bi-file-earmark-excel"></i>
+            <span>اکسل</span>
+        </a>
+        <a href="{% url 'reports:export_csv' report_key=config.key %}?personnel_code={{ report_filter.personnel_code }}&personnel_name={{ report_filter.personnel_name|urlencode }}" class="btn btn-ghost">
+            <i class="bi bi-filetype-csv"></i>
+            <span>CSV</span>
+        </a>
+        {% endif %}
+        {% if report_filter.is_filtered %}
+        <a href="{% url 'reports:report_detail' slug=config.slug %}" class="btn btn-ghost">
+            <i class="bi bi-x-circle"></i>
+            <span>حذف فیلتر</span>
+        </a>
+        {% endif %}
+    </div>
+</header>
+
+{% if kpi_items %}
+<section class="rd-kpi-stage" aria-label="شاخص‌های گزارش">
+    {% for kpi in kpi_items %}
+    <article class="rd-kpi{% if kpi.is_lead %} is-lead{% endif %}">
+        <div class="rd-kpi-top">
+            <span class="rd-kpi-label">{{ kpi.label }}</span>
+            <span class="rd-kpi-icon" aria-hidden="true"><i class="bi {{ kpi.icon }}"></i></span>
+        </div>
+        <strong class="rd-kpi-value">{{ kpi.formatted }}</strong>
+        {% if kpi.unit %}<span class="rd-kpi-unit">{{ kpi.unit }}</span>{% endif %}
+    </article>
+    {% endfor %}
+</section>
+{% endif %}
+
+<section class="rd-filter" id="personnel-filter">
+    <div class="rd-filter-copy">
+        <strong>گزارش‌گیری فردی</strong>
+        <p>جستجو بر اساس نام یا کد پرسنلی در API کارا</p>
+    </div>
+    <div class="rd-filter-field">
+        <label for="personnelSearch">نام / کد پرسنلی</label>
+        <input type="text" id="personnelSearch" class="form-control"
+               placeholder="مثال: حمید سلیمی یا 20300002"
+               autocomplete="off"
+               value="{% if report_filter.is_filtered %}{{ report_filter.personnel_name }} ({{ report_filter.personnel_code }}){% endif %}">
+        <div id="personnelResults" class="personnel-dropdown d-none"></div>
+    </div>
+    <button type="button" id="btnFetchPersonnel" class="btn btn-kara" disabled>
+        <i class="bi bi-download"></i>
+        <span>دریافت گزارش فرد</span>
+    </button>
+</section>
+
+{% if not report_filter.is_filtered and has_leaders %}
+<section class="rd-stage" aria-label="برترین‌ها و نمودار">
+    <div class="rd-panel">
+        <div class="rd-panel-head">
+            <h2>برترین‌ها</h2>
+            <p>۳ نفر برتر بر اساس فروش</p>
+        </div>
+        {% include "reports/_top_performers.html" with top_performers=top_performers show_empty=False %}
+    </div>
+    <div class="rd-panel">
+        <div class="rd-panel-head">
+            <h2>مقایسه پیشتازان</h2>
+            <p>تا ۸ ردیف برتر</p>
+        </div>
+        <div class="rd-chart-frame">
+            <canvas id="rdLeadersChart" aria-label="نمودار برترین‌ها"></canvas>
+        </div>
+        {{ chart_leaders|json_script:"rd-leaders-chart-data" }}
+    </div>
+</section>
+{% endif %}
+
+{% if snapshot and rows %}
+<section class="rd-table-console" aria-label="جدول گزارش">
+    <div class="rd-table-toolbar">
+        <div>
+            <h2>جدول داده</h2>
+            <p>{{ row_count }} ردیف · اسکرول افقی برای ستون‌های بیشتر</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="{% url 'reports:export_excel' report_key=config.key %}?personnel_code={{ report_filter.personnel_code }}&personnel_name={{ report_filter.personnel_name|urlencode }}" class="btn btn-sm btn-outline-kara">
+                <i class="bi bi-download"></i> اکسل
+            </a>
+        </div>
+    </div>
+    <div class="rd-table-body">
+        <div class="table-responsive">
+            <table id="reportTable" class="table table-hover table-sm align-middle w-100 mb-0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        {% for col in columns %}
+                        <th>{{ col.label }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row_cells in table_rows %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        {% for cell in row_cells %}
+                        <td data-order="{{ cell.sort }}">{{ cell.display }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if sum_cells %}
+                <tfoot>
+                    <tr>
+                        <td>∑</td>
+                        {% for cell in sum_cells %}
+                        <td>{{ cell.display }}</td>
+                        {% endfor %}
+                    </tr>
+                </tfoot>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</section>
+{% elif snapshot and not rows %}
+<section class="rd-empty">
+    <i class="bi bi-inbox"></i>
+    <h2>داده‌ای برای این فیلتر نیست</h2>
+    <p>فیلتر پرسنل را تغییر دهید یا گزارش را دوباره همگام کنید.</p>
+</section>
+{% elif not snapshot %}
+<section class="rd-empty">
+    <i class="bi bi-cloud-download"></i>
+    <h2>گزارش هنوز دریافت نشده</h2>
+    <p>برای مشاهده، داده را از سیستم کارا همگام کنید.</p>
+    <form method="post" action="{% url 'reports:refresh' report_key=config.key %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-kara">دریافت گزارش</button>
+    </form>
+</section>
+{% endif %}
+
+</div>
+
+<script>
+    window.KARA_REPORT = {
+        reportKey: "{{ config.key }}",
+        searchUrl: "{% url 'reports:api_personnel_search' %}",
+        csrfToken: "{{ csrf_token }}",
+    };
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/personnel-search.js' %}"></script>
+<script src="{% static 'reports/js/report-detail.js' %}?v=1"></script>
+{% endblock %}

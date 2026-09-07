@@ -1,0 +1,197 @@
+{% extends "reports/base.html" %}
+{% load static report_filters %}
+
+{% block title %}فاکتورها{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'reports/css/invoices.css' %}?v=4">
+{% endblock %}
+
+{% block content %}
+<div class="inv-list-page">
+    <header class="page-header ax-header inv-list-header">
+        <div class="page-header-copy">
+            <span class="page-eyebrow">فروش</span>
+            <h1 class="page-title">فاکتورها</h1>
+            <p class="page-desc">
+                {% if kara_nav.scoped %}فاکتورهای در دسترس شما{% else %}همه فاکتورهای همگام‌شده{% endif %}
+                · {% if filters.is_active %}{{ aggregate.count }} نتیجه{% else %}{{ aggregate.count }} فاکتور{% endif %}
+            </p>
+        </div>
+    </header>
+
+    <section class="inv-filter-bar" aria-label="جستجو و فیلتر">
+        <form method="get" class="inv-filter-form" role="search">
+            <div class="inv-filter-primary">
+                <label class="inv-filter-search" for="invSearchInput">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input
+                        id="invSearchInput"
+                        type="search"
+                        name="q"
+                        value="{{ filters.q }}"
+                        placeholder="شماره فاکتور یا نام مشتری…"
+                        aria-label="جستجوی فاکتور"
+                        autocomplete="off"
+                    >
+                </label>
+                <div class="inv-filter-actions">
+                    <button type="submit" class="btn btn-kara btn-sm">
+                        <i class="bi bi-funnel"></i> اعمال فیلتر
+                    </button>
+                    {% if filters.is_active %}
+                    <a href="{% url 'reports:invoices' %}" class="btn btn-outline-kara btn-sm">
+                        <i class="bi bi-x-lg"></i> پاک کردن همه
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <details class="inv-filter-advanced" {% if filters.has_advanced %}open{% endif %}>
+                <summary>
+                    فیلترهای پیشرفته
+                    {% if filters.active_count %}
+                    <span class="inv-filter-badge">{{ filters.active_count }}</span>
+                    {% endif %}
+                </summary>
+                <div class="inv-filter-grid">
+                    <div class="inv-filter-field">
+                        <label for="invStatus">وضعیت پیش‌فاکتور</label>
+                        <select id="invStatus" name="status" class="form-select form-select-sm inv-filter-control">
+                            {% for value, label in status_options %}
+                            <option value="{{ value }}" {% if filters.status == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="inv-filter-field">
+                        <label for="invVisitor">ویزیتور</label>
+                        <select id="invVisitor" name="visitor" class="form-select form-select-sm inv-filter-control">
+                            <option value="">همه ویزیتورها</option>
+                            {% for row in visitor_options %}
+                            <option value="{{ row.code }}" {% if filters.visitor == row.code %}selected{% endif %}>
+                                {{ row.name }} ({{ row.code }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="inv-filter-field">
+                        <label for="invDateFrom">از تاریخ</label>
+                        <input id="invDateFrom" type="text" name="date_from" value="{{ filters.date_from }}"
+                               class="form-control form-control-sm inv-filter-control"
+                               placeholder="1405/01/01" inputmode="numeric" dir="ltr">
+                    </div>
+                    <div class="inv-filter-field">
+                        <label for="invDateTo">تا تاریخ</label>
+                        <input id="invDateTo" type="text" name="date_to" value="{{ filters.date_to }}"
+                               class="form-control form-control-sm inv-filter-control"
+                               placeholder="1405/12/29" inputmode="numeric" dir="ltr">
+                    </div>
+                    <div class="inv-filter-field">
+                        <label for="invMinAmount">حداقل مبلغ</label>
+                        <input id="invMinAmount" type="text" name="min_amount" value="{{ filters.min_amount }}"
+                               class="form-control form-control-sm inv-filter-control"
+                               placeholder="مثلاً ۱۰۰۰۰۰۰" inputmode="numeric" dir="ltr">
+                    </div>
+                    <div class="inv-filter-field">
+                        <label for="invMaxAmount">حداکثر مبلغ</label>
+                        <input id="invMaxAmount" type="text" name="max_amount" value="{{ filters.max_amount }}"
+                               class="form-control form-control-sm inv-filter-control"
+                               placeholder="مثلاً ۵۰۰۰۰۰۰۰" inputmode="numeric" dir="ltr">
+                    </div>
+                </div>
+            </details>
+        </form>
+
+        <div class="inv-filter-hints">
+            <span><i class="bi bi-hash"></i> عدد = شماره فاکتور</span>
+            <span><i class="bi bi-person"></i> متن = نام مشتری</span>
+            <span><i class="bi bi-calendar3"></i> تاریخ شمسی YYYY/MM/DD</span>
+            {% if filters.is_active %}
+            <span class="inv-filter-chip">
+                {% if filters.q %}جستجو: <strong>{{ filters.q }}</strong>{% endif %}
+                {% if filters.has_advanced %} · {{ filters.active_count }} فیلتر پیشرفته{% endif %}
+                {% if pages > 1 %} · صفحه {{ page }}/{{ pages }}{% endif %}
+            </span>
+            {% elif pages > 1 %}
+            <span class="inv-filter-chip">صفحه {{ page }} از {{ pages }}</span>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="kara-card inv-list-table">
+        <div class="kara-card-body p-0">
+            <div class="table-responsive ranking-table-wrap">
+                <table class="table table-hover table-sm align-middle kara-table mb-0">
+                    <thead>
+                        <tr>
+                            <th>شماره</th>
+                            <th>تاریخ</th>
+                            <th>مشتری</th>
+                            <th>ویزیتور</th>
+                            <th class="text-num">مبلغ</th>
+                            <th class="text-num">اقلام</th>
+                            <th>وضعیت پیش‌فاکتور</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for inv in orders %}
+                        <tr>
+                            <td>
+                                <strong>{{ inv.order_pre_code }}</strong>
+                                <small class="text-muted d-block">{{ inv.order_code }}</small>
+                            </td>
+                            <td>{{ inv.order_date }}</td>
+                            <td>{{ inv.partner_name }}</td>
+                            <td>{{ inv.visitor_name|default:"—" }}</td>
+                            <td class="text-num">{{ inv.amount_label }}</td>
+                            <td class="text-num">{{ inv.items_count }}</td>
+                            <td><span class="badge inv-status-badge">{{ inv.status_label }}</span></td>
+                            <td>
+                                <a href="{% url 'reports:invoice_detail' inv.order_code %}" class="btn btn-sm btn-outline-kara">
+                                    جزئیات
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">
+                                {% if filters.is_active %}
+                                فاکتوری با این فیلترها پیدا نشد.
+                                {% else %}
+                                فاکتوری یافت نشد. ابتدا <code>sale_orders</code> را همگام‌سازی کنید.
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    {% if pages > 1 %}
+    <nav class="inv-pagination" aria-label="صفحه‌بندی فاکتورها">
+        {% if prev_url %}
+        <a class="btn btn-outline-kara btn-sm" href="{{ prev_url }}">
+            <i class="bi bi-chevron-right"></i> قبلی
+        </a>
+        {% else %}
+        <span class="btn btn-outline-kara btn-sm disabled" aria-disabled="true">
+            <i class="bi bi-chevron-right"></i> قبلی
+        </span>
+        {% endif %}
+        <span class="inv-pagination-label">صفحه <strong>{{ page }}</strong> از <strong>{{ pages }}</strong></span>
+        {% if next_url %}
+        <a class="btn btn-outline-kara btn-sm" href="{{ next_url }}">
+            بعدی <i class="bi bi-chevron-left"></i>
+        </a>
+        {% else %}
+        <span class="btn btn-outline-kara btn-sm disabled" aria-disabled="true">
+            بعدی <i class="bi bi-chevron-left"></i>
+        </span>
+        {% endif %}
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

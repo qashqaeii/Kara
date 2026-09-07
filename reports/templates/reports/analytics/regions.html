@@ -1,0 +1,206 @@
+{% extends "reports/base.html" %}
+{% load static %}
+
+{% block title %}شهر و منطقه — تحلیل{% endblock %}
+
+{% block content %}
+<header class="page-header ax-header">
+    <div class="page-header-copy">
+        <span class="page-eyebrow">تحلیل فروش</span>
+        <h1 class="page-title">شهر و منطقه</h1>
+        <p class="page-desc">فروش جغرافیایی · {{ preset_label }} · منبع گزارش تفکیکی</p>
+    </div>
+    <div class="page-header-actions">
+        <form method="get" class="d-inline">
+            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+                {% for value, label in period_options %}
+                <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </form>
+        <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
+    </div>
+</header>
+
+{% if cities or zones %}
+<section class="ax-summary ax-summary-geo" aria-label="خلاصه جغرافیا">
+    <article class="ax-summary-cell">
+        <span>شهر فعال</span>
+        <strong>{{ city_summary.count }}</strong>
+    </article>
+    <article class="ax-summary-cell">
+        <span>فروش شهرها</span>
+        <strong>{{ city_summary.total_formatted }}</strong>
+        <small>{{ currency_unit }}</small>
+    </article>
+    <article class="ax-summary-cell">
+        <span>منطقه فعال</span>
+        <strong>{{ zone_summary.count }}</strong>
+    </article>
+    <article class="ax-summary-cell ax-summary-lead">
+        <span>پیشتاز جغرافیایی</span>
+        <strong>{{ city_summary.top_name }}</strong>
+        <small>{{ city_summary.top_share }}٪ از فروش شهرها · {{ city_summary.top_formatted }}</small>
+    </article>
+</section>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">سهم شهرهای برتر</h2>
+                <p class="section-desc">فروش خالص به تفکیک شهر</p>
+            </div>
+            <div class="ax-chart-frame ax-chart-frame-doughnut">
+                <canvas id="axCitiesChart" aria-label="نمودار سهم شهرها"></canvas>
+            </div>
+            {% if city_chart %}
+            <ul class="ax-chart-fallback" aria-hidden="true">
+                {% for row in city_chart %}
+                <li>
+                    <span class="ax-fb-name">{{ row.name }}</span>
+                    <div class="ax-fb-track"><div class="ax-fb-fill" style="width:{% widthratio row.value city_chart.0.value 100 %}%"></div></div>
+                    <span class="ax-fb-val">{{ row.formatted }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {{ city_chart|json_script:"ax-cities-chart-data" }}
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="panel-block h-100 ax-chart-panel">
+            <div class="section-head mb-3">
+                <h2 class="section-title">مقایسه مناطق</h2>
+                <p class="section-desc">۸ منطقه با بیشترین فروش</p>
+            </div>
+            <div class="ax-chart-frame">
+                <canvas id="axZonesChart" aria-label="نمودار مقایسه مناطق"></canvas>
+            </div>
+            {% if zone_chart %}
+            <ul class="ax-chart-fallback" aria-hidden="true">
+                {% for row in zone_chart %}
+                <li>
+                    <span class="ax-fb-name">{{ row.name }}</span>
+                    <div class="ax-fb-track"><div class="ax-fb-fill ax-fb-fill-copper" style="width:{% widthratio row.value zone_chart.0.value 100 %}%"></div></div>
+                    <span class="ax-fb-val">{{ row.formatted }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {{ zone_chart|json_script:"ax-zones-chart-data" }}
+        </section>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+                <div>
+                    <h2 class="section-title">شهرها</h2>
+                    <p class="section-desc">{{ city_summary.count }} شهر · مرتب‌شده بر فروش خالص</p>
+                </div>
+                <label class="ax-search">
+                    <i class="bi bi-search"></i>
+                    <input type="search" id="axCityFilter" placeholder="جستجوی شهر…" autocomplete="off">
+                </label>
+            </div>
+            {% if cities %}
+            <ol class="ax-geo-list" id="axCityList">
+                {% for c in cities %}
+                <li data-filter="{{ c.name }}">
+                    <span class="ax-geo-rank {% if forloop.counter <= 3 %}is-top{% endif %}">{{ forloop.counter }}</span>
+                    <div class="ax-geo-main">
+                        <div class="ax-geo-row">
+                            <strong>{{ c.name }}</strong>
+                            <span>{{ c.formatted }}</span>
+                        </div>
+                        <div class="ax-share-track">
+                            <div class="ax-share-fill" style="width:{{ c.share_of_leader }}%"></div>
+                        </div>
+                        <div class="ax-geo-meta">
+                            <span>{{ c.share_percent|floatformat:1 }}٪ از لیست</span>
+                            {% if c.order_count %}<span>{{ c.order_count }} سفارش</span>{% endif %}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            <p class="ax-filter-empty d-none" id="axCityEmpty">شهری پیدا نشد.</p>
+            {% else %}
+            <p class="text-muted mb-0">داده شهری نیست.</p>
+            {% endif %}
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="panel-block h-100">
+            <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
+                <div>
+                    <h2 class="section-title">مناطق</h2>
+                    <p class="section-desc">{{ zone_summary.count }} منطقه · مرتب‌شده بر فروش خالص</p>
+                </div>
+                <label class="ax-search">
+                    <i class="bi bi-search"></i>
+                    <input type="search" id="axZoneFilter" placeholder="جستجوی منطقه…" autocomplete="off">
+                </label>
+            </div>
+            {% if zones %}
+            <ol class="ax-geo-list" id="axZoneList">
+                {% for z in zones %}
+                <li data-filter="{{ z.name }}">
+                    <span class="ax-geo-rank {% if forloop.counter <= 3 %}is-top-copper{% endif %}">{{ forloop.counter }}</span>
+                    <div class="ax-geo-main">
+                        <div class="ax-geo-row">
+                            <strong>{{ z.name }}</strong>
+                            <span>{{ z.formatted }}</span>
+                        </div>
+                        <div class="ax-share-track">
+                            <div class="ax-share-fill ax-share-fill-copper" style="width:{{ z.share_of_leader }}%"></div>
+                        </div>
+                        <div class="ax-geo-meta">
+                            <span>{{ z.share_percent|floatformat:1 }}٪ از لیست</span>
+                            {% if z.order_count %}<span>{{ z.order_count }} سفارش</span>{% endif %}
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ol>
+            <p class="ax-filter-empty d-none" id="axZoneEmpty">منطقه‌ای پیدا نشد.</p>
+            {% else %}
+            <p class="text-muted mb-0">داده منطقه‌ای نیست.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% else %}
+<section class="empty-state">
+    <i class="bi bi-geo-alt"></i>
+    <h2>داده جغرافیایی همگام نشده</h2>
+    <p>گزارش تفکیکی فروش (شهر / منطقه) را از مرکز همگام‌سازی اجرا کنید.</p>
+    <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">رفتن به همگام‌سازی</a>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'reports/js/analytics-rank.js' %}?v=3"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (!window.KaraAnalyticsRank) return;
+    KaraAnalyticsRank.initDoughnut({
+        chartId: "axCitiesChart",
+        dataId: "ax-cities-chart-data",
+    });
+    KaraAnalyticsRank.init({
+        chartId: "axZonesChart",
+        dataId: "ax-zones-chart-data",
+        label: "فروش منطقه",
+        accent: "#b45309",
+        horizontal: true,
+    });
+    KaraAnalyticsRank.bindListFilter("axCityFilter", "axCityList", "axCityEmpty");
+    KaraAnalyticsRank.bindListFilter("axZoneFilter", "axZoneList", "axZoneEmpty");
+});
+</script>
+{% endblock %}

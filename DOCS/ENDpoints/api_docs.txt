@@ -1,0 +1,4556 @@
+نمایی از اند پوینت ها به شکل کامل :
+
+
+# دریافت گزارش فروش >> گزارش صورت وضعیت ویزیتور
+هدر :
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+33741
+content-type
+application/json; charset=utf-8
+date
+Tue, 07 Jul 2026 10:49:22 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=b4gUpSam+f/SQDG7pRWHTWcDYdPlhODLGaJ671WFo8umkqsK0R/x2cXKUdZsk/Q+PVeNFff3xwevItVnfi2EXlcu0VtB6Wevsz9PTYpe1ho=; expires=Wed, 08-Jul-2026 20:09:21 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+860
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=b4gUpSam+f/SQDG7pRWHTWcDYdPlhODLGaJ671WFo8umkqsK0R/x2cXKUdZsk/Q+PVeNFff3xwevItVnfi2EXlcu0VtB6Wevsz9PTYpe1ho=; .KaraAuthProvider=A84FDE14E8170E5BB0111D72A29F9D25CE5D4F4C7592D2ED4FEA89B50D353A36B6A8C343AE009CD98EBA0506E63D2FA34B70907EC98A210AC18FE0BA6C457BA43249A4B183CB012A5C890FCAE811D4AD9F4BEFC8C24F01F73FD0F61F359A69E82442835177880B90A90B5274E271F0879FB6C7C7CF966F06E01E176CC7B141D24E2A418C4E5D574354BACAA0E94BA7A20336A91779576B58E99FE435497CD9B1D447D8A4BB63CE53BF66DF43CB62B7D18519E77DEC3845C91FC72DF57CBCEF2AB7E174446901EAE2C03BB05B5AE052A5C93EA067FA6BA7D7552DBEECEA9E4C4A8218124498EF16B5B976EB36BC23E8F96733EEABFFC287A356193974FDBB13EDFE96B7A1B1B7CB9D969CA3B23BD4C107898A65A5AA30C8BA8EA17F9DC6B0D7357C7896622D527C8EFAEC609D6117A75ED2FE93E3BEFD7FDC36D3802391FEDAE97D7DE614D69F654A8FDCFE6E228E724CE4E6FE3F9C616F7B90312E0EFAF9045404F6D5EEF9E5E943DF0371DA66044DA6429BA07E29166ABD2CD6C8EBB80807348A94E853C35B710E66269399AF86209DFB5816E0F06E66D6DEF762CC2579DAB9F3B1758B0B030BB25F35A26C2C3411E31C4247EF68CD9A080E44F18EA8823EB53BCC72396186621BA33A26D71F4C76DAC3B01504AC0599ED5FF30A454938D2F72B20C307A8DD95DC963AD22FC2641DD83BF66F9888D615E05F196FA1D1D18EB074F2B28E7DD288457DFD895F849C755E11E640D860EE06192FB95E2BA123A0F82493CA1BA787742B3CAFB038203B4692D38FBDA16929A1DD547FAAA1DB486C49229A49E7FC7641365271D8E79A63787A4CC357249568F62554A0890B6508B514E6C41DAB9CB459DC2756DA33CEC154838872DDAFA656F87143049B6B844A2CC0D00421A4977B420ABB61DE66BD00798F71156276A21D2BF9432E9F0A7FB2D3022B8136A8
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/VisitorsSale
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+پیلود :
+
+GridName=VisitorSaleReportGrid&GridTitle=%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4+%D8%B5%D9%88%D8%B1%D8%AA+%D9%88%D8%B6%D8%B9%DB%8C%D8%AA+%D9%88%DB%8C%D8%B2%DB%8C%D8%AA%D9%88%D8%B1&GridJSFrom=1&GridJSCount=38&GridJSTotal=0&SortColumn=&SortOrder=none&ColumnFilterString=&BindingClass=Kara.BLL.Sale.Report&BindingMethod=GetReportBinding_VisitorsSale&BindingArguments=BPersonnelCode%3D%26EPersonnelCode%3D%26BPartnerCode%3D%26EPartnerCode%3D%26BOrderCode%3D%26EOrderCode%3D%26BDate%3D%26EDate%3D%26BPreOrderInsertDate%3D%26EPreOrderInsertDate%3D%26BoundSettlementInDate%3Dfalse%26TimeGrouping%3D0%26ReportBasedOn%3DInserted%7CConfirmed%7CTotal%7CShipment%7CConfirmedShipment%7CTotalReversion%7CWaitingForAccountingConfirm%7CFinal%7C%26HeadVisitorCode%3D0%26Period%3D%26IncludeFreeProductPrices%3Dfalse%26HeadVisitorSale%3DFalse%26WithPartnerGroup%3Dfalse%26&ExportType=Grid
+
+نمونه پاسخ :
+
+{
+    "GridViewJSTotal": 20,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 20,
+    "Data": [
+        {
+            "Key": 1,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "---",
+                "HeadVisitorName": "بدون سرپرست",
+                "VisitorCode": "20000006",
+                "VisitorName": "خانم الماسی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "3",
+                "ActiveDayCountBasedOnFinalOrder": "3",
+                "OrderCountBasedOnPreOrder": "7",
+                "OrderCountBasedOnFinalOrder": "7",
+                "PartnerNumberBasedOnPreOrder": "5",
+                "PartnerNumberBasedOnFinalOrder": "5",
+                "MeanOrderStuffNumberBasedOnPreOrder": "3.14",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "3.14",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "57.08",
+                "QuantitySumBasedOnFinalOrder": "57.08",
+                "StuffQuantitySumBasedOnPreOrder": "1,770",
+                "StuffQuantitySumBasedOnFinalOrder": "1,770",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "386,480,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "386,480,000",
+                "CashSetteled": "1,000,000",
+                "BankSetteled": "196,120,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "197,120,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "386,480,000",
+                "RemainderBasedOnPeriodSaleReversion": "189,360,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "189,360,000"
+            }
+        },
+        {
+            "Key": 2,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "---",
+                "HeadVisitorName": "بدون سرپرست",
+                "VisitorCode": "20000011",
+                "VisitorName": "زهرا بیکی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "2",
+                "ActiveDayCountBasedOnFinalOrder": "2",
+                "OrderCountBasedOnPreOrder": "5",
+                "OrderCountBasedOnFinalOrder": "5",
+                "PartnerNumberBasedOnPreOrder": "5",
+                "PartnerNumberBasedOnFinalOrder": "5",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.2",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.2",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "5.33",
+                "QuantitySumBasedOnFinalOrder": "5.33",
+                "StuffQuantitySumBasedOnPreOrder": "198",
+                "StuffQuantitySumBasedOnFinalOrder": "198",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "98,700,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "98,700,000",
+                "CashSetteled": "16,300,000",
+                "BankSetteled": "82,400,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "98,700,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "98,700,000",
+                "RemainderBasedOnPeriodSaleReversion": "0",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "0"
+            }
+        },
+        {
+            "Key": 3,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "---",
+                "HeadVisitorName": "بدون سرپرست",
+                "VisitorCode": "20000016",
+                "VisitorName": "نگار صامتی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "2",
+                "ActiveDayCountBasedOnFinalOrder": "2",
+                "OrderCountBasedOnPreOrder": "2",
+                "OrderCountBasedOnFinalOrder": "2",
+                "PartnerNumberBasedOnPreOrder": "1",
+                "PartnerNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "4",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "4",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "7",
+                "QuantitySumBasedOnFinalOrder": "7",
+                "StuffQuantitySumBasedOnPreOrder": "144",
+                "StuffQuantitySumBasedOnFinalOrder": "144",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "88,760,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "88,760,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "88,760,000",
+                "RemainderBasedOnPeriodSaleReversion": "88,760,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "88,760,000"
+            }
+        },
+        {
+            "Key": 4,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "---",
+                "HeadVisitorName": "بدون سرپرست",
+                "VisitorCode": "20000019",
+                "VisitorName": "پوریا نیری فلاح",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "1",
+                "ActiveDayCountBasedOnFinalOrder": "1",
+                "OrderCountBasedOnPreOrder": "2",
+                "OrderCountBasedOnFinalOrder": "1",
+                "PartnerNumberBasedOnPreOrder": "2",
+                "PartnerNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "1",
+                "QuantitySumBasedOnFinalOrder": "1",
+                "StuffQuantitySumBasedOnPreOrder": "20",
+                "StuffQuantitySumBasedOnFinalOrder": "20",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "44,000,000",
+                "TotalDistributionReversion": "22,000,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "22,000,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "22,000,000",
+                "RemainderBasedOnPeriodSaleReversion": "22,000,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "22,000,000"
+            }
+        },
+        {
+            "Key": 5,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "---",
+                "HeadVisitorName": "بدون سرپرست",
+                "VisitorCode": "20000020",
+                "VisitorName": "سجاد حسینی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "7",
+                "ActiveDayCountBasedOnFinalOrder": "7",
+                "OrderCountBasedOnPreOrder": "12",
+                "OrderCountBasedOnFinalOrder": "10",
+                "PartnerNumberBasedOnPreOrder": "11",
+                "PartnerNumberBasedOnFinalOrder": "10",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.42",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.7",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "20.75",
+                "QuantitySumBasedOnFinalOrder": "20.75",
+                "StuffQuantitySumBasedOnPreOrder": "686",
+                "StuffQuantitySumBasedOnFinalOrder": "686",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "1,000",
+                "StuffWeightSumBasedOnFinalOrder": "1,000",
+                "TotalStuffSale": "324,160,000",
+                "TotalDistributionReversion": "64,000,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "260,160,000",
+                "CashSetteled": "12,500,000",
+                "BankSetteled": "182,440,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "194,940,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "260,160,000",
+                "RemainderBasedOnPeriodSaleReversion": "65,220,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "65,220,000"
+            }
+        },
+        {
+            "Key": 6,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "21300004",
+                "HeadVisitorName": "علی رحیمی",
+                "VisitorCode": "20300002",
+                "VisitorName": "حمید سلیمی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "1",
+                "ActiveDayCountBasedOnFinalOrder": "1",
+                "OrderCountBasedOnPreOrder": "1",
+                "OrderCountBasedOnFinalOrder": "1",
+                "PartnerNumberBasedOnPreOrder": "1",
+                "PartnerNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "2",
+                "QuantitySumBasedOnFinalOrder": "2",
+                "StuffQuantitySumBasedOnPreOrder": "48",
+                "StuffQuantitySumBasedOnFinalOrder": "48",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "84,000,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "84,000,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "84,000,000",
+                "RemainderBasedOnPeriodSaleReversion": "84,000,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "84,000,000"
+            }
+        },
+        {
+            "Key": 7,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300003",
+                "HeadVisitorName": "امیر سلیمی",
+                "VisitorCode": "20400001",
+                "VisitorName": "فاطمه جاوید باروق",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "13",
+                "ActiveDayCountBasedOnFinalOrder": "11",
+                "OrderCountBasedOnPreOrder": "67",
+                "OrderCountBasedOnFinalOrder": "49",
+                "PartnerNumberBasedOnPreOrder": "55",
+                "PartnerNumberBasedOnFinalOrder": "47",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.94",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.98",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "96.58",
+                "QuantitySumBasedOnFinalOrder": "84.5",
+                "StuffQuantitySumBasedOnPreOrder": "2,960",
+                "StuffQuantitySumBasedOnFinalOrder": "2,608",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "13,000",
+                "StuffWeightSumBasedOnFinalOrder": "10,000",
+                "TotalStuffSale": "1,527,620,000",
+                "TotalDistributionReversion": "229,500,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "1,298,120,000",
+                "CashSetteled": "26,350,000",
+                "BankSetteled": "427,430,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "453,780,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "1,298,120,000",
+                "RemainderBasedOnPeriodSaleReversion": "844,340,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "844,340,000"
+            }
+        },
+        {
+            "Key": 8,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300003",
+                "HeadVisitorName": "امیر سلیمی",
+                "VisitorCode": "20400002",
+                "VisitorName": "ستایش شیخعلی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "15",
+                "ActiveDayCountBasedOnFinalOrder": "13",
+                "OrderCountBasedOnPreOrder": "81",
+                "OrderCountBasedOnFinalOrder": "60",
+                "PartnerNumberBasedOnPreOrder": "67",
+                "PartnerNumberBasedOnFinalOrder": "58",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.96",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.82",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "99.92",
+                "QuantitySumBasedOnFinalOrder": "90",
+                "StuffQuantitySumBasedOnPreOrder": "3,370",
+                "StuffQuantitySumBasedOnFinalOrder": "2,823",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "24,000",
+                "StuffWeightSumBasedOnFinalOrder": "21,000",
+                "TotalStuffSale": "1,690,320,000",
+                "TotalDistributionReversion": "430,720,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "20,000",
+                "AddedPrice": "0",
+                "TotalSale": "1,259,580,000",
+                "CashSetteled": "60,720,000",
+                "BankSetteled": "327,500,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "6,860,000",
+                "TotalSetteled": "395,080,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "1,259,580,000",
+                "RemainderBasedOnPeriodSaleReversion": "864,500,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "864,500,000"
+            }
+        },
+        {
+            "Key": 9,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20000016",
+                "HeadVisitorName": "نگار صامتی",
+                "VisitorCode": "20400003",
+                "VisitorName": "هانیه مهرعلیان",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "3",
+                "ActiveDayCountBasedOnFinalOrder": "1",
+                "OrderCountBasedOnPreOrder": "5",
+                "OrderCountBasedOnFinalOrder": "1",
+                "PartnerNumberBasedOnPreOrder": "3",
+                "PartnerNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.8",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "2",
+                "QuantitySumBasedOnFinalOrder": "2",
+                "StuffQuantitySumBasedOnPreOrder": "54",
+                "StuffQuantitySumBasedOnFinalOrder": "54",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "250,020,000",
+                "TotalDistributionReversion": "194,220,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "55,800,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "55,800,000",
+                "RemainderBasedOnPeriodSaleReversion": "55,800,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "55,800,000"
+            }
+        },
+        {
+            "Key": 10,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300004",
+                "HeadVisitorName": "حمید مهتاب",
+                "VisitorCode": "20400004",
+                "VisitorName": "محمدمهدی فرج پور",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "17",
+                "ActiveDayCountBasedOnFinalOrder": "16",
+                "OrderCountBasedOnPreOrder": "73",
+                "OrderCountBasedOnFinalOrder": "62",
+                "PartnerNumberBasedOnPreOrder": "61",
+                "PartnerNumberBasedOnFinalOrder": "56",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.86",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.9",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "397.5",
+                "QuantitySumBasedOnFinalOrder": "386.5",
+                "StuffQuantitySumBasedOnPreOrder": "11,885",
+                "StuffQuantitySumBasedOnFinalOrder": "11,648",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "3,390,860,000",
+                "TotalDistributionReversion": "282,800,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "3,108,060,000",
+                "CashSetteled": "5,900,000",
+                "BankSetteled": "1,398,680,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "1,404,580,000",
+                "TotalSaleReversion": "21,000,000",
+                "TotalPureSale": "3,087,060,000",
+                "RemainderBasedOnPeriodSaleReversion": "1,682,480,000",
+                "ReversionSetteled": "21,000,000",
+                "RemainderBasedOnSettlementWithSaleReversion": "1,682,480,000"
+            }
+        },
+        {
+            "Key": 11,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300003",
+                "HeadVisitorName": "امیر سلیمی",
+                "VisitorCode": "20400005",
+                "VisitorName": "مهدی عموئی گلرودباری",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "16",
+                "ActiveDayCountBasedOnFinalOrder": "14",
+                "OrderCountBasedOnPreOrder": "34",
+                "OrderCountBasedOnFinalOrder": "25",
+                "PartnerNumberBasedOnPreOrder": "32",
+                "PartnerNumberBasedOnFinalOrder": "25",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.71",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.88",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "112",
+                "QuantitySumBasedOnFinalOrder": "106",
+                "StuffQuantitySumBasedOnPreOrder": "3,556",
+                "StuffQuantitySumBasedOnFinalOrder": "3,361",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "1,447,700,000",
+                "TotalDistributionReversion": "203,860,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "100,000",
+                "AddedPrice": "0",
+                "TotalSale": "1,243,740,000",
+                "CashSetteled": "0",
+                "BankSetteled": "628,880,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "628,880,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "1,243,740,000",
+                "RemainderBasedOnPeriodSaleReversion": "614,860,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "614,860,000"
+            }
+        },
+        {
+            "Key": 12,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300004",
+                "HeadVisitorName": "حمید مهتاب",
+                "VisitorCode": "20400006",
+                "VisitorName": "آقای کرم اللهی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "13",
+                "ActiveDayCountBasedOnFinalOrder": "12",
+                "OrderCountBasedOnPreOrder": "63",
+                "OrderCountBasedOnFinalOrder": "42",
+                "PartnerNumberBasedOnPreOrder": "54",
+                "PartnerNumberBasedOnFinalOrder": "40",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.81",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.69",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "95.67",
+                "QuantitySumBasedOnFinalOrder": "67.5",
+                "StuffQuantitySumBasedOnPreOrder": "3,396",
+                "StuffQuantitySumBasedOnFinalOrder": "2,519",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "1,000",
+                "StuffWeightSumBasedOnFinalOrder": "1,000",
+                "TotalStuffSale": "1,942,200,000",
+                "TotalDistributionReversion": "287,700,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "1,654,500,000",
+                "CashSetteled": "32,600,000",
+                "BankSetteled": "573,420,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "606,020,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "1,654,500,000",
+                "RemainderBasedOnPeriodSaleReversion": "1,048,480,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "1,048,480,000"
+            }
+        },
+        {
+            "Key": 13,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300004",
+                "HeadVisitorName": "حمید مهتاب",
+                "VisitorCode": "20400007",
+                "VisitorName": "عاطفه قادری",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "7",
+                "ActiveDayCountBasedOnFinalOrder": "4",
+                "OrderCountBasedOnPreOrder": "7",
+                "OrderCountBasedOnFinalOrder": "4",
+                "PartnerNumberBasedOnPreOrder": "6",
+                "PartnerNumberBasedOnFinalOrder": "4",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.14",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.25",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "8.33",
+                "QuantitySumBasedOnFinalOrder": "8.33",
+                "StuffQuantitySumBasedOnPreOrder": "268",
+                "StuffQuantitySumBasedOnFinalOrder": "268",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "242,320,000",
+                "TotalDistributionReversion": "106,320,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "136,000,000",
+                "CashSetteled": "0",
+                "BankSetteled": "84,480,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "84,480,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "136,000,000",
+                "RemainderBasedOnPeriodSaleReversion": "51,520,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "51,520,000"
+            }
+        },
+        {
+            "Key": 14,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300004",
+                "HeadVisitorName": "حمید مهتاب",
+                "VisitorCode": "20400008",
+                "VisitorName": "سپیده قادری",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "12",
+                "ActiveDayCountBasedOnFinalOrder": "11",
+                "OrderCountBasedOnPreOrder": "32",
+                "OrderCountBasedOnFinalOrder": "20",
+                "PartnerNumberBasedOnPreOrder": "23",
+                "PartnerNumberBasedOnFinalOrder": "18",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.03",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.05",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "40.17",
+                "QuantitySumBasedOnFinalOrder": "40.17",
+                "StuffQuantitySumBasedOnPreOrder": "1,090",
+                "StuffQuantitySumBasedOnFinalOrder": "1,090",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "943,380,000",
+                "TotalDistributionReversion": "360,280,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "80,000",
+                "AddedPrice": "0",
+                "TotalSale": "583,020,000",
+                "CashSetteled": "73,680,000",
+                "BankSetteled": "310,800,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "384,480,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "583,020,000",
+                "RemainderBasedOnPeriodSaleReversion": "198,540,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "198,540,000"
+            }
+        },
+        {
+            "Key": 15,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300004",
+                "HeadVisitorName": "حمید مهتاب",
+                "VisitorCode": "20400009",
+                "VisitorName": "محمدحسین محمدی جوزانی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "3",
+                "ActiveDayCountBasedOnFinalOrder": "2",
+                "OrderCountBasedOnPreOrder": "3",
+                "OrderCountBasedOnFinalOrder": "2",
+                "PartnerNumberBasedOnPreOrder": "3",
+                "PartnerNumberBasedOnFinalOrder": "2",
+                "MeanOrderStuffNumberBasedOnPreOrder": "6",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.5",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "4.17",
+                "QuantitySumBasedOnFinalOrder": "4.17",
+                "StuffQuantitySumBasedOnPreOrder": "101",
+                "StuffQuantitySumBasedOnFinalOrder": "101",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "355,820,000",
+                "TotalDistributionReversion": "290,540,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "65,280,000",
+                "CashSetteled": "0",
+                "BankSetteled": "65,280,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "65,280,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "65,280,000",
+                "RemainderBasedOnPeriodSaleReversion": "0",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "0"
+            }
+        },
+        {
+            "Key": 16,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300002",
+                "HeadVisitorName": "حمید سلیمی",
+                "VisitorCode": "20400011",
+                "VisitorName": "محمدرضا محمد دوست",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "7",
+                "ActiveDayCountBasedOnFinalOrder": "5",
+                "OrderCountBasedOnPreOrder": "18",
+                "OrderCountBasedOnFinalOrder": "9",
+                "PartnerNumberBasedOnPreOrder": "16",
+                "PartnerNumberBasedOnFinalOrder": "9",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.56",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.89",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "27.17",
+                "QuantitySumBasedOnFinalOrder": "21.17",
+                "StuffQuantitySumBasedOnPreOrder": "780",
+                "StuffQuantitySumBasedOnFinalOrder": "650",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "2,000",
+                "StuffWeightSumBasedOnFinalOrder": "2,000",
+                "TotalStuffSale": "248,120,000",
+                "TotalDistributionReversion": "84,760,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "163,360,000",
+                "CashSetteled": "1,800,000",
+                "BankSetteled": "84,680,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "86,480,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "163,360,000",
+                "RemainderBasedOnPeriodSaleReversion": "76,880,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "76,880,000"
+            }
+        },
+        {
+            "Key": 17,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300003",
+                "HeadVisitorName": "امیر سلیمی",
+                "VisitorCode": "20400012",
+                "VisitorName": "علی اصغر زحمتکش",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "4",
+                "ActiveDayCountBasedOnFinalOrder": "1",
+                "OrderCountBasedOnPreOrder": "4",
+                "OrderCountBasedOnFinalOrder": "1",
+                "PartnerNumberBasedOnPreOrder": "3",
+                "PartnerNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "4.75",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "6",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "6",
+                "QuantitySumBasedOnFinalOrder": "6",
+                "StuffQuantitySumBasedOnPreOrder": "206",
+                "StuffQuantitySumBasedOnFinalOrder": "206",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "134,120,000",
+                "TotalDistributionReversion": "76,740,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "57,380,000",
+                "CashSetteled": "0",
+                "BankSetteled": "57,380,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "57,380,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "57,380,000",
+                "RemainderBasedOnPeriodSaleReversion": "0",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "0"
+            }
+        },
+        {
+            "Key": 18,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20300002",
+                "HeadVisitorName": "حمید سلیمی",
+                "VisitorCode": "20400013",
+                "VisitorName": "بهرام بهتاج فر",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "1",
+                "ActiveDayCountBasedOnFinalOrder": "1",
+                "OrderCountBasedOnPreOrder": "1",
+                "OrderCountBasedOnFinalOrder": "1",
+                "PartnerNumberBasedOnPreOrder": "1",
+                "PartnerNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "2",
+                "QuantitySumBasedOnFinalOrder": "2",
+                "StuffQuantitySumBasedOnPreOrder": "2",
+                "StuffQuantitySumBasedOnFinalOrder": "2",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "12,240,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "12,240,000",
+                "CashSetteled": "0",
+                "BankSetteled": "12,240,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "12,240,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "12,240,000",
+                "RemainderBasedOnPeriodSaleReversion": "0",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "0"
+            }
+        },
+        {
+            "Key": 19,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "---",
+                "HeadVisitorName": "بدون سرپرست",
+                "VisitorCode": "20400014",
+                "VisitorName": "زینب عصار",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "1",
+                "ActiveDayCountBasedOnFinalOrder": "1",
+                "OrderCountBasedOnPreOrder": "2",
+                "OrderCountBasedOnFinalOrder": "2",
+                "PartnerNumberBasedOnPreOrder": "2",
+                "PartnerNumberBasedOnFinalOrder": "2",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "1.38",
+                "QuantitySumBasedOnFinalOrder": "1.38",
+                "StuffQuantitySumBasedOnPreOrder": "28",
+                "StuffQuantitySumBasedOnFinalOrder": "28",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "1,000",
+                "StuffWeightSumBasedOnFinalOrder": "1,000",
+                "TotalStuffSale": "57,100,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "57,100,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "57,100,000",
+                "RemainderBasedOnPeriodSaleReversion": "57,100,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "57,100,000"
+            }
+        },
+        {
+            "Key": 20,
+            "Value": {
+                "PartnerGroupName": "",
+                "HeadVisitorCode": "20000003",
+                "HeadVisitorName": "امیرفرهنگ سراج",
+                "VisitorCode": "21300004",
+                "VisitorName": "علی رحیمی",
+                "Period": "",
+                "ActiveDayCountBasedOnPreOrder": "3",
+                "ActiveDayCountBasedOnFinalOrder": "3",
+                "OrderCountBasedOnPreOrder": "7",
+                "OrderCountBasedOnFinalOrder": "7",
+                "PartnerNumberBasedOnPreOrder": "6",
+                "PartnerNumberBasedOnFinalOrder": "6",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.71",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.71",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "175",
+                "QuantitySumBasedOnFinalOrder": "175",
+                "StuffQuantitySumBasedOnPreOrder": "4,179",
+                "StuffQuantitySumBasedOnFinalOrder": "4,179",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "747,616,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "747,616,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "747,616,000",
+                "RemainderBasedOnPeriodSaleReversion": "747,616,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "747,616,000"
+            }
+        }
+    ],
+    "SumRowData": {
+        "PartnerGroupName": null,
+        "HeadVisitorCode": null,
+        "HeadVisitorName": null,
+        "VisitorCode": null,
+        "VisitorName": null,
+        "Period": null,
+        "ActiveDayCountBasedOnPreOrder": "131",
+        "ActiveDayCountBasedOnFinalOrder": "111",
+        "OrderCountBasedOnPreOrder": "426",
+        "OrderCountBasedOnFinalOrder": "311",
+        "PartnerNumberBasedOnPreOrder": "357",
+        "PartnerNumberBasedOnFinalOrder": "293",
+        "MeanOrderStuffNumberBasedOnPreOrder": null,
+        "MeanOrderStuffNumberBasedOnFinalOrder": null,
+        "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": null,
+        "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": null,
+        "QuantitySumBasedOnPreOrder": "1,161.05",
+        "QuantitySumBasedOnFinalOrder": "1,087.88",
+        "StuffQuantitySumBasedOnPreOrder": "34,741",
+        "StuffQuantitySumBasedOnFinalOrder": "32,403",
+        "QuantitySumBasedOnPreOrderFreeProduct": "0",
+        "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+        "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+        "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+        "StuffVolumeSumBasedOnPreOrder": "0",
+        "StuffVolumeSumBasedOnFinalOrder": "0",
+        "StuffWeightSumBasedOnPreOrder": "42,000",
+        "StuffWeightSumBasedOnFinalOrder": "36,000",
+        "TotalStuffSale": "14,015,536,000",
+        "TotalDistributionReversion": "2,633,440,000",
+        "MeanDiscountPercent": null,
+        "TotalDiscount": "0",
+        "TotalVAT": "0",
+        "SubtractedPrice": "200,000",
+        "AddedPrice": "0",
+        "TotalSale": "11,381,896,000",
+        "CashSetteled": "230,850,000",
+        "BankSetteled": "4,431,730,000",
+        "ChequeSetteled": "0",
+        "OtherSetteled": "6,860,000",
+        "TotalSetteled": "4,669,440,000",
+        "TotalSaleReversion": "21,000,000",
+        "TotalPureSale": "11,360,896,000",
+        "RemainderBasedOnPeriodSaleReversion": "6,691,456,000",
+        "ReversionSetteled": "21,000,000",
+        "RemainderBasedOnSettlementWithSaleReversion": "6,691,456,000"
+    },
+    "OtherInformations": []
+}
+
+
+
+---------------------------------------------------------------------------------
+
+نمونه بعدی :
+فروش >> گزارش صورت وضعیت سرپرست فروش
+
+هدر :
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+11475
+content-type
+application/json; charset=utf-8
+date
+Tue, 07 Jul 2026 10:52:04 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=b4gUpSam+f/SQDG7pRWHTWcDYdPlhODLGaJ671WFo8umkqsK0R/x2cXKUdZsk/Q+PVeNFff3xwevItVnfi2EXlcu0VtB6Wevsz9PTYpe1ho=; expires=Wed, 08-Jul-2026 20:12:03 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+857
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=b4gUpSam+f/SQDG7pRWHTWcDYdPlhODLGaJ671WFo8umkqsK0R/x2cXKUdZsk/Q+PVeNFff3xwevItVnfi2EXlcu0VtB6Wevsz9PTYpe1ho=; .KaraAuthProvider=A84FDE14E8170E5BB0111D72A29F9D25CE5D4F4C7592D2ED4FEA89B50D353A36B6A8C343AE009CD98EBA0506E63D2FA34B70907EC98A210AC18FE0BA6C457BA43249A4B183CB012A5C890FCAE811D4AD9F4BEFC8C24F01F73FD0F61F359A69E82442835177880B90A90B5274E271F0879FB6C7C7CF966F06E01E176CC7B141D24E2A418C4E5D574354BACAA0E94BA7A20336A91779576B58E99FE435497CD9B1D447D8A4BB63CE53BF66DF43CB62B7D18519E77DEC3845C91FC72DF57CBCEF2AB7E174446901EAE2C03BB05B5AE052A5C93EA067FA6BA7D7552DBEECEA9E4C4A8218124498EF16B5B976EB36BC23E8F96733EEABFFC287A356193974FDBB13EDFE96B7A1B1B7CB9D969CA3B23BD4C107898A65A5AA30C8BA8EA17F9DC6B0D7357C7896622D527C8EFAEC609D6117A75ED2FE93E3BEFD7FDC36D3802391FEDAE97D7DE614D69F654A8FDCFE6E228E724CE4E6FE3F9C616F7B90312E0EFAF9045404F6D5EEF9E5E943DF0371DA66044DA6429BA07E29166ABD2CD6C8EBB80807348A94E853C35B710E66269399AF86209DFB5816E0F06E66D6DEF762CC2579DAB9F3B1758B0B030BB25F35A26C2C3411E31C4247EF68CD9A080E44F18EA8823EB53BCC72396186621BA33A26D71F4C76DAC3B01504AC0599ED5FF30A454938D2F72B20C307A8DD95DC963AD22FC2641DD83BF66F9888D615E05F196FA1D1D18EB074F2B28E7DD288457DFD895F849C755E11E640D860EE06192FB95E2BA123A0F82493CA1BA787742B3CAFB038203B4692D38FBDA16929A1DD547FAAA1DB486C49229A49E7FC7641365271D8E79A63787A4CC357249568F62554A0890B6508B514E6C41DAB9CB459DC2756DA33CEC154838872DDAFA656F87143049B6B844A2CC0D00421A4977B420ABB61DE66BD00798F71156276A21D2BF9432E9F0A7FB2D3022B8136A8
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/HeadVisitorsSale
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+پیلود :
+
+GridName=HeadVisitorSaleReportGrid&GridTitle=%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4+%D8%B5%D9%88%D8%B1%D8%AA+%D9%88%D8%B6%D8%B9%DB%8C%D8%AA+%D8%B3%D8%B1%D9%BE%D8%B1%D8%B3%D8%AA&GridJSFrom=1&GridJSCount=10&GridJSTotal=0&SortColumn=&SortOrder=none&ColumnFilterString=&BindingClass=Kara.BLL.Sale.Report&BindingMethod=GetReportBinding_VisitorsSale&BindingArguments=BPersonnelCode%3D%26EPersonnelCode%3D%26BPartnerCode%3D%26EPartnerCode%3D%26BOrderCode%3D%26EOrderCode%3D%26BDate%3D%26EDate%3D%26BPreOrderInsertDate%3D%26EPreOrderInsertDate%3D%26BoundSettlementInDate%3Dfalse%26TimeGrouping%3D0%26ReportBasedOn%3DInserted%7CConfirmed%7CTotal%7CShipment%7CConfirmedShipment%7CTotalReversion%7CWaitingForAccountingConfirm%7CFinal%7C%26HeadVisitorCode%3D0%26Period%3D%26IncludeFreeProductPrices%3Dfalse%26HeadVisitorSale%3DTrue%26WithPartnerGroup%3Dfalse%26&ExportType=Grid
+
+
+و پاسخ :
+
+{
+    "GridViewJSTotal": 7,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 7,
+    "Data": [
+        {
+            "Key": 1,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "",
+                "VisitorName": "بدون سرپرست",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "30",
+                "OrderCountBasedOnFinalOrder": "27",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.37",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.52",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "92.55",
+                "QuantitySumBasedOnFinalOrder": "92.55",
+                "StuffQuantitySumBasedOnPreOrder": "2,846",
+                "StuffQuantitySumBasedOnFinalOrder": "2,846",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "2,000",
+                "StuffWeightSumBasedOnFinalOrder": "2,000",
+                "TotalStuffSale": "999,200,000",
+                "TotalDistributionReversion": "86,000,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "913,200,000",
+                "CashSetteled": "29,800,000",
+                "BankSetteled": "460,960,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "490,760,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "913,200,000",
+                "RemainderBasedOnPeriodSaleReversion": "422,440,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "422,440,000"
+            }
+        },
+        {
+            "Key": 2,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "20000003",
+                "VisitorName": "امیرفرهنگ سراج",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "7",
+                "OrderCountBasedOnFinalOrder": "7",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.71",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.71",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "175",
+                "QuantitySumBasedOnFinalOrder": "175",
+                "StuffQuantitySumBasedOnPreOrder": "4,179",
+                "StuffQuantitySumBasedOnFinalOrder": "4,179",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "747,616,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "747,616,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "747,616,000",
+                "RemainderBasedOnPeriodSaleReversion": "747,616,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "747,616,000"
+            }
+        },
+        {
+            "Key": 3,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "20000016",
+                "VisitorName": "نگار صامتی",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "5",
+                "OrderCountBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.8",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "2",
+                "QuantitySumBasedOnFinalOrder": "2",
+                "StuffQuantitySumBasedOnPreOrder": "54",
+                "StuffQuantitySumBasedOnFinalOrder": "54",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "250,020,000",
+                "TotalDistributionReversion": "194,220,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "55,800,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "55,800,000",
+                "RemainderBasedOnPeriodSaleReversion": "55,800,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "55,800,000"
+            }
+        },
+        {
+            "Key": 4,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "20300002",
+                "VisitorName": "حمید سلیمی",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "19",
+                "OrderCountBasedOnFinalOrder": "10",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.53",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.8",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "29.17",
+                "QuantitySumBasedOnFinalOrder": "23.17",
+                "StuffQuantitySumBasedOnPreOrder": "782",
+                "StuffQuantitySumBasedOnFinalOrder": "652",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "2,000",
+                "StuffWeightSumBasedOnFinalOrder": "2,000",
+                "TotalStuffSale": "260,360,000",
+                "TotalDistributionReversion": "84,760,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "175,600,000",
+                "CashSetteled": "1,800,000",
+                "BankSetteled": "96,920,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "98,720,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "175,600,000",
+                "RemainderBasedOnPeriodSaleReversion": "76,880,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "76,880,000"
+            }
+        },
+        {
+            "Key": 5,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "20300003",
+                "VisitorName": "امیر سلیمی",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "186",
+                "OrderCountBasedOnFinalOrder": "135",
+                "MeanOrderStuffNumberBasedOnPreOrder": "2.15",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "2.1",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "314.5",
+                "QuantitySumBasedOnFinalOrder": "286.5",
+                "StuffQuantitySumBasedOnPreOrder": "10,092",
+                "StuffQuantitySumBasedOnFinalOrder": "8,998",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "37,000",
+                "StuffWeightSumBasedOnFinalOrder": "31,000",
+                "TotalStuffSale": "4,799,760,000",
+                "TotalDistributionReversion": "940,820,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "120,000",
+                "AddedPrice": "0",
+                "TotalSale": "3,858,820,000",
+                "CashSetteled": "87,070,000",
+                "BankSetteled": "1,441,190,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "6,860,000",
+                "TotalSetteled": "1,535,120,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "3,858,820,000",
+                "RemainderBasedOnPeriodSaleReversion": "2,323,700,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "2,323,700,000"
+            }
+        },
+        {
+            "Key": 6,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "20300004",
+                "VisitorName": "حمید مهتاب",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "178",
+                "OrderCountBasedOnFinalOrder": "130",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.96",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.88",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "545.83",
+                "QuantitySumBasedOnFinalOrder": "506.67",
+                "StuffQuantitySumBasedOnPreOrder": "16,740",
+                "StuffQuantitySumBasedOnFinalOrder": "15,626",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "1,000",
+                "StuffWeightSumBasedOnFinalOrder": "1,000",
+                "TotalStuffSale": "6,874,580,000",
+                "TotalDistributionReversion": "1,327,640,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "80,000",
+                "AddedPrice": "0",
+                "TotalSale": "5,546,860,000",
+                "CashSetteled": "112,180,000",
+                "BankSetteled": "2,432,660,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "2,544,840,000",
+                "TotalSaleReversion": "21,000,000",
+                "TotalPureSale": "5,525,860,000",
+                "RemainderBasedOnPeriodSaleReversion": "2,981,020,000",
+                "ReversionSetteled": "21,000,000",
+                "RemainderBasedOnSettlementWithSaleReversion": "2,981,020,000"
+            }
+        },
+        {
+            "Key": 7,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "21300004",
+                "VisitorName": "علی رحیمی",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "1",
+                "OrderCountBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "2",
+                "QuantitySumBasedOnFinalOrder": "2",
+                "StuffQuantitySumBasedOnPreOrder": "48",
+                "StuffQuantitySumBasedOnFinalOrder": "48",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "0",
+                "StuffWeightSumBasedOnFinalOrder": "0",
+                "TotalStuffSale": "84,000,000",
+                "TotalDistributionReversion": "0",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "84,000,000",
+                "CashSetteled": "0",
+                "BankSetteled": "0",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "0",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "84,000,000",
+                "RemainderBasedOnPeriodSaleReversion": "84,000,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "84,000,000"
+            }
+        }
+    ],
+    "SumRowData": {
+        "PartnerGroupName": null,
+        "VisitorCode": null,
+        "VisitorName": null,
+        "Period": null,
+        "OrderCountBasedOnPreOrder": "426",
+        "OrderCountBasedOnFinalOrder": "311",
+        "MeanOrderStuffNumberBasedOnPreOrder": null,
+        "MeanOrderStuffNumberBasedOnFinalOrder": null,
+        "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": null,
+        "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": null,
+        "QuantitySumBasedOnPreOrder": "1,161.05",
+        "QuantitySumBasedOnFinalOrder": "1,087.89",
+        "StuffQuantitySumBasedOnPreOrder": "34,741",
+        "StuffQuantitySumBasedOnFinalOrder": "32,403",
+        "QuantitySumBasedOnPreOrderFreeProduct": "0",
+        "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+        "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+        "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+        "StuffVolumeSumBasedOnPreOrder": "0",
+        "StuffVolumeSumBasedOnFinalOrder": "0",
+        "StuffWeightSumBasedOnPreOrder": "42,000",
+        "StuffWeightSumBasedOnFinalOrder": "36,000",
+        "TotalStuffSale": "14,015,536,000",
+        "TotalDistributionReversion": "2,633,440,000",
+        "MeanDiscountPercent": null,
+        "TotalDiscount": "0",
+        "TotalVAT": "0",
+        "SubtractedPrice": "200,000",
+        "AddedPrice": "0",
+        "TotalSale": "11,381,896,000",
+        "CashSetteled": "230,850,000",
+        "BankSetteled": "4,431,730,000",
+        "ChequeSetteled": "0",
+        "OtherSetteled": "6,860,000",
+        "TotalSetteled": "4,669,440,000",
+        "TotalSaleReversion": "21,000,000",
+        "TotalPureSale": "11,360,896,000",
+        "RemainderBasedOnPeriodSaleReversion": "6,691,456,000",
+        "ReversionSetteled": "21,000,000",
+        "RemainderBasedOnSettlementWithSaleReversion": "6,691,456,000"
+    },
+    "OtherInformations": []
+}
+
+
+-----------------------------
+
+لاگین :
+
+Request URL
+http://app.pakhshmarket.com/Home/LogIn
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+44
+content-type
+application/json; charset=utf-8
+date
+Tue, 07 Jul 2026 11:05:28 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+.KaraAuthProvider=809EE0EEC9686A24473A608E9D2D2E902248DB5175CED50EAC97835B89F406A632497ABAB66E4C3B2BC43870894612F46DE7565560546E2FC51546B65751DF94B9F49F80E8AC05C8BB006B8A9D6AF8B5B4DE815454E157EE53E5586986463CA378EEAD478B244088840BAC54426EE4307346A795C4DD6BF0237B8801C13495A216DA7012788F9F8DEFBBA7186CC244C1B6A17295B247E4D5EC589F258A9E3FAEE58F6B23E2CF5A0C08BCE67D359C520546E8610F691F5202FFED40D5FF16CA81A52DABA35FF495FFE5F93696481C774EFF10B50048E39AC3A54BA32D559930907C63DF140D057DC306F73A75EDE1C6A27865C23B0DF5E645D82E29F11D4FD9AA8ADFD46164C700EBF35AC65129F2C9BCE3C815407655BBA153A23F0593C547EAFFCD1B70233F15A54977DDD8E5EA9A57D3219EC31B37AAC13E10227AF9A5575D71DD4D38C41FC336CEAB0F49DC11C6D69F0519A8560B09748B1F1BB825D9369CA161884C05EAB1E7A16EFC66E8D809BB830D99A7AD37A3560C82182A86BB79EB9327D927F40F59E572FC14E6E8B0D91E94C3673A828E298EEBF002FEF2944641D13A6E8F8A5AEC9FA90A99B7479CA2E733277E695D0389B63277173D6104A9940245A612A2DAB14DF7EE47E220FBC64573ED86E420029BBFC8B948599592D8864020A46DE2AA68D03930497A9FE2FF77FBCF9FAF6E2B625C28474E4F19AEE18444F440E49E7A8008D70D6CDA3C4ACF5F8409AD4C55097B335EC70686F0D1C0EEDD1FF7BBA5B30DD2E211732F6624C9E289BBB094F4AFA8672A8E5D19845936A0AC187E49C0A89992C746A502C5415B16CFB2E2AC6B46D98024F9B49E2C12102F48AA45420D3ACFED2C7AF20EE69341C37A16DDEE9745D50A31295E18C63FAA4A9351F42744868A0AAAAFC610845F3291347EE8121FE79F845D78D96757D4EF21D9108DF8; path=/
+set-cookie
+.KaraAuthProvider=809EE0EEC9686A24473A608E9D2D2E902248DB5175CED50EAC97835B89F406A632497ABAB66E4C3B2BC43870894612F46DE7565560546E2FC51546B65751DF94B9F49F80E8AC05C8BB006B8A9D6AF8B5B4DE815454E157EE53E5586986463CA378EEAD478B244088840BAC54426EE4307346A795C4DD6BF0237B8801C13495A216DA7012788F9F8DEFBBA7186CC244C1B6A17295B247E4D5EC589F258A9E3FAEE58F6B23E2CF5A0C08BCE67D359C520546E8610F691F5202FFED40D5FF16CA81A52DABA35FF495FFE5F93696481C774EFF10B50048E39AC3A54BA32D559930907C63DF140D057DC306F73A75EDE1C6A27865C23B0DF5E645D82E29F11D4FD9AA8ADFD46164C700EBF35AC65129F2C9BCE3C815407655BBA153A23F0593C547EAFFCD1B70233F15A54977DDD8E5EA9A57D3219EC31B37AAC13E10227AF9A5575D71DD4D38C41FC336CEAB0F49DC11C6D69F0519A8560B09748B1F1BB825D9369CA161884C05EAB1E7A16EFC66E8D809BB830D99A7AD37A3560C82182A86BB79EB9327D927F40F59E572FC14E6E8B0D91E94C3673A828E298EEBF002FEF2944641D13A6E8F8A5AEC9FA90A99B7479CA2E733277E695D0389B63277173D6104A9940245A612A2DAB14DF7EE47E220FBC64573ED86E420029BBFC8B948599592D8864020A46DE2AA68D03930497A9FE2FF77FBCF9FAF6E2B625C28474E4F19AEE18444F440E49E7A8008D70D6CDA3C4ACF5F8409AD4C55097B335EC70686F0D1C0EEDD1FF7BBA5B30DD2E211732F6624C9E289BBB094F4AFA8672A8E5D19845936A0AC187E49C0A89992C746A502C5415B16CFB2E2AC6B46D98024F9B49E2C12102F48AA45420D3ACFED2C7AF20EE69341C37A16DDEE9745D50A31295E18C63FAA4A9351F42744868A0AAAAFC610845F3291347EE8121FE79F845D78D96757D4EF21D9108DF8; path=/
+set-cookie
+Kara.Common.Request.keySession80=0f0UN6Cmx3iy8zmotjy19KrGjh6YMVWpM48VbVE60gBl+/PbQuvMt+8wnVbv0AkhrNHUjMAzGehuiSjjTvJIE2IbyQEvl8gF5wG6uIKF35I=; expires=Wed, 08-Jul-2026 20:25:28 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+86
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=0f0UN6Cmx3iy8zmotjy19KrGjh6YMVWpM48VbVE60gBl+/PbQuvMt+8wnVbv0AkhrNHUjMAzGehuiSjjTvJIE2IbyQEvl8gF5wG6uIKF35I=
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+UserName
+حسین قشقایی
+Password
+123456
+
+پاسخ
+{"Success":true,"Message":"","ReturnUrl":""}
+
+
+
+
+Request URL
+http://app.pakhshmarket.com/Accounting/Entity/EntityList?EntityGlobalType=10203&q=2&limit=30&timestamp=1783423865489
+Request Method
+GET
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+2011
+content-type
+application/json; charset=utf-8
+date
+Tue, 07 Jul 2026 11:31:05 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=8pz49GKyZTLF2aaogMtH9xX3kqhVtctzRkXPU9UkhmIjE0XP32Kwfr/L/HxU40X4h0n2kAHwfleeHlO4XrYd39NOw5nBvnHCrdWTR0kRZeQ=; expires=Wed, 08-Jul-2026 20:51:05 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=8pz49GKyZTLF2aaogMtH9xX3kqhVtctzRkXPU9UkhmIjE0XP32Kwfr/L/HxU40X4h0n2kAHwfleeHlO4XrYd39NOw5nBvnHCrdWTR0kRZeQ=; .KaraAuthProvider=134BB91CDCA9AE8350E3669DA4EB1A48520CAECABEB2584592BFD41F64A9B9DD889FA3A83BE4D84196C0E91EEA206B41327518FDD2F08921CBD51EED144B74B2810EFA370AB7C014523C5609AD89AC542F253D25F8F54E4AD2E9A45F2767A61DA1375802CBE57F2397EE35C5AC0DB4F9B0207C818DACCDE5895A685300746D9CD15505BD4E2B174EA29D8127DCF588EBF4C01588FB0E61DC8DEE374229B2DCE1EFE1BEE8174AE6F0D18791583431F60DEA797D43A03DD19E8555B4197AEE5D18E3796A17A40D508E654345F43F003E3027CAA97881562C595A3425979FBA45E95638682500E4F9F536238F465AB672322BF826F82ABAB52F8F313D45877C6BCCBCBA7A298DF0F0DFDABFAB5D9E6B0FAC4B2DB343BA4325364ADBA8BF696580CD4B26CCB17195EEB3ABC970774A4A3EADED5A0D57A53316E543A269A7AB7432AE01019F9BAE172EC53A90E50E66D77B4B2E3E726D87FF0472307173C88432DE5AA4665E7CBE6E6F9FB91846E6A2CB9F2E3B0803DF8B0CC284F800853F61F342527DCA0ED562EEFDA8D4195074ECA6B657AB487E9BC4B0B729F4F899088D1839AB78B20DE04324B4D74957D8E9ECC9B24CCC9011E269656A9F0ACE3454E897AD0E6DC35AF6EF37BDD905A56CB5642DCD426C3B356F60ED746CD517EF9FD2354C6BAEAF262FF87D28BE804CAE64C383C7283CC60877A385808A4158813246D2DE4CD4AEAE4F2F2BB68A41D0396BC965EA0F721BD3918EEC347E5D78AF066C4A9AC07F8E8D83512E0E48479D186FE5EF1CC34C45E4EA05225EDFDB4BD44A9810718BD589819CA5E962745D69B9F669822DA1B43AB7A608074639F1EE6702CCA7AEA812248EA39A100414B80243B73FCC4DE12F48EEBFF5A1DE6B296B590AFF405525F49C6B875C8E386A15C5869FF3087CEE64DA420D5F28B5F99E9B59486BCD370EBE63FAFD
+host
+app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/HeadVisitorsSale
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+EntityGlobalType=10203&q=2&limit=30&timestamp=1783423865489
+
+پاسخ
+[
+    {
+        "Id": "65422944-7438-47e2-818e-e5892f01661b",
+        "Code": "20300002",
+        "Name": "حمید سلیمی",
+        "PersonTelephone": "",
+        "PersonLegalName": "",
+        "DefaultPackageName": null,
+        "DefaultPackageId": "00000000-0000-0000-0000-000000000000",
+        "EntityGlobalType": 10203,
+        "PartnerAddress": "",
+        "StuffGroupCode": "",
+        "IsCash": null,
+        "StuffBasketIds": [],
+        "Units": [],
+        "VATPercent": 0.00,
+        "SaleDefaultPackageId": null,
+        "SaleDefaultPackageUnitId": "",
+        "SaleDefaultPackageName": "",
+        "SaleDefaultPackageCoefficient": 0.000,
+        "BankAccountNumber": "",
+        "StuffDescription": "",
+        "MaxPackageCoefficient": 0.000,
+        "ExpirationDateFormat": null,
+        "EntityIsPerson": true,
+        "SaleLine": "لاین پیش فرض",
+        "SaleLineId": "لاین پیش فرض"
+    },
+    {
+        "Id": "fcad24fc-fd82-4104-b498-42ae77bd2df3",
+        "Code": "20300003",
+        "Name": "امیر سلیمی",
+        "PersonTelephone": "",
+        "PersonLegalName": "",
+        "DefaultPackageName": null,
+        "DefaultPackageId": "00000000-0000-0000-0000-000000000000",
+        "EntityGlobalType": 10203,
+        "PartnerAddress": "",
+        "StuffGroupCode": "",
+        "IsCash": null,
+        "StuffBasketIds": [],
+        "Units": [],
+        "VATPercent": 0.00,
+        "SaleDefaultPackageId": null,
+        "SaleDefaultPackageUnitId": "",
+        "SaleDefaultPackageName": "",
+        "SaleDefaultPackageCoefficient": 0.000,
+        "BankAccountNumber": "",
+        "StuffDescription": "",
+        "MaxPackageCoefficient": 0.000,
+        "ExpirationDateFormat": null,
+        "EntityIsPerson": true,
+        "SaleLine": "لاین پیش فرض",
+        "SaleLineId": "لاین پیش فرض"
+    },
+    {
+        "Id": "adadf9be-9270-4821-8599-549bb73b3549",
+        "Code": "20300004",
+        "Name": "حمید مهتاب",
+        "PersonTelephone": "",
+        "PersonLegalName": "",
+        "DefaultPackageName": null,
+        "DefaultPackageId": "00000000-0000-0000-0000-000000000000",
+        "EntityGlobalType": 10203,
+        "PartnerAddress": "",
+        "StuffGroupCode": "",
+        "IsCash": null,
+        "StuffBasketIds": [],
+        "Units": [],
+        "VATPercent": 0.00,
+        "SaleDefaultPackageId": null,
+        "SaleDefaultPackageUnitId": "",
+        "SaleDefaultPackageName": "",
+        "SaleDefaultPackageCoefficient": 0.000,
+        "BankAccountNumber": "",
+        "StuffDescription": "",
+        "MaxPackageCoefficient": 0.000,
+        "ExpirationDateFormat": null,
+        "EntityIsPerson": true,
+        "SaleLine": "لاین پیش فرض",
+        "SaleLineId": "لاین پیش فرض"
+    }
+]
+
+
+
+
+--------------------------------------
+
+
+یا این کیس
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+2910
+content-type
+application/json; charset=utf-8
+date
+Tue, 07 Jul 2026 11:32:21 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=8pz49GKyZTLF2aaogMtH9xX3kqhVtctzRkXPU9UkhmIjE0XP32Kwfr/L/HxU40X4h0n2kAHwfleeHlO4XrYd39NOw5nBvnHCrdWTR0kRZeQ=; expires=Wed, 08-Jul-2026 20:52:20 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+873
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=8pz49GKyZTLF2aaogMtH9xX3kqhVtctzRkXPU9UkhmIjE0XP32Kwfr/L/HxU40X4h0n2kAHwfleeHlO4XrYd39NOw5nBvnHCrdWTR0kRZeQ=; .KaraAuthProvider=134BB91CDCA9AE8350E3669DA4EB1A48520CAECABEB2584592BFD41F64A9B9DD889FA3A83BE4D84196C0E91EEA206B41327518FDD2F08921CBD51EED144B74B2810EFA370AB7C014523C5609AD89AC542F253D25F8F54E4AD2E9A45F2767A61DA1375802CBE57F2397EE35C5AC0DB4F9B0207C818DACCDE5895A685300746D9CD15505BD4E2B174EA29D8127DCF588EBF4C01588FB0E61DC8DEE374229B2DCE1EFE1BEE8174AE6F0D18791583431F60DEA797D43A03DD19E8555B4197AEE5D18E3796A17A40D508E654345F43F003E3027CAA97881562C595A3425979FBA45E95638682500E4F9F536238F465AB672322BF826F82ABAB52F8F313D45877C6BCCBCBA7A298DF0F0DFDABFAB5D9E6B0FAC4B2DB343BA4325364ADBA8BF696580CD4B26CCB17195EEB3ABC970774A4A3EADED5A0D57A53316E543A269A7AB7432AE01019F9BAE172EC53A90E50E66D77B4B2E3E726D87FF0472307173C88432DE5AA4665E7CBE6E6F9FB91846E6A2CB9F2E3B0803DF8B0CC284F800853F61F342527DCA0ED562EEFDA8D4195074ECA6B657AB487E9BC4B0B729F4F899088D1839AB78B20DE04324B4D74957D8E9ECC9B24CCC9011E269656A9F0ACE3454E897AD0E6DC35AF6EF37BDD905A56CB5642DCD426C3B356F60ED746CD517EF9FD2354C6BAEAF262FF87D28BE804CAE64C383C7283CC60877A385808A4158813246D2DE4CD4AEAE4F2F2BB68A41D0396BC965EA0F721BD3918EEC347E5D78AF066C4A9AC07F8E8D83512E0E48479D186FE5EF1CC34C45E4EA05225EDFDB4BD44A9810718BD589819CA5E962745D69B9F669822DA1B43AB7A608074639F1EE6702CCA7AEA812248EA39A100414B80243B73FCC4DE12F48EEBFF5A1DE6B296B590AFF405525F49C6B875C8E386A15C5869FF3087CEE64DA420D5F28B5F99E9B59486BCD370EBE63FAFD
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/HeadVisitorsSale
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+GridName
+HeadVisitorSaleReportGrid
+GridTitle
+گزارش صورت وضعیت سرپرست
+GridJSFrom
+1
+GridJSCount
+10
+GridJSTotal
+0
+SortColumn
+SortOrder
+none
+ColumnFilterString
+BindingClass
+Kara.BLL.Sale.Report
+BindingMethod
+GetReportBinding_VisitorsSale
+BindingArguments
+BPersonnelCode=20300002&EPersonnelCode=20300002&BPartnerCode=&EPartnerCode=&BOrderCode=&EOrderCode=&BDate=&EDate=&BPreOrderInsertDate=&EPreOrderInsertDate=&BoundSettlementInDate=false&TimeGrouping=0&ReportBasedOn=Inserted|Confirmed|Total|Shipment|ConfirmedShipment|TotalReversion|WaitingForAccountingConfirm|Final|&HeadVisitorCode=0&Period=&IncludeFreeProductPrices=false&HeadVisitorSale=True&WithPartnerGroup=false&
+ExportType
+Grid
+
+
+
+پاسخ :
+
+{
+    "GridViewJSTotal": 1,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 1,
+    "Data": [
+        {
+            "Key": 1,
+            "Value": {
+                "PartnerGroupName": "",
+                "VisitorCode": "20300002",
+                "VisitorName": "حمید سلیمی",
+                "Period": "",
+                "OrderCountBasedOnPreOrder": "19",
+                "OrderCountBasedOnFinalOrder": "10",
+                "MeanOrderStuffNumberBasedOnPreOrder": "1.53",
+                "MeanOrderStuffNumberBasedOnFinalOrder": "1.8",
+                "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": "0",
+                "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": "0",
+                "QuantitySumBasedOnPreOrder": "29.17",
+                "QuantitySumBasedOnFinalOrder": "23.17",
+                "StuffQuantitySumBasedOnPreOrder": "782",
+                "StuffQuantitySumBasedOnFinalOrder": "652",
+                "QuantitySumBasedOnPreOrderFreeProduct": "0",
+                "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+                "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+                "StuffVolumeSumBasedOnPreOrder": "0",
+                "StuffVolumeSumBasedOnFinalOrder": "0",
+                "StuffWeightSumBasedOnPreOrder": "2,000",
+                "StuffWeightSumBasedOnFinalOrder": "2,000",
+                "TotalStuffSale": "260,360,000",
+                "TotalDistributionReversion": "84,760,000",
+                "MeanDiscountPercent": "0",
+                "TotalDiscount": "0",
+                "TotalVAT": "0",
+                "SubtractedPrice": "0",
+                "AddedPrice": "0",
+                "TotalSale": "175,600,000",
+                "CashSetteled": "1,800,000",
+                "BankSetteled": "96,920,000",
+                "ChequeSetteled": "0",
+                "OtherSetteled": "0",
+                "TotalSetteled": "98,720,000",
+                "TotalSaleReversion": "0",
+                "TotalPureSale": "175,600,000",
+                "RemainderBasedOnPeriodSaleReversion": "76,880,000",
+                "ReversionSetteled": "0",
+                "RemainderBasedOnSettlementWithSaleReversion": "76,880,000"
+            }
+        }
+    ],
+    "SumRowData": {
+        "PartnerGroupName": null,
+        "VisitorCode": null,
+        "VisitorName": null,
+        "Period": null,
+        "OrderCountBasedOnPreOrder": "19",
+        "OrderCountBasedOnFinalOrder": "10",
+        "MeanOrderStuffNumberBasedOnPreOrder": null,
+        "MeanOrderStuffNumberBasedOnFinalOrder": null,
+        "MeanOrderStuffNumberBasedOnPreOrderFreeProduct": null,
+        "MeanOrderStuffNumberBasedOnFinalOrderFreeProduct": null,
+        "QuantitySumBasedOnPreOrder": "29.17",
+        "QuantitySumBasedOnFinalOrder": "23.17",
+        "StuffQuantitySumBasedOnPreOrder": "782",
+        "StuffQuantitySumBasedOnFinalOrder": "652",
+        "QuantitySumBasedOnPreOrderFreeProduct": "0",
+        "QuantitySumBasedOnFinalOrderFreeProduct": "0",
+        "StuffQuantitySumBasedOnPreOrderFreeProduct": "0",
+        "StuffQuantitySumBasedOnFinalOrderFreeProduct": "0",
+        "StuffVolumeSumBasedOnPreOrder": "0",
+        "StuffVolumeSumBasedOnFinalOrder": "0",
+        "StuffWeightSumBasedOnPreOrder": "2,000",
+        "StuffWeightSumBasedOnFinalOrder": "2,000",
+        "TotalStuffSale": "260,360,000",
+        "TotalDistributionReversion": "84,760,000",
+        "MeanDiscountPercent": null,
+        "TotalDiscount": "0",
+        "TotalVAT": "0",
+        "SubtractedPrice": "0",
+        "AddedPrice": "0",
+        "TotalSale": "175,600,000",
+        "CashSetteled": "1,800,000",
+        "BankSetteled": "96,920,000",
+        "ChequeSetteled": "0",
+        "OtherSetteled": "0",
+        "TotalSetteled": "98,720,000",
+        "TotalSaleReversion": "0",
+        "TotalPureSale": "175,600,000",
+        "RemainderBasedOnPeriodSaleReversion": "76,880,000",
+        "ReversionSetteled": "0",
+        "RemainderBasedOnSettlementWithSaleReversion": "76,880,000"
+    },
+    "OtherInformations": []
+}
+
+------------------------
+
+یا این کیس :
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+109
+content-type
+application/json; charset=utf-8
+date
+Tue, 07 Jul 2026 11:34:38 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=8pz49GKyZTLF2aaogMtH9xX3kqhVtctzRkXPU9UkhmIjE0XP32Kwfr/L/HxU40X4h0n2kAHwfleeHlO4XrYd39NOw5nBvnHCrdWTR0kRZeQ=; expires=Wed, 08-Jul-2026 20:54:38 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+876
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=8pz49GKyZTLF2aaogMtH9xX3kqhVtctzRkXPU9UkhmIjE0XP32Kwfr/L/HxU40X4h0n2kAHwfleeHlO4XrYd39NOw5nBvnHCrdWTR0kRZeQ=; .KaraAuthProvider=134BB91CDCA9AE8350E3669DA4EB1A48520CAECABEB2584592BFD41F64A9B9DD889FA3A83BE4D84196C0E91EEA206B41327518FDD2F08921CBD51EED144B74B2810EFA370AB7C014523C5609AD89AC542F253D25F8F54E4AD2E9A45F2767A61DA1375802CBE57F2397EE35C5AC0DB4F9B0207C818DACCDE5895A685300746D9CD15505BD4E2B174EA29D8127DCF588EBF4C01588FB0E61DC8DEE374229B2DCE1EFE1BEE8174AE6F0D18791583431F60DEA797D43A03DD19E8555B4197AEE5D18E3796A17A40D508E654345F43F003E3027CAA97881562C595A3425979FBA45E95638682500E4F9F536238F465AB672322BF826F82ABAB52F8F313D45877C6BCCBCBA7A298DF0F0DFDABFAB5D9E6B0FAC4B2DB343BA4325364ADBA8BF696580CD4B26CCB17195EEB3ABC970774A4A3EADED5A0D57A53316E543A269A7AB7432AE01019F9BAE172EC53A90E50E66D77B4B2E3E726D87FF0472307173C88432DE5AA4665E7CBE6E6F9FB91846E6A2CB9F2E3B0803DF8B0CC284F800853F61F342527DCA0ED562EEFDA8D4195074ECA6B657AB487E9BC4B0B729F4F899088D1839AB78B20DE04324B4D74957D8E9ECC9B24CCC9011E269656A9F0ACE3454E897AD0E6DC35AF6EF37BDD905A56CB5642DCD426C3B356F60ED746CD517EF9FD2354C6BAEAF262FF87D28BE804CAE64C383C7283CC60877A385808A4158813246D2DE4CD4AEAE4F2F2BB68A41D0396BC965EA0F721BD3918EEC347E5D78AF066C4A9AC07F8E8D83512E0E48479D186FE5EF1CC34C45E4EA05225EDFDB4BD44A9810718BD589819CA5E962745D69B9F669822DA1B43AB7A608074639F1EE6702CCA7AEA812248EA39A100414B80243B73FCC4DE12F48EEBFF5A1DE6B296B590AFF405525F49C6B875C8E386A15C5869FF3087CEE64DA420D5F28B5F99E9B59486BCD370EBE63FAFD
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/VisitorsSale
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+GridName=VisitorSaleReportGrid&GridTitle=%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4+%D8%B5%D9%88%D8%B1%D8%AA+%D9%88%D8%B6%D8%B9%DB%8C%D8%AA+%D9%88%DB%8C%D8%B2%DB%8C%D8%AA%D9%88%D8%B1&GridJSFrom=1&GridJSCount=38&GridJSTotal=0&SortColumn=&SortOrder=none&ColumnFilterString=&BindingClass=Kara.BLL.Sale.Report&BindingMethod=GetReportBinding_VisitorsSale&BindingArguments=BPersonnelCode%3D21300003%26EPersonnelCode%3D21300003%26BPartnerCode%3D%26EPartnerCode%3D%26BOrderCode%3D%26EOrderCode%3D%26BDate%3D%26EDate%3D%26BPreOrderInsertDate%3D%26EPreOrderInsertDate%3D%26BoundSettlementInDate%3Dfalse%26TimeGrouping%3D0%26ReportBasedOn%3DInserted%7CConfirmed%7CTotal%7CShipment%7CConfirmedShipment%7CTotalReversion%7CWaitingForAccountingConfirm%7CFinal%7C%26HeadVisitorCode%3D0%26Period%3D%26IncludeFreeProductPrices%3Dfalse%26HeadVisitorSale%3DFalse%26WithPartnerGroup%3Dfalse%26&ExportType=Grid
+
+
+{
+    "GridViewJSTotal": 0,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 0,
+    "Data": [],
+    "SumRowData": [],
+    "OtherInformations": []
+}
+
+
+
+-----------------------------------------
+
+
+
+
+
+گزارشات بر اساس شهر و منطقه 
+
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+14594
+content-type
+application/json; charset=utf-8
+date
+Thu, 30 Jul 2026 05:47:52 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=zvLlOKHcbS80pjGL0RwdeTwZUegqQiAWAQRCZ3VtZjonIiJAZ3EHpfxTqu0iOSXhv+JrKqQet8EkWaFfYKNIBc5YBUA++tUILzUOxsEx9qc=; expires=Fri, 31-Jul-2026 15:07:49 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+28297
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=zvLlOKHcbS80pjGL0RwdeTwZUegqQiAWAQRCZ3VtZjonIiJAZ3EHpfxTqu0iOSXhv+JrKqQet8EkWaFfYKNIBc5YBUA++tUILzUOxsEx9qc=; .KaraAuthProvider=05B2572DC49C0840F4F211751690D91DD417DB43BFAE0289F6685B3603957354116174D3DA5B79327ABE1EAF8685FFDCBD1C90555AB167C597A8828F8F8A4A7AEB203B5D6ABE410DBE200F087AB02FACCC5A0875CE4DBA47EA719E934B5F01DC2E0BCCE0F3C6005FB7AE5BE508AFC3B7D400CA0D70940A840C0DA4E043F99BAB625C5BD9C0C648A4C64237771206231198D276C0A0A19638951FF95DCBFE8C4AEA2239DFD057064CC94FA15BC31220D54379DDFCF3D695BFA21A6C8A04891F8FF4C97CFDE3D3B3152F9FFF180BDFC18E6F845756CB393FFDCCB7AFD3753725C6475B63B940AB8D81B0B7555153B0FB63EF3577F13C554C0FBB844B7987BE5C324F5B144122D7F6939B7985B10BBB45D1BDB60E2A8F379C848F41B73EE2F7D2CCF6191F83D3B71469AA70AAFFC3B08C16A6B5897CFF0F0BBA50DC67827BB09A277D7934E75FA29DA0D3C9765E6E71F452C5B0511E8B68CBB67DD89F48528293D03AFA706A92CD6CD7F39DADBA61726BFAF28A58E1EDB9836C664CAAB126644541BA793EE79A64AEA68C419D15BC6DCE8E3B21C5B3656D537A92B02D6AD78AF084BD44C3CE0AB69A76AA3B0146CC6823EA37FB546F3FA2DC0A9518994282FEAF715E9E2EA3F107013AB8D060D7746E250E8E74F6F2CBEDF23B201720258F12586CC8541B71630228F363D6FD4DF6E8AA0BA1FECE66A23915725A775C5F59C2CB830F8931C624E93CA4BF789A1BD6B6775670FCD977B80060E03D7CA241EE4E3562F8543C45CD94D3E049B2E41630A44EA63C433F53FEB7A36F7392F53F373B79D5F7C451E331F89A5BE4C48A5FE1E8119503F32A1C72F9177C41A1A7833EA20D859E50F25957FA585D676C72BF642066E55CF8C5F57ED79D3FFDF48C4EF5EE0D68A4BE55A592717A2D6A9CF795F89B7EE5173749262BA78691E2342129275B9F7B5A22C15A
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/StuffGroup
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+GridName
+SaleReport_StuffGroupsGrid
+GridTitle
+گزارش تفکیکی فروش
+GridJSFrom
+1
+GridJSCount
+10
+GridJSTotal
+0
+SortColumn
+SortOrder
+none
+ColumnFilterString
+BindingClass
+Kara.BLL.Sale.Report
+BindingMethod
+GetReportBinding_StuffGroupsSale
+BindingArguments
+BDate=&EDate=&BPreOrderInsertDate=&EPreOrderInsertDate=&BPartnerCode=&EPartnerCode=&EntityGroupIds=0,00000000-0000-0000-0001-000000000001,6e66257a-7ac4-48f9-bbb4-7c180b6636f6,53b1273d-ca88-4db3-84b6-4d7b2b2a6b68,4139d18c-fc01-4fdd-b7c7-05ab236b5583,2df8ae6c-0202-4359-9b5f-2dab2efac1bd,3c95daf6-7b11-4b2e-a213-6455dc964b7f,d931f5f0-b90a-4e81-8955-35b7cd5dd2d2,a1007c6c-49f0-47b1-9b85-7d42a652edb4,7c52ccbc-035d-4c6e-bc77-1935b22cd1d6,d2589a74-369e-485a-b664-1cd4b1079b0d,d62958b8-968e-44c4-ad4c-9d77c15f2cc5,f39c4125-df0c-448f-a5e3-179759f11ac1,1c41918c-826f-4d9a-9386-93ad166bd632,4aba8f5a-7d29-4afd-a264-0971cae843ee,d1c95ced-8071-444e-82ed-5120a7dcef0c,81bb2147-0005-4ae9-a196-6af367f49102,a689d05e-6288-4957-a1c2-32d272661ee5,a85f088f-17ea-4008-b9e4-d45fe8a054dc,43402e68-e183-4786-97e6-0ef8b1242821,1ec66197-fcff-4d97-8b46-5c594007f80b,0260c13a-2843-4b60-8546-be1da809410e,d944dcf6-1340-40bc-ab2c-82ed1e853a0a,e41d2b46-c8ce-437c-9263-0555866de758,4c589cf4-f862-4b39-90e1-304a9aaae3d2,4900ee2d-1bfc-429c-8661-fd3c96b03016,968573b7-a4ca-434d-8655-cbe0334405b0,2653132b-3cf9-40d8-bf7a-fcde2991533b,c5ccc8b4-6333-4166-887c-a46744070814,5a1d8076-0b5f-4cc7-9687-8e47c174f288,559bf41f-67c0-4f7d-993e-f04efd8d81d7,25b83919-967c-452c-abfe-35f22fb90128,9d3647b5-b89c-44da-b74b-10a5196f529e,92d5ae37-89a7-42cd-b5c5-78fd3bd26658,813991f1-c6a4-4575-a77d-aa8020b94faf,624d0f6e-0766-4718-827d-2f35f0d9211e,e28a6e76-2096-4781-ba48-b0fe1abbdbbb,1504e1d5-e905-4f10-891c-7400a9b4e1a7,003189f5-982b-4eac-b37a-87d8317a23e9,6da25cea-dd7b-4cfd-bee9-8dcce9ed1817,86963dad-0bf5-4750-bfcf-58369305331c,4535f771-b49b-4ab4-9aee-8afd692a72a8,361c2aab-8a4d-4d23-97ab-d738367c48b8,cd122f8f-5187-4861-80df-0d44aeb2d8b2,ca6cf6e5-1471-4d46-bfbb-e32abee9a446,9351733d-efbc-4389-a33f-43d8a8ba7e64,9aa36c23-0e17-446a-a8dd-72e3aeaf8570,867530ae-73d2-4469-94de-92f8bf496ce3,e4ae93ae-f100-44fb-a810-3c729fe66b54,18458abb-a215-4a27-8918-09037e2d15b4,c6356337-cbcf-4a75-884f-24239179df84,f1ccd4e7-a866-400c-9130-2e8d6a603a28,af68af97-8eee-425d-8689-a7113b0e82f3,e41099ea-bb5b-443c-8d0e-676a96881009,39d31751-63dd-4347-b94b-e2cade2bc10b,8fcb7c74-54b7-4be3-b5be-69f9abe92a1c,f7be6c87-0921-4187-b818-16392e3f1f37,b731ca49-14c6-4d55-bb2b-be967a639e9e,3a83290c-d6c4-498e-884b-4f516cb03cc6,718e340d-53a8-4084-a8af-8d61f4ca5910,d85e47d3-c02a-465d-89cd-569ed4cd907b,f8d22947-63ca-4280-888b-27a5b4a821d2,c0f4233e-bf0d-4a5e-8981-53eb85293560,f32804ff-91d1-4676-9cec-89587043f67e,6134eca0-9a92-4910-a8d8-cc2ba8ddd8fa,4e96ab07-42e9-425d-bb59-6c0b055ef9ba,87e51500-8306-4f9a-9d95-e3dbbfc52bc1,d26f28ad-c35f-479f-8b96-55b09b804d4d,923f0ec0-7826-4014-b39c-1f0a2c5f127c,89f2dbdd-93be-41e3-bbd6-b2fa157f634d,926d490d-249f-4b08-ba3f-85577a415258,7aa9b4e7-93ca-4290-ab5d-8bf8a65dad38,31e099a7-29dd-4046-9134-a82abff37cce,96d59cea-04c6-4c78-89cb-b160c4c7bde8,fffbd2d5-67e8-4c58-8f8e-afd9350f1d20,da4b4534-2134-47e4-8a18-4e91fb7fb333,5652ee80-9ca3-470c-b353-f9065efd5d81,da6ced17-ed68-4a20-b0de-a0a1489ce28c,368ae0bd-721d-4480-bb47-f34dd6a079d1,eb276fef-ddfd-4f0c-9db1-3bcfe8d10c23,9788758a-ce4d-4b83-8e6e-07d4b712575f,ecd51b3a-a9ea-4813-bd4a-d50be601a56d,a6e8fd30-b6ca-4be5-be42-431a18365c01,5feb468b-acbd-46ef-a3a7-f3e2c9c9b1ce,022aaaee-31e5-4306-a2d3-94aa2c7bd8a5,1c4fcbef-8e01-4eff-92bf-7d8265e5827b,cdf9b459-40ee-4e49-9c0d-7628f34932a3,e6e25fe3-9fda-442c-a20c-92412eeb2567,ce153f8c-575c-4310-b68b-2ae991fad396,d5217cf0-e709-42d4-976e-2854789b7751,80cc551c-959f-43e2-9182-08123f586c67,ca1bac93-8b25-4478-a7d6-10e879c0ae52,cfd6cacd-6543-405a-9b18-c5bc889cf0d5,eba1c5f2-9254-4e4f-97d1-a5f7b3361298,83f0262f-36c8-43ec-8d3b-09695da320f6,e6981f52-7a5e-4e2c-8826-381ef1d399ef,b5a01a54-ce48-470d-91ab-78b932d0e8fc,63248c2a-c4ab-4955-9947-b1bd0707f071,000ff86e-5683-4234-b448-7f2b5a13e719,6a80562f-1434-492d-89a9-4c4e593141d7,1ee29c22-593c-4b28-9b49-6ea29d577464,4248a412-34c2-4d09-b594-cb4909f19ac9,12132a19-8e96-4fe6-a327-46369d2b4c64,5e308f8d-2ef2-48a0-a59b-0be73d2f228d,c1f21514-2bf7-4ac9-a8a4-3d4ebed3e33e,afbcfe86-d3f5-4e0e-90c4-f2bbbf05d629,126f64c8-0bcd-4e98-b354-1599e57ba304,bfb4f51b-8fca-4f59-8329-4ce85d887385,467615d4-8139-4bf4-8329-082b8c272cba,3dec3d08-7614-481b-b201-0ad50f2bb78c,c7182234-687c-480d-982c-c80e10842921,df1b66d1-4377-4315-bbb4-db3d69d51cc2,fc6c9dcc-1d46-40b4-ab26-a0eba599c594,83cbde34-4d1c-457b-94b0-01a0282d6138,12e8be83-dbf0-46e7-b2ca-1f8ed223d4b8,18df7e0d-4157-4f1b-ac2b-b65d8d50b527,1e06c0a4-a66f-4e54-839a-102cb5526725,1eb8e171-3fc0-4502-8b07-157b8f4f0153,04ec15bb-b4fd-4c29-aff8-7a139687461b,95276c9d-a1e9-4456-bbc2-d044e51b737c,d2012738-ae9d-4e2a-bfc1-f45b654fa3e4,a3e30f96-a986-4eba-bcad-c20946c643f6,b298e303-1b6a-4d46-8fb1-7a9b1a923f7d,f178af4d-c9f1-487d-9f28-853672edcdf8,6562063d-44c1-4ac9-ae2b-d14a27e4a6b0,456dba95-35d3-46a5-ac6b-84fba28cd370,d56c7725-9d74-419b-8212-bdd0b18283ec,03a7dfec-f384-4415-b151-2a06f0521cbb,7e265ac5-d944-4096-aacc-c2cac52a6595,b280a39a-d596-4d59-b286-1edd7030bbed,e4335ecd-9550-4455-8153-d7fcc7023336,ef51ca52-7f7a-41c0-8cdb-c4640fe7cafa,d337bf4e-87a6-4381-a903-3af190c1032c,54b38bba-c063-476e-a6a3-2defa4639326,ce9a98c7-42c8-4e59-b7ea-cfa31a97e50c,be69ad40-4bb2-40f9-8a0c-93f38a27f433,8bff0b57-fa62-48c9-adfe-0680a9f3da52,23365408-0f7e-4e0f-b5e5-7d314d4f21cd,ea587236-a0d2-489b-a783-988ade57cca0,c5cdcc50-1e9f-4074-8ff3-97de40e3434b,978c63fe-f335-4743-9dcc-75f4df5d1263,386d7f62-2f26-45f5-aecc-4eeeb17a6a13,880b25b2-6592-4143-9d9e-9fb3d664d107,3c866835-54cf-41ea-8476-db5efdae96d1,699f6e56-1280-4826-9e25-84c55642683b,7929bcf1-62af-4543-b9da-353a97cf2e1a,ae85813a-9fea-43d6-a965-b991117537db,279c37d4-adf8-48a8-801d-f0141e2ea30c,0a6260c4-869f-4904-93be-231d6ef09cd6,3b57bf70-ed62-45a2-94cd-1af8d20498c9,2de0b55a-2ab4-47bd-bb91-36276f5650a0,aa945909-59ad-4e4a-81df-5db2310fb885,40e4c437-145d-437e-9217-daeee2eec8da,2449f574-5752-4ed9-8408-7f52500b267c,94f35e33-b868-4328-9235-085bbe98de83,bae6aee1-273d-46ec-91bb-a6d339b79a61,92655382-118a-4ae4-834e-745be8f37593,5ff5eb2c-e0c1-46f4-a044-3fc9878c5b45,740b2637-cbcc-4125-85ea-9e9d496be228,f24f1224-7fbb-44c2-b33e-40293f3272ea,b553030a-14a6-4266-aad6-10560ddf810e,f8293c7a-b8a3-4481-831c-8c184153b6d6,a2d15007-196e-4f8d-889f-b1f8c3b700f7,18c0bf29-c0f2-41aa-8f2e-c0debf5262f5,c5153235-c923-4481-ad32-313bd001a6b9,5eaf6b67-cb80-40bc-b6b8-19281582860f,d040f272-3335-4932-bdbd-372c2c91018b,8edeec10-02df-422d-a2e4-8d03ca7a7737,e9a76c62-2029-445a-931d-c2e4673eb089,1fe9eec5-7dc6-48b7-b330-d9799dfa658b,a0990522-2810-46d9-a735-95a468cae6e7,40335e8e-09b9-4fba-bef5-75385ffdd323,90c585ed-97eb-4b6e-961c-879aea06a8fd,17f2f586-31f5-4e08-9d13-6b63f4e4c61c,08f655c3-5fbb-4d95-bdd2-62b14dda1fd5,7ef0726b-a305-432d-ab06-6d330754034d,e2736257-48b5-4c25-9470-880b41589ae8,82f72551-c07a-4e3d-9324-88bca823127d,36cd1dd3-9317-4830-a69f-e3ce2dcdcb14,12f0eee9-24db-406d-8b83-814aa49a1db9,e761cb6d-f22e-4059-959f-a3d73ebc4a0d,eabfaa2a-ecb7-4d25-86d5-8f4dc4f6afde,3ed2e36d-3148-4936-88a6-7999fecf8551,d2e8b153-c1cb-445d-8d28-470c19258674,0daced30-bc56-4995-8881-477927001f93,7186b4f4-7e41-419e-81d6-8766b3c60a49,e98825ae-2a2a-4732-9e21-1a11059c35b7,33fc514b-9039-42a1-9fe2-cad1125b238c,d7617ddd-c888-4ee1-a884-4acf17f34dfa,f8fc04a1-09bd-4cd4-a071-b3d1561004d9,b4ce3f59-4848-4054-8780-cdaa5e4d5f4e,c2868043-277b-47e7-a130-f7ab9d57effd,b07d7c1a-6c6d-430e-8d12-c14c87b79bf3,e1a1d76b-d18f-404f-b9db-6a61fd4eb6e2,cc1dddcb-574a-4e7a-801d-3045467314a2,dd280ee3-afbe-4274-9fd2-1def27149391,baa7d187-9090-42a2-b170-60874913be19,901c912e-3571-4c65-a43d-bb6c9d8e45c1,0d83f482-37c5-4528-bb32-ddc45803dbfa,db02532a-911d-4bac-8b2b-56a5613908e2,bd983ae1-83fd-4254-a6b3-5ecedb45cf33,20cf60c5-da76-4c76-93b8-ca186960805d,c9258217-723c-461a-8887-3220b25ce2db,8c8029d7-dc81-49a5-a435-c7edb87f1996,83ca190f-b419-4f5e-bc3f-636066618752,7fbbd5a3-0131-4eab-b2ff-0fef289f2a54,50e39821-750f-4732-b9f8-673163636da2,14cb36c5-be6a-4c2b-b299-b21028a92c10,03ed361d-d1cd-4adf-9c81-bdb4d1f54629,26ac939e-5264-414c-8be5-9478619ea228,984d1d7e-9621-4fb4-bfc0-af70d24d8054,f3c80c8d-49b1-42f9-8b2c-46df0f54ec8c,824d9dc8-38fd-4fc7-8bb8-fc1fa2066954,e775e9c6-b2ba-4a60-b14f-eb06d77bf42e,88ea77a6-6171-4404-9c8a-e7bf26fc3185,0c0bef7a-39a9-4b72-bdc3-3878e34ba4da,74ebb602-af56-4d26-8efd-58690b8b2283,5bebe4ba-a66b-426b-abe6-3e7bfcac7212,739e0229-84eb-4e5d-ab73-483ffbc55d72,d5d5bfa5-56a7-4e7d-9754-b170df531cf0,f92a36aa-8823-427d-988d-619e711a3e85,d6e2a645-d8fe-4d87-8083-bce00aaa820f,6e9867af-3846-4f94-b1f1-87a16bf9f1b2,053040a8-f076-48ca-a7cf-8f1aca847339,69b4053a-711a-4ed8-8ba4-1d892e7bf1e9,4db5497b-022f-47aa-a7f9-f8fa442e9a50,eb24aa83-601e-4e1f-8205-7b685cca2ffb,3b1113b6-bca3-481a-9b4c-3e3d97ed5127,dc0d8d66-e3bd-4ac8-820f-35f27b008b35,f28e0c5c-9ebd-4158-82ec-f80e9ae90df1,2207e144-a735-4313-9972-0b915886f573,86a37b04-142f-47b4-8335-78bd336a9016,1a27673a-133a-4677-9fd3-46e765a35d9c,daa779c7-a4bf-4737-9548-3c2693a59bea,8f3af06d-cbe1-42ee-8526-a45eb2e82c8b,9631410b-97e2-49d8-834a-744d69c47b5b,f0455daf-c561-4c3e-b715-c63a4a49b5e6,621e1f7e-4d68-4301-b7d3-d224d9deeb5f,54aee5d5-ca27-4fa4-a80a-12d07f46b5bd,db7c93f3-1df5-40c8-a3ce-90442a981669,49f80e0d-b761-4358-b29f-1f219d71f89e,19e6d638-d1b1-475c-8e90-5726bb2da37e,409a64fe-1d28-4d32-b3d3-802cc9908443,20a11143-c88b-4e9a-a9b5-d5acc7de1b73,7c251301-8f4a-4066-96a5-4898d03787e9,517a036d-789b-4a08-9ae9-35047dc2401e,b5f0a1c2-b475-44dd-8163-f4661f8d5dae,78c3fca9-45c1-4f20-9d44-ace19dcc195b,464061ff-3c19-42cf-a2ea-717ced9c09d2,d3e75ee9-7a4c-41a4-a7d1-71d34f0920b5,2dbc57e9-3dec-4841-96ef-72dfab475cc3,45d8f26d-2822-4a54-b453-dcb067abee59,4d5db2aa-c107-416a-ba77-6bad65765d8b,7237b013-1a96-4f0f-bafa-66e4716c5440,67fcd43b-2a19-412e-99ff-98b800432979,7c5e0cb8-f73d-44b9-a218-de015984527f,23fba762-370c-4e70-8264-2043dffc790f,774a9669-8a41-4891-b598-e53f5f1ab44b,923618a1-4044-47a2-9d45-347779ff92b7,e9da6830-6b52-4f6a-bad6-fbf9b825c9df,dfc443fd-9bb4-41f7-9b57-44dd63a17b59,daa57575-dec8-447b-8b91-54903e797d0d,b479f65c-0c69-464c-bd9c-3e9e6d2df3b7,56f71638-c0de-4c5d-8115-1840cadb2300,298db39e-d55f-4648-84f3-4ddd257c8d6f,c685db56-7a27-481a-9eb7-2da75515c139,b780b7f8-db10-4e86-903c-53eae1160cd4,1b7a1324-d33f-42f1-9dec-a6b60b0d4ca2,309b4df4-09a9-4571-aa88-d71c2d015b39,c2061950-9d98-4b75-95ca-675e8e081933,5c3dbc36-41b8-4940-aa86-096624266b5f,9eaf6be3-07fb-4ee8-8bce-167a0875d7ce,a5ffd240-251c-4955-8ba9-3732486b66ce,e9dcfe5c-77c6-4194-a16a-546424349ad7,8ae764cc-3378-446a-89f0-907102db75aa,8821a6fb-ca76-4c3f-9108-e2184d3cc31e,c7528028-b19a-4be9-a859-6254348657ac,1a76810c-91a5-4cbf-97b1-7ff3b8242336,9a52b7b4-03e4-47cb-bdbc-1d336198f1c1,a3318828-fc97-4906-a748-56e8b032358e,b0aa8625-a411-4393-82f5-0515015035c7,ab11fef9-6490-4ea4-8925-25cade2b0520,dfb826b2-878d-49d1-8081-05788ebe2774,a31e6b0d-8f02-4451-8c13-ea3b02fdebe8,a1aec6e6-833c-4368-ab20-4587d3b8f8d3,39be3090-074d-4d0a-822b-b7e17206fd15,632bde89-9637-47b1-949f-c6d4ce6ad984,42ec57e5-9300-46d7-a262-188b5ee9191d,39bc8b24-33cd-4999-aff5-2eaa94e7ee6c,b25bc3c0-dfc6-4525-bc91-91e398c960a7,5971465f-2f04-409f-9259-1135884ba670,9148cb65-5931-43dc-9c4b-400b688991d0,d0812df8-34ce-4bd1-99d5-e4888f58124a,f1f9ec47-60d4-490e-9528-702c639df38c,a2e7a71d-6f48-4658-9e0f-a74621298ec6,47d37eea-ac13-4fee-86ab-cd6e0c88123e,aa7cf4e2-07e3-4a22-8658-b2ed4a5737aa,e0da4052-0e00-4cff-b739-51bfcc584e50,ce90aa4f-65fe-450b-a02a-1f82727fa72c,d6e85480-fc8e-4607-bfd8-4af972045b01,9c760053-f458-4fd2-b034-07d8880e56dd,68f6a290-a2c3-4963-90ab-817567bceee6,994e9836-c4c9-40d5-acf2-b825098a205f,472dbd58-7a71-43b7-a2d0-57dd1435239e,99398aa0-680d-4cc9-853c-f40132f90c57,85968e27-c1f8-49a5-85db-243141b9db04,034a8fd0-ff3f-441d-a20e-76df1426e26b,9a2e8602-0061-469c-9ffc-817c59f9163f,e5369de4-5524-4eff-82b2-69dfb086bc36,4df39599-cc38-4103-85d8-61ed1b51f939,b834245d-17d9-4d7b-9749-659c1aed8a45,d6ed984b-b1fd-4348-9498-ced7a633bf9d,3fe36b10-6bd1-4483-bdda-8cd63f27adde,72e10006-7f0c-4e79-9a5a-937a41e436eb,c33c0e7e-9179-4df0-b11a-1459c505edc2,47901ba0-f239-4b13-b6f4-089ff2216091,10480dd3-cb07-4c93-bf73-61121f741c0e,2de67188-9d4c-4c90-b19f-148be23febdd,5be88d2e-a063-42af-bf4d-3a74a5eccaa9,d17bcf68-c539-4cf6-8d31-a4b60a626ea3,56c20c78-04c4-420d-8bab-cdf8c3d6581c,36a8e518-1d6e-4060-98fe-ba8d0fc24faf,76aa1326-80aa-4566-b483-90bc303c11f9,30aa22e9-b539-4dc4-8bcb-896b1ebf00e9,b878682f-8065-4001-86da-b4822ac8076c,005e20f3-e4d2-464b-a8e3-aa048f742750,6aa306e9-c3f1-475a-b30b-a937607f763d,20c5d1ac-9bd7-4a6f-8bf5-49c3e074a17c,07c5169c-5659-4735-87a7-050906d4f20a,b02e3e94-6fc0-4932-ac59-0d9e8a1ed3c7,d56f76c9-1515-4fbb-9aeb-bfdbf08829bd,3e4300f8-f592-4609-a200-920c060fa52d,15a8ee36-30f1-4be9-9415-a420ec45cd32,16ecfcdb-c700-436f-ac27-dd94680aaee0,e7058be9-ea10-4c79-8cb7-bafa3a7b584d,9013d1de-4250-41ec-bcaa-99b54c5b26d9,7f56b415-af83-44ac-9fbd-b62db408d3b6,83792cf3-1129-4703-b143-26d5fe0b6bc7,2c7685fc-bbf6-4b97-8fcf-83cc25455c44,a2e89008-77eb-4756-a877-15b973432741,21df0437-4bc2-431e-b8d0-6400a3918757,5859a971-caa3-42e1-9e31-b5e5a938828c,0e6cbffe-0e4c-4b76-a772-b9aec4a15149,11680b7d-8206-4f29-9df1-edfe7f488667,7aebace5-2f55-466c-8be8-55c221f14e8d,00f2cda4-9ef6-498a-bc85-9ea6a73a96cd,4470155c-4383-4f6b-b6ee-2f350bad403f,3b215d3b-7495-413d-890b-2ac88f340725,0c332e49-23bc-42d0-9bae-4ea76c1a8c1e,4e24a6ea-698c-4cb3-a248-be11408fc0f4,64b505c9-9a3e-4759-a35e-ae5b6dc3cbd5,54d7ccb1-d3f3-4759-bd17-ad57cfb0fe1c,a743e140-0e5a-4038-a706-f72ef4e3cbd1,3785ef5c-645d-4c60-9213-ce3a7c6007e9,fd121630-6590-4c6e-845c-e3fd2dea5d44,56e7d3f9-29d2-4a28-bf97-e80fd85deef5,6f0fff08-c660-42a0-a6a0-fa526bb5101d,522faa61-8a5d-4b49-88a4-02ab9eb5bc4f,93581f32-8475-45fc-85c6-90d1bc8b81dc,0bdf4e6a-06aa-4f02-8fc6-6ba4d734e641,1316c048-2ea4-482b-a27d-b662931abfbd,8dbb053d-8711-4688-b74c-b48b1daf8f70,bff62af3-3c28-4aa4-82e9-381eddaf8103,a9899182-91f5-4bc7-85f9-39bbc7d2ecc4,6cdb8069-cea4-48bc-a4a4-cba922e505eb,b95ddfe1-b5f2-4aa1-a989-6322e1d34002,396b3578-7e4b-471d-8054-d692fe2d4f57,9f7ff2e2-9229-4f9c-b9ee-16f2079f9a3b,0c9b0fb9-83ba-44f8-886d-d22f2453f021,c3744aaa-3a7b-4358-b4ad-108c4b3d9b6c,9147fe02-76a8-4476-bcbf-9db5a1d21087,817dad86-75fd-49f5-a25b-4341ba7e13f1,a8e49679-7d78-48c6-b911-7a1b74aa160d,3b40648e-5c49-43fc-83f4-a8cabff43b0c,9ed3b2ae-3998-423e-a556-0743513c7699,a17aeefd-9ab1-4bc1-8021-7a23847a20f0,f87d3dfa-f635-4ff8-98c7-83f8466471c2,0c094bf3-7509-48a4-8ea4-72261c028d1b,79ccbb0a-3c62-42a6-9890-227dd51e5700,c3c0e7fe-19cb-4c78-a789-0eba6e9a5d5e,8e522291-d899-4aa5-9bfb-aaef0d3442a0,a9d20774-6b0a-4319-8dbe-2d80f5b106a3,821963d8-1315-4aa2-9b04-40aa861c9128,ff627ab2-eab3-4d63-a974-b266d57d544e,30549e32-7e72-4fd4-8240-f71327bd83a2,9d3b6750-b8da-4fab-a9fc-2bdd178e13d9,fc2a7182-1983-43e8-b1a4-59947d810224,3b867573-0b24-4acb-b133-d13e4c8e0b8d,c12a3a99-b7d4-4e69-96cf-1c65934d1f79,d5fead96-9efc-4611-b462-495c99c9088d,f7ee4437-4b8c-495d-9020-9f75be4a0f35,0884f056-0479-42a7-9d88-12496673d294,442ce7af-de23-4048-984c-c0e02fad9fce,66d4dd9a-1345-46d1-84d0-6c347b236d5f,4c8004b3-9fc5-4418-82bc-cfd87c6af08b,3f27c441-d182-40e8-8897-25c1cf1bc8b7,0bd028a8-c081-4816-92b9-1ab121a05b64,54396dd6-76f9-40af-aa33-059a9d800ce4,c2b533b6-97b2-40ea-9796-64460b9b3bc7,33868dda-4e3d-40cf-adbd-a4b65508bacb,87ba3ef6-160e-4723-b261-2aa198e8d104,a0a47dec-9064-4fc8-a30c-f4d06f88c7f6,0e878f8f-8577-4e41-a62e-74c6e4738653,b6791753-c5d6-4556-b87c-63d5cb869c9b,bc10f8ec-8366-4ba1-b360-cb5d06bd6061,3abf2922-1b6f-4d61-b469-9b4e0549ea02,d2ea6835-9c4a-4647-9e3e-8eb7e2b2aa7d,ad873950-03d4-447a-8213-49fc492c910b,5ee8823b-480e-482f-b466-511d8094ccfc,1427d343-6eef-4c94-a9d2-dc1153d01304,f8a79270-89a4-4fd6-bc21-87e637aaae90,4e8cc8ea-a920-4b18-aed3-93497eb23dc0,fd91ac99-fcb5-4438-bc1d-2eaf0569eee7,1ac1570c-8361-4891-ab61-b113b61a74b3,9da35f2d-9417-475a-9957-514a23537030,e2721d76-8b69-484e-b892-91f9e9e948c2,2b7a1fbf-798f-4dfe-b464-7d1157360d42,d67c399b-7f17-41cb-a638-0b2bb5c601db,07d111b9-3608-44c7-a9a1-6d74f1cb0671,29c543ab-95b1-4fda-a89b-b1b3977128e1,7dd2899b-4b3a-49be-ba5e-5726fd0cc5f8,13a249bc-514b-4d58-bfbd-3c1afcca1bc2,ff627068-ada2-4256-8252-e5ca66a332e0,9e5eae73-0bfd-477b-925e-c1ce8c2469ba,e24d68e3-e828-48f2-89e8-4549129aec12,4fd3828e-b22a-44bc-9bba-76260f891ffd,aab39409-3fda-4886-b854-e6ad7f94583b,73fe245b-2041-455a-9979-dbeb31508dda,5a27ff57-b106-4440-b329-03d78bf1b4d4,acb0db1b-acbd-48d5-9107-06c0a99b0f35,ae34cf74-cc38-43c8-b2ac-11deb9169f8a,c3165306-28f0-410c-b6bb-86efca475705,4fd707f1-a856-4fba-a9ed-68a0e2355701,e562111b-9a5e-4668-95b4-cbbaf943577c,5a3bddbb-3dc7-4c7a-a2ba-204356cdc4a5,fe6cc7ab-8743-4663-ac32-1b888799f895,ce4cd271-8ce8-41fe-a985-33c06810c91e,d962a559-d23d-45e9-8440-f63cefbdd1a2,d3ebdbb0-915b-4dd0-bfae-7d51bc6c800d,f7ad20ae-51b2-46eb-a743-395369e6325d,2c369dfe-60e6-414d-a563-2d66406bc31b,d47082f5-561c-4614-9e6c-8eb37fc28ffb,582e4f02-3661-4eb5-ac8c-151dd696bb19,c9396739-00ff-43c8-a0b6-2903a2ede9df,f12f9ae5-450c-4d9e-9a0a-0de9446db6d2,612e54d6-8b5d-4f5d-8022-e2cdfd33e1ee,0d0b4536-51bb-41e8-95ab-5ebdef4b22c5,625b2f06-be16-4c01-a54f-41942d369506,8053017d-44b5-41d6-8574-42fa7406489f,c376ab70-a314-487c-b008-0b26992e0030,7e9ee8f8-7d86-4a52-913a-02aac1e78872,b71b3d16-1e2c-4057-be11-e81341f00923,2d56e281-3f97-43d0-bec0-7fc298884649,3f6ce8a7-3afe-4c43-b646-71c339049160,93349765-5486-4492-9a13-09c9009813c8,75abe5b1-80f1-4543-b591-65f395ba025c,9a94a5c4-9090-4b87-9ab6-095bd4e7261b,e87b8fe4-188b-4a03-af14-52481650ac39,3937f8ea-32b6-48c0-bd9d-e1b94833bcf6,d2dde8eb-bbac-4ca7-a968-1b34d6382649,024bdb6a-2600-4d03-8886-8010a58fb187,98e0694a-2494-42a4-b05f-b38e67d7ccca,87c9cdcb-3bed-421d-83a2-d863251877b0,665c272c-fb76-46ba-b243-ded9b13f2c90,1a126c37-f674-4ec3-9150-a7aa98e2e61d,459f79e1-244d-4cf7-b623-88ac42ae592d,5662de92-c39a-4b83-84f2-a7285a459926,80e55579-48f1-4a83-8990-823c3b6ad054,620e701d-8c44-4e61-a394-6310d2d0e900,4c156b4a-4514-47c4-8623-95c994024696,ac250a0c-ee7a-4188-bc7a-be9d841d05ef,2c9ccdcb-a6d5-432d-913c-5bad7af3135c,8572dad0-6914-4cbd-bf7a-350b592ec9f3,6b710aa2-0a41-42ac-aa0c-8281c838998b,7ce44874-8424-498c-acfc-f87f310849cc,556f808a-fff3-43f2-8d35-a2f2990adc4b,8a062d31-6f48-44e4-b45c-f339215ce9b1,bb2ef621-f471-49e8-ac37-9bce395e8c18,90ffd489-54c5-47dc-82a6-788d044e9825,e3b9d61c-9405-41cd-8e80-e51219fba33e,9e6e5993-6b5d-441a-ba04-8be11d57b075,4014179f-224c-44db-a934-862a7ed1a7cf,0eac934e-8b61-4a71-a45a-4757d1ea7902,5d837cfd-83a6-4d53-be61-ee92d960d3ed,65e570c1-1636-4e40-a81a-5d0445c385b5,8141c3d4-cc1b-4fef-8c61-985bc87c4a45,85b8d787-3dfe-4ae1-9e65-902cff2e5835,16779bf0-bb52-4f76-9ed4-e66d22e035bb,e488a196-0feb-4b46-974d-6e6cdd81072f,9288f409-c5a2-49a3-90dd-c019bc8ee059,ea4637ec-1773-4f61-84a1-be6d3038060a,63b91278-befe-44b0-83bd-fe379b06a645,6d094c82-5b05-43fb-92d3-29b4a5eef614,760097d9-1e45-4e91-a293-c873ea735eeb,fedf5827-a5f8-4411-94c6-45988bdf1061,0b3f42e6-963a-4654-841f-fa2f51b739db,8575e20b-76a1-4ede-8438-27cb05d9f24b,c49588bc-dfe3-4899-9d09-d7fcdc05f6af,bfd4ae7e-c806-49c8-93e8-ac06803f98b9,ca4dbb29-11f1-4e7c-bec1-8106ec981109,4f6b8255-f425-4c43-969b-558bf1be4da4,f0a5adc8-55f2-4a1a-aefe-6bf5efd6f0e3,a8c6057e-2cf8-43dc-9bed-6de45300c938,f9500726-5475-4fe3-97aa-4c3c70bbd25a,8f2c0753-a813-48d9-9dcd-a2b49adc654a,dc891c32-3788-454d-bf6b-9c352d2a5178,f23fe1bc-5292-4870-b2ff-03526da18d15,0b48dd45-94d8-4112-bb75-3a3e95783b3d,7b04a2df-8b46-409d-bf53-e1ac2e445b96,e69af047-7dc4-4195-9ae5-649990e777a2,e75b4a47-8e0f-4c99-baf7-5972245880ac,9cd1a68b-b726-4aca-b63d-1284cac450e9,a135d489-7cd3-4a35-a9d3-c0bac4267fd4,da52b8e1-4d1c-4562-a90a-a31716e8a84d,e466691f-60ba-4a72-aa3e-ec04ee182bd5,bb6f071c-efec-479d-83bd-2042f8a323ea,a4d2abee-6234-4589-af37-0ee8bbd660ff,ad682d77-d0f8-428f-a604-9822bf00c1bb,3cf21d41-3d52-4c02-90e4-8c5e02164652,733d1afb-4df4-499f-935d-cbb6b37ab491,25db551b-522d-46b0-bf08-919758a79e58,f7164b49-3477-4aaa-9d50-a85801474c46,8495f150-5d53-42ed-8cc6-8c56a6f66c4f,dc3f1470-3272-45d0-b50f-ab4c2440cc65,6c2e8cfd-8d7d-4239-b1ae-3a191856e70c,052d61c4-aebf-4f47-91dd-6ed50a4d9789,26b38e75-0386-4dea-800b-17dce701759b,f3a7d086-a53b-4ca4-8b58-1bbaaa164c72,c638a424-a95e-4b70-96a1-dbaa643dedd1,348155db-7163-435b-ab0d-6b57eed8d94c,66884933-4f5f-4fa6-b294-d6668398dbcf,2eff6021-a619-4470-9df1-887b8f55c5b4,f9f3a8ee-bb9a-440b-9305-a06430e73efc,0088bfec-1e1b-4a55-968c-28c93cded992,878ee09a-1077-45fe-9354-c0080c3c566e,c21720ad-2834-4ea5-b971-1e3902e8b16c,c79c42e7-4317-423b-a672-ad10995bafe6,b37ab9e6-b577-4f43-97e5-9db1cbda465b,cf5cf19f-4b78-4cf8-9200-16fe077298ad,f9d3c615-ea36-46d2-bf9c-8d88ac2274b6,84ebd200-3549-462e-961f-7df0fcf112b3,e3b02a50-4e04-4809-93e3-f70e01570c0e,40b31a18-8150-4956-a996-666f83c0ed77,a5bcd597-38ed-4039-8855-c1ae440b4ea7,8daaa53e-d3b9-46e1-a819-3839308e7f2b,fd08d5b1-9aca-4aa7-b6e0-ea475d119a5a,638f454a-fee4-4c6e-817a-2b844ecd9611,b4ca281d-b1af-4ad4-b644-2c9ba5d4bc67,f901a087-e2ae-4b17-8f92-4cb59a74cfe5,c232a6ec-c0fe-4a92-a633-e341a1adb977,147a52c6-e77e-4d06-b065-c07a0b97bdec,91541566-8c35-46fb-a2fd-60ea5eb3a93f,d46f5748-b7be-4056-8758-4cfd8f3b74ef,e4e38ba5-db23-4eba-acdb-56f1bfec81a3,0ed8e6e6-afa0-4180-bc03-8b025f658336,d1689dfb-b679-4e27-be6d-c3006c3cfa4b,5c2bdbbc-0d3c-4db8-ae9e-7116694725b3,73fe6f67-62bb-475d-972e-b3e4d96952f7,5e72bf16-3ffe-4db5-ad18-f12de2edefea,d710defa-559c-46a8-92d2-e75ccb8dd1cf,f198517b-e0f1-4209-8fe6-03dadec5256d,7163f68d-9205-42f2-8281-e641fa89ac8a,31267596-74ed-473f-b4e0-5cd91ffcc459,54fa4b9e-e6fd-48ca-8105-b9b2cea886aa,5d515510-fafb-4d4d-8adb-4e0211f1b8df,ef415d00-ff35-4f97-80e0-2ca0d22e4649,ec85d71b-5838-433e-b5f7-7be4c5d628a4,276e5094-0b78-4676-a2bc-72d02b2736e1,f3be18f3-f4ef-4e6b-898e-afef61a3e87a,ac7ee9d5-fa83-4a19-8d73-dc93156cd26b,486acf13-3510-45ef-b7ee-ce8000ed6cfc,f6c460e9-2489-411d-a5a0-caf8e3afd957,61594f60-d12a-46fc-8de1-0b907d827af6,99b2b3cb-c8bb-48f1-ad63-d755895b659e,4d250f3c-fa2c-45a9-b3fb-6110de0d30ea,2dce51e3-1507-4651-b91b-fc19a54aca66,553fc391-1212-4e87-b1bc-9162ce4ed0b6,a5d5c329-c876-4a74-abbe-096e87300ed8,90bf37cc-fad8-40e3-aa26-47af5153cb17,d8ebe180-0d9d-4158-9ab9-6cd61baadc15,9ec8031f-5037-4c38-9383-9b4c5c51a069,ee41d755-2643-4194-8ffb-d97e726bb792,c7da7ad3-222d-4e32-998a-ffc8fbac658a,4c54af7e-6883-4774-9ea3-0d86f5c5db99,958cbea7-ea8f-41c3-a70b-8afd0f34fadc,c0fe0216-1d4c-4566-808d-f1a55327f348,59ae03e0-43a6-4b48-94ce-8d45bcc8865e,7bf2210c-74dd-4b5e-b0a9-b4243038fb15,fd4978b6-659b-4c81-add9-6db1491d0279,4d906cfe-e4ce-4d53-a21d-150520d8f27e,4f08c813-c73c-4d66-b660-98cc46e287ae,5323f76e-3e24-4a4f-84be-2933126361d5,8e5acf37-9e13-4023-ac6e-0cf7d9036964,279c8d29-c268-47fd-b962-8e1a35e0f48d,f7aa5900-3fb1-4a79-a4ba-da23ba8216a5,aa84c351-1cea-445a-bbc7-74ee46aa9ef3,f6bbdaaa-80e9-4b64-afee-4899bd87e058,7aceea53-ffd3-47c2-995a-a8d0359d5411,44bc1479-5446-48ea-9336-14095af99eb3,0dcadbba-4140-4fe6-951c-5628e28282b2,697fec16-373c-476b-94d3-5e6a25d1dff4,a0901469-ea0e-4c3f-864a-2bf5e27bbc55,a0f1659c-d343-495b-9943-e23c29b40185,ea665224-9bad-4bb8-ad03-da7054c34091,169b6ecf-9cac-4604-a78f-3e6d11fe3ca8,e65c2332-ab9d-4fce-bd91-ce3535c09e63,f7fee215-9a52-4bd7-99f2-db8f256d956c,eb967484-f9eb-46da-91e4-87274e3def8d,5db8146f-e5ad-449e-9fde-5d385db295cc,fc81fce9-f5dc-4eef-bfc3-a165f29652a8,4ebadfd3-9ece-4415-ae8e-7ee992136455,7490fe88-00c2-43a7-ad23-8f0edaabb786,c0065993-7cf6-409c-89ae-79f61f20943e,2945de49-2625-4aca-896a-12ecb1ae5d06,3e0e3a1a-475b-4036-95b9-dbe08ff5f8de,0053bdce-4a08-4460-a700-3252f5d8b544,3787df41-f5ff-4287-aca0-fe44ee8aa4be,7687074f-d42c-4c69-9351-1f1969f24a88,d09df250-536a-4b86-872d-b880a9484cc8,06e47ac6-c10c-41ce-8678-0fe44da1e67a,f2b4d6ae-5f04-4df1-b989-191327887d91,ee0f2c04-8782-4d60-a2dc-ca92f00829fc,2df6db07-ffb9-488d-997e-fe7818c16c18,123b5559-f611-45fd-955f-ab2c3d0fdad6,9751220d-a8c0-4bea-962a-e16776d85b93,3b19d651-1585-4c01-84e2-6f0973641257,bb7f9447-9082-4ef9-a87d-1649de8f5a73,a3861877-1a81-44db-9492-1ff88da438ec,1adfe279-9393-4f73-ab4e-f9874afc2fba,bac3978c-3063-49c8-a73b-33294b562cd5,de7e6c84-f401-4f00-8b95-22c6f39866be,ebaf2cce-d104-41d4-b24c-4f6110e26c31,3860302b-a9b1-4512-b76d-f416e1365258,c11180b9-f221-4da7-99ff-4c8f3eb4cbcb,4f1598cf-2f28-43dc-a3c8-be9e781aeab6,be1078d4-182a-4466-abc1-55f816369569,ac889599-aca9-48f4-ad3c-72d923bfcb76,13e0e36e-e7b9-41a7-bdde-78506712f836,317892d3-aa69-4a34-8557-dbf7fd26a6d1,bcc6dba4-b636-4013-b5c7-83e4ef67b01c,2564f91d-5f51-4dd6-83d1-440e19bc2925,38b7577e-f098-49d3-b3d9-0f1dd81e01a7,4ad32bfc-ff19-440d-b0b8-0fb9537c8e2a,26ad37c9-92e1-486d-bdc4-e9809c5f4951,3dc77ac0-79d1-495c-8ae5-644f281332cc,272cbeda-04b8-402e-baef-0567c894d555,11a54108-9793-4643-a0c1-bcdfa37749e6,ae5bb163-8a7f-4ab0-9b25-8764f447ab16,414e8999-8996-463a-8867-4ba4445f04c2,14a3649e-3551-4cef-8dc1-d5e2369ee552,00362883-3f36-47f5-aea6-1bb1583fc9f7,a1b7569e-16e4-4d22-96d4-f012b6ad93dd,ee8133c2-680a-4347-92af-f6a837521b6b,45f114e6-2128-4270-a1b0-bba832704acc,3c89a54a-cc08-465d-98c3-8c5d6342a1f4,9b3ac2f8-f69b-4896-8c6f-255d35a89df6,f1be68db-dd70-4312-89a7-b3192b9941b3,7422da01-1a7d-4f77-945d-37cbc033f931,7245e9ac-0bfe-4aca-b895-f491110e592b,d6506a2b-5fb1-4651-9cbe-c1e185972a14,7df36a76-a76b-4cfc-b914-2b50af87eada,bde41eb7-702a-4887-8b58-1a4379aafba2,9fca0e6b-df5c-4a66-9397-cdc581d69a80,a3aba5e5-497f-425e-b9c9-d87d8100c299,5a7a4871-57e2-4988-88b5-a5cd5cd7e55b,983ccea6-631a-461b-92ba-67e6df92aa10,50c89e4d-b393-4666-a12f-c0d42baf853d,93ef6ac6-f38f-4217-bdf2-8c0e3fb13a85,9e1fdc18-a504-4419-897b-8660121b5420,08fda994-2811-4813-a888-e28895b3a9af,9e2d1fe8-a885-4727-a66d-44148547cce1,bbfb4fc6-4e2c-44a4-ad4e-5c8cae2d2981&PartnerGroupIds=0,00000000-0000-0000-0000-000000000000,9cc96f02-6a22-4814-af73-46c10ac2fa01,81cd4687-5ed8-4180-a809-f94769f816c6,3a7822dc-0999-475d-8fef-180184d27bf5,ff7b5885-3eda-4c94-a97a-199caa1e9024,31556c6c-effe-456a-b4f5-7d6a9e50699f,f1de1d5b-5cc5-43ac-b56c-70c942f76337,3d567246-25d2-4542-9918-4b9e65aaa7d4,bd9dfb0b-8f10-424f-a322-601724c9d58e,04f07334-a0c4-4d59-91e6-cb29b71afeaf,f2f6eeac-7d14-47c2-84e0-a1290a00d33d,bbbf46da-6e93-40ae-a862-f19de4712b4e,3f4fd415-17f1-466a-838e-f6b00c972741,23384737-f38e-44d2-b30c-59fefe5db491,c58c6773-efc1-4a08-8b4c-7a7a966e1811,9d4f3759-aecf-46c6-96d7-b69b387c6253,a491bc14-c8a9-46ae-81e2-5a9dedb66d9f,9fa7d48c-27bc-48c0-86b3-4043e8d35801,e6182d67-ada2-4d27-aaa9-8ded6150b3e5,f8f2373d-5763-44ec-a2a3-69bbe4922c1b,46507f3f-4f3c-4d0a-b58f-688b35e23abe,d88781ce-0737-4dab-b245-be4a05c4aada,00000000-0000-0000-0000-ffffffffffff,00000000-0000-0000-0000-eeeeeeeeeeee&BVisitorCode=&EVisitorCode=&ReportBasedOn=Inserted|Confirmed|Total|Shipment|ConfirmedShipment|TotalReversion|WaitingForAccountingConfirm|Final|&FreeProductIncluding=true&WithSupervisorDetail=false&WithVisitorDetail=false&WithPartnerDetail=false&WithCityDetail=true&WithZoneDetail=true&WithRouteDetail=false&WithStuffBasketDetail=false&WithGroupNameDetail=false&WithSubGroupNameDetail=false&WithStuffDetail=false&WithBatchNumberDetail=false&WithWarehouseDetail=false&PeriodType=-1&PeriodTypeBasedOn=-1&IncludeFreeProductPrices=false&ShowZeroResults=false&WithPartnerGroup=false&WithMachine=false&
+ExportType
+Grid
+
+
+
+
+{
+    "GridViewJSTotal": 27,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 10,
+    "Data": [
+        {
+            "Key": 1,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "",
+                "Zone": "",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "7",
+                "PartnerCount": "5",
+                "MinOrderDate": "1405/03/25",
+                "MaxOrderDate": "1405/05/06",
+                "NotPureSalePackageQuantity": "38",
+                "NotPureSaleQuantity": "391",
+                "NotPureSalePrice": "394,140,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "0",
+                "DistributionReversionPackageQuantity": "0",
+                "DistributionReversionQuantity": "0",
+                "DistributionReversionPrice": "0",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "0",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "394,140,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "38",
+                "PureSaleQuantity": "391",
+                "PureSalePrice": "394,140,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "0"
+            }
+        },
+        {
+            "Key": 2,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "اسلامشهر",
+                "Zone": "صباشهر",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "7",
+                "PartnerCount": "5",
+                "MinOrderDate": "1405/02/25",
+                "MaxOrderDate": "1405/03/07",
+                "NotPureSalePackageQuantity": "59",
+                "NotPureSaleQuantity": "1,770",
+                "NotPureSalePrice": "386,480,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "0",
+                "DistributionReversionPackageQuantity": "0",
+                "DistributionReversionQuantity": "0",
+                "DistributionReversionPrice": "0",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "0",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "386,480,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "59",
+                "PureSaleQuantity": "1,770",
+                "PureSalePrice": "386,480,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "0"
+            }
+        },
+        {
+            "Key": 3,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "پاکدشت",
+                "Zone": "فرون اباد",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "66",
+                "PartnerCount": "37",
+                "MinOrderDate": "1405/03/25",
+                "MaxOrderDate": "1405/05/05",
+                "NotPureSalePackageQuantity": "208",
+                "NotPureSaleQuantity": "3,346",
+                "NotPureSalePrice": "1,436,260,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "18",
+                "DistributionReversionPackageQuantity": "78",
+                "DistributionReversionQuantity": "1,169",
+                "DistributionReversionPrice": "422,560,000",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "5",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "1,013,700,000",
+                "PureVAT": "0",
+                "PureSubtracted": "20,000",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "130",
+                "PureSaleQuantity": "2,177",
+                "PureSalePrice": "1,013,680,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "13"
+            }
+        },
+        {
+            "Key": 4,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "پاکدشت",
+                "Zone": "میدان ساعت",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "109",
+                "PartnerCount": "78",
+                "MinOrderDate": "1405/03/30",
+                "MaxOrderDate": "1405/05/07",
+                "NotPureSalePackageQuantity": "235",
+                "NotPureSaleQuantity": "5,837",
+                "NotPureSalePrice": "2,265,460,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "26",
+                "DistributionReversionPackageQuantity": "29",
+                "DistributionReversionQuantity": "612",
+                "DistributionReversionPrice": "383,360,000",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "0",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "1,882,100,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "206",
+                "PureSaleQuantity": "5,225",
+                "PureSalePrice": "1,882,100,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "26"
+            }
+        },
+        {
+            "Key": 5,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "پردیس",
+                "Zone": "مرکزی",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "2",
+                "PartnerCount": "2",
+                "MinOrderDate": "1405/04/11",
+                "MaxOrderDate": "1405/04/11",
+                "NotPureSalePackageQuantity": "5",
+                "NotPureSaleQuantity": "28",
+                "NotPureSalePrice": "57,100,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "1",
+                "DistributionReversionPackageQuantity": "0",
+                "DistributionReversionQuantity": "0",
+                "DistributionReversionPrice": "0",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "0",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "57,100,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "5",
+                "PureSaleQuantity": "28",
+                "PureSalePrice": "57,100,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "1"
+            }
+        },
+        {
+            "Key": 6,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "پیشوا",
+                "Zone": "خیابان فلسطین",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "4",
+                "PartnerCount": "4",
+                "MinOrderDate": "1405/04/01",
+                "MaxOrderDate": "1405/04/30",
+                "NotPureSalePackageQuantity": "7",
+                "NotPureSaleQuantity": "242",
+                "NotPureSalePrice": "47,060,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "0",
+                "DistributionReversionPackageQuantity": "0",
+                "DistributionReversionQuantity": "0",
+                "DistributionReversionPrice": "0",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "0",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "47,060,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "7",
+                "PureSaleQuantity": "242",
+                "PureSalePrice": "47,060,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "0"
+            }
+        },
+        {
+            "Key": 7,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "پیشوا",
+                "Zone": "مرکزی",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "51",
+                "PartnerCount": "34",
+                "MinOrderDate": "1405/04/01",
+                "MaxOrderDate": "1405/05/07",
+                "NotPureSalePackageQuantity": "160",
+                "NotPureSaleQuantity": "2,817",
+                "NotPureSalePrice": "1,253,580,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "12",
+                "DistributionReversionPackageQuantity": "20",
+                "DistributionReversionQuantity": "444",
+                "DistributionReversionPrice": "213,900,000",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "1",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "1,039,680,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "140",
+                "PureSaleQuantity": "2,373",
+                "PureSalePrice": "1,039,680,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "11"
+            }
+        },
+        {
+            "Key": 8,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "تهران",
+                "Zone": "منطقه 10",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "51",
+                "PartnerCount": "33",
+                "MinOrderDate": "1405/03/26",
+                "MaxOrderDate": "1405/05/07",
+                "NotPureSalePackageQuantity": "167",
+                "NotPureSaleQuantity": "4,330",
+                "NotPureSalePrice": "2,699,400,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "4",
+                "DistributionReversionPackageQuantity": "16",
+                "DistributionReversionQuantity": "371",
+                "DistributionReversionPrice": "330,160,000",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "3",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "2,369,240,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "151",
+                "PureSaleQuantity": "3,959",
+                "PureSalePrice": "2,369,240,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "1"
+            }
+        },
+        {
+            "Key": 9,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "تهران",
+                "Zone": "منطقه 15",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "39",
+                "PartnerCount": "29",
+                "MinOrderDate": "1405/01/20",
+                "MaxOrderDate": "1405/05/07",
+                "NotPureSalePackageQuantity": "307",
+                "NotPureSaleQuantity": "8,343",
+                "NotPureSalePrice": "2,451,656,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "10",
+                "DistributionReversionPackageQuantity": "5",
+                "DistributionReversionQuantity": "152",
+                "DistributionReversionPrice": "133,500,000",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "0",
+                "ReversionCount": "0",
+                "SaleReversionPackageQuantity": "0",
+                "SaleReversionQuantity": "0",
+                "SaleReversionPrice": "0",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "2,318,156,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "302",
+                "PureSaleQuantity": "8,191",
+                "PureSalePrice": "2,318,156,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "10"
+            }
+        },
+        {
+            "Key": 10,
+            "Value": {
+                "SupervisorCode": "",
+                "SupervisorName": "",
+                "VisitorCode": "",
+                "VisitorName": "",
+                "PartnerCode": "",
+                "PartnerName": "",
+                "PartnerLegalName": "",
+                "PartnerTelephones": "",
+                "PartnerAddress": "",
+                "City": "تهران",
+                "Zone": "منطقه 16",
+                "Route": "",
+                "PartnerGroupName": "",
+                "Period": "",
+                "WarehouseCode": "",
+                "WarehouseName": "",
+                "StuffBasket": "",
+                "StuffGroupName": "",
+                "StuffSubGroupName": "",
+                "StuffCode": "",
+                "StuffName": "",
+                "StuffDescription": "",
+                "BatchNumber": "",
+                "ExpirationDate": "",
+                "Machine": "",
+                "OrderCount": "128",
+                "PartnerCount": "91",
+                "MinOrderDate": "1405/03/24",
+                "MaxOrderDate": "1405/05/07",
+                "NotPureSalePackageQuantity": "525",
+                "NotPureSaleQuantity": "8,380",
+                "NotPureSalePrice": "4,459,720,000",
+                "NotPureSaleVolume": "0",
+                "NotPureSaleWeight": "12",
+                "DistributionReversionPackageQuantity": "67",
+                "DistributionReversionQuantity": "733",
+                "DistributionReversionPrice": "564,420,000",
+                "DistributionReversionVolume": "0",
+                "DistributionReversionWeight": "3",
+                "ReversionCount": "2",
+                "SaleReversionPackageQuantity": "0.967",
+                "SaleReversionQuantity": "26",
+                "SaleReversionPrice": "27,440,000",
+                "SaleReversionVolume": "0",
+                "SaleReversionWeight": "0",
+                "PureDiscount": "0",
+                "AfterDiscountReduction": "3,867,860,000",
+                "PureVAT": "0",
+                "PureSubtracted": "0",
+                "PureAdded": "0",
+                "PureSalePackageQuantity": "457.033",
+                "PureSaleQuantity": "7,621",
+                "PureSalePrice": "3,867,860,000",
+                "PureSaleVolume": "0",
+                "PureSaleWeight": "9"
+            }
+        }
+    ],
+    "SumRowData": {
+        "SupervisorCode": null,
+        "SupervisorName": null,
+        "VisitorCode": null,
+        "VisitorName": null,
+        "PartnerCode": null,
+        "PartnerName": null,
+        "PartnerLegalName": null,
+        "PartnerTelephones": null,
+        "PartnerAddress": null,
+        "City": null,
+        "Zone": null,
+        "Route": null,
+        "PartnerGroupName": null,
+        "Period": null,
+        "WarehouseCode": null,
+        "WarehouseName": null,
+        "StuffBasket": null,
+        "StuffGroupName": null,
+        "StuffSubGroupName": null,
+        "StuffCode": null,
+        "StuffName": null,
+        "StuffDescription": null,
+        "BatchNumber": null,
+        "ExpirationDate": null,
+        "Machine": null,
+        "OrderCount": "890",
+        "PartnerCount": "653",
+        "MinOrderDate": null,
+        "MaxOrderDate": null,
+        "NotPureSalePackageQuantity": null,
+        "NotPureSaleQuantity": "75,928",
+        "NotPureSalePrice": "30,849,666,000",
+        "NotPureSaleVolume": "0",
+        "NotPureSaleWeight": "142",
+        "DistributionReversionPackageQuantity": null,
+        "DistributionReversionQuantity": "10,599",
+        "DistributionReversionPrice": "5,162,920,000",
+        "DistributionReversionVolume": "0",
+        "DistributionReversionWeight": "16",
+        "ReversionCount": "2",
+        "SaleReversionPackageQuantity": null,
+        "SaleReversionQuantity": "26",
+        "SaleReversionPrice": "27,440,000",
+        "SaleReversionVolume": "0",
+        "SaleReversionWeight": "0",
+        "PureDiscount": "18,377,000",
+        "AfterDiscountReduction": "25,640,929,000",
+        "PureVAT": "0",
+        "PureSubtracted": "259,999",
+        "PureAdded": "0",
+        "PureSalePackageQuantity": null,
+        "PureSaleQuantity": "65,303",
+        "PureSalePrice": "25,640,669,001",
+        "PureSaleVolume": "0",
+        "PureSaleWeight": "126"
+    },
+    "OtherInformations": []
+}
+
+
+
+
+فروش >> گزارش برگشت از فروش
+
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+3225
+content-type
+application/json; charset=utf-8
+date
+Thu, 30 Jul 2026 05:52:18 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=zvLlOKHcbS80pjGL0RwdeTwZUegqQiAWAQRCZ3VtZjonIiJAZ3EHpfxTqu0iOSXhv+JrKqQet8EkWaFfYKNIBc5YBUA++tUILzUOxsEx9qc=; expires=Fri, 31-Jul-2026 15:12:18 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+575
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=zvLlOKHcbS80pjGL0RwdeTwZUegqQiAWAQRCZ3VtZjonIiJAZ3EHpfxTqu0iOSXhv+JrKqQet8EkWaFfYKNIBc5YBUA++tUILzUOxsEx9qc=; .KaraAuthProvider=05B2572DC49C0840F4F211751690D91DD417DB43BFAE0289F6685B3603957354116174D3DA5B79327ABE1EAF8685FFDCBD1C90555AB167C597A8828F8F8A4A7AEB203B5D6ABE410DBE200F087AB02FACCC5A0875CE4DBA47EA719E934B5F01DC2E0BCCE0F3C6005FB7AE5BE508AFC3B7D400CA0D70940A840C0DA4E043F99BAB625C5BD9C0C648A4C64237771206231198D276C0A0A19638951FF95DCBFE8C4AEA2239DFD057064CC94FA15BC31220D54379DDFCF3D695BFA21A6C8A04891F8FF4C97CFDE3D3B3152F9FFF180BDFC18E6F845756CB393FFDCCB7AFD3753725C6475B63B940AB8D81B0B7555153B0FB63EF3577F13C554C0FBB844B7987BE5C324F5B144122D7F6939B7985B10BBB45D1BDB60E2A8F379C848F41B73EE2F7D2CCF6191F83D3B71469AA70AAFFC3B08C16A6B5897CFF0F0BBA50DC67827BB09A277D7934E75FA29DA0D3C9765E6E71F452C5B0511E8B68CBB67DD89F48528293D03AFA706A92CD6CD7F39DADBA61726BFAF28A58E1EDB9836C664CAAB126644541BA793EE79A64AEA68C419D15BC6DCE8E3B21C5B3656D537A92B02D6AD78AF084BD44C3CE0AB69A76AA3B0146CC6823EA37FB546F3FA2DC0A9518994282FEAF715E9E2EA3F107013AB8D060D7746E250E8E74F6F2CBEDF23B201720258F12586CC8541B71630228F363D6FD4DF6E8AA0BA1FECE66A23915725A775C5F59C2CB830F8931C624E93CA4BF789A1BD6B6775670FCD977B80060E03D7CA241EE4E3562F8543C45CD94D3E049B2E41630A44EA63C433F53FEB7A36F7392F53F373B79D5F7C451E331F89A5BE4C48A5FE1E8119503F32A1C72F9177C41A1A7833EA20D859E50F25957FA585D676C72BF642066E55CF8C5F57ED79D3FFDF48C4EF5EE0D68A4BE55A592717A2D6A9CF795F89B7EE5173749262BA78691E2342129275B9F7B5A22C15A
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/Reversions
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+GridName
+SaleReversionReportGrid
+GridTitle
+گزارش برگشت از فروش
+GridJSFrom
+1
+GridJSCount
+10
+GridJSTotal
+0
+SortColumn
+SortOrder
+none
+ColumnFilterString
+BindingClass
+Kara.BLL.Sale.Report
+BindingMethod
+GetReportBinding_SaleReversion
+BindingArguments
+BPartnerCode=&EPartnerCode=&BOrderDate=&EOrderDate=&BReversionDate=&EReversionDate=&BPersonnelCode=&EPersonnelCode=&BStuffCode=&EStuffCode=&ShowStuffs=false&IncludeFreeProducts=false&
+ExportType
+Grid
+
+
+{GridViewJSTotal: 2, GridViewJSFrom: 1, GridViewJSCount: 2,…}
+Data
+: 
+[{Key: 1, Value: {ReversionCode: "1", OrderCode: "112", TotalCode: "7", PartnerCode: "14105001",…}},…]
+0
+: 
+{Key: 1, Value: {ReversionCode: "1", OrderCode: "112", TotalCode: "7", PartnerCode: "14105001",…}}
+Key
+: 
+1
+Value
+: 
+{ReversionCode: "1", OrderCode: "112", TotalCode: "7", PartnerCode: "14105001",…}
+BatchNumber
+: 
+""
+ExpirationDate
+: 
+""
+FreeProduct
+: 
+"0"
+OrderCode
+: 
+"112"
+OrderDate
+: 
+"1405/04/02"
+OrderDiscount
+: 
+"0"
+OrderFinalPrice
+: 
+"21,000,000"
+OrderPrice
+: 
+"21,000,000"
+OrderQuantity
+: 
+"12"
+OrderStuffQuantity
+: 
+"12"
+OrderUnitPrice
+: 
+"1,750,000"
+OrderVAT
+: 
+"0"
+PartnerAddress
+: 
+"سه راه علی آباد شمالی، خیابان همدانی، جنب مسجد جامع علی آباد، پ 17"
+PartnerCode
+: 
+"14105001"
+PartnerName
+: 
+" قاسم دخیلی"
+PartnerPhone
+: 
+""
+ReversionCode
+: 
+"1"
+ReversionDate
+: 
+"1405/04/02"
+ReversionDescription
+: 
+""
+ReversionDiscount
+: 
+"0"
+ReversionDiscountPercent
+: 
+"0"
+ReversionFinalPrice
+: 
+"21,000,000"
+ReversionPrice
+: 
+"21,000,000"
+ReversionProporatedDiscount
+: 
+"0"
+ReversionProporatedDiscountPercent
+: 
+"0"
+ReversionQuantity
+: 
+"12"
+ReversionReason
+: 
+"قیمت مصرف کننده"
+ReversionStuffQuantity
+: 
+"12"
+ReversionUnitPrice
+: 
+"1,750,000"
+ReversionVAT
+: 
+"0"
+StuffCode
+: 
+""
+StuffName
+: 
+""
+TotalCode
+: 
+"7"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+VisitorCode
+: 
+"20400004"
+VisitorName
+: 
+"محمدمهدی فرج پور"
+WarehouseDocumentDate
+: 
+"1405/04/02"
+1
+: 
+{Key: 2, Value: {ReversionCode: "2", OrderCode: "72", TotalCode: "", PartnerCode: "14108002",…}}
+Key
+: 
+2
+Value
+: 
+{ReversionCode: "2", OrderCode: "72", TotalCode: "", PartnerCode: "14108002",…}
+BatchNumber
+: 
+""
+ExpirationDate
+: 
+""
+FreeProduct
+: 
+"0"
+OrderCode
+: 
+"72"
+OrderDate
+: 
+"1405/03/26"
+OrderDiscount
+: 
+"0"
+OrderFinalPrice
+: 
+"13,800,000"
+OrderPrice
+: 
+"13,800,000"
+OrderQuantity
+: 
+"30"
+OrderStuffQuantity
+: 
+"30"
+OrderUnitPrice
+: 
+"460,000"
+OrderVAT
+: 
+"0"
+PartnerAddress
+: 
+"سه راه علی آباد، خیابان قربانی، نبش دوم شرقی، پالک 21 "
+PartnerCode
+: 
+"14108002"
+PartnerName
+: 
+"مرتضی قوی دوست"
+PartnerPhone
+: 
+""
+ReversionCode
+: 
+"2"
+ReversionDate
+: 
+"1405/04/24"
+ReversionDescription
+: 
+""
+ReversionDiscount
+: 
+"0"
+ReversionDiscountPercent
+: 
+"0"
+ReversionFinalPrice
+: 
+"6,440,000"
+ReversionPrice
+: 
+"6,440,000"
+ReversionProporatedDiscount
+: 
+"0"
+ReversionProporatedDiscountPercent
+: 
+"0"
+ReversionQuantity
+: 
+"14"
+ReversionReason
+: 
+"معیوب بودن اجناس"
+ReversionStuffQuantity
+: 
+"14"
+ReversionUnitPrice
+: 
+"460,000"
+ReversionVAT
+: 
+"0"
+StuffCode
+: 
+""
+StuffName
+: 
+""
+TotalCode
+: 
+""
+TotalReversion
+: 
+""
+UnitName
+: 
+""
+VisitorCode
+: 
+"20400004"
+VisitorName
+: 
+"محمدمهدی فرج پور"
+WarehouseDocumentDate
+: 
+"1405/04/27"
+GridViewJSCount
+: 
+2
+GridViewJSFrom
+: 
+1
+GridViewJSTotal
+: 
+2
+OtherInformations
+: 
+[]
+SumRowData
+: 
+{ReversionCode: null, OrderCode: null, TotalCode: null, PartnerCode: null, PartnerName: null,…}
+BatchNumber
+: 
+null
+ExpirationDate
+: 
+null
+FreeProduct
+: 
+null
+OrderCode
+: 
+null
+OrderDate
+: 
+null
+OrderDiscount
+: 
+"0"
+OrderFinalPrice
+: 
+"34,800,000"
+OrderPrice
+: 
+"34,800,000"
+OrderQuantity
+: 
+"42"
+OrderStuffQuantity
+: 
+"42"
+OrderUnitPrice
+: 
+null
+OrderVAT
+: 
+"0"
+PartnerAddress
+: 
+null
+PartnerCode
+: 
+null
+PartnerName
+: 
+null
+PartnerPhone
+: 
+null
+ReversionCode
+: 
+null
+ReversionDate
+: 
+null
+ReversionDescription
+: 
+null
+ReversionDiscount
+: 
+"0"
+ReversionDiscountPercent
+: 
+null
+ReversionFinalPrice
+: 
+"27,440,000"
+ReversionPrice
+: 
+"27,440,000"
+ReversionProporatedDiscount
+: 
+"0"
+ReversionProporatedDiscountPercent
+: 
+null
+ReversionQuantity
+: 
+"26"
+ReversionReason
+: 
+null
+ReversionStuffQuantity
+: 
+"26"
+ReversionUnitPrice
+: 
+null
+ReversionVAT
+: 
+"0"
+StuffCode
+: 
+null
+StuffName
+: 
+null
+TotalCode
+: 
+null
+TotalReversion
+: 
+null
+UnitName
+: 
+null
+VisitorCode
+: 
+null
+VisitorName
+: 
+null
+WarehouseDocumentDate
+: 
+null
+
+
+
+
+فروش >> گزارش برگشت از توزیع
+
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+127.0.0.1:10808
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+connection
+keep-alive
+content-length
+9099
+content-type
+application/json; charset=utf-8
+date
+Thu, 30 Jul 2026 05:57:09 GMT
+keep-alive
+timeout=60
+proxy-connection
+keep-alive
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=zvLlOKHcbS80pjGL0RwdeTwZUegqQiAWAQRCZ3VtZjonIiJAZ3EHpfxTqu0iOSXhv+JrKqQet8EkWaFfYKNIBc5YBUA++tUILzUOxsEx9qc=; expires=Fri, 31-Jul-2026 15:17:07 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+content-length
+676
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=zvLlOKHcbS80pjGL0RwdeTwZUegqQiAWAQRCZ3VtZjonIiJAZ3EHpfxTqu0iOSXhv+JrKqQet8EkWaFfYKNIBc5YBUA++tUILzUOxsEx9qc=; .KaraAuthProvider=05B2572DC49C0840F4F211751690D91DD417DB43BFAE0289F6685B3603957354116174D3DA5B79327ABE1EAF8685FFDCBD1C90555AB167C597A8828F8F8A4A7AEB203B5D6ABE410DBE200F087AB02FACCC5A0875CE4DBA47EA719E934B5F01DC2E0BCCE0F3C6005FB7AE5BE508AFC3B7D400CA0D70940A840C0DA4E043F99BAB625C5BD9C0C648A4C64237771206231198D276C0A0A19638951FF95DCBFE8C4AEA2239DFD057064CC94FA15BC31220D54379DDFCF3D695BFA21A6C8A04891F8FF4C97CFDE3D3B3152F9FFF180BDFC18E6F845756CB393FFDCCB7AFD3753725C6475B63B940AB8D81B0B7555153B0FB63EF3577F13C554C0FBB844B7987BE5C324F5B144122D7F6939B7985B10BBB45D1BDB60E2A8F379C848F41B73EE2F7D2CCF6191F83D3B71469AA70AAFFC3B08C16A6B5897CFF0F0BBA50DC67827BB09A277D7934E75FA29DA0D3C9765E6E71F452C5B0511E8B68CBB67DD89F48528293D03AFA706A92CD6CD7F39DADBA61726BFAF28A58E1EDB9836C664CAAB126644541BA793EE79A64AEA68C419D15BC6DCE8E3B21C5B3656D537A92B02D6AD78AF084BD44C3CE0AB69A76AA3B0146CC6823EA37FB546F3FA2DC0A9518994282FEAF715E9E2EA3F107013AB8D060D7746E250E8E74F6F2CBEDF23B201720258F12586CC8541B71630228F363D6FD4DF6E8AA0BA1FECE66A23915725A775C5F59C2CB830F8931C624E93CA4BF789A1BD6B6775670FCD977B80060E03D7CA241EE4E3562F8543C45CD94D3E049B2E41630A44EA63C433F53FEB7A36F7392F53F373B79D5F7C451E331F89A5BE4C48A5FE1E8119503F32A1C72F9177C41A1A7833EA20D859E50F25957FA585D676C72BF642066E55CF8C5F57ED79D3FFDF48C4EF5EE0D68A4BE55A592717A2D6A9CF795F89B7EE5173749262BA78691E2342129275B9F7B5A22C15A
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+proxy-connection
+keep-alive
+referer
+http://app.pakhshmarket.com/Sale/Report/SaleDistributionReversion
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+
+GridName=SaleDistributionReversionReportGrid&GridTitle=%DA%AF%D8%B2%D8%A7%D8%B1%D8%B4+%D8%A8%D8%B1%DA%AF%D8%B4%D8%AA+%D8%A7%D8%B2+%D8%AA%D9%88%D8%B2%DB%8C%D8%B9&GridJSFrom=1&GridJSCount=10&GridJSTotal=0&SortColumn=&SortOrder=none&ColumnFilterString=&BindingClass=Kara.BLL.Sale.Report&BindingMethod=GetReportBinding_SaleDistributionReversion&BindingArguments=BStuffCode%3D%26EStuffCode%3D%26BPersonnelCode%3D%26EPersonnelCode%3D%26BPartnerCode%3D%26EPartnerCode%3D%26BPayeeCode%3D%26EPayeeCode%3D%26BDriverCode%3D%26EDriverCode%3D%26BDate%3D%26EDate%3D%26BPreOrderInsertDate%3D%26EPreOrderInsertDate%3D%26ShowStuffs%3Dfalse%26IncludeFreeProductPrices%3Dfalse%26&ExportType=Grid
+
+
+{GridViewJSTotal: 172, GridViewJSFrom: 1, GridViewJSCount: 10, Data: [,…],…}
+Data
+: 
+[,…]
+0
+: 
+{Key: 1, Value: {OrderCode: "", TotalCode: "19", PartnerCode: "12838002", PartnerName: "مجید هاشمی",…}}
+Key
+: 
+1
+Value
+: 
+{OrderCode: "", TotalCode: "19", PartnerCode: "12838002", PartnerName: "مجید هاشمی",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200001"
+DriverName
+: 
+"حسین جبارپور"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/11"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"12,500,000"
+OrderPrice
+: 
+"12,500,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"51"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"12838002"
+PartnerName
+: 
+"مجید هاشمی"
+PayeeCode
+: 
+"20000020"
+PayeeName
+: 
+"سجاد حسینی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"12,500,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"12,500,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"عدم زمان کافی برای توزیع"
+ReversionStuffQuantity
+: 
+"51"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"19"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400004"
+VisitorName
+: 
+"محمدمهدی فرج پور"
+1
+: 
+{Key: 2, Value: {OrderCode: "", TotalCode: "37", PartnerCode: "14404001", PartnerName: "آقای فتحی",…}}
+Key
+: 
+2
+Value
+: 
+{OrderCode: "", TotalCode: "37", PartnerCode: "14404001", PartnerName: "آقای فتحی",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/22"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"18,620,000"
+OrderPrice
+: 
+"18,620,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"51"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14404001"
+PartnerName
+: 
+"آقای فتحی"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"18,620,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"18,620,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"بسته بودن"
+ReversionStuffQuantity
+: 
+"51"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"37"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400006"
+VisitorName
+: 
+"آقای کرم اللهی"
+2
+: 
+{Key: 3,…}
+Key
+: 
+3
+Value
+: 
+{OrderCode: "", TotalCode: "4", PartnerCode: "12904001", PartnerName: "اقای طباطبایی",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200001"
+DriverName
+: 
+"حسین جبارپور"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/01"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"6,120,000"
+OrderPrice
+: 
+"6,120,000"
+OrderQuantity
+: 
+"1"
+OrderStuffQuantity
+: 
+"1"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"12904001"
+PartnerName
+: 
+"اقای طباطبایی"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"6,120,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"6,120,000"
+ReversionQuantity
+: 
+"1"
+ReversionReason
+: 
+"بسته بودن"
+ReversionStuffQuantity
+: 
+"1"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"4"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400001"
+VisitorName
+: 
+"فاطمه جاوید باروق"
+3
+: 
+{Key: 4,…}
+Key
+: 
+4
+Value
+: 
+{OrderCode: "", TotalCode: "35", PartnerCode: "14113010", PartnerName: "آقای نیکوکار",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/21"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"19,920,000"
+OrderPrice
+: 
+"19,920,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"31"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14113010"
+PartnerName
+: 
+"آقای نیکوکار"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"19,920,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"19,920,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"بسته بودن"
+ReversionStuffQuantity
+: 
+"31"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"35"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400004"
+VisitorName
+: 
+"محمدمهدی فرج پور"
+4
+: 
+{Key: 5,…}
+Key
+: 
+5
+Value
+: 
+{OrderCode: "", TotalCode: "41", PartnerCode: "14406003", PartnerName: "آقای حیدرزاده",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/23"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"18,620,000"
+OrderPrice
+: 
+"18,620,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"51"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14406003"
+PartnerName
+: 
+"آقای حیدرزاده"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"18,620,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"18,620,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"بسته بودن"
+ReversionStuffQuantity
+: 
+"51"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"41"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400006"
+VisitorName
+: 
+"آقای کرم اللهی"
+5
+: 
+{Key: 6, Value: {OrderCode: "", TotalCode: "20", PartnerCode: "14315012", PartnerName: "نوری نوری",…}}
+Key
+: 
+6
+Value
+: 
+{OrderCode: "", TotalCode: "20", PartnerCode: "14315012", PartnerName: "نوری نوری",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/13"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"43,620,000"
+OrderPrice
+: 
+"43,620,000"
+OrderQuantity
+: 
+"4"
+OrderStuffQuantity
+: 
+"151"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14315012"
+PartnerName
+: 
+"نوری نوری"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"43,620,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"43,620,000"
+ReversionQuantity
+: 
+"4"
+ReversionReason
+: 
+"اعلام عدم سفارش"
+ReversionStuffQuantity
+: 
+"151"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"20"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400005"
+VisitorName
+: 
+"مهدی عموئی گلرودباری"
+6
+: 
+{Key: 7,…}
+Key
+: 
+7
+Value
+: 
+{OrderCode: "", TotalCode: "74", PartnerCode: "12501004", PartnerName: "اقای مهدوی ",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200004"
+DriverName
+: 
+"ادریس شعبان زاده"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/05/06"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"401,540,000"
+OrderPrice
+: 
+"401,540,000"
+OrderQuantity
+: 
+"34"
+OrderStuffQuantity
+: 
+"1,024"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"12501004"
+PartnerName
+: 
+"اقای  مهدوی "
+PayeeCode
+: 
+"21200004"
+PayeeName
+: 
+"ادریس شعبان زاده"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"401,540,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"401,540,000"
+ReversionQuantity
+: 
+"34"
+ReversionReason
+: 
+"سایر دلایل"
+ReversionStuffQuantity
+: 
+"1,024"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"74"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400001"
+VisitorName
+: 
+"فاطمه جاوید باروق"
+7
+: 
+{Key: 8, Value: {OrderCode: "", TotalCode: "18", PartnerCode: "14509008", PartnerName: "محمد یاری",…}}
+Key
+: 
+8
+Value
+: 
+{OrderCode: "", TotalCode: "18", PartnerCode: "14509008", PartnerName: "محمد یاری",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/11"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"10,280,000"
+OrderPrice
+: 
+"10,280,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"33"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14509008"
+PartnerName
+: 
+"محمد یاری"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"10,280,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"10,280,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"اعلام عدم سفارش"
+ReversionStuffQuantity
+: 
+"33"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"18"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400006"
+VisitorName
+: 
+"آقای کرم اللهی"
+8
+: 
+{Key: 9, Value: {OrderCode: "", TotalCode: "44", PartnerCode: "14611004", PartnerName: "آقای غلامی",…}}
+Key
+: 
+9
+Value
+: 
+{OrderCode: "", TotalCode: "44", PartnerCode: "14611004", PartnerName: "آقای غلامی",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/24"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"12,240,000"
+OrderPrice
+: 
+"12,240,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"2"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14611004"
+PartnerName
+: 
+"آقای غلامی"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"12,240,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"12,240,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"بسته بودن"
+ReversionStuffQuantity
+: 
+"2"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"44"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400004"
+VisitorName
+: 
+"محمدمهدی فرج پور"
+9
+: 
+{Key: 10,…}
+Key
+: 
+10
+Value
+: 
+{OrderCode: "", TotalCode: "37", PartnerCode: "14611004", PartnerName: "آقای غلامی",…}
+BatchNumber
+: 
+""
+DriverCode
+: 
+"21200002"
+DriverName
+: 
+"محمدرضا حمیدی"
+ExpirationDate
+: 
+""
+OrderCode
+: 
+""
+OrderDate
+: 
+"1405/04/22"
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"12,240,000"
+OrderPrice
+: 
+"12,240,000"
+OrderQuantity
+: 
+"2"
+OrderStuffQuantity
+: 
+"2"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+"14611004"
+PartnerName
+: 
+"آقای غلامی"
+PayeeCode
+: 
+"20900001"
+PayeeName
+: 
+"حمیدرضا نوری کوهانی"
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"12,240,000"
+ReversionPercent
+: 
+"100"
+ReversionPrice
+: 
+"12,240,000"
+ReversionQuantity
+: 
+"2"
+ReversionReason
+: 
+"بسته بودن"
+ReversionStuffQuantity
+: 
+"2"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+""
+TotalCode
+: 
+"37"
+TotalReversion
+: 
+"کاملا مرجوعی"
+UnitName
+: 
+""
+UnitPrice
+: 
+"0"
+VisitorCode
+: 
+"20400004"
+VisitorName
+: 
+"محمدمهدی فرج پور"
+GridViewJSCount
+: 
+10
+GridViewJSFrom
+: 
+1
+GridViewJSTotal
+: 
+172
+OtherInformations
+: 
+[]
+SumRowData
+: 
+{OrderCode: null, TotalCode: null, PartnerCode: null, PartnerName: null, VisitorCode: null,…}
+BatchNumber
+: 
+null
+DriverCode
+: 
+null
+DriverName
+: 
+null
+ExpirationDate
+: 
+null
+OrderCode
+: 
+null
+OrderDate
+: 
+null
+OrderDiscount
+: 
+"0"
+OrderFinal
+: 
+"5,313,760,000"
+OrderPrice
+: 
+"5,313,760,000"
+OrderQuantity
+: 
+"598"
+OrderStuffQuantity
+: 
+"11,060"
+OrderVAT
+: 
+"0"
+PartnerCode
+: 
+null
+PartnerName
+: 
+null
+PayeeCode
+: 
+null
+PayeeName
+: 
+null
+ReversionDiscount
+: 
+"0"
+ReversionFinal
+: 
+"5,225,240,000"
+ReversionPercent
+: 
+"98.33"
+ReversionPrice
+: 
+"5,225,240,000"
+ReversionQuantity
+: 
+"588"
+ReversionReason
+: 
+null
+ReversionStuffQuantity
+: 
+"10,843"
+ReversionVAT
+: 
+"0"
+StuffName
+: 
+null
+TotalCode
+: 
+null
+TotalReversion
+: 
+null
+UnitName
+: 
+null
+UnitPrice
+: 
+null
+VisitorCode
+: 
+null
+VisitorName
+: 
+null
+
+

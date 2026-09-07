@@ -34,6 +34,10 @@ def create_bot():
     apihelper.API_URL = getattr(settings, "BALE_API_URL", "https://tapi.bale.ai/bot{0}/{1}")
     apihelper.ENABLE_MIDDLEWARE = True
     apihelper.proxy = {"http": None, "https": None}
+    connect_timeout = int(getattr(settings, "BALE_CONNECT_TIMEOUT", 10))
+    read_timeout = int(getattr(settings, "BALE_READ_TIMEOUT", 30))
+    apihelper.CONNECT_TIMEOUT = connect_timeout
+    apihelper.READ_TIMEOUT = read_timeout
     bot = telebot.TeleBot(token, threaded=False, parse_mode=None)
 
     @bot.middleware_handler(update_types=["message", "callback_query"])

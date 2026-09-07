@@ -3,6 +3,8 @@ credentials.txt
 _env_ids.txt
 data/
 .env
+.env.*
+!.env.example
 db.sqlite3
 db.sqlite3-*
 __pycache__/
@@ -10,3 +12,7 @@ __pycache__/
 .venv/
 venv/
 .pytest_cache/
+staticfiles/
+media/
+logs/
+*.log

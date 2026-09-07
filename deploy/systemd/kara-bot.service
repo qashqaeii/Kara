@@ -1,0 +1,29 @@
+[Unit]
+Description=Kara Bale messenger bot
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=kara
+Group=kara
+WorkingDirectory=/opt/kara
+EnvironmentFile=/opt/kara/.env
+Environment=KARA_DISABLE_AUTO_REFRESH=1
+Environment=KARA_RUN_SCHEDULER=0
+Environment=BALE_BOT_ENABLED=True
+ExecStart=/opt/kara/.venv/bin/python manage.py run_bale_bot
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=30
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/kara /var/log/kara /opt/kara/data
+ProtectKernelTunables=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

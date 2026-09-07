@@ -1,0 +1,30 @@
+[Unit]
+Description=Kara Dashboard (Gunicorn)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=kara
+Group=kara
+WorkingDirectory=/opt/kara
+EnvironmentFile=/opt/kara/.env
+Environment=KARA_DISABLE_AUTO_REFRESH=1
+Environment=BALE_BOT_ENABLED=False
+ExecStart=/opt/kara/.venv/bin/gunicorn --config /opt/kara/deploy/gunicorn.conf.py
+ExecReload=/bin/kill -s HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/kara /var/log/kara /opt/kara/data
+ProtectKernelTunables=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

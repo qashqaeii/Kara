@@ -1,0 +1,30 @@
+[Unit]
+Description=Kara APScheduler background sync
+After=network.target postgresql.service kara-web.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=kara
+Group=kara
+WorkingDirectory=/opt/kara
+EnvironmentFile=/opt/kara/.env
+Environment=KARA_RUN_SCHEDULER=1
+Environment=KARA_DISABLE_AUTO_REFRESH=0
+Environment=AUTO_REFRESH_ENABLED=True
+Environment=BALE_BOT_ENABLED=False
+ExecStart=/opt/kara/.venv/bin/python manage.py run_scheduler
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=60
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/kara /var/log/kara /opt/kara/data
+ProtectKernelTunables=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

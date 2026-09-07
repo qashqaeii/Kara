@@ -193,11 +193,18 @@ def _format_next(dt) -> str:
 def should_start_scheduler() -> bool:
     if os.environ.get("KARA_DISABLE_AUTO_REFRESH", "").lower() in ("1", "true", "yes"):
         return False
-    if "runserver" in sys.argv and os.environ.get("RUN_MAIN") != "true":
-        return False
     if any(
         cmd in sys.argv
         for cmd in ("migrate", "makemigrations", "test", "shell", "kara_sync", "prune_db")
     ):
         return False
-    return True
+
+    # Production: only the dedicated scheduler service/process.
+    if os.environ.get("KARA_RUN_SCHEDULER", "").lower() in ("1", "true", "yes"):
+        return True
+
+    # Development: Django runserver child process only (not Gunicorn/manage.py).
+    if "runserver" in sys.argv and os.environ.get("RUN_MAIN") == "true":
+        return True
+
+    return False

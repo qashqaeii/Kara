@@ -11,17 +11,34 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    "django-insecure-dev-only-change-in-production",
-)
+_DEV_SECRET_KEY = "django-insecure-dev-only-change-in-production"
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in ("true", "1", "yes")
 
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", _DEV_SECRET_KEY)
+if not DEBUG and (not SECRET_KEY or SECRET_KEY == _DEV_SECRET_KEY):
+    from django.core.exceptions import ImproperlyConfigured
+
+    raise ImproperlyConfigured(
+        "DJANGO_SECRET_KEY must be set to a unique value when DJANGO_DEBUG=False."
+    )
+
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    for host in os.environ.get(
+        "DJANGO_ALLOWED_HOSTS",
+        "localhost,127.0.0.1,portal.pakhshmarket.com,85.198.10.243",
+    ).split(",")
     if host.strip()
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "DJANGO_CSRF_TRUSTED_ORIGINS",
+        "https://portal.pakhshmarket.com",
+    ).split(",")
+    if origin.strip()
 ]
 
 INSTALLED_APPS = [
@@ -67,16 +84,33 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "kara_dashboard.wsgi.application"
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        "OPTIONS": {
-            # Wait for concurrent writers (runserver + sync + CLI)
-            "timeout": 30,
-        },
+DATABASE_ENGINE = os.environ.get("DATABASE_ENGINE", "").strip().lower()
+if DATABASE_ENGINE in ("postgresql", "postgres") or os.environ.get("POSTGRES_DB"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("POSTGRES_DB", "kara"),
+            "USER": os.environ.get("POSTGRES_USER", "kara"),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD", ""),
+            "HOST": os.environ.get("POSTGRES_HOST", "127.0.0.1"),
+            "PORT": os.environ.get("POSTGRES_PORT", "5432"),
+            "CONN_MAX_AGE": int(os.environ.get("DB_CONN_MAX_AGE", "60")),
+            "OPTIONS": {
+                "connect_timeout": int(os.environ.get("DB_CONNECT_TIMEOUT", "10")),
+            },
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+            "OPTIONS": {
+                # Wait for concurrent writers (runserver + sync + CLI)
+                "timeout": 30,
+            },
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -90,8 +124,12 @@ TIME_ZONE = "Asia/Tehran"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = Path(os.environ.get("DJANGO_STATIC_ROOT", str(BASE_DIR / "staticfiles")))
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = Path(os.environ.get("DJANGO_MEDIA_ROOT", str(BASE_DIR / "media")))
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -152,13 +190,29 @@ SNAPSHOT_KEEP_DAILY = int(os.environ.get("SNAPSHOT_KEEP_DAILY", "1"))
 SYNC_JOB_RETENTION_DAYS = int(os.environ.get("SYNC_JOB_RETENTION_DAYS", "14"))
 REFRESH_LOG_KEEP = int(os.environ.get("REFRESH_LOG_KEEP", "100"))
 
-# Cache used for sync locks (use Redis in multi-worker production)
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "kara-dashboard",
+# Cache — locmem for dev; file/redis for production multi-process.
+_CACHE_DIR = Path(os.environ.get("KARA_CACHE_DIR", str(BASE_DIR / "data" / "cache")))
+if os.environ.get("REDIS_URL"):
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.environ["REDIS_URL"],
+        }
     }
-}
+elif not DEBUG:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+            "LOCATION": str(_CACHE_DIR),
+        }
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "kara-dashboard",
+        }
+    }
 
 KARA_USER_AGENT = os.environ.get(
     "KARA_USER_AGENT",
@@ -181,9 +235,97 @@ BALE_ADMIN_IDS = [
 BALE_LOGIN_MAX_ATTEMPTS = int(os.environ.get("BALE_LOGIN_MAX_ATTEMPTS", "5"))
 BALE_LOGIN_LOCK_MINUTES = int(os.environ.get("BALE_LOGIN_LOCK_MINUTES", "15"))
 BALE_API_URL = os.environ.get("BALE_API_URL", "https://tapi.bale.ai/bot{0}/{1}")
+BALE_CONNECT_TIMEOUT = int(os.environ.get("BALE_CONNECT_TIMEOUT", "10"))
+BALE_READ_TIMEOUT = int(os.environ.get("BALE_READ_TIMEOUT", "30"))
 
 from django.contrib.messages import constants as message_constants
 
 MESSAGE_TAGS = {
     message_constants.ERROR: "danger",
 }
+
+# --- Production security (behind Nginx + TLS) ---
+def _env_bool(name: str, default: bool = False) -> bool:
+    return os.environ.get(name, str(default)).lower() in ("true", "1", "yes")
+
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    USE_X_FORWARDED_HOST = _env_bool("DJANGO_USE_X_FORWARDED_HOST", True)
+    # Phase 1 (pre-Certbot): keep False. Phase 2 (post-Certbot): set True in .env
+    SECURE_SSL_REDIRECT = _env_bool("DJANGO_SECURE_SSL_REDIRECT", False)
+    SESSION_COOKIE_SECURE = _env_bool("DJANGO_SESSION_COOKIE_SECURE", True)
+    CSRF_COOKIE_SECURE = _env_bool("DJANGO_CSRF_COOKIE_SECURE", True)
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = "DENY"
+    if SECURE_SSL_REDIRECT:
+        SECURE_HSTS_SECONDS = int(os.environ.get("DJANGO_HSTS_SECONDS", "31536000"))
+        SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+        SECURE_HSTS_PRELOAD = _env_bool("DJANGO_HSTS_PRELOAD", True)
+    else:
+        SECURE_HSTS_SECONDS = 0
+        SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+        SECURE_HSTS_PRELOAD = False
+
+# --- Logging ---
+_LOG_DIR = Path(os.environ.get("KARA_LOG_DIR", str(BASE_DIR / "logs")))
+_LOG_LEVEL = os.environ.get("KARA_LOG_LEVEL", "INFO" if not DEBUG else "DEBUG")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "sensitive": {
+            "()": "reports.logging_utils.SensitiveDataFilter",
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {name} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "filters": ["sensitive"],
+            "formatter": "verbose",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": _LOG_LEVEL,
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO" if not DEBUG else "DEBUG",
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "reports": {
+            "handlers": ["console"],
+            "level": _LOG_LEVEL,
+            "propagate": False,
+        },
+    },
+}
+
+if not DEBUG:
+    _LOG_DIR.mkdir(parents=True, exist_ok=True)
+    LOGGING["handlers"]["file"] = {
+        "class": "logging.handlers.RotatingFileHandler",
+        "filename": str(_LOG_DIR / "kara.log"),
+        "maxBytes": 10 * 1024 * 1024,
+        "backupCount": 5,
+        "filters": ["sensitive"],
+        "formatter": "verbose",
+    }
+    LOGGING["root"]["handlers"].append("file")
+    for logger_name in ("django", "django.request", "reports"):
+        LOGGING["loggers"][logger_name]["handlers"].append("file")

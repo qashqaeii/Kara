@@ -1,4 +1,4 @@
-/* Official invoice print shell */
+/* Official invoice print shell — width-first layout */
 
 .inv-print-page {
     margin: 0;
@@ -169,47 +169,56 @@
     color: var(--kara-text-muted);
 }
 
+/* Single vertical scroll only — full invoice width */
 .inv-print-stage {
     position: relative;
     flex: 1 1 auto;
     min-height: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 1rem;
 }
 
 .inv-print-viewport {
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .inv-print-scaler {
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
+    transform-origin: top center;
+    transition: transform 0.15s ease;
 }
 
 .inv-print-document {
+    width: 100%;
+    min-width: 0;
     background: #fff;
-    transform-origin: top left;
     box-shadow:
         0 0 0 1px rgba(12, 18, 34, 0.04),
         0 12px 28px rgba(12, 18, 34, 0.1),
         0 28px 56px rgba(12, 18, 34, 0.08);
 }
 
+/* Kara print pages are A4-width — keep them readable inside the shell */
+.inv-print-document [name="PrintPageDIV98532"],
+.inv-print-document .PrintPagePortrait,
+.inv-print-document .PrintPageLandscape {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
 .inv-print-document center {
     display: block;
 }
 
+.inv-print-document table {
+    max-width: 100%;
+}
+
 .inv-print-loader {
-    position: absolute;
+    position: fixed;
     inset: 0;
     display: flex;
     flex-direction: column;
@@ -217,8 +226,8 @@
     justify-content: center;
     gap: 0.65rem;
     color: var(--kara-text-muted);
-    z-index: 5;
-    background: rgba(232, 236, 239, 0.72);
+    z-index: 30;
+    background: rgba(232, 236, 239, 0.82);
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
@@ -238,9 +247,8 @@
 }
 
 .inv-print-error {
-    position: absolute;
-    inset: auto 1rem 1rem;
-    z-index: 6;
+    max-width: 960px;
+    margin: 0 auto 1rem;
     padding: 0.75rem 1rem;
     border-radius: 0.65rem;
     background: var(--kara-danger-soft);
@@ -268,6 +276,10 @@
     .inv-print-toolbar__actions {
         justify-content: flex-start;
     }
+
+    .inv-print-stage {
+        padding: 0.5rem;
+    }
 }
 
 @media print {
@@ -284,19 +296,17 @@
         background: #fff;
     }
 
-    .inv-print-stage,
-    .inv-print-viewport,
-    .inv-print-scaler {
+    .inv-print-stage {
         padding: 0;
         overflow: visible;
-        height: auto;
-        display: block;
+    }
+
+    .inv-print-scaler {
+        transform: none !important;
     }
 
     .inv-print-document {
-        transform: none !important;
-        width: 100% !important;
-        height: auto !important;
         box-shadow: none;
+        width: 100% !important;
     }
 }

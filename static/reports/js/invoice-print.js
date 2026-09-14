@@ -2,7 +2,6 @@
     "use strict";
 
     var contentUrl = window.INV_PRINT_CONTENT_URL || "";
-    var stage = document.getElementById("invPrintStage");
     var loader = document.getElementById("invPrintLoader");
     var errorBox = document.getElementById("invPrintError");
     var scaler = document.getElementById("invPrintScaler");
@@ -13,17 +12,15 @@
     var fitBtn = document.getElementById("invFitBtn");
     var printBtn = document.getElementById("invPrintBtn");
 
-    if (!contentUrl || !stage || !scaler || !documentRoot) {
+    if (!contentUrl || !scaler || !documentRoot) {
         return;
     }
 
-    var contentWidth = 0;
-    var contentHeight = 0;
-    var fitScale = 1;
     var userScale = 1;
-    var minUserScale = 0.6;
-    var maxUserScale = 1.4;
+    var minScale = 0.75;
+    var maxScale = 1.35;
     var karaBaseSet = false;
+    var stylesReady = false;
 
     function showError(message) {
         if (!errorBox) {
@@ -59,67 +56,57 @@
     }
 
     function importKaraStyles(parsed) {
-        var marker = "data-kara-print-style";
+        var promises = [];
         parsed.querySelectorAll('link[rel="stylesheet"], style').forEach(function (node) {
             if (node.id === "portal-invoice-print-enhance") {
                 return;
             }
             var clone = node.cloneNode(true);
-            clone.setAttribute(marker, "1");
+            clone.setAttribute("data-kara-print-style", "1");
             document.head.appendChild(clone);
+            if (clone.tagName === "LINK") {
+                promises.push(
+                    new Promise(function (resolve) {
+                        clone.addEventListener("load", resolve);
+                        clone.addEventListener("error", resolve);
+                    })
+                );
+            }
         });
+        return Promise.all(promises);
     }
 
-    function measureContent() {
-        contentWidth = Math.max(documentRoot.scrollWidth, documentRoot.offsetWidth, 720);
-        contentHeight = Math.max(documentRoot.scrollHeight, documentRoot.offsetHeight, 400);
-        return contentWidth > 0 && contentHeight > 0;
-    }
-
-    function availableSize() {
-        var rect = stage.getBoundingClientRect();
-        return {
-            width: Math.max(rect.width - 24, 320),
-            height: Math.max(rect.height - 24, 240),
-        };
-    }
-
-    function computeFitScale() {
-        if (!contentWidth || !contentHeight) {
-            return 1;
-        }
-        var avail = availableSize();
-        return Math.min(avail.width / contentWidth, avail.height / contentHeight, 1);
-    }
-
-    function effectiveScale() {
-        return fitScale * userScale;
-    }
-
-    function applyLayout() {
-        if (!measureContent()) {
-            return;
-        }
-        var scale = effectiveScale();
-        documentRoot.style.width = contentWidth + "px";
-        documentRoot.style.height = contentHeight + "px";
-        documentRoot.style.transform = "scale(" + scale + ")";
-
-        scaler.style.width = Math.round(contentWidth * scale) + "px";
-        scaler.style.height = Math.round(contentHeight * scale) + "px";
-
+    function applyScale() {
+        scaler.style.transform = userScale === 1 ? "none" : "scale(" + userScale + ")";
         if (zoomLabel) {
-            zoomLabel.textContent = Math.round(scale * 100) + "%";
+            zoomLabel.textContent = Math.round(userScale * 100) + "%";
         }
     }
 
-    function fitToScreen() {
+    function resetScale() {
         userScale = 1;
-        if (!measureContent()) {
-            return;
-        }
-        fitScale = computeFitScale();
-        applyLayout();
+        applyScale();
+    }
+
+    function waitForImages() {
+        var images = documentRoot.querySelectorAll("img");
+        var pending = [];
+        images.forEach(function (img) {
+            if (!img.complete) {
+                pending.push(
+                    new Promise(function (resolve) {
+                        img.addEventListener("load", resolve);
+                        img.addEventListener("error", resolve);
+                    })
+                );
+            }
+        });
+        return Promise.all(pending);
+    }
+
+    function finalizeLayout() {
+        hideLoader();
+        resetScale();
     }
 
     function loadDocument() {
@@ -133,12 +120,15 @@
             .then(function (html) {
                 var parsed = new DOMParser().parseFromString(html, "text/html");
                 ensureKaraBase(parsed);
-                importKaraStyles(parsed);
-                documentRoot.innerHTML = parsed.body ? parsed.body.innerHTML : html;
-                hideLoader();
-                window.setTimeout(fitToScreen, 80);
-                window.setTimeout(fitToScreen, 400);
-                window.setTimeout(fitToScreen, 1200);
+                return importKaraStyles(parsed).then(function () {
+                    stylesReady = true;
+                    documentRoot.innerHTML = parsed.body ? parsed.body.innerHTML : html;
+                    return waitForImages();
+                });
+            })
+            .then(function () {
+                window.setTimeout(finalizeLayout, 50);
+                window.setTimeout(finalizeLayout, 300);
             })
             .catch(function (err) {
                 hideLoader();
@@ -148,20 +138,20 @@
 
     if (zoomIn) {
         zoomIn.addEventListener("click", function () {
-            userScale = Math.min(maxUserScale, userScale + 0.08);
-            applyLayout();
+            userScale = Math.min(maxScale, userScale + 0.1);
+            applyScale();
         });
     }
 
     if (zoomOut) {
         zoomOut.addEventListener("click", function () {
-            userScale = Math.max(minUserScale, userScale - 0.08);
-            applyLayout();
+            userScale = Math.max(minScale, userScale - 0.1);
+            applyScale();
         });
     }
 
     if (fitBtn) {
-        fitBtn.addEventListener("click", fitToScreen);
+        fitBtn.addEventListener("click", resetScale);
     }
 
     if (printBtn) {
@@ -169,11 +159,6 @@
             window.print();
         });
     }
-
-    window.addEventListener("resize", function () {
-        fitScale = computeFitScale();
-        applyLayout();
-    });
 
     document.addEventListener("keydown", function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === "p") {

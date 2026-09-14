@@ -7,6 +7,16 @@
 1) بررسی وضعیت (اول این‌ها)
 ==================================================
 
+sudo -u kara bash -lc 'cd /opt/kara && git pull --ff-only origin main'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py collectstatic --noinput'
+systemctl restart kara-web
+
+
+
+
+
+
+
 systemctl status kara-bot
 systemctl cat kara-bot
 grep -E 'BALE_|KARA_LOG' /opt/kara/.env

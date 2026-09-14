@@ -93,7 +93,7 @@ def fetch_print_html(
     if not kara_order_id:
         raise InvoicePrintError("شناسه چاپ فاکتور موجود نیست.")
 
-    cache_key = f"kara_invoice_print:v3:{kara_order_id}"
+    cache_key = f"kara_invoice_print:v4:{kara_order_id}"
     if use_cache:
         cached = cache.get(cache_key)
         if cached:

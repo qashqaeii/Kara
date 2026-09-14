@@ -250,7 +250,7 @@ body.kara-body {
     gap: 0.15rem;
     flex: 1 1 auto;
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .kara-nav-groups {
@@ -258,7 +258,9 @@ body.kara-body {
     flex-wrap: nowrap;
     align-items: center;
     gap: 0.1rem;
+    flex: 1 1 auto;
     min-width: 0;
+    overflow: hidden;
 }
 
 .nav-group {
@@ -4061,31 +4063,38 @@ tr.me-is-me {
 /* ========== PHASE 2 — Product Polish & Full Coverage ========== */
 
 /* Nav overflow (1024–1400px) */
-.kara-nav-overflow { flex-shrink: 0; margin-inline-start: 0.25rem; }
+.kara-nav-overflow {
+    flex-shrink: 0;
+    margin-inline-start: 0.25rem;
+    position: relative;
+    z-index: 1050;
+}
 .kara-nav-overflow.has-active .dropdown-toggle {
     color: var(--kara-primary);
     background: var(--kara-primary-soft);
     font-weight: 700;
 }
-.kara-nav-overflow-menu { min-width: 11rem; padding: 0.35rem; }
-.kara-nav-overflow-menu .kara-nav-item { list-style: none; margin: 0; padding: 0; }
-.kara-nav-overflow-menu .nav-link {
+.kara-nav-overflow .dropdown-menu {
+    min-width: 11rem;
+    padding: 0.35rem;
+    z-index: 1060;
+    border: 1px solid var(--kara-border);
+    border-radius: var(--kara-radius);
+    box-shadow: var(--kara-shadow-md);
+}
+.kara-nav-overflow-menu .dropdown-item {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    width: 100%;
-    padding: 0.45rem 0.65rem;
     border-radius: var(--kara-radius-sm);
     font-size: var(--kara-text-sm);
     font-weight: 600;
-    color: var(--kara-text-secondary);
-    text-decoration: none;
+    padding: 0.45rem 0.65rem;
 }
-.kara-nav-overflow-menu .nav-link:hover { background: var(--kara-surface-secondary); color: var(--kara-text); }
-.kara-nav-overflow-menu .nav-link.active {
+.kara-nav-overflow-menu .dropdown-item.active,
+.kara-nav-overflow-menu .dropdown-item:active {
     background: var(--kara-primary-soft);
     color: var(--kara-primary);
-    font-weight: 700;
 }
 
 /* Entity detail header */

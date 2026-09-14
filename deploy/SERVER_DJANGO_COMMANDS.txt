@@ -126,7 +126,39 @@ sudo -u kara bash /opt/kara/deploy/deploy.sh
 
 
 ==================================================
-8) عیب‌یابی سریع — علائم رایج
+8) گیت روی سرور — ۵ دستور اصلی
+==================================================
+
+مسیر repo: /opt/kara  |  مالک: kara  |  شاخه: main
+repo: https://github.com/qashqaeii/Kara
+
+⚠️  git را با root مستقیم نزنید — خطای dubious ownership می‌دهد.
+    همیشه با کاربر kara اجرا کنید (sudo -u kara ...) یا deploy.sh.
+
+# 1) وضعیت — ببینید روی سرور چه commitی هست
+sudo -u kara bash -lc 'cd /opt/kara && git status'
+
+# 2) دریافت آخرین تغییرات از GitHub (بدون اعمال)
+sudo -u kara bash -lc 'cd /opt/kara && git fetch origin'
+
+# 3) رفتن روی شاخه production
+sudo -u kara bash -lc 'cd /opt/kara && git checkout main'
+
+# 4) اعمال کد جدید — فقط fast-forward
+sudo -u kara bash -lc 'cd /opt/kara && git pull --ff-only origin main'
+
+# 5) تأیید — آخرین commitهای نصب‌شده
+sudo -u kara bash -lc 'cd /opt/kara && git log -5 --oneline'
+
+# بعد از pull: migrate + collectstatic + restart (یکجا — توصیه‌شده)
+sudo -u kara bash /opt/kara/deploy/deploy.sh
+
+# اگر حتماً باید root باشید (یک‌بار، غیرتوصیه‌شده):
+# git config --global --add safe.directory /opt/kara
+
+
+==================================================
+9) عیب‌یابی سریع — علائم رایج
 ==================================================
 
 # 500 Internal Server Error
@@ -152,7 +184,7 @@ sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manag
 
 
 ==================================================
-9) لاگ دقیق‌تر (موقت — فقط برای عیب‌یابی)
+10) لاگ دقیق‌تر (موقت — فقط برای عیب‌یابی)
 ==================================================
 
 # افزایش سطح لاگ اپ (بعد از تست حتماً به INFO برگردانید)
@@ -172,7 +204,7 @@ systemctl restart kara-web
 
 
 ==================================================
-10) مقادیر مهم در .env
+11) مقادیر مهم در .env
 ==================================================
 
 nano /opt/kara/.env

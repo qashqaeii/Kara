@@ -1,4 +1,4 @@
-/* Official invoice print shell — fit-to-viewport, no nested scroll */
+/* Official invoice print shell */
 
 .inv-print-page {
     margin: 0;
@@ -177,7 +177,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.65rem;
+    padding: 0.75rem;
 }
 
 .inv-print-viewport {
@@ -189,6 +189,25 @@
     overflow: hidden;
 }
 
+.inv-print-scaler {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.inv-print-document {
+    background: #fff;
+    transform-origin: top left;
+    box-shadow:
+        0 0 0 1px rgba(12, 18, 34, 0.04),
+        0 12px 28px rgba(12, 18, 34, 0.1),
+        0 28px 56px rgba(12, 18, 34, 0.08);
+}
+
+.inv-print-document center {
+    display: block;
+}
+
 .inv-print-loader {
     position: absolute;
     inset: 0;
@@ -198,14 +217,15 @@
     justify-content: center;
     gap: 0.65rem;
     color: var(--kara-text-muted);
-    pointer-events: none;
-    transition: opacity 0.2s ease;
     z-index: 5;
+    background: rgba(232, 236, 239, 0.72);
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
 .inv-print-loader.is-hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 .inv-print-loader__spinner {
@@ -217,27 +237,25 @@
     animation: inv-print-spin 0.8s linear infinite;
 }
 
+.inv-print-error {
+    position: absolute;
+    inset: auto 1rem 1rem;
+    z-index: 6;
+    padding: 0.75rem 1rem;
+    border-radius: 0.65rem;
+    background: var(--kara-danger-soft);
+    border: 1px solid rgba(185, 28, 28, 0.2);
+    color: var(--kara-danger);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.inv-print-error.is-hidden {
+    display: none;
+}
+
 @keyframes inv-print-spin {
     to { transform: rotate(360deg); }
-}
-
-.inv-print-paper {
-    position: relative;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-
-.inv-print-frame {
-    display: block;
-    border: 0;
-    background: #fff;
-    overflow: hidden;
-    transform-origin: top left;
-    border-radius: 2px;
-    box-shadow:
-        0 0 0 1px rgba(12, 18, 34, 0.04),
-        0 12px 28px rgba(12, 18, 34, 0.1),
-        0 28px 56px rgba(12, 18, 34, 0.08);
 }
 
 @media (max-width: 900px) {
@@ -246,10 +264,7 @@
         gap: 0.55rem;
     }
 
-    .inv-print-toolbar__meta {
-        justify-content: flex-start;
-    }
-
+    .inv-print-toolbar__meta,
     .inv-print-toolbar__actions {
         justify-content: flex-start;
     }
@@ -258,6 +273,7 @@
 @media print {
     .inv-print-toolbar,
     .inv-print-loader,
+    .inv-print-error,
     .inv-print-hint {
         display: none !important;
     }
@@ -269,22 +285,18 @@
     }
 
     .inv-print-stage,
-    .inv-print-viewport {
+    .inv-print-viewport,
+    .inv-print-scaler {
         padding: 0;
         overflow: visible;
         height: auto;
+        display: block;
     }
 
-    .inv-print-paper {
+    .inv-print-document {
         transform: none !important;
-        width: 100% !important;
-        height: auto !important;
-    }
-
-    .inv-print-frame {
         width: 100% !important;
         height: auto !important;
         box-shadow: none;
-        transform: none !important;
     }
 }

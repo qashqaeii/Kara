@@ -53,25 +53,8 @@ def is_access_denied_html(html: str) -> bool:
 
 _PORTAL_PRINT_CSS = """
 <style id="portal-invoice-print-enhance">
-html, body {
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    background: #fff !important;
-}
-center { display: block !important; }
-.NoPrint, #PrintLayoutIcon, a[onclick*="ChangeLayout"] { display: none !important; }
-[name="PrintPageDIV98532"], .PrintPagePortrait, .PrintPageLandscape {
-    margin: 0 auto !important;
-    box-shadow: none !important;
-}
-.PrintTitleA4, .PrintHeader, .PrintContent, .PrintContent table {
-    font-family: "Segoe UI", Tahoma, "Vazirmatn", "B Yekan", "B Nazanin", sans-serif !important;
-}
-.PrintContent table { border-collapse: collapse !important; }
-.PrintContent td, .PrintContent th {
-    padding: 3px 5px !important;
-    line-height: 1.45 !important;
+@media screen {
+    .NoPrint { display: none !important; }
 }
 </style>
 """
@@ -110,7 +93,7 @@ def fetch_print_html(
     if not kara_order_id:
         raise InvoicePrintError("شناسه چاپ فاکتور موجود نیست.")
 
-    cache_key = f"kara_invoice_print:v2:{kara_order_id}"
+    cache_key = f"kara_invoice_print:v3:{kara_order_id}"
     if use_cache:
         cached = cache.get(cache_key)
         if cached:

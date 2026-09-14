@@ -1,18 +1,19 @@
 (function () {
     "use strict";
 
-    var frame = document.getElementById("invPrintFrame");
-    var paper = document.getElementById("invPrintPaper");
-    var viewport = document.getElementById("invPrintViewport");
-    var stage = document.querySelector(".inv-print-stage");
+    var contentUrl = window.INV_PRINT_CONTENT_URL || "";
+    var stage = document.getElementById("invPrintStage");
     var loader = document.getElementById("invPrintLoader");
+    var errorBox = document.getElementById("invPrintError");
+    var scaler = document.getElementById("invPrintScaler");
+    var documentRoot = document.getElementById("invPrintDocument");
     var zoomLabel = document.getElementById("invZoomLabel");
     var zoomIn = document.getElementById("invZoomIn");
     var zoomOut = document.getElementById("invZoomOut");
     var fitBtn = document.getElementById("invFitBtn");
     var printBtn = document.getElementById("invPrintBtn");
 
-    if (!frame || !paper || !stage) {
+    if (!contentUrl || !stage || !scaler || !documentRoot) {
         return;
     }
 
@@ -20,37 +21,66 @@
     var contentHeight = 0;
     var fitScale = 1;
     var userScale = 1;
-    var minUserScale = 0.55;
-    var maxUserScale = 1.35;
+    var minUserScale = 0.6;
+    var maxUserScale = 1.4;
+    var karaBaseSet = false;
 
-    function readContentSize() {
-        try {
-            var doc = frame.contentDocument || frame.contentWindow.document;
-            if (!doc || !doc.body) {
-                return false;
-            }
-            var root = doc.documentElement;
-            contentWidth = Math.max(
-                doc.body.scrollWidth,
-                doc.body.offsetWidth,
-                root ? root.scrollWidth : 0
-            );
-            contentHeight = Math.max(
-                doc.body.scrollHeight,
-                doc.body.offsetHeight,
-                root ? root.scrollHeight : 0
-            );
-            return contentWidth > 0 && contentHeight > 0;
-        } catch (err) {
-            return false;
+    function showError(message) {
+        if (!errorBox) {
+            return;
         }
+        errorBox.textContent = message;
+        errorBox.classList.remove("is-hidden");
+    }
+
+    function hideLoader() {
+        if (loader) {
+            loader.classList.add("is-hidden");
+        }
+    }
+
+    function ensureKaraBase(parsed) {
+        if (karaBaseSet) {
+            return;
+        }
+        var baseNode = parsed.querySelector("base");
+        var href = baseNode && baseNode.getAttribute("href");
+        if (!href) {
+            return;
+        }
+        var existing = document.querySelector("base[data-kara-print]");
+        if (!existing) {
+            existing = document.createElement("base");
+            existing.setAttribute("data-kara-print", "1");
+            document.head.appendChild(existing);
+        }
+        existing.setAttribute("href", href);
+        karaBaseSet = true;
+    }
+
+    function importKaraStyles(parsed) {
+        var marker = "data-kara-print-style";
+        parsed.querySelectorAll('link[rel="stylesheet"], style').forEach(function (node) {
+            if (node.id === "portal-invoice-print-enhance") {
+                return;
+            }
+            var clone = node.cloneNode(true);
+            clone.setAttribute(marker, "1");
+            document.head.appendChild(clone);
+        });
+    }
+
+    function measureContent() {
+        contentWidth = Math.max(documentRoot.scrollWidth, documentRoot.offsetWidth, 720);
+        contentHeight = Math.max(documentRoot.scrollHeight, documentRoot.offsetHeight, 400);
+        return contentWidth > 0 && contentHeight > 0;
     }
 
     function availableSize() {
         var rect = stage.getBoundingClientRect();
         return {
-            width: Math.max(rect.width - 20, 320),
-            height: Math.max(rect.height - 20, 240),
+            width: Math.max(rect.width - 24, 320),
+            height: Math.max(rect.height - 24, 240),
         };
     }
 
@@ -59,9 +89,7 @@
             return 1;
         }
         var avail = availableSize();
-        var scaleW = avail.width / contentWidth;
-        var scaleH = avail.height / contentHeight;
-        return Math.min(scaleW, scaleH, 1);
+        return Math.min(avail.width / contentWidth, avail.height / contentHeight, 1);
     }
 
     function effectiveScale() {
@@ -69,16 +97,16 @@
     }
 
     function applyLayout() {
+        if (!measureContent()) {
+            return;
+        }
         var scale = effectiveScale();
-        frame.style.width = contentWidth + "px";
-        frame.style.height = contentHeight + "px";
-        frame.style.transform = "scale(" + scale + ")";
-        frame.style.transformOrigin = "top left";
-        frame.setAttribute("scrolling", "no");
+        documentRoot.style.width = contentWidth + "px";
+        documentRoot.style.height = contentHeight + "px";
+        documentRoot.style.transform = "scale(" + scale + ")";
 
-        paper.style.width = Math.round(contentWidth * scale) + "px";
-        paper.style.height = Math.round(contentHeight * scale) + "px";
-        paper.style.transform = "none";
+        scaler.style.width = Math.round(contentWidth * scale) + "px";
+        scaler.style.height = Math.round(contentHeight * scale) + "px";
 
         if (zoomLabel) {
             zoomLabel.textContent = Math.round(scale * 100) + "%";
@@ -86,25 +114,37 @@
     }
 
     function fitToScreen() {
-        if (!readContentSize()) {
+        userScale = 1;
+        if (!measureContent()) {
             return;
         }
         fitScale = computeFitScale();
         applyLayout();
     }
 
-    function hideLoader() {
-        if (loader) {
-            loader.classList.add("is-hidden");
-        }
-        fitToScreen();
+    function loadDocument() {
+        fetch(contentUrl, { credentials: "same-origin", cache: "no-store" })
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("بارگذاری پیش‌فاکتور ناموفق بود.");
+                }
+                return response.text();
+            })
+            .then(function (html) {
+                var parsed = new DOMParser().parseFromString(html, "text/html");
+                ensureKaraBase(parsed);
+                importKaraStyles(parsed);
+                documentRoot.innerHTML = parsed.body ? parsed.body.innerHTML : html;
+                hideLoader();
+                window.setTimeout(fitToScreen, 80);
+                window.setTimeout(fitToScreen, 400);
+                window.setTimeout(fitToScreen, 1200);
+            })
+            .catch(function (err) {
+                hideLoader();
+                showError(err && err.message ? err.message : "خطا در بارگذاری پیش‌فاکتور");
+            });
     }
-
-    frame.addEventListener("load", function () {
-        window.setTimeout(hideLoader, 60);
-        window.setTimeout(fitToScreen, 180);
-        window.setTimeout(fitToScreen, 600);
-    });
 
     if (zoomIn) {
         zoomIn.addEventListener("click", function () {
@@ -121,20 +161,12 @@
     }
 
     if (fitBtn) {
-        fitBtn.addEventListener("click", function () {
-            userScale = 1;
-            fitToScreen();
-        });
+        fitBtn.addEventListener("click", fitToScreen);
     }
 
     if (printBtn) {
         printBtn.addEventListener("click", function () {
-            try {
-                frame.contentWindow.focus();
-                frame.contentWindow.print();
-            } catch (err) {
-                window.print();
-            }
+            window.print();
         });
     }
 
@@ -146,9 +178,9 @@
     document.addEventListener("keydown", function (event) {
         if ((event.ctrlKey || event.metaKey) && event.key === "p") {
             event.preventDefault();
-            if (printBtn) {
-                printBtn.click();
-            }
+            window.print();
         }
     });
+
+    loadDocument();
 })();

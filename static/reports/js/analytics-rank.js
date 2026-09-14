@@ -3,11 +3,14 @@
 (function () {
     "use strict";
 
-    var DEFAULT_ACCENT = "#0f766e";
-    var MUTED = "#94a3b8";
-    var GRID = "rgba(12,18,34,0.06)";
-    var PALETTE = ["#0f766e", "#0d9488", "#14b8a6", "#b45309", "#d97706", "#64748b", "#334155", "#0b3d3a"];
-    var CURRENCY = (window.KaraDashboard && window.KaraDashboard.currencyUnit) || "تومان";
+    var T = window.KaraChartTheme || {};
+    if (T.applyDefaults) T.applyDefaults();
+
+    var DEFAULT_ACCENT = T.primary || "#0f766e";
+    var MUTED = T.muted || "#94a3b8";
+    var GRID = (T.colors && T.colors.grid) || "rgba(12,18,34,0.05)";
+    var PALETTE = T.palette || ["#0f766e", "#0d9488", "#14b8a6", "#b45309", "#d97706", "#64748b", "#334155", "#0b3d3a"];
+    var CURRENCY = T.currencyUnit ? T.currencyUnit() : ((window.KaraDashboard && window.KaraDashboard.currencyUnit) || "تومان");
 
     function faNum(v) {
         try {

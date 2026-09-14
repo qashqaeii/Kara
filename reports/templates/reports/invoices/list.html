@@ -4,16 +4,16 @@
 {% block title %}فاکتورها{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/invoices.css' %}?v=4">
+<link rel="stylesheet" href="{% static 'reports/css/invoices.css' %}?v=5">
 {% endblock %}
 
 {% block content %}
 <div class="inv-list-page">
-    <header class="page-header ax-header inv-list-header">
-        <div class="page-header-copy">
-            <span class="page-eyebrow">فروش</span>
-            <h1 class="page-title">فاکتورها</h1>
-            <p class="page-desc">
+    <header class="kara-page-toolbar page-header ax-header inv-list-header">
+        <div class="kara-page-toolbar__context page-header-copy">
+            <span class="kara-page-toolbar__eyebrow page-eyebrow">فروش</span>
+            <h1 class="kara-page-toolbar__title page-title">فاکتورها</h1>
+            <p class="kara-page-toolbar__meta page-desc">
                 {% if kara_nav.scoped %}فاکتورهای در دسترس شما{% else %}همه فاکتورهای همگام‌شده{% endif %}
                 · {% if filters.is_active %}{{ aggregate.count }} نتیجه{% else %}{{ aggregate.count }} فاکتور{% endif %}
             </p>
@@ -23,7 +23,7 @@
     <section class="inv-filter-bar" aria-label="جستجو و فیلتر">
         <form method="get" class="inv-filter-form" role="search">
             <div class="inv-filter-primary">
-                <label class="inv-filter-search" for="invSearchInput">
+                <label class="kara-search-field inv-filter-search" for="invSearchInput">
                     <i class="bi bi-search" aria-hidden="true"></i>
                     <input
                         id="invSearchInput"
@@ -138,18 +138,18 @@
                         {% for inv in orders %}
                         <tr>
                             <td>
-                                <strong>{{ inv.order_pre_code }}</strong>
-                                <small class="text-muted d-block">{{ inv.order_code }}</small>
+                                <span class="invoice-code">{{ inv.order_pre_code }}</span>
+                                <span class="invoice-code-sub">{{ inv.order_code }}</span>
                             </td>
                             <td>{{ inv.order_date }}</td>
                             <td>{{ inv.partner_name }}</td>
                             <td>{{ inv.visitor_name|default:"—" }}</td>
                             <td class="text-num">{{ inv.amount_label }}</td>
                             <td class="text-num">{{ inv.items_count }}</td>
-                            <td><span class="badge inv-status-badge">{{ inv.status_label }}</span></td>
+                            <td><span class="kara-badge inv-status-badge">{{ inv.status_label }}</span></td>
                             <td>
-                                <a href="{% url 'reports:invoice_detail' inv.order_code %}" class="btn btn-sm btn-outline-kara">
-                                    جزئیات
+                                <a href="{% url 'reports:invoice_detail' inv.order_code %}" class="btn-ghost-action">
+                                    جزئیات <i class="bi bi-chevron-left"></i>
                                 </a>
                             </td>
                         </tr>

@@ -4,22 +4,22 @@
 {% block title %}مطالبات و معوقات{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/receivables.css' %}?v=5">
+<link rel="stylesheet" href="{% static 'reports/css/receivables.css' %}?v=6">
 {% endblock %}
 
 {% block content %}
-<header class="page-header ax-header recv-top">
-    <div class="page-header-copy">
-        <span class="page-eyebrow">ریسک اعتباری · وصول مطالبات</span>
-        <h1 class="page-title">مطالبات و معوقات</h1>
-        <p class="page-desc">
+<header class="kara-page-toolbar page-header ax-header recv-top">
+    <div class="kara-page-toolbar__context page-header-copy">
+        <span class="kara-page-toolbar__eyebrow page-eyebrow">ریسک اعتباری · وصول مطالبات</span>
+        <h1 class="kara-page-toolbar__title page-title">مطالبات و معوقات</h1>
+        <p class="kara-page-toolbar__meta page-desc">
             سن‌بندی سفارش‌های تسویه‌نشده و مانده حساب مشتریان
             {% if business_date_label and business_date_label != "—" %}
             · به‌روز تا {{ business_date_label }}
             {% endif %}
         </p>
     </div>
-    <div class="page-header-actions">
+    <div class="kara-page-toolbar__actions page-header-actions">
         <a href="{% url 'reports:tv_mode' %}" class="btn btn-outline-kara" target="_blank" rel="noopener"><i class="bi bi-tv"></i> تلویزیون</a>
         <a href="{% url 'reports:sync_center' %}" class="btn btn-outline-kara">همگام‌سازی</a>
         <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
@@ -27,69 +27,65 @@
 </header>
 
 {% if available %}
-<section class="recv-stage" aria-label="خلاصه مطالبات">
-    <div class="recv-stage-glow" aria-hidden="true"></div>
-    <div class="recv-stage-grid">
-        <div class="recv-stage-hero">
-            <p class="recv-kicker">جمع معوقات جدول سنی</p>
-            <div class="recv-mega">
-                <span class="recv-mega-num">{{ kpis.total_outstanding.formatted }}</span>
-                <span class="recv-mega-unit">{{ unit }}</span>
-            </div>
-            <div class="recv-chips">
-                <span class="recv-chip"><i class="bi bi-layers"></i>{{ kpis.row_count }} ردیف</span>
-                <span class="recv-chip"><i class="bi bi-person-badge"></i>{{ kpis.visitor_count }} ویزیتور</span>
-                <span class="recv-chip"><i class="bi bi-geo-alt"></i>{{ kpis.city_count }} شهر</span>
-                {% if concentration.available %}
-                <span class="recv-chip is-accent"><i class="bi bi-pie-chart"></i>تمرکز ۳تای برتر {{ concentration.top3_share }}٪</span>
-                {% endif %}
-            </div>
+<section class="kara-financial-summary" aria-label="خلاصه مالی مطالبات">
+    <div class="kara-fin-primary">
+        <p class="kara-fin-primary__label">جمع معوقات جدول سنی</p>
+        <div class="kara-fin-primary__value">
+            <strong class="kara-amount">{{ kpis.total_outstanding.formatted }}</strong>
+            <span class="kara-amount-unit">{{ unit }}</span>
         </div>
-
-        <div class="recv-stage-meter" style="--fresh:{{ bands.fresh.share }};--watch:{{ bands.watch.share }};--critical:{{ bands.critical.share }};">
-            <div class="recv-ring" aria-hidden="true">
-                <div class="recv-ring-hole">
-                    <strong>{% if bands.watch.share >= bands.fresh.share %}{{ bands.watch.share }}{% else %}{{ bands.fresh.share }}{% endif %}٪</strong>
-                    <span>باند غالب</span>
-                </div>
-            </div>
-            <ul class="recv-ring-legend">
-                <li class="is-fresh"><b></b><span>{{ bands.fresh.label }}</span><em>{{ bands.fresh.share }}٪</em></li>
-                <li class="is-watch"><b></b><span>{{ bands.watch.label }}</span><em>{{ bands.watch.share }}٪</em></li>
-                <li class="is-critical"><b></b><span>{{ bands.critical.label }}</span><em>{{ bands.critical.share }}٪</em></li>
-            </ul>
-        </div>
-
-        <div class="recv-stage-bands">
-            <article class="recv-band-card is-fresh">
-                <header>
-                    <span>جاری</span>
-                    <em>{{ bands.fresh.share }}٪</em>
-                </header>
-                <strong>{{ bands.fresh.formatted }}</strong>
-                <div class="recv-band-track"><i style="width:{{ bands.fresh.share }}%"></i></div>
-                <p>{{ bands.fresh.label }}</p>
-            </article>
-            <article class="recv-band-card is-watch">
-                <header>
-                    <span>هشدار</span>
-                    <em>{{ bands.watch.share }}٪</em>
-                </header>
-                <strong>{{ bands.watch.formatted }}</strong>
-                <div class="recv-band-track"><i style="width:{{ bands.watch.share }}%"></i></div>
-                <p>{{ bands.watch.label }}</p>
-            </article>
-            <article class="recv-band-card is-critical">
-                <header>
-                    <span>بحرانی</span>
-                    <em>{{ bands.critical.share }}٪</em>
-                </header>
-                <strong>{{ bands.critical.formatted }}</strong>
-                <div class="recv-band-track"><i style="width:{{ bands.critical.share }}%"></i></div>
-                <p>{{ bands.critical.label }}</p>
-            </article>
+        <div class="kara-fin-meta">
+            <span><i class="bi bi-layers"></i>{{ kpis.row_count }} ردیف</span>
+            <span><i class="bi bi-person-badge"></i>{{ kpis.visitor_count }} ویزیتور</span>
+            <span><i class="bi bi-geo-alt"></i>{{ kpis.city_count }} شهر</span>
+            {% if concentration.available %}
+            <span><i class="bi bi-pie-chart"></i>تمرکز ۳تای برتر {{ concentration.top3_share }}٪</span>
+            {% endif %}
         </div>
     </div>
+    <div class="kara-fin-grid">
+        <article class="kara-fin-cell">
+            <span>مانده حساب مشتریان</span>
+            <strong>{{ kpis.partner_balance.formatted }}</strong>
+            <small>{{ unit }} · {{ kpis.partner_count }} مشتری</small>
+        </article>
+        <article class="kara-fin-cell">
+            <span>میانگین هر ردیف</span>
+            <strong>{{ kpis.avg_per_row.formatted }}</strong>
+            <small>{{ unit }}</small>
+        </article>
+        <article class="kara-fin-cell is-success">
+            <span>سهم جاری</span>
+            <strong>{{ kpis.fresh_share }}٪</strong>
+            <small>{{ bands.fresh.label }}</small>
+        </article>
+        <article class="kara-fin-cell {% if kpis.critical_share >= 10 %}is-danger{% else %}is-warning{% endif %}">
+            <span>سهم بحرانی</span>
+            <strong>{{ kpis.critical_share }}٪</strong>
+            <small>{{ bands.critical.label }}</small>
+        </article>
+    </div>
+</section>
+
+<section class="kara-aging-row" aria-label="پروفایل ریسک سنی">
+    <article class="kara-aging-bucket">
+        <header><span>جاری</span><em>{{ bands.fresh.share }}٪</em></header>
+        <strong>{{ bands.fresh.formatted }}</strong>
+        <div class="kara-progress"><i style="width:{{ bands.fresh.share }}%"></i></div>
+        <p class="mb-0 mt-1 small text-muted">{{ bands.fresh.label }}</p>
+    </article>
+    <article class="kara-aging-bucket is-warning">
+        <header><span>هشدار</span><em>{{ bands.watch.share }}٪</em></header>
+        <strong>{{ bands.watch.formatted }}</strong>
+        <div class="kara-progress"><i style="width:{{ bands.watch.share }}%"></i></div>
+        <p class="mb-0 mt-1 small text-muted">{{ bands.watch.label }}</p>
+    </article>
+    <article class="kara-aging-bucket is-danger">
+        <header><span>بحرانی</span><em>{{ bands.critical.share }}٪</em></header>
+        <strong>{{ bands.critical.formatted }}</strong>
+        <div class="kara-progress"><i style="width:{{ bands.critical.share }}%"></i></div>
+        <p class="mb-0 mt-1 small text-muted">{{ bands.critical.label }}</p>
+    </article>
 </section>
 
 <section class="recv-stat-row" aria-label="شاخص‌های کلیدی">
@@ -376,14 +372,14 @@
                 <button type="button" data-risk="watch">هشدار</button>
                 <button type="button" data-risk="critical">بحرانی</button>
             </div>
-            <label class="recv-search">
+            <label class="kara-search-field recv-search">
                 <i class="bi bi-search"></i>
                 <input type="search" id="recvRowFilter" placeholder="جستجو…" autocomplete="off">
             </label>
         </div>
     </div>
     <div class="recv-table-wrap">
-        <table class="recv-table" id="recvDetailTable">
+        <table class="kara-table recv-table" id="recvDetailTable">
             <thead>
                 <tr>
                     <th>#</th>

@@ -4,21 +4,21 @@
 {% block title %}{{ config.title }} — کارا{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/report-detail.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'reports/css/report-detail.css' %}?v=4">
 {% endblock %}
 
 {% block content %}
 <div class="rd-page">
 
-<header class="rd-command">
-    <div class="rd-command-glow" aria-hidden="true"></div>
-    <div class="rd-command-copy">
-        <ol class="rd-crumb">
+<header class="kara-page-toolbar rd-command">
+    <div class="kara-page-toolbar__context rd-command-copy">
+        <ol class="rd-crumb kara-crumb mb-2">
             <li><a href="{% url 'reports:dashboard' %}">نمای کلی</a></li>
-            <li>{{ config.title }}</li>
+            <li><a href="{% url 'reports:data_explorer' %}">کاوش داده</a></li>
+            <li aria-current="page">{{ config.title }}</li>
         </ol>
-        <span class="rd-eyebrow">جزئیات گزارش · لایه داده</span>
-        <h1>{{ config.title }}</h1>
+        <span class="kara-page-toolbar__eyebrow rd-eyebrow">جزئیات گزارش · لایه داده</span>
+        <h1 class="kara-page-toolbar__title">{{ config.title }}</h1>
         {% if report_filter.is_filtered %}
         <span class="rd-filter-pill">
             <i class="bi bi-person-fill"></i>
@@ -42,7 +42,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="rd-command-actions">
+    <div class="kara-page-toolbar__actions rd-command-actions">
         <form method="post" action="{% url 'reports:refresh' report_key=config.key %}" id="refreshForm">
             {% csrf_token %}
             <input type="hidden" name="personnel_code" id="hiddenPersonnelCode" value="{{ report_filter.personnel_code }}">
@@ -142,7 +142,7 @@
     </div>
     <div class="rd-table-body">
         <div class="table-responsive">
-            <table id="reportTable" class="table table-hover table-sm align-middle w-100 mb-0">
+            <table id="reportTable" class="table table-hover table-sm align-middle kara-table w-100 mb-0">
                 <thead>
                     <tr>
                         <th>#</th>

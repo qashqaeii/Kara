@@ -4,7 +4,7 @@
 {% block title %}{{ name }} — پرونده سرپرست{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/supervisor-detail.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'reports/css/supervisor-detail.css' %}?v=4">
 {% endblock %}
 
 {% block content %}
@@ -15,13 +15,13 @@
         <li aria-current="page">{{ name }}</li>
     </ol>
 </nav>
-<header class="page-header ax-header svd-header">
-    <div class="page-header-copy spd-identity">
-        <div class="spd-avatar svd-avatar" aria-hidden="true">{{ initials }}</div>
+<header class="kara-page-toolbar page-header ax-header svd-header">
+    <div class="kara-page-toolbar__context page-header-copy kara-detail-identity">
+        <div class="kara-detail-avatar spd-avatar svd-avatar" aria-hidden="true">{{ initials }}</div>
         <div>
-            <span class="page-eyebrow">پرونده عملکرد سرپرست</span>
-            <h1 class="page-title">{{ name }}</h1>
-            <p class="page-desc">
+            <span class="kara-page-toolbar__eyebrow page-eyebrow">پرونده عملکرد سرپرست</span>
+            <h1 class="kara-page-toolbar__title page-title">{{ name }}</h1>
+            <p class="kara-page-toolbar__meta page-desc">
                 کد {{ supervisor_code }}
                 · {{ preset_label }}
                 {% if date_from_label != "—" %}· {{ date_from_label }} تا {{ date_to_label }}{% endif %}
@@ -29,9 +29,9 @@
             </p>
         </div>
     </div>
-    <div class="page-header-actions">
+    <div class="kara-page-toolbar__actions page-header-actions">
         <form method="get" class="d-inline">
-            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+            <select name="period" class="form-select form-select-sm period-select kara-input" onchange="this.form.submit()" aria-label="بازه زمانی">
                 {% for value, label in period_options %}
                 <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}
@@ -138,7 +138,7 @@
 
 <div class="row g-4 mb-4">
     <div class="col-lg-7">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">روند فروش تیم</h2>
                 <p class="section-desc">فروش روزانه سرپرست در بازه</p>
@@ -150,7 +150,7 @@
         </section>
     </div>
     <div class="col-lg-5">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">سهم اعضای تیم</h2>
                 <p class="section-desc">ترکیب فروش فردی</p>
@@ -165,7 +165,7 @@
 
 <div class="row g-4 mb-4">
     <div class="col-lg-6">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">سفارش روزانه تیم</h2>
                 <p class="section-desc">تعداد سفارش نهایی</p>
@@ -177,7 +177,7 @@
         </section>
     </div>
     <div class="col-lg-6">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">بیشترین سفارش در تیم</h2>
                 <p class="section-desc">رتبه‌بندی تعداد سفارش نهایی</p>
@@ -190,20 +190,20 @@
     </div>
 </div>
 
-<section class="panel-block svd-roster mb-4">
+<section class="kara-panel panel-block svd-roster mb-4">
     <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
         <div>
             <h2 class="section-title">ترکیب تیم</h2>
             <p class="section-desc">{{ kpis.team_size.formatted }} ویزیتور · قابل جستجو · لینک به پرونده فردی</p>
         </div>
-        <label class="ax-search">
+        <label class="kara-search-field ax-search">
             <i class="bi bi-search"></i>
-            <input type="search" id="svdTeamFilter" placeholder="جستجوی نام یا کد ویزیتور…" autocomplete="off">
+            <input type="search" id="svdTeamFilter" placeholder="جستجوی نام یا کد ویزیتور…" autocomplete="off" aria-label="جستجوی ویزیتور">
         </label>
     </div>
 
     <div class="svd-table-wrap">
-        <table class="svd-table" id="svdTeamTable">
+        <table class="kara-table svd-table" id="svdTeamTable">
             <thead>
                 <tr>
                     <th>رتبه</th>
@@ -246,8 +246,8 @@
                         </span>
                     </td>
                     <td>
-                        <a class="svd-link" href="{% url 'reports:analytics_salesperson_detail' m.code %}?period={{ preset }}">
-                            پرونده <i class="bi bi-arrow-left"></i>
+                        <a class="btn-ghost-action svd-link" href="{% url 'reports:analytics_salesperson_detail' m.code %}?period={{ preset }}">
+                            پرونده <i class="bi bi-chevron-left"></i>
                         </a>
                     </td>
                 </tr>
@@ -261,13 +261,13 @@
 </section>
 
 {% if history %}
-<section class="panel-block svd-history">
+<section class="kara-panel panel-block svd-history">
     <div class="section-head mb-3">
         <h2 class="section-title">تاریخچه روزانه سرپرست</h2>
         <p class="section-desc">{{ history|length }} روز ثبت‌شده · شدت رنگ متناسب با بهترین روز</p>
     </div>
     <div class="svd-table-wrap">
-        <table class="svd-table svd-history-table">
+        <table class="kara-table svd-table svd-history-table">
             <thead>
                 <tr>
                     <th>تاریخ</th>

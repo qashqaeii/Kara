@@ -9,52 +9,8 @@
     --sc-miss: #64748b;
 }
 
-.sc-command {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: var(--kara-space-3) var(--kara-space-4);
-    margin-bottom: var(--kara-section-gap);
-    padding: var(--kara-space-4);
-    background: var(--kara-surface);
-    border: 1px solid var(--kara-border);
-    border-radius: var(--kara-radius);
-    box-shadow: var(--kara-shadow-sm);
-    animation: scIn 0.45s ease both;
-}
-
-.sc-eyebrow {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--kara-accent);
-    margin-bottom: 0.35rem;
-}
-
-.sc-command-copy h1 {
-    margin: 0;
-    font-family: var(--kara-font-display);
-    font-size: clamp(1.55rem, 2.4vw, 2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--kara-primary);
-}
-
-.sc-command-copy p {
-    margin: 0.35rem 0 0;
-    color: var(--kara-text-muted);
-    font-size: 0.9rem;
-    max-width: 38rem;
-}
-
-.sc-command-actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.55rem;
-}
+/* Header uses .kara-page-toolbar.sc-command — see custom.css Phase 2 */
+.sc-command { animation: scIn 0.45s ease both; }
 
 /* Hero stage — connection pulse */
 .sc-stage {

@@ -4,31 +4,32 @@
 {% block title %}داشبورد مدیریتی — کارا{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/dashboard.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'reports/css/dashboard.css' %}?v=4">
 {% endblock %}
 
 {% block content %}
-<header class="db-command">
-    <div class="db-command-copy">
-        <span class="db-eyebrow">KARA · لایه تحلیلی</span>
-        <h1>نمای کلی فروش</h1>
-        <p>
+<header class="kara-page-toolbar db-command">
+    <div class="kara-page-toolbar__context db-command-copy">
+        <span class="kara-page-toolbar__eyebrow db-eyebrow">KARA · لایه تحلیلی</span>
+        <h1 class="kara-page-toolbar__title">نمای کلی فروش</h1>
+        <p class="kara-page-toolbar__meta">
             به‌روزرسانی‌شده {{ connection.last_sync_label }}
             {% if refresh_interval %} · خودکار هر {{ refresh_interval }} دقیقه{% endif %}
-            <span id="liveStatusText" class="db-live-label"></span>
         </p>
     </div>
-    <div class="db-command-actions">
-        <div class="conn-badge status-{{ connection.status }}">
-            <span class="conn-dot"></span>
-            {{ connection.status_label }}
-        </div>
-        <div id="refreshCountdown" class="db-countdown">
-            <span>بعدی</span>
-            <strong id="countdownText">--:--</strong>
+    <div class="kara-page-toolbar__actions db-command-actions">
+        <div class="kara-page-toolbar__status-group">
+            <div class="conn-badge status-{{ connection.status }}">
+                <span class="conn-dot"></span>
+                {{ connection.status_label }}
+            </div>
+            <div id="refreshCountdown" class="db-countdown" title="زمان تا بروزرسانی خودکار">
+                <span>بعدی</span>
+                <strong id="countdownText">--:--</strong>
+            </div>
         </div>
         <form method="get" class="d-inline">
-            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+            <select name="period" class="form-select form-select-sm period-select kara-input" onchange="this.form.submit()" aria-label="بازه زمانی">
                 <option value="all" {% if preset == 'all' or not preset %}selected{% endif %}>کل داده‌ها</option>
                 <option value="today" {% if preset == 'today' %}selected{% endif %}>امروز</option>
                 <option value="yesterday" {% if preset == 'yesterday' %}selected{% endif %}>دیروز</option>
@@ -65,16 +66,15 @@
 
 {% if company_kpis %}
 {% with pure=company_kpis.total_pure_sale sale=company_kpis.total_sale orders=company_kpis.final_order_count rev=company_kpis.reversion_rate visitors=company_kpis.active_visitors %}
-<section class="db-stage" id="aggregateKpis" aria-label="شاخص اصلی">
-    <div class="db-stage-glow" aria-hidden="true"></div>
-    <div class="db-stage-main">
-        <p class="db-kicker">{{ pure.label|default:"فروش خالص" }}</p>
-        <div class="db-mega">
-            <strong class="db-mega-num" data-kpi="total_pure_sale">{{ pure.formatted|default:"—" }}</strong>
-            <span class="db-mega-unit">{{ currency_unit }}</span>
+<section class="kara-exec-summary db-stage" id="aggregateKpis" aria-label="شاخص اصلی">
+    <div class="kara-exec-primary db-stage-main">
+        <p class="kara-exec-primary__label db-kicker">{{ pure.label|default:"فروش خالص" }}</p>
+        <div class="kara-exec-primary__value db-mega">
+            <strong class="db-mega-num kara-amount" data-kpi="total_pure_sale">{{ pure.formatted|default:"—" }}</strong>
+            <span class="kara-amount-unit db-mega-unit">{{ currency_unit }}</span>
         </div>
         {% if pure.comparison and pure.comparison.is_comparable %}
-        <div class="db-delta delta-{{ pure.comparison.direction }}">
+        <div class="kara-trend is-{{ pure.comparison.direction }} db-delta delta-{{ pure.comparison.direction }}">
             <i class="bi bi-arrow-{% if pure.comparison.direction == 'up' %}up{% elif pure.comparison.direction == 'down' %}down{% else %}right{% endif %}-short"></i>
             {% if pure.comparison.percent_change is not None %}{{ pure.comparison.percent_change }}٪{% else %}—{% endif %}
             <span>نسبت به دوره قبل</span>
@@ -86,29 +86,29 @@
             <a href="{% url 'reports:analytics_regions' %}"><i class="bi bi-geo"></i> جغرافیا</a>
         </div>
     </div>
-    <div class="db-stage-side">
+    <div class="kara-exec-secondary db-stage-side">
         {% if sale %}
-        <article class="db-side-kpi">
+        <article class="kara-kpi-mini db-side-kpi">
             <span>{{ sale.label }}</span>
             <strong data-kpi="total_sale">{{ sale.formatted }}</strong>
             <small>{{ currency_unit }}</small>
         </article>
         {% endif %}
         {% if orders %}
-        <article class="db-side-kpi">
+        <article class="kara-kpi-mini db-side-kpi">
             <span>{{ orders.label }}</span>
             <strong data-kpi="final_order_count">{{ orders.formatted }}</strong>
         </article>
         {% endif %}
         {% if rev %}
-        <article class="db-side-kpi {% if rev.numeric >= 5 %}is-warn{% endif %}">
+        <article class="kara-kpi-mini db-side-kpi {% if rev.numeric >= 5 %}is-warn{% endif %}">
             <span>{{ rev.label }}</span>
             <strong data-kpi="reversion_rate">{{ rev.formatted }}</strong>
             <small>٪</small>
         </article>
         {% endif %}
         {% if visitors %}
-        <article class="db-side-kpi">
+        <article class="kara-kpi-mini db-side-kpi">
             <span>{{ visitors.label }}</span>
             <strong data-kpi="active_visitors">{{ visitors.formatted }}</strong>
         </article>
@@ -509,7 +509,7 @@
 
 {% block extra_js %}
 <script src="{% static 'reports/js/live-dashboard.js' %}?v=3"></script>
-<script src="{% static 'reports/js/dashboard-charts.js' %}?v=2"></script>
+<script src="{% static 'reports/js/dashboard-charts.js' %}?v=3"></script>
 <script>
 window.KaraDashboard = window.KaraDashboard || {};
 window.KaraDashboard.currencyUnit = "{{ currency_unit|default:'تومان' }}";

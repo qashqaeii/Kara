@@ -145,6 +145,8 @@ const KaraLiveDashboard = (function () {
         const btn = document.getElementById("btnRefreshAll");
         if (alertEl) alertEl.classList.remove("d-none");
         if (btn) btn.disabled = true;
+        const stage = document.getElementById("aggregateKpis");
+        if (stage) stage.classList.add("is-syncing");
         setLiveStatus("در حال بروزرسانی...", "refreshing");
 
         try {
@@ -168,6 +170,8 @@ const KaraLiveDashboard = (function () {
 
         if (alertEl) alertEl.classList.add("d-none");
         if (btn) btn.disabled = false;
+        const stage = document.getElementById("aggregateKpis");
+        if (stage) stage.classList.remove("is-syncing");
         isRefreshing = false;
     }
 

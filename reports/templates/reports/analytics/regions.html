@@ -4,15 +4,15 @@
 {% block title %}شهر و منطقه — تحلیل{% endblock %}
 
 {% block content %}
-<header class="page-header ax-header">
-    <div class="page-header-copy">
-        <span class="page-eyebrow">تحلیل فروش</span>
-        <h1 class="page-title">شهر و منطقه</h1>
-        <p class="page-desc">فروش جغرافیایی · {{ preset_label }} · منبع گزارش تفکیکی</p>
+<header class="kara-page-toolbar page-header ax-header">
+    <div class="kara-page-toolbar__context page-header-copy">
+        <span class="kara-page-toolbar__eyebrow page-eyebrow">تحلیل فروش</span>
+        <h1 class="kara-page-toolbar__title page-title">شهر و منطقه</h1>
+        <p class="kara-page-toolbar__meta page-desc">فروش جغرافیایی · {{ preset_label }} · منبع گزارش تفکیکی</p>
     </div>
-    <div class="page-header-actions">
+    <div class="kara-page-toolbar__actions page-header-actions">
         <form method="get" class="d-inline">
-            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+            <select name="period" class="form-select form-select-sm period-select kara-input" onchange="this.form.submit()" aria-label="بازه زمانی">
                 {% for value, label in period_options %}
                 <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}

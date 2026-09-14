@@ -2490,3 +2490,38 @@ body.tv-body::after {
   .tv-champ-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tv-pulse-hero-foot { grid-template-columns: 1fr; }
 }
+
+/* Phase 2 — Executive wallboard polish (readability at distance) */
+:root {
+    --tv-bg: #0a1018;
+    --tv-bg-mid: #0e1622;
+    --tv-surface-solid: #141f2e;
+}
+.tv-header {
+    border-bottom: 1px solid var(--tv-line-strong);
+    background: rgba(10, 16, 24, 0.92);
+    backdrop-filter: blur(12px);
+}
+.tv-brand strong {
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    color: var(--tv-accent);
+}
+.tv-status {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+}
+.tv-pulse-hero-value,
+.tv-fin-hero strong,
+.tv-rank-hero-sale {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+.tv-rank-list li,
+.tv-geo-list li,
+.tv-product-rest li {
+    transition: background 180ms ease;
+}
+.tv-chart-frame canvas {
+    filter: contrast(1.02);
+}

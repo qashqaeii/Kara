@@ -4,19 +4,19 @@
 {% block title %}عملکرد من{% endblock %}
 
 {% block content %}
-<header class="page-header ax-header me-header">
-    <div class="page-header-copy">
-        <span class="page-eyebrow">پنل شخصی</span>
-        <h1 class="page-title">عملکرد من</h1>
-        <p class="page-desc">
+<header class="kara-page-toolbar page-header ax-header me-header">
+    <div class="kara-page-toolbar__context page-header-copy">
+        <span class="kara-page-toolbar__eyebrow page-eyebrow">پنل شخصی</span>
+        <h1 class="kara-page-toolbar__title page-title">عملکرد من</h1>
+        <p class="kara-page-toolbar__meta page-desc">
             {{ mode_label }} · {{ user_display }} · نقش: {{ scope.role|fa_role }}
             <span class="me-sep">·</span> {{ preset_label }}
         </p>
         <p class="me-hint">{{ mode_hint }}</p>
     </div>
-    <div class="page-header-actions">
+    <div class="kara-page-toolbar__actions page-header-actions">
         <form method="get" class="d-inline">
-            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+            <select name="period" class="form-select form-select-sm period-select kara-input" onchange="this.form.submit()" aria-label="بازه زمانی">
                 {% for value, label in period_options %}
                 <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}

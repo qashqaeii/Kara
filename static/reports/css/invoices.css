@@ -142,9 +142,11 @@
     box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
 }
 
-.inv-filter-search {
+.inv-filter-search,
+.kara-search-field.inv-filter-search {
     flex: 1 1 12rem;
     min-width: 0;
+    max-width: 28rem;
     display: flex;
     align-items: center;
     gap: var(--kara-space-2);
@@ -153,8 +155,8 @@
     margin: 0;
     border: 1px solid var(--kara-border-strong);
     border-radius: var(--kara-radius-sm);
-    background: var(--kara-bg);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background: var(--kara-surface);
+    transition: border-color var(--kara-transition), box-shadow var(--kara-transition);
 }
 
 .inv-filter-search:focus-within {
@@ -645,45 +647,17 @@
     border-color: rgba(180, 83, 9, 0.22);
 }
 
-/* Tables */
-.kara-table {
-    margin-bottom: 0;
-    font-size: 0.84rem;
-    --bs-table-bg: transparent;
+/* Tables — extends global .kara-table in custom.css */
+.inv-list-table .kara-table thead th {
+    top: 0;
 }
 
-.kara-table thead th {
-    background: var(--kara-primary);
-    color: #ecfdf8;
-    font-size: 0.72rem;
-    font-weight: 600;
-    padding: 0.55rem 0.7rem;
-    border: none;
-    white-space: nowrap;
-    vertical-align: middle;
+.inv-list-table .ranking-table-wrap {
+    max-height: none;
 }
 
-.kara-table tbody td {
-    padding: 0.5rem 0.7rem;
-    vertical-align: middle;
-    border-color: rgba(12, 18, 34, 0.06);
-}
-
-.kara-table tbody tr:nth-child(even) {
-    background: rgba(11, 61, 58, 0.025);
-}
-
-.kara-table tbody tr:hover {
-    background: rgba(15, 118, 110, 0.06);
-}
-
-.kara-table .text-num {
-    text-align: left;
-    direction: ltr;
-    unicode-bidi: embed;
-    font-variant-numeric: tabular-nums;
-    font-family: var(--kara-font-display);
-    font-weight: 600;
+.inv-detail-page .kara-table thead th {
+    position: static;
 }
 
 .inv-amount-hero {

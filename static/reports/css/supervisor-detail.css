@@ -7,12 +7,7 @@
     box-shadow: 0 10px 28px rgba(15, 118, 110, 0.28);
 }
 
-.svd-hero {
-    background:
-        radial-gradient(1200px 280px at 100% -20%, rgba(180, 83, 9, 0.12), transparent 55%),
-        radial-gradient(900px 260px at 0% 0%, rgba(15, 118, 110, 0.14), transparent 50%),
-        var(--kara-surface);
-}
+/* Hero uses global .spd-hero / .svd-hero bridge in custom.css */
 
 .svd-hero-meta {
     display: flex;
@@ -107,19 +102,11 @@
     font-size: 0.9rem;
 }
 
-.svd-table thead th {
+.kara-table.svd-table thead th {
     position: sticky;
     top: 0;
     z-index: 1;
-    background: linear-gradient(180deg, #f8fafc, #f1f5f9);
-    color: var(--kara-text-muted);
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.02em;
-    text-align: right;
-    padding: 0.85rem 1rem;
-    border-bottom: 1px solid var(--kara-border);
-    white-space: nowrap;
+    padding: 0.6rem 0.75rem;
 }
 
 .svd-table thead th.num,

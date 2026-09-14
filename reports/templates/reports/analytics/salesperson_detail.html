@@ -11,13 +11,13 @@
         <li aria-current="page">{{ name }}</li>
     </ol>
 </nav>
-<header class="page-header ax-header spd-header">
-    <div class="page-header-copy spd-identity">
-        <div class="spd-avatar" aria-hidden="true">{{ initials }}</div>
+<header class="kara-page-toolbar page-header ax-header spd-header">
+    <div class="kara-page-toolbar__context page-header-copy kara-detail-identity">
+        <div class="kara-detail-avatar spd-avatar" aria-hidden="true">{{ initials }}</div>
         <div>
-            <span class="page-eyebrow">پرونده عملکرد ویزیتور</span>
-            <h1 class="page-title">{{ name }}</h1>
-            <p class="page-desc">
+            <span class="kara-page-toolbar__eyebrow page-eyebrow">پرونده عملکرد ویزیتور</span>
+            <h1 class="kara-page-toolbar__title page-title">{{ name }}</h1>
+            <p class="kara-page-toolbar__meta page-desc">
                 کد {{ personnel_code }}
                 {% if supervisor_name and supervisor_name != "—" %}
                 · سرپرست
@@ -29,9 +29,9 @@
             </p>
         </div>
     </div>
-    <div class="page-header-actions">
+    <div class="kara-page-toolbar__actions page-header-actions">
         <form method="get" class="d-inline">
-            <select name="period" class="form-select form-select-sm period-select" onchange="this.form.submit()" aria-label="بازه زمانی">
+            <select name="period" class="form-select form-select-sm period-select kara-input" onchange="this.form.submit()" aria-label="بازه زمانی">
                 {% for value, label in period_options %}
                 <option value="{{ value }}" {% if preset == value %}selected{% endif %}>{{ label }}</option>
                 {% endfor %}
@@ -143,7 +143,7 @@
 
 <div class="row g-4 mb-4">
     <div class="col-lg-6">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
                 <div>
                     <h2 class="section-title">روند فروش خالص</h2>
@@ -161,7 +161,7 @@
         </section>
     </div>
     <div class="col-lg-3">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">سفارش روزانه</h2>
                 <p class="section-desc">تعداد سفارش نهایی</p>
@@ -173,7 +173,7 @@
         </section>
     </div>
     <div class="col-lg-3">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">نرخ برگشت</h2>
                 <p class="section-desc">درصد روزانه</p>
@@ -188,7 +188,7 @@
 
 <div class="row g-4 mb-4">
     <div class="col-lg-4">
-        <section class="panel-block h-100 ax-chart-panel">
+        <section class="kara-panel panel-block h-100 ax-chart-panel">
             <div class="section-head mb-3">
                 <h2 class="section-title">ترکیب فروش و برگشت</h2>
                 <p class="section-desc">سهم خالص در برابر برگشت‌ها</p>
@@ -242,19 +242,19 @@
     </div>
 </div>
 
-<section class="panel-block">
+<section class="kara-panel panel-block">
     <div class="section-head mb-3 d-flex flex-wrap justify-content-between align-items-end gap-2">
         <div>
             <h2 class="section-title">تاریخچه روزانه</h2>
             <p class="section-desc">{{ day_count }} روز · قابل جستجو</p>
         </div>
-        <label class="ax-search">
+        <label class="kara-search-field ax-search">
             <i class="bi bi-search"></i>
-            <input type="search" id="spdHistoryFilter" placeholder="جستجوی تاریخ…" autocomplete="off">
+            <input type="search" id="spdHistoryFilter" placeholder="جستجوی تاریخ…" autocomplete="off" aria-label="جستجوی تاریخ">
         </label>
     </div>
     <div class="table-responsive ranking-table-wrap">
-        <table class="table table-sm align-middle ranking-table ax-table" id="spdHistoryTable">
+        <table class="table table-sm align-middle kara-table ranking-table ax-table" id="spdHistoryTable">
             <thead>
                 <tr>
                     <th>تاریخ</th>

@@ -4,13 +4,13 @@
 {% block title %}کاوش داده — کارا{% endblock %}
 
 {% block content %}
-<header class="page-header">
-    <div class="page-header-copy">
-        <span class="page-eyebrow">ابزار کنترل داده</span>
-        <h1 class="page-title">کاوش داده</h1>
-        <p class="page-desc">بررسی ردیف‌ها، خروجی و تطبیق با کارا — نه داشبورد اصلی مدیریت</p>
+<header class="kara-page-toolbar page-header">
+    <div class="kara-page-toolbar__context page-header-copy">
+        <span class="kara-page-toolbar__eyebrow page-eyebrow">ابزار کنترل داده</span>
+        <h1 class="kara-page-toolbar__title page-title">کاوش داده</h1>
+        <p class="kara-page-toolbar__meta page-desc">بررسی ردیف‌ها، خروجی و تطبیق با کارا — نه داشبورد اصلی مدیریت</p>
     </div>
-    <div class="page-header-actions">
+    <div class="kara-page-toolbar__actions page-header-actions">
         <a href="{% url 'reports:dashboard' %}" class="btn btn-outline-kara">نمای کلی</a>
         <a href="{% url 'reports:sync_center' %}" class="btn btn-kara">همگام‌سازی</a>
     </div>

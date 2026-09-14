@@ -4,19 +4,19 @@
 {% block title %}مرکز همگام‌سازی — کارا{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/sync.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'reports/css/sync.css' %}?v=4">
 {% endblock %}
 
 {% block content %}
 <div class="sc-page" id="scPage" data-csrf="{{ csrf_token }}">
 
-<header class="sc-command">
-    <div class="sc-command-copy">
-        <span class="sc-eyebrow">لایه یکپارچه‌سازی</span>
-        <h1>همگام‌سازی کارا</h1>
-        <p>اتصال، تازگی داده و زمان‌بندی جداگانه هر گزارش — داشبورد فقط از دیتابیس محلی می‌خواند.</p>
+<header class="kara-page-toolbar sc-command">
+    <div class="kara-page-toolbar__context sc-command-copy">
+        <span class="kara-page-toolbar__eyebrow sc-eyebrow">لایه یکپارچه‌سازی</span>
+        <h1 class="kara-page-toolbar__title">همگام‌سازی کارا</h1>
+        <p class="kara-page-toolbar__meta">اتصال، تازگی داده و زمان‌بندی جداگانه هر گزارش — داشبورد فقط از دیتابیس محلی می‌خواند.</p>
     </div>
-    <div class="sc-command-actions">
+    <div class="kara-page-toolbar__actions sc-command-actions">
         <div class="conn-badge status-{{ connection.status }}">
             <span class="conn-dot"></span>
             {{ connection.status_label }}
@@ -169,7 +169,7 @@
         <p class="sc-cli mb-0">خط فرمان: <code>python manage.py kara_sync --all</code></p>
     </div>
     <div class="table-responsive">
-        <table class="table align-middle mb-0">
+        <table class="table align-middle kara-table mb-0">
             <thead>
                 <tr>
                     <th>زمان</th>

@@ -4,7 +4,7 @@
 {% block title %}فاکتور {{ invoice.order_pre_code }}{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'reports/css/invoices.css' %}?v=2">
+<link rel="stylesheet" href="{% static 'reports/css/invoices.css' %}?v=6">
 {% endblock %}
 
 {% block content %}
@@ -16,14 +16,14 @@
         </ol>
     </nav>
 
-    <header class="inv-detail-head">
-        <div class="inv-detail-head-main">
-            <span class="page-eyebrow">جزئیات فاکتور</span>
+    <header class="kara-page-toolbar inv-detail-head">
+        <div class="kara-page-toolbar__context inv-detail-head-main">
+            <span class="kara-page-toolbar__eyebrow page-eyebrow">جزئیات فاکتور</span>
             <div class="inv-detail-title-row">
-                <h1 class="page-title">فاکتور {{ invoice.order_pre_code }}</h1>
-                <strong class="inv-detail-amount">{{ invoice.amount_label }}</strong>
+                <h1 class="kara-page-toolbar__title page-title">فاکتور {{ invoice.order_pre_code }}</h1>
+                <strong class="inv-detail-amount kara-amount">{{ invoice.amount_label }}</strong>
             </div>
-            <p class="inv-detail-meta">
+            <p class="kara-page-toolbar__meta inv-detail-meta">
                 <span>{{ invoice.partner_name }}</span>
                 <span>{{ invoice.order_date }}</span>
                 <span>{{ invoice.status_label }}</span>
@@ -35,7 +35,7 @@
                 {% endif %}
             </p>
         </div>
-        <div class="inv-detail-head-actions">
+        <div class="kara-page-toolbar__actions inv-detail-head-actions">
             <a href="{% url 'reports:invoices' %}" class="btn btn-outline-kara btn-sm">
                 <i class="bi bi-arrow-right"></i> بازگشت
             </a>

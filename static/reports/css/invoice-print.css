@@ -1,35 +1,36 @@
-/* Official invoice print shell — portal wrapper around Kara HTML */
+/* Official invoice print shell — fit-to-viewport, no nested scroll */
 
 .inv-print-page {
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     background:
-        radial-gradient(circle at top right, rgba(15, 118, 110, 0.08), transparent 42%),
-        linear-gradient(180deg, #dfe4e9 0%, #e8ecef 40%, #eef1f4 100%);
+        radial-gradient(circle at 82% 0%, rgba(15, 118, 110, 0.1), transparent 38%),
+        linear-gradient(165deg, #d8dee5 0%, #e8ecef 45%, #eef1f4 100%);
     color: var(--kara-text);
     font-family: "Segoe UI", Tahoma, "Vazirmatn", "B Yekan", sans-serif;
 }
 
 .inv-print-toolbar {
-    position: sticky;
-    top: 0;
+    flex: 0 0 auto;
     z-index: 20;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem 1.25rem;
-    padding: 0.85rem 1.25rem;
-    background: rgba(255, 255, 255, 0.92);
+    gap: 0.75rem 1rem;
+    padding: 0.7rem 1.1rem;
+    background: rgba(255, 255, 255, 0.96);
     border-bottom: 1px solid var(--kara-border-strong);
-    box-shadow: var(--kara-shadow-sm);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 18px rgba(12, 18, 34, 0.06);
+    backdrop-filter: blur(12px);
 }
 
 .inv-print-toolbar__brand {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.75rem;
     min-width: 0;
 }
 
@@ -37,16 +38,16 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 3rem;
-    height: 3rem;
-    padding: 0 0.75rem;
-    border-radius: 0.85rem;
-    background: linear-gradient(135deg, var(--kara-primary), var(--kara-accent));
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.8rem;
+    background: linear-gradient(145deg, var(--kara-primary), var(--kara-accent));
     color: #fff;
-    font-size: 0.78rem;
+    font-size: 0.68rem;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    white-space: nowrap;
+    line-height: 1.1;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .inv-print-toolbar__titles {
@@ -55,36 +56,41 @@
 
 .inv-print-toolbar__titles h1 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 800;
     color: var(--kara-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .inv-print-toolbar__titles p {
-    margin: 0.2rem 0 0;
+    margin: 0.15rem 0 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.35rem 0.75rem;
-    font-size: 0.82rem;
+    gap: 0.25rem 0.65rem;
+    font-size: 0.78rem;
     color: var(--kara-text-muted);
 }
 
 .inv-print-toolbar__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 0.4rem;
 }
 
 .inv-print-chip {
     display: inline-flex;
     align-items: center;
-    padding: 0.35rem 0.7rem;
+    padding: 0.3rem 0.65rem;
     border-radius: 999px;
     background: var(--kara-surface-secondary);
     border: 1px solid var(--kara-border);
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 600;
     color: var(--kara-text-secondary);
+    white-space: nowrap;
 }
 
 .inv-print-chip--amount {
@@ -98,23 +104,24 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: flex-end;
+    gap: 0.4rem;
 }
 
 .inv-print-zoom {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.2rem;
+    gap: 0.15rem;
+    padding: 0.15rem;
     border: 1px solid var(--kara-border);
-    border-radius: 0.75rem;
+    border-radius: 0.65rem;
     background: #fff;
 }
 
 .inv-print-zoom__label {
-    min-width: 3rem;
+    min-width: 2.75rem;
     text-align: center;
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
     color: var(--kara-text-secondary);
 }
@@ -123,20 +130,17 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    min-height: 2.35rem;
-    padding: 0.45rem 0.9rem;
-    border-radius: 0.7rem;
+    gap: 0.35rem;
+    min-height: 2.2rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.65rem;
     border: 1px solid transparent;
-    font-size: 0.84rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
-}
-
-.inv-print-btn:hover {
-    text-decoration: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
 }
 
 .inv-print-btn--primary {
@@ -161,14 +165,28 @@
 }
 
 .inv-print-hint {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     color: var(--kara-text-muted);
 }
 
 .inv-print-stage {
     position: relative;
-    padding: 1.25rem 1rem 2rem;
-    overflow: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem;
+}
+
+.inv-print-viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .inv-print-loader {
@@ -178,19 +196,21 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     color: var(--kara-text-muted);
     pointer-events: none;
     transition: opacity 0.2s ease;
+    z-index: 5;
 }
 
 .inv-print-loader.is-hidden {
     opacity: 0;
+    visibility: hidden;
 }
 
 .inv-print-loader__spinner {
-    width: 2rem;
-    height: 2rem;
+    width: 1.85rem;
+    height: 1.85rem;
     border: 3px solid rgba(11, 61, 58, 0.12);
     border-top-color: var(--kara-accent);
     border-radius: 50%;
@@ -202,47 +222,36 @@
 }
 
 .inv-print-paper {
-    width: min(100%, 920px);
-    margin: 0 auto;
-    transform-origin: top center;
-    transition: transform 0.15s ease;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
 }
 
 .inv-print-frame {
     display: block;
-    width: 100%;
-    min-height: 70vh;
     border: 0;
-    border-radius: 0.35rem;
     background: #fff;
+    overflow: hidden;
+    transform-origin: top left;
+    border-radius: 2px;
     box-shadow:
-        0 1px 2px rgba(12, 18, 34, 0.05),
-        0 10px 30px rgba(12, 18, 34, 0.08),
-        0 24px 60px rgba(12, 18, 34, 0.06);
+        0 0 0 1px rgba(12, 18, 34, 0.04),
+        0 12px 28px rgba(12, 18, 34, 0.1),
+        0 28px 56px rgba(12, 18, 34, 0.08);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .inv-print-toolbar {
-        padding: 0.75rem;
+        grid-template-columns: 1fr;
+        gap: 0.55rem;
     }
 
-    .inv-print-toolbar__logo {
-        min-width: 2.5rem;
-        height: 2.5rem;
-        font-size: 0.7rem;
-    }
-
-    .inv-print-toolbar__titles h1 {
-        font-size: 0.92rem;
+    .inv-print-toolbar__meta {
+        justify-content: flex-start;
     }
 
     .inv-print-toolbar__actions {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    .inv-print-stage {
-        padding: 0.75rem 0.5rem 1.5rem;
+        justify-content: flex-start;
     }
 }
 
@@ -254,24 +263,28 @@
     }
 
     .inv-print-page {
+        height: auto;
+        overflow: visible;
         background: #fff;
     }
 
-    .inv-print-stage {
+    .inv-print-stage,
+    .inv-print-viewport {
         padding: 0;
         overflow: visible;
+        height: auto;
     }
 
     .inv-print-paper {
-        width: 100%;
         transform: none !important;
-        box-shadow: none;
+        width: 100% !important;
+        height: auto !important;
     }
 
     .inv-print-frame {
-        min-height: auto;
+        width: 100% !important;
         height: auto !important;
         box-shadow: none;
-        border-radius: 0;
+        transform: none !important;
     }
 }

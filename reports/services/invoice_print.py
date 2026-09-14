@@ -51,14 +51,48 @@ def is_access_denied_html(html: str) -> bool:
     return any(marker in text for marker in _ACCESS_DENIED_MARKERS)
 
 
+_PORTAL_PRINT_CSS = """
+<style id="portal-invoice-print-enhance">
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+}
+center { display: block !important; }
+.NoPrint, #PrintLayoutIcon, a[onclick*="ChangeLayout"] { display: none !important; }
+[name="PrintPageDIV98532"], .PrintPagePortrait, .PrintPageLandscape {
+    margin: 0 auto !important;
+    box-shadow: none !important;
+}
+.PrintTitleA4, .PrintHeader, .PrintContent, .PrintContent table {
+    font-family: "Segoe UI", Tahoma, "Vazirmatn", "B Yekan", "B Nazanin", sans-serif !important;
+}
+.PrintContent table { border-collapse: collapse !important; }
+.PrintContent td, .PrintContent th {
+    padding: 3px 5px !important;
+    line-height: 1.45 !important;
+}
+</style>
+"""
+
+
 def prepare_print_html(html: str) -> str:
-    """Inject Kara base URL so relative CSS/image paths resolve when proxied."""
+    """Inject Kara base URL and portal screen/print enhancements."""
     if not html:
         return html
-    if re.search(r"<base\s", html, flags=re.IGNORECASE):
+
+    head_injections: list[str] = []
+    if not re.search(r"<base\s", html, flags=re.IGNORECASE):
+        base_href = settings.KARA_BASE_URL.rstrip("/") + "/Sale/Print/"
+        head_injections.append(f'<base href="{base_href}">')
+    if "portal-invoice-print-enhance" not in html:
+        head_injections.append(_PORTAL_PRINT_CSS)
+
+    if not head_injections:
         return html
-    base_href = settings.KARA_BASE_URL.rstrip("/") + "/Sale/Print/"
-    injection = f'<base href="{base_href}">'
+
+    injection = "".join(head_injections)
     match = re.search(r"<head[^>]*>", html, flags=re.IGNORECASE)
     if match:
         idx = match.end()
@@ -76,7 +110,7 @@ def fetch_print_html(
     if not kara_order_id:
         raise InvoicePrintError("شناسه چاپ فاکتور موجود نیست.")
 
-    cache_key = f"kara_invoice_print:{kara_order_id}"
+    cache_key = f"kara_invoice_print:v2:{kara_order_id}"
     if use_cache:
         cached = cache.get(cache_key)
         if cached:

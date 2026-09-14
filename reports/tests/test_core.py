@@ -565,6 +565,7 @@ class InvoicePrintServiceTests(TestCase):
         out = prepare_print_html(html)
         self.assertIn('<base href="', out)
         self.assertIn("/Sale/Print/", out)
+        self.assertIn("portal-invoice-print-enhance", out)
 
     def test_sign_and_verify_print_token(self):
         from reports.services.invoice_print import sign_print_token, verify_print_token

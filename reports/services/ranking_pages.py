@@ -54,7 +54,7 @@ def ranking_summary(items: list[dict], *, label_singular: str = "نفر") -> dic
 
     amounts = [float(r.get("total_sale") or r.get("pure_sale") or r.get("amount") or 0) for r in items]
     total = sum(amounts)
-    orders = sum(int(r.get("order_count") or 0) for r in items)
+    orders = sum(_parse_order_count(r.get("order_count")) for r in items)
     top = items[0]
     top_amount = amounts[0]
     return {

@@ -1,0 +1,187 @@
+دستورهای سرور — داشبورد جنگو (Kara Web)
+مسیر واقعی پروژه: /opt/kara  (نه /root/Kara)
+کاربر سرویس: kara
+دامنه: portal.pakhshmarket.com
+به ترتیب اولویت اجرا کنید.
+
+==================================================
+1) بررسی وضعیت (اول این‌ها)
+==================================================
+
+systemctl status kara-web
+systemctl status kara-scheduler
+systemctl status nginx
+systemctl cat kara-web
+curl -fsS https://portal.pakhshmarket.com/health/
+curl -fsS http://127.0.0.1:8000/health/
+grep -E 'DJANGO_|POSTGRES_|KARA_LOG' /opt/kara/.env
+
+
+==================================================
+2) مشاهده لاگ — خطای 500 و Traceback
+==================================================
+
+# لاگ زنده سرویس وب (Gunicorn + Django) — مهم‌ترین منبع برای خطای 500
+journalctl -u kara-web -n 200 --no-pager
+journalctl -u kara-web -f
+journalctl -u kara-web --since today
+journalctl -u kara-web -p err --since today
+
+# فقط خطاها و Traceback
+journalctl -u kara-web --since today --no-pager | grep -iE 'error|traceback|exception|500'
+journalctl -u kara-web --since "1 hour ago" --no-pager | grep -A 30 -i traceback
+
+# فایل لاگ اپلیکیشن (وقتی DEBUG=False لاگ‌ها اینجا هم می‌روند)
+tail -n 200 /var/log/kara/kara.log
+tail -f /var/log/kara/kara.log
+grep -iE 'error|traceback|exception|internal server' /var/log/kara/kara.log | tail -80
+grep -A 40 -i traceback /var/log/kara/kara.log | tail -120
+
+# لاگ Nginx (502، timeout، upstream)
+tail -n 100 /var/log/nginx/kara-error.log
+tail -n 50 /var/log/nginx/kara-access.log
+grep -E ' 500 | 502 |upstream' /var/log/nginx/kara-access.log | tail -30
+
+# scheduler (اگر مشکل از sync/analytics باشد)
+journalctl -u kara-scheduler -n 100 --no-pager
+journalctl -u kara-scheduler -p err --since today
+
+
+==================================================
+3) تست URL — قبل و بعد از رفع خطا
+==================================================
+
+# سلامت کلی
+curl -fsS -o /dev/null -w "health HTTP %{http_code}\n" https://portal.pakhshmarket.com/health/
+
+# صفحه‌ای که خطا می‌دهد (مثال: سرپرستان)
+curl -sS -o /dev/null -w "supervisors HTTP %{http_code}\n" \
+  -b "sessionid=SESSION_ID_HERE" \
+  https://portal.pakhshmarket.com/reports/analytics/supervisors/
+
+# مستقیم به Gunicorn (بدون Nginx) — فقط روی سرور
+curl -sS -o /dev/null -w "local supervisors HTTP %{http_code}\n" \
+  -H "Host: portal.pakhshmarket.com" \
+  http://127.0.0.1:8000/reports/analytics/supervisors/
+
+# APIهای analytics
+curl -sS -o /dev/null -w "api supervisors HTTP %{http_code}\n" \
+  -b "sessionid=SESSION_ID_HERE" \
+  https://portal.pakhshmarket.com/reports/api/analytics/supervisors/
+
+
+==================================================
+4) دستورات Django — بررسی و نگهداری
+==================================================
+
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py check'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py check --deploy'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py migrate --check'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py showmigrations reports'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py collectstatic --noinput'
+
+
+==================================================
+5) شبیه‌سازی خطا در shell — پیدا کردن علت 500
+==================================================
+
+# باز کردن shell
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py shell'
+
+# داخل shell — تست رتبه‌بندی سرپرستان (صفحه /reports/analytics/supervisors/)
+from django.contrib.auth import get_user_model
+from reports.services.analytics import AnalyticsService
+User = get_user_model()
+user = User.objects.filter(is_superuser=True).first()
+AnalyticsService.head_visitor_ranking(limit=100, preset="today", user=user)
+
+# تست رتبه‌بندی ویزیتورها
+AnalyticsService.visitor_ranking(limit=100, preset="today", user=user)
+
+# تست اتصال دیتابیس analytics
+from reports.services.analytics import AnalyticsService
+AnalyticsService.connection_status()
+
+# اگر خطا داد، Traceback کامل در ترمینال نمایش داده می‌شود.
+
+
+==================================================
+6) analytics — sync و rebuild
+==================================================
+
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py kara_sync --help'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py rebuild_analytics'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py rebuild_analytics --from-date=1404/01/01 --to-date=1404/06/30'
+
+
+==================================================
+7) مدیریت سرویس‌ها
+==================================================
+
+systemctl restart kara-web
+systemctl restart kara-scheduler
+systemctl reload nginx
+bash /opt/kara/deploy/restart-services.sh
+sudo -u kara bash /opt/kara/deploy/deploy.sh
+
+
+==================================================
+8) عیب‌یابی سریع — علائم رایج
+==================================================
+
+# 500 Internal Server Error
+#   → journalctl -u kara-web و kara.log را ببینید
+#   → بخش 5 (shell) را برای همان view/service اجرا کنید
+
+# 502 Bad Gateway
+systemctl status kara-web
+journalctl -u kara-web -n 50 --no-pager
+ss -tlnp | grep 8000
+
+# CSRF / ورود ناموفق
+grep DJANGO_CSRF /opt/kara/.env
+grep DJANGO_ALLOWED_HOSTS /opt/kara/.env
+
+# استاتیک 404
+ls -la /var/lib/kara/staticfiles/ | head
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py collectstatic --noinput'
+
+# دیتابیس
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py dbshell'
+# داخل psql: \dt reports_*
+
+
+==================================================
+9) لاگ دقیق‌تر (موقت — فقط برای عیب‌یابی)
+==================================================
+
+# افزایش سطح لاگ اپ (بعد از تست حتماً به INFO برگردانید)
+nano /opt/kara/.env
+# KARA_LOG_LEVEL=DEBUG
+systemctl restart kara-web
+
+# مشاهده خطای لحظه‌ای هنگام باز کردن صفحه در مرورگر
+journalctl -u kara-web -f
+
+# برگرداندن به حالت عادی
+# KARA_LOG_LEVEL=INFO
+systemctl restart kara-web
+
+# هشدار: DJANGO_DEBUG=True را در production نگه ندارید.
+# فقط برای تست کوتاه روی سرور توسعه — نه portal.pakhshmarket.com
+
+
+==================================================
+10) مقادیر مهم در .env
+==================================================
+
+nano /opt/kara/.env
+
+DJANGO_DEBUG=False
+DJANGO_ALLOWED_HOSTS=portal.pakhshmarket.com,85.198.10.243
+DJANGO_CSRF_TRUSTED_ORIGINS=https://portal.pakhshmarket.com
+KARA_LOG_DIR=/var/log/kara
+KARA_LOG_LEVEL=INFO
+POSTGRES_HOST=127.0.0.1
+POSTGRES_DB=kara
+POSTGRES_USER=kara

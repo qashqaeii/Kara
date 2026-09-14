@@ -1,0 +1,86 @@
+دستورهای سرور — ربات بله کارا
+مسیر واقعی پروژه: /opt/kara  (نه /root/Kara)
+کاربر سرویس: kara
+به ترتیب اولویت اجرا کنید.
+
+==================================================
+1) بررسی وضعیت (اول این‌ها)
+==================================================
+
+systemctl status kara-bot
+systemctl cat kara-bot
+grep -E 'BALE_|KARA_LOG' /opt/kara/.env
+ps aux | grep run_bale_bot
+
+
+==================================================
+2) مشاهده لاگ
+==================================================
+
+journalctl -u kara-bot -n 100 --no-pager
+journalctl -u kara-bot -f
+journalctl -u kara-bot --since today
+journalctl -u kara-bot -p err --since today
+tail -f /var/log/kara/kara.log
+grep -i bale /var/log/kara/kara.log | tail -50
+
+
+==================================================
+3) مدیریت سرویس
+==================================================
+
+systemctl start kara-bot
+systemctl stop kara-bot
+systemctl restart kara-bot
+systemctl enable kara-bot
+systemctl disable kara-bot
+bash /opt/kara/deploy/restart-services.sh
+
+
+==================================================
+4) دستورات Django — ربات (به‌عنوان کاربر kara)
+==================================================
+
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py run_bale_bot'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py provision_bot_visitors --dry-run'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py provision_bot_visitors --all'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py provision_bot_visitors --personnel-code=20400028'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py set_bot_password 20400028'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py set_bot_password 20400028 12345678'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py provision_bot_supervisors --dry-run'
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py provision_bot_supervisors --all'
+
+
+==================================================
+5) نصب سرویس systemd (فقط اگر kara-bot وجود ندارد)
+==================================================
+
+cp /opt/kara/deploy/systemd/kara-bot.service /etc/systemd/system/
+nano /etc/systemd/system/kara-bot.service
+systemctl daemon-reload
+systemctl enable --now kara-bot
+
+
+==================================================
+6) مقادیر لازم در .env
+==================================================
+
+nano /opt/kara/.env
+
+BALE_BOT_TOKEN=...
+BALE_BOT_ENABLED=True
+BALE_ADMIN_IDS=123456789
+KARA_LOG_DIR=/var/log/kara
+
+
+==================================================
+7) عیب‌یابی — قطع اتصال tapi.bale.ai
+==================================================
+
+curl -I https://tapi.bale.ai
+ping -c 3 tapi.bale.ai
+nslookup tapi.bale.ai
+journalctl -u kara-bot -p err --since "2026-09-13" --no-pager
+systemctl restart kara-bot
+systemctl stop kara-bot
+sudo -u kara bash -lc 'cd /opt/kara && source .venv/bin/activate && python manage.py run_bale_bot'

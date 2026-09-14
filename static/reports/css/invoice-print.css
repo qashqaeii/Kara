@@ -227,14 +227,14 @@
     gap: 0.65rem;
     color: var(--kara-text-muted);
     z-index: 30;
-    background: rgba(232, 236, 239, 0.82);
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    background: rgba(232, 236, 239, 0.55);
+    transition: opacity 0.12s ease, visibility 0.12s ease;
+    pointer-events: none;
 }
 
 .inv-print-loader.is-hidden {
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
 }
 
 .inv-print-loader__spinner {

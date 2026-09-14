@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>پیش‌فاکتور {{ order_pre_code }} | پخش مارکت</title>
     <link rel="stylesheet" href="{% static 'reports/css/custom.css' %}?v=7">
-    <link rel="stylesheet" href="{% static 'reports/css/invoice-print.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'reports/css/invoice-print.css' %}?v=5">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="inv-print-page">
@@ -77,6 +77,6 @@
     <script>
         window.INV_PRINT_CONTENT_URL = "{{ content_url|escapejs }}";
     </script>
-    <script src="{% static 'reports/js/invoice-print.js' %}?v=4" defer></script>
+    <script src="{% static 'reports/js/invoice-print.js' %}?v=5" defer></script>
 </body>
 </html>

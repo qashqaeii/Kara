@@ -20,7 +20,7 @@
     var minScale = 0.75;
     var maxScale = 1.35;
     var karaBaseSet = false;
-    var stylesReady = false;
+    var loaderHidden = false;
 
     function showError(message) {
         if (!errorBox) {
@@ -31,9 +31,11 @@
     }
 
     function hideLoader() {
-        if (loader) {
-            loader.classList.add("is-hidden");
+        if (loaderHidden || !loader) {
+            return;
         }
+        loaderHidden = true;
+        loader.classList.add("is-hidden");
     }
 
     function ensureKaraBase(parsed) {
@@ -56,7 +58,6 @@
     }
 
     function importKaraStyles(parsed) {
-        var promises = [];
         parsed.querySelectorAll('link[rel="stylesheet"], style').forEach(function (node) {
             if (node.id === "portal-invoice-print-enhance") {
                 return;
@@ -64,16 +65,7 @@
             var clone = node.cloneNode(true);
             clone.setAttribute("data-kara-print-style", "1");
             document.head.appendChild(clone);
-            if (clone.tagName === "LINK") {
-                promises.push(
-                    new Promise(function (resolve) {
-                        clone.addEventListener("load", resolve);
-                        clone.addEventListener("error", resolve);
-                    })
-                );
-            }
         });
-        return Promise.all(promises);
     }
 
     function applyScale() {
@@ -88,28 +80,20 @@
         applyScale();
     }
 
-    function waitForImages() {
-        var images = documentRoot.querySelectorAll("img");
-        var pending = [];
-        images.forEach(function (img) {
-            if (!img.complete) {
-                pending.push(
-                    new Promise(function (resolve) {
-                        img.addEventListener("load", resolve);
-                        img.addEventListener("error", resolve);
-                    })
-                );
-            }
-        });
-        return Promise.all(pending);
-    }
-
-    function finalizeLayout() {
+    function revealDocument() {
         hideLoader();
         resetScale();
     }
 
+    function scheduleReveal() {
+        window.requestAnimationFrame(function () {
+            revealDocument();
+        });
+    }
+
     function loadDocument() {
+        var safetyTimer = window.setTimeout(revealDocument, 1500);
+
         fetch(contentUrl, { credentials: "same-origin", cache: "no-store" })
             .then(function (response) {
                 if (!response.ok) {
@@ -120,19 +104,17 @@
             .then(function (html) {
                 var parsed = new DOMParser().parseFromString(html, "text/html");
                 ensureKaraBase(parsed);
-                return importKaraStyles(parsed).then(function () {
-                    stylesReady = true;
-                    documentRoot.innerHTML = parsed.body ? parsed.body.innerHTML : html;
-                    return waitForImages();
-                });
-            })
-            .then(function () {
-                window.setTimeout(finalizeLayout, 50);
-                window.setTimeout(finalizeLayout, 300);
+                importKaraStyles(parsed);
+                documentRoot.innerHTML = parsed.body ? parsed.body.innerHTML : html;
+                scheduleReveal();
             })
             .catch(function (err) {
+                window.clearTimeout(safetyTimer);
                 hideLoader();
                 showError(err && err.message ? err.message : "خطا در بارگذاری پیش‌فاکتور");
+            })
+            .then(function () {
+                window.clearTimeout(safetyTimer);
             });
     }
 

@@ -559,6 +559,16 @@ class SyncOrchestrator:
                     )
                 except Exception:
                     logger.exception("bot sync notification failed")
+            if (
+                finalize_job
+                and report_key == "sale_orders"
+                and not personnel_code
+                and job.status == SyncStatus.SUCCESS
+            ):
+                try:
+                    self._chain_sync_kara_order_ids(parent_job=job)
+                except Exception:
+                    logger.exception("kara order id chain sync failed")
         return job
 
     def _ensure_profit_loss_dates(self, overrides: dict) -> dict:
@@ -674,6 +684,8 @@ class SyncOrchestrator:
             return self._upsert_distribution_reversion_rows(snapshot, job, rows)
         if report_key == "sale_orders":
             return self._upsert_sale_order_rows(snapshot, job, rows)
+        if report_key == "sale_order_registry":
+            return self._merge_sale_order_kara_ids(snapshot, job, rows)
         if report_key == "sale_orders_with_stuffs":
             return self._upsert_sale_order_line_rows(snapshot, job, rows)
         if report_key == "sale_stuffs":
@@ -910,6 +922,97 @@ class SyncOrchestrator:
             )
         SaleOrderLineSnapshot.objects.bulk_create(objs, batch_size=200)
         return len(objs), 0
+
+    def _chain_sync_kara_order_ids(self, *, parent_job: KaraSyncJob) -> None:
+        """Fetch SaleOrderAllGrid and merge OrderId GUIDs onto invoice rows."""
+        config = ReportRegistry.get("sale_order_registry")
+        child_job = KaraSyncJob.objects.create(
+            report_key="sale_order_registry",
+            status=SyncStatus.RUNNING,
+            triggered_by=parent_job.triggered_by,
+            metadata={"chained_from": parent_job.report_key, "parent_job_id": parent_job.pk},
+        )
+        started = time.monotonic()
+        try:
+            grid_response = self.client.run_report("sale_order_registry")
+            payload = grid_response.as_dict()
+            payload["fetched_at"] = timezone.now().isoformat(timespec="seconds")
+            rows = flatten_rows(payload)
+            checksum = _checksum(
+                {
+                    "Data": payload.get("Data"),
+                    "total": payload.get("GridViewJSTotal"),
+                }
+            )
+            snapshot = KaraReportSnapshot.objects.create(
+                report_key=config.key,
+                report_title=config.title,
+                fetched_at=timezone.now(),
+                raw_data=slim_stored_payload(payload),
+                rows_count=grid_response.count,
+                sync_job=child_job,
+                content_checksum=checksum,
+            )
+            inserted, updated = self._merge_sale_order_kara_ids(snapshot, child_job, rows)
+            replace_superseded_snapshots(snapshot)
+            child_job.status = SyncStatus.SUCCESS
+            child_job.received_count = grid_response.count
+            child_job.page_count = grid_response.page_count
+            child_job.inserted_count = inserted
+            child_job.updated_count = updated
+            child_job.duration_ms = int((time.monotonic() - started) * 1000)
+            child_job.finished_at = timezone.now()
+            child_job.save()
+            self._log(
+                child_job,
+                "info",
+                f"شناسه چاپ — {grid_response.count} ردیف، {updated} فاکتور بروزرسانی شد",
+            )
+        except Exception as exc:
+            child_job.status = SyncStatus.FAILED
+            child_job.error_message = str(exc)
+            child_job.error_count = 1
+            child_job.duration_ms = int((time.monotonic() - started) * 1000)
+            child_job.finished_at = timezone.now()
+            child_job.save()
+            self._log(child_job, "error", f"شناسه چاپ ناموفق: {exc}")
+            raise
+
+    def _merge_sale_order_kara_ids(self, snapshot, job, rows) -> tuple[int, int]:
+        from reports.services.retention import find_latest_full_snapshot
+
+        inv_snap = find_latest_full_snapshot("sale_orders")
+        if not inv_snap:
+            return 0, 0
+
+        id_by_pre_code: dict[str, str] = {}
+        for row in rows:
+            order_id = str(row.get("OrderId") or "").strip()
+            pre_code = str(row.get("OrderPreCode") or "").strip()
+            if order_id and pre_code:
+                id_by_pre_code[pre_code] = order_id
+
+        if not id_by_pre_code:
+            return 0, 0
+
+        orders = list(
+            SaleOrderSnapshot.objects.filter(
+                snapshot=inv_snap,
+                order_pre_code__in=id_by_pre_code.keys(),
+            )
+        )
+        to_update: list[SaleOrderSnapshot] = []
+        for order in orders:
+            kara_id = id_by_pre_code.get(order.order_pre_code, "")
+            if kara_id and order.kara_order_id != kara_id:
+                order.kara_order_id = kara_id
+                to_update.append(order)
+
+        if to_update:
+            SaleOrderSnapshot.objects.bulk_update(
+                to_update, ["kara_order_id"], batch_size=500
+            )
+        return 0, len(to_update)
 
     def _upsert_sale_order_rows(self, snapshot, job, rows) -> tuple[int, int]:
         objs = []

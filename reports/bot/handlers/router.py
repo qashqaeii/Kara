@@ -455,8 +455,22 @@ class BotRouter:
                 order.stuffs_quantity_sum or 0
             )
             text = fmt.invoice_detail_message(order, user)
+            print_url = ""
+            try:
+                from reports.services.invoice_print import (
+                    build_portal_print_url,
+                    can_print,
+                )
+
+                if can_print(order):
+                    print_url = build_portal_print_url(order_code, user.pk)
+            except Exception:
+                logger.exception("invoice print url build failed")
             markup = kb.invoice_detail_keyboard(
-                order_code, has_items=has_items, items_count=items_count
+                order_code,
+                has_items=has_items,
+                items_count=items_count,
+                print_url=print_url,
             )
             self._edit_or_send(chat_id, message_id, text, markup)
         except Exception:

@@ -445,6 +445,13 @@ class SaleOrderSnapshot(models.Model):
     )
     order_code = models.CharField(max_length=50, db_index=True)
     order_pre_code = models.CharField(max_length=50, blank=True, default="")
+    kara_order_id = models.CharField(
+        max_length=36,
+        blank=True,
+        default="",
+        db_index=True,
+        help_text="GUID کارا برای چاپ پیش‌فاکتور (SaleOrderAllGrid.OrderId)",
+    )
     order_date = models.CharField(max_length=20, blank=True, default="")
     partner_code = models.CharField(max_length=50, blank=True, default="", db_index=True)
     partner_name = models.CharField(max_length=255, blank=True, default="")

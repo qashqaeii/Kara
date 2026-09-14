@@ -359,6 +359,43 @@ class KaraClient:
             )
         )
 
+    def fetch_invoice_print(
+        self,
+        order_id: str,
+        *,
+        print_id: str | None = None,
+    ) -> str:
+        """Return raw HTML for a single sale-order print view."""
+        order_id = (order_id or "").strip()
+        if not order_id:
+            raise InvalidResponseError("شناسه فاکتور (OrderId) خالی است.")
+
+        template_id = (print_id or getattr(settings, "KARA_INVOICE_PRINT_ID", "") or "").strip()
+        if not template_id:
+            raise InvalidResponseError("شناسه قالب چاپ (PrintId) تنظیم نشده است.")
+
+        referer = urljoin(self.base_url + "/", "Sale/Order")
+        print_url = urljoin(self.base_url + "/", "Sale/Print/SingleOrderPrint")
+        self.ensure_authenticated()
+        started = time.monotonic()
+        response = self._request(
+            self.session.get,
+            print_url,
+            params={"OrderId": order_id, "PrintId": template_id},
+            headers={"Referer": referer, "Accept": "text/html,application/xhtml+xml"},
+            expect_json=False,
+        )
+        html = response.text or ""
+        if not html.strip():
+            raise InvalidResponseError("خروجی چاپ فاکتور خالی بود.")
+        duration_ms = int((time.monotonic() - started) * 1000)
+        logger.info(
+            "kara_invoice_print ok order_id=%s duration_ms=%s",
+            order_id,
+            duration_ms,
+        )
+        return html
+
     def run_print_report(
         self,
         report_key: str,

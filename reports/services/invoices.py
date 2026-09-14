@@ -703,6 +703,13 @@ class InvoiceService:
             payload["line_items_total"] = total
             if not payload["has_line_items"] and total:
                 payload["has_line_items"] = True
+
+        from reports.services.invoice_print import can_print, print_path_for_order
+
+        payload["print_available"] = can_print(order)
+        payload["print_url"] = (
+            print_path_for_order(summary.order_code) if payload["print_available"] else ""
+        )
         return payload
 
     @classmethod

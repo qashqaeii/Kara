@@ -279,6 +279,15 @@ STUFF_GROUP_ARGS: dict[str, Any] = {
     "WithMachine": "true",
 }
 
+SALE_ORDER_REGISTRY_ARGS: dict[str, Any] = {
+    "OrderState": "",
+    "JustStatements": "",
+    "JustNotStatements": "",
+    "JustFinalOrders": "",
+    "ShowPreviouseYearsOrders": "False",
+    "OrderCode": "",
+}
+
 SALE_ORDERS_ARGS: dict[str, Any] = {
     "RefreshReport": "true",
     "BPersonnelCode": "",
@@ -603,6 +612,31 @@ REPORT_DEFINITIONS: dict[str, ReportDefinition] = {
         columns=SALE_ORDER_LINE_COLUMNS,
         kpi_fields={},
         suggested_interval_minutes=60,
+    ),
+    "sale_order_registry": ReportDefinition(
+        key="sale_order_registry",
+        title="لیست پیش‌فاکتورها (شناسه چاپ)",
+        slug="sale-order-registry",
+        referer="/Sale/Order",
+        grid_name="SaleOrderAllGrid",
+        grid_title="پیش فاکتورها",
+        binding_class="Kara.BLL.Sale.Order",
+        binding_method="_GridAjaxBinding",
+        default_arguments=SALE_ORDER_REGISTRY_ARGS,
+        parser="sale_orders",
+        sync_strategy=SyncStrategy.FULL,
+        page_size=100,
+        columns=(
+            ColumnDef("OrderPreCode", "شماره پیش‌فاکتور"),
+            ColumnDef("OrderId", "شناسه کارا"),
+            ColumnDef("PartnerName", "مشتری"),
+            ColumnDef("PersonnelName", "ویزیتور"),
+            ColumnDef("OrderInsertDate", "تاریخ ثبت"),
+            ColumnDef("State", "وضعیت"),
+            ColumnDef("OrderPrice", "مبلغ", numeric=True, money=True),
+        ),
+        kpi_fields={},
+        suggested_interval_minutes=30,
     ),
     "sale_stuffs": ReportDefinition(
         key="sale_stuffs",

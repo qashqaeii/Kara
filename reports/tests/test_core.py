@@ -520,3 +520,135 @@ class InvoiceServiceTests(TestCase):
         status = InvoiceService.sync_status()
         self.assertGreaterEqual(status["orders_count"], 1)
         self.assertGreaterEqual(status["line_items_count"], 1)
+
+    def test_serialize_order_includes_print_fields(self):
+        from reports.services.invoices import InvoiceService
+
+        self.order.kara_order_id = "7417156c-8a8f-4841-adf9-96c135332cfa"
+        self.order.save(update_fields=["kara_order_id"])
+        payload = InvoiceService.serialize_order(self.order)
+        self.assertTrue(payload["print_available"])
+        self.assertIn("/print/", payload["print_url"])
+
+
+class InvoicePrintServiceTests(TestCase):
+    def test_resolve_kara_order_id_prefers_model_field(self):
+        from reports.models import KaraReportSnapshot, KaraSyncJob, SaleOrderSnapshot
+        from reports.services.invoice_print import resolve_kara_order_id
+
+        job = KaraSyncJob.objects.create(report_key="sale_orders", status="success")
+        snap = KaraReportSnapshot.objects.create(
+            report_key="sale_orders",
+            sync_job=job,
+            fetched_at=timezone.now(),
+            period_from="1405/01/01",
+            period_to="1405/05/22",
+            raw_data={},
+        )
+        order = SaleOrderSnapshot.objects.create(
+            snapshot=snap,
+            sync_job=job,
+            order_code="1",
+            order_pre_code="1000001",
+            kara_order_id="aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+            raw_data={"OrderId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"},
+        )
+        self.assertEqual(
+            resolve_kara_order_id(order),
+            "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+        )
+
+    def test_prepare_print_html_injects_base_tag(self):
+        from reports.services.invoice_print import prepare_print_html
+
+        html = "<html><head><title>x</title></head><body></body></html>"
+        out = prepare_print_html(html)
+        self.assertIn('<base href="', out)
+        self.assertIn("/Sale/Print/", out)
+
+    def test_sign_and_verify_print_token(self):
+        from reports.services.invoice_print import sign_print_token, verify_print_token
+
+        token = sign_print_token("42", 7)
+        order_code, user_id = verify_print_token(token)
+        self.assertEqual(order_code, "42")
+        self.assertEqual(user_id, 7)
+
+    def test_invoice_print_view_with_token(self):
+        from django.contrib.auth.models import User
+        from django.test import Client
+
+        from reports.models import KaraReportSnapshot, KaraSyncJob, SaleOrderSnapshot
+        from reports.services.invoice_print import sign_print_token
+
+        user = User.objects.create_user(username="printuser", password="x")
+        job = KaraSyncJob.objects.create(report_key="sale_orders", status="success")
+        snap = KaraReportSnapshot.objects.create(
+            report_key="sale_orders",
+            sync_job=job,
+            fetched_at=timezone.now(),
+            period_from="1405/01/01",
+            period_to="1405/05/22",
+            raw_data={},
+        )
+        SaleOrderSnapshot.objects.create(
+            snapshot=snap,
+            sync_job=job,
+            order_code="42",
+            order_pre_code="1000042",
+            kara_order_id="7417156c-8a8f-4841-adf9-96c135332cfa",
+            visitor_code="",
+        )
+        token = sign_print_token("42", user.pk)
+        html = "<html><head><title>صورتحساب</title></head><body>ok</body></html>"
+
+        with patch(
+            "reports.views.invoice_views.fetch_print_html",
+            return_value=html,
+        ):
+            client = Client()
+            response = client.get(f"/reports/invoices/42/print/?token={token}")
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("صورتحساب", response.content.decode())
+
+    def test_merge_sale_order_kara_ids(self):
+        from reports.models import KaraReportSnapshot, KaraSyncJob, SaleOrderSnapshot
+        from reports.services.sync.orchestrator import SyncOrchestrator
+
+        job = KaraSyncJob.objects.create(report_key="sale_orders", status="success")
+        snap = KaraReportSnapshot.objects.create(
+            report_key="sale_orders",
+            sync_job=job,
+            fetched_at=timezone.now(),
+            period_from="1405/01/01",
+            period_to="1405/05/22",
+            raw_data={},
+        )
+        order = SaleOrderSnapshot.objects.create(
+            snapshot=snap,
+            sync_job=job,
+            order_code="42",
+            order_pre_code="1000042",
+            partner_name="مشتری",
+        )
+        registry_snap = KaraReportSnapshot.objects.create(
+            report_key="sale_order_registry",
+            sync_job=job,
+            fetched_at=timezone.now(),
+            period_from="",
+            period_to="",
+            raw_data={},
+        )
+        rows = [
+            {
+                "OrderPreCode": "1000042",
+                "OrderId": "7417156c-8a8f-4841-adf9-96c135332cfa",
+            }
+        ]
+        orchestrator = SyncOrchestrator()
+        inserted, updated = orchestrator._merge_sale_order_kara_ids(registry_snap, job, rows)
+        self.assertEqual(inserted, 0)
+        self.assertEqual(updated, 1)
+        order.refresh_from_db()
+        self.assertEqual(order.kara_order_id, "7417156c-8a8f-4841-adf9-96c135332cfa")

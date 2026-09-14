@@ -1,0 +1,2057 @@
+در آدرس :
+http://app.pakhshmarket.com/Sale/Order
+
+
+Request URL
+http://app.pakhshmarket.com/Common/GridBinding/_GridAjaxBinding
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+85.198.23.170:80
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+content-length
+31824
+content-type
+application/json; charset=utf-8
+date
+Mon, 14 Sep 2026 14:17:53 GMT
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=cuh7dvnaCESluoRuiFspKnI1ZGSM6ZS6QpcMb0ovgtqbAQy2xOZahH7cOo7OWk8je5vHhXttkaSG5sFKTLDkoE469o06Ya9dweNqu2hK+9g=; expires=Tue, 15-Sep-2026 23:37:52 GMT; path=/
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+application/json, text/javascript, */*
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+connection
+keep-alive
+content-length
+420
+content-type
+application/x-www-form-urlencoded
+cookie
+Kara.Common.Request.keySession80=cuh7dvnaCESluoRuiFspKnI1ZGSM6ZS6QpcMb0ovgtqbAQy2xOZahH7cOo7OWk8je5vHhXttkaSG5sFKTLDkoE469o06Ya9dweNqu2hK+9g=; .KaraAuthProvider=62B2F94101BFC8F34335CFBB62CECACFDEF39EE2A361DD5D927891F2AC5AA3DEC17C0D0AD8E527B2DDE184C8C9AEA7A4330056A86D2D13B7902E241E63F518DCDF19A7A542088A54E47807C5C5F06AB2AA0459F4BC810386BC95C0276751635D62CAD8E5FF4565C0A9197A6F0C442E39146442AF49604BDF3C1320CA481B5DCA0926471A31E37154A2CA7DC735F6EE7FA39B1090CD85527951EB551C762CA79BE4826C179221F094313BE95ABFCCB3A98BB69B80400D4542FDC4B0488CEA14F5669767FDEEEEDF411D6DA03FE62C88F489116E86C228FC2FFAA2ED5609758C0C328CB144D468CE84E4268E1E2CE2113481C28ABC6945F15031609ED965B4078F114429F36253BBEB02D9500D94500A12D9E391C977A44724A895C1CC7AAB42C83CD1269785AB11C8BCB5AD86F5CCC96813B78C3A52CA51B0957A8CB72BEC743BDDEDE760F6865A4FBCBFFD17F815016E046C9BF3A23A931D9C4FEFBDA12ED56E392AD7635A5830951FD242EAAA9BCB29010F2B79AB5CA56D9E4FFF5DC6D3C621DFF0B9DCF84EB9521B57F9ABCB31268D14B137464F77FF8EC2E5901ACD246EDB689519A449024FFF8DB98075BC930B568FEE1504FA54BBB2BCBFE9EDCB0E06DA2501D0F03B9E757734218E0D9D01003A9696FCF23E2DE5439E9BB1BBD2F1DC9922DB76AAB722795BD9F69C7F64911934F8083DD051BD418FC885173799371C14A9315E9233306C818F2D47D65AE7756AEC914BD938C315489C5F8F8FF04138FBE266F7F6AA54CE7DAEC3F579901CBF40847EE243A6F8BCEBA7A7177A9E8955EF335A20A8738B7EFDC758D61F82CE29E0F120ED319B311515F1C3EC7D1696C605F8959ABBFDA7CA59E82C4BC249692E5F755E6713C3927C22A913EE9DC304C9C7E9EBA6402961B4A0F64F9E586AC106FBFED997A6A3F474C03181C4D8AC46700D7322D492
+host
+app.pakhshmarket.com
+origin
+http://app.pakhshmarket.com
+referer
+http://app.pakhshmarket.com/Sale/Order
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36
+x-requested-with
+XMLHttpRequest
+
+
+
+
+پیلود :
+GridName
+SaleOrderAllGrid
+GridTitle
+پیش فاکتورها
+GridJSFrom
+1
+GridJSCount
+20
+GridJSTotal
+0
+SortColumn
+SortOrder
+none
+ColumnFilterString
+BindingClass
+Kara.BLL.Sale.Order
+BindingMethod
+_GridAjaxBinding
+BindingArguments
+OrderState=&JustStatements=&JustNotStatements=&JustFinalOrders=&ShowPreviouseYearsOrders=False&OrderCode=&
+ExportType
+Grid
+
+
+
+
+و ریسپانس :
+
+{
+    "GridViewJSTotal": 1678,
+    "GridViewJSFrom": 1,
+    "GridViewJSCount": 20,
+    "Data": [
+        {
+            "Key": 1,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001739",
+                "PartnerCode": "14302032",
+                "PartnerName": "جواد محمدی",
+                "PartnerLegalName": "سوپر مارکت محمدی",
+                "PartnerAddress": "سه راه آذری خیابان قدرت پاکی نبش کوچه نبش کوچه محمد علی نیک پی پلاک 195",
+                "PartnerPhones": "09920360352",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "تهران / منطقه 17 / آذری",
+                "PersonnelCode": "20400025",
+                "PersonnelName": "طاها امیرشادبر",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "16:33",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 16:55",
+                "TotalCode": "",
+                "InsertUserName": "مریم آقازاده تازه کندی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "115,800,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "چهارشنبه 25 شهریور 10 به بعد ارسال شود",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "",
+                "OrderId": "7417156c-8a8f-4841-adf9-96c135332cfa",
+                "PartnerId": "62ffe10e-c3b9-4a2d-9366-a3549b29103d",
+                "PersonnelId": "c73c39f1-c7c8-4bb0-8fad-df3013372f3f",
+                "MobileInserted": "false",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "16:55",
+                "ValidateTime1": "16:35"
+            }
+        },
+        {
+            "Key": 2,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001738",
+                "PartnerCode": "14101027",
+                "PartnerName": "بهرام براتلو",
+                "PartnerLegalName": "",
+                "PartnerAddress": "جوادیه خیابان فریدون نوری بنبست اول روبه روی قهوه خانه پلاک 51",
+                "PartnerPhones": "09353097438",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "تهران / منطقه 16 / جوادیه",
+                "PersonnelCode": "20400025",
+                "PersonnelName": "طاها امیرشادبر",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "16:26",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 16:55",
+                "TotalCode": "",
+                "InsertUserName": "مریم آقازاده تازه کندی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "26,400,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "چهارشنبه ساعت 10 به بعد",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "",
+                "OrderId": "b1250f3d-7eac-4c3e-8f59-2e3be957e13a",
+                "PartnerId": "9137f76e-dfd8-42cd-b6e5-912188a41706",
+                "PersonnelId": "c73c39f1-c7c8-4bb0-8fad-df3013372f3f",
+                "MobileInserted": "false",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "16:55",
+                "ValidateTime1": "16:35"
+            }
+        },
+        {
+            "Key": 3,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001737",
+                "PartnerCode": "12101064",
+                "PartnerName": "شهرام  اکبری ",
+                "PartnerLegalName": "",
+                "PartnerAddress": "پاکدشت/ بیست متری مقداد فدک ۱۵ نرسیده به پارک لرکده سوپرمارکت یکتا ",
+                "PartnerPhones": "09194369715",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "پاکدشت / میدان ساعت / بلوار جنوبی",
+                "PersonnelCode": "20400002",
+                "PersonnelName": "ستایش شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "16:10",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 16:55",
+                "TotalCode": "",
+                "InsertUserName": "ستایش شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "19,200,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "بار صدرصد پنجشنبه ارسال شود  ۱۰ به بعد  و اینکه ۱۳ تا دونه آبمیوه ، البالو دارد که مشکل داره  جابه جای انجام شود با آبمیوه انبه ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "",
+                "OrderId": "a4f1fd46-78e9-4275-bc86-739915d0acde",
+                "PartnerId": "de451963-1889-4b25-ac4d-76cf3bd1f8f5",
+                "PersonnelId": "e4e8c9ad-04da-4dd2-9905-3266866780f4",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "16:55",
+                "ValidateTime1": "16:35"
+            }
+        },
+        {
+            "Key": 4,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001736",
+                "PartnerCode": "11901036",
+                "PartnerName": "امیر حسین  شاهی",
+                "PartnerLegalName": "سوپر مارکت تک ",
+                "PartnerAddress": "قرچک باقرآبادخیابان بسیج خیابان جانبازان انتهای جانباز ۴ جنب نانوایی لواش پلاک ۱۷",
+                "PartnerPhones": "09926670346",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "15:09",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "26,040,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "چهارشنبه بار بره ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5871160,35.4016024",
+                "OrderId": "b7942987-cd3e-4fe4-a161-6793bb528fc8",
+                "PartnerId": "8de697c3-f26d-4ab0-b9f9-de31796e95eb",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "15:51"
+            }
+        },
+        {
+            "Key": 5,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001735",
+                "PartnerCode": "11901035",
+                "PartnerName": "جلال شاه ملکی ",
+                "PartnerLegalName": "سوپر مارکت فعله گری ",
+                "PartnerAddress": "قرچک باقرآبادخیابان بسیج داخل جانباز۴ پلاک ۵",
+                "PartnerPhones": "09195703411",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "15:04",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "30,800,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه بار بره",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5855144,35.4033919",
+                "OrderId": "42c4389c-d3a8-45b2-bef8-f1008c6c0712",
+                "PartnerId": "e68a0a1b-f35c-4582-b329-35ce4b2d8a7a",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "15:51"
+            }
+        },
+        {
+            "Key": 6,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001734",
+                "PartnerCode": "11901034",
+                "PartnerName": "محمد  عبدی ",
+                "PartnerLegalName": "پروتئین تک ",
+                "PartnerAddress": "قرچک باقرآبادخیابان بسیج نبش نرگس ۱۲",
+                "PartnerPhones": "09192044763",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "14:28",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "31,800,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه بار بره ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5847341,35.4047964",
+                "OrderId": "77c582c0-2f78-475b-b683-b344173784fa",
+                "PartnerId": "a1697981-b135-4cb7-a071-77482727b183",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:29"
+            }
+        },
+        {
+            "Key": 7,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001733",
+                "PartnerCode": "11901033",
+                "PartnerName": "علی فتحی ",
+                "PartnerLegalName": "هایپر تک ",
+                "PartnerAddress": "قرچک باقرآبادخیابان بسیج نبش نرگس ۱۲",
+                "PartnerPhones": "09387362333",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "14:24",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "15,200,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه بار بره ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5847367,35.4047915",
+                "OrderId": "ebba0ff1-a382-4dd0-98a2-50c7c9c8144f",
+                "PartnerId": "de753f7d-bcb8-45c2-9654-47adec76d581",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:29"
+            }
+        },
+        {
+            "Key": 8,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001732",
+                "PartnerCode": "12902002",
+                "PartnerName": "رضا  شجاعی ",
+                "PartnerLegalName": "",
+                "PartnerAddress": "قرچک  باقر اباد خیابان بسیج نبش همت 8",
+                "PartnerPhones": "09196044457",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "پیشوا / مرکزی / 15خرداد",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "14:09",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "35,800,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه ۱۲ به بعد برو زودتر بار نمیگیره ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5838364,35.4044757",
+                "OrderId": "3e17e0f5-fa8b-4c63-9869-467112a426c4",
+                "PartnerId": "eca22bc4-1697-496a-a77b-a08f6dcafaa0",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:29"
+            }
+        },
+        {
+            "Key": 9,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001731",
+                "PartnerCode": "11901011",
+                "PartnerName": "داوود محمدی ",
+                "PartnerLegalName": "سوپر مارکت محمدی",
+                "PartnerAddress": "قرچک باقرآبادخیابان بسیج بین همت 6 و 7",
+                "PartnerPhones": "09127910574",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "14:02",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "15,000,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه بار به دستش برسد قبل ۱۲",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5846302,35.4048752",
+                "OrderId": "0e25cade-19bd-4e75-9f33-3ae4803d2110",
+                "PartnerId": "0e9c63cb-d823-4e0d-a1ab-7e7bf5ee31e3",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:29"
+            }
+        },
+        {
+            "Key": 10,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001730",
+                "PartnerCode": "11901032",
+                "PartnerName": "مصطفی  خیرش داد ",
+                "PartnerLegalName": "سوپر مارکت ایران ",
+                "PartnerAddress": "قرچک باقرآبادخیابان بسیج روبه روی نرگس ۱۰ ",
+                "PartnerPhones": "09190534207",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "13:54",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "19,500,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5853717,35.4052178",
+                "OrderId": "b07bacc4-e8ac-450a-ba89-7f10564805b0",
+                "PartnerId": "a0dc1a58-8433-4521-b44d-93db12edf03f",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:29"
+            }
+        },
+        {
+            "Key": 11,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001729",
+                "PartnerCode": "12101205",
+                "PartnerName": "علی  سلیمی نژادیان ",
+                "PartnerLegalName": "سوپر مارکت سلیمی ",
+                "PartnerAddress": "پاکدشت ارکیده ۱۲پلاک ۱۷",
+                "PartnerPhones": "09185012142",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "پاکدشت / میدان ساعت / بلوار جنوبی",
+                "PersonnelCode": "20400034",
+                "PersonnelName": "محمد عرب",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "13:48",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "محمد عرب",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "54,820,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنج شنبه ساعت 11ارسال شود ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "دستی",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.6702129,35.4850806",
+                "OrderId": "6c7dab78-cf4c-47b2-ac83-dc72173c7715",
+                "PartnerId": "5762663d-ef10-4123-85be-ee1062ac62e4",
+                "PersonnelId": "15d68410-d010-4b96-a8cd-9eef8f4393c3",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:29"
+            }
+        },
+        {
+            "Key": 12,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001728",
+                "PartnerCode": "14631003",
+                "PartnerName": "آقا  جعفر پور",
+                "PartnerLegalName": "",
+                "PartnerAddress": "مجید آباد اول کوچه قشم پلاک 5",
+                "PartnerPhones": "09212796544",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "تهران / منطقه 20 / باقرشهر",
+                "PersonnelCode": "20400022",
+                "PersonnelName": "علی حاج غلامعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "13:34",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:53",
+                "TotalCode": "",
+                "InsertUserName": "علی حاج غلامعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "267,900,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.3857800,35.5148817",
+                "OrderId": "a602eba1-2ef6-486f-8bd7-b1de673eb588",
+                "PartnerId": "c1e07b80-a063-44cc-a5f0-93f313610817",
+                "PersonnelId": "9f40f95c-c899-4853-94de-4be359eb3f8f",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:53",
+                "ValidateTime1": "14:30"
+            }
+        },
+        {
+            "Key": 13,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001727",
+                "PartnerCode": "11901008",
+                "PartnerName": "علیرضا  زیادی",
+                "PartnerLegalName": "سوپر مارکت علیرضا",
+                "PartnerAddress": "قرچک باقرآباد ابتدای خیابان بسیج جنب نانوایی لواشی روبه روی مسجد ",
+                "PartnerPhones": "09012062749",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "13:17",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "39,400,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5889394,35.4065594",
+                "OrderId": "a29ab231-1fe6-4790-ae1f-b1cf7fb4b345",
+                "PartnerId": "8c2b0376-209b-4000-850b-b2b3ca2e91ba",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:23"
+            }
+        },
+        {
+            "Key": 14,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001726",
+                "PartnerCode": "11406008",
+                "PartnerName": "علی  باشتنی ",
+                "PartnerLegalName": "عطاری همیشه بهار ",
+                "PartnerAddress": "پاکدشت بیست متری مقداد /بین جماران ۱۰ و ۱۲ پلاک ۱۱۲",
+                "PartnerPhones": "09367312892",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "پاکدشت / فرون اباد / 20متری مقداد",
+                "PersonnelCode": "20400002",
+                "PersonnelName": "ستایش شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "13:11",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "ستایش شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "42,000,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": " مغازه ۱۰ به بعد باز میباشد ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "",
+                "OrderId": "703d8b9c-8839-4c5f-9b5e-7dbca9c80c83",
+                "PartnerId": "f45768c3-a4cd-452b-ac82-0cbd769788ef",
+                "PersonnelId": "e4e8c9ad-04da-4dd2-9905-3266866780f4",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:23"
+            }
+        },
+        {
+            "Key": 15,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001725",
+                "PartnerCode": "14637006",
+                "PartnerName": "آقا کاکاوند",
+                "PartnerLegalName": "",
+                "PartnerAddress": "گلحصار روبه روی پست بانگ۵۶",
+                "PartnerPhones": "09126395244",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "تهران / منطقه 20 / گل حصار",
+                "PersonnelCode": "20400022",
+                "PersonnelName": "علی حاج غلامعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "12:52",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "علی حاج غلامعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "45,000,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.4410933,35.5472433",
+                "OrderId": "f8d70c1b-68c0-4366-80bb-bd147a16203c",
+                "PartnerId": "77cf358e-9ab6-41e5-9faa-78f6cbb96543",
+                "PersonnelId": "9f40f95c-c899-4853-94de-4be359eb3f8f",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:23"
+            }
+        },
+        {
+            "Key": 16,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001724",
+                "PartnerCode": "12101204",
+                "PartnerName": "حسین  سلیمی ",
+                "PartnerLegalName": "فروشگاه مواد غذایی شهر وند ",
+                "PartnerAddress": "پاکدشت آرمیده ۸پلاک ۲۸",
+                "PartnerPhones": "09190062091",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "پاکدشت / میدان ساعت / بلوار جنوبی",
+                "PersonnelCode": "20400034",
+                "PersonnelName": "محمد عرب",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "12:36",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "محمد عرب",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "33,600,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنج شنبه ۹صب ارسال شود",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.6714117,35.4859183",
+                "OrderId": "6cdc145d-d26f-4add-a895-075171206a5f",
+                "PartnerId": "97e3f71e-4c34-4cc1-b8f2-b5135b76dd76",
+                "PersonnelId": "15d68410-d010-4b96-a8cd-9eef8f4393c3",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:23"
+            }
+        },
+        {
+            "Key": 17,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001723",
+                "PartnerCode": "11901007",
+                "PartnerName": "علی  سلگی",
+                "PartnerLegalName": "سوپر مارکت سلگی",
+                "PartnerAddress": "قرچک باقرآباد بلوار امام خمینی کوچه نبوت پلاک 22",
+                "PartnerPhones": "09125938890",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "12:36",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "19,200,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه بار بره \n",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5855650,35.4090148",
+                "OrderId": "c7c956d3-4c8e-4027-968b-832c474e20e4",
+                "PartnerId": "6774eef0-a9ed-497c-aa72-667753c04dfa",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:24"
+            }
+        },
+        {
+            "Key": 18,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001722",
+                "PartnerCode": "14637001",
+                "PartnerName": "آقا  ایزدپناه",
+                "PartnerLegalName": "",
+                "PartnerAddress": "گل حصار خ رستگار نبش بیات پلاک ۲۹",
+                "PartnerPhones": "09192245640",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "تهران / منطقه 20 / گل حصار",
+                "PersonnelCode": "20400022",
+                "PersonnelName": "علی حاج غلامعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "12:34",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "علی حاج غلامعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "33,600,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.4436517,35.5450450",
+                "OrderId": "b3034161-269a-497d-8140-73bdcecbed2e",
+                "PartnerId": "53269cf9-027b-4fc1-bbe6-6f7c2583fe99",
+                "PersonnelId": "9f40f95c-c899-4853-94de-4be359eb3f8f",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:23"
+            }
+        },
+        {
+            "Key": 19,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001721",
+                "PartnerCode": "11406007",
+                "PartnerName": "محمد فرح زاد ",
+                "PartnerLegalName": "هایپر ایران زمین ",
+                "PartnerAddress": "پاکدشت /بیست متری مقداد  میدان مقداد روبه روی باشگاه اسطوره سازان ",
+                "PartnerPhones": "09338088775",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "پاکدشت / فرون اباد / 20متری مقداد",
+                "PersonnelCode": "20400002",
+                "PersonnelName": "ستایش شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "12:29",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "ستایش شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "30,000,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": " مغازه ۹ به بعد باز میباشد ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "",
+                "OrderId": "924cae84-545f-45df-8396-7eb9cf53a51f",
+                "PartnerId": "61b49e4d-2231-4aeb-b36a-4aedd37cf937",
+                "PersonnelId": "e4e8c9ad-04da-4dd2-9905-3266866780f4",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:24"
+            }
+        },
+        {
+            "Key": 20,
+            "Value": {
+                "OrderCode": "",
+                "OrderPreCode": "1001720",
+                "PartnerCode": "11901031",
+                "PartnerName": "رضا  نورمحمدی ",
+                "PartnerLegalName": "لبنیات محلی بوعلی ",
+                "PartnerAddress": "قرچک باقرآباد خیابان اصلی روبه روی کتابخونه ولایت ",
+                "PartnerPhones": "09193099953",
+                "PartnerEconomicCode": "",
+                "PartnerNationalCode": "",
+                "PartnerZuneAndPath": "قرچک / بلوار امام خمینی / جنب مسجد جامع",
+                "PersonnelCode": "20300005",
+                "PersonnelName": "ستاره شیخعلی",
+                "SaleLine": "لاین پیش فرض",
+                "OrderInsertDate": "1405/06/23",
+                "OrderInsertDateTime": "12:15",
+                "State": "ثبت شده",
+                "LastValidDate": "1405/06/23 15:54",
+                "TotalCode": "",
+                "InsertUserName": "ستاره شیخعلی",
+                "ConfirmUser": "حمیدرضا مهتاب قره لر",
+                "OrderPrice": "41,520,000",
+                "SettlementName": "نقد",
+                "SettlementDay": "0",
+                "Description": "پنجشنبه بار بره ساعت ۱۱ به بعد هستش ",
+                "Description2": "",
+                "WarehouseName": "انبار پخش - مجتمع جم",
+                "PriceCalculation": "خودکار",
+                "DiscountCalculation": "خودکار",
+                "VATCalculation": "خودکار",
+                "Corrdinates": "51.5858234,35.4099801",
+                "OrderId": "96085715-826c-4222-91b1-10a48afce1da",
+                "PartnerId": "61baedde-6542-4d35-b874-4bc40459590c",
+                "PersonnelId": "06bac6c5-3c29-427b-af8b-bd9e65776f13",
+                "MobileInserted": "true",
+                "PhoneVisitInserted": "false",
+                "ValidateDate1": "1405/06/23",
+                "ValidateDate2": "1405/06/23",
+                "ValidateDate3": "",
+                "ValidateDate4": "",
+                "ValidateDate5": "",
+                "ValidateTime5": "",
+                "ValidateTime4": "",
+                "ValidateTime3": "",
+                "ValidateTime2": "15:54",
+                "ValidateTime1": "13:23"
+            }
+        }
+    ],
+    "SumRowData": {
+        "OrderCode": null,
+        "OrderPreCode": null,
+        "PartnerCode": null,
+        "PartnerName": null,
+        "PartnerLegalName": null,
+        "PartnerAddress": null,
+        "PartnerPhones": null,
+        "PartnerEconomicCode": null,
+        "PartnerNationalCode": null,
+        "PartnerZuneAndPath": null,
+        "PersonnelCode": null,
+        "PersonnelName": null,
+        "SaleLine": null,
+        "OrderInsertDate": null,
+        "OrderInsertDateTime": null,
+        "State": null,
+        "LastValidDate": null,
+        "TotalCode": null,
+        "InsertUserName": null,
+        "ConfirmUser": null,
+        "OrderPrice": "56,862,206,912",
+        "SettlementName": null,
+        "SettlementDay": null,
+        "Description": null,
+        "Description2": null,
+        "WarehouseName": null,
+        "PriceCalculation": null,
+        "DiscountCalculation": null,
+        "VATCalculation": null,
+        "Corrdinates": null,
+        "OrderId": null,
+        "PartnerId": null,
+        "PersonnelId": null,
+        "MobileInserted": null,
+        "PhoneVisitInserted": null,
+        "ValidateDate1": null,
+        "ValidateDate2": null,
+        "ValidateDate3": null,
+        "ValidateDate4": null,
+        "ValidateDate5": null,
+        "ValidateTime5": null,
+        "ValidateTime4": null,
+        "ValidateTime3": null,
+        "ValidateTime2": null,
+        "ValidateTime1": null
+    },
+    "OtherInformations": []
+}
+
+
+
+
+
+که چندین صفحه داره . 
+
+
+حالا وقتی نمایش داده میشه به شکل جدولی هر مورد :
+
+یک گزینه داریم به اسم چاپ که با  زدن اون برای هر مورد به طور مثال برای این کیس :
+
+
+http://app.pakhshmarket.com/Sale/Print/SingleOrderPrint?OrderId=7417156c-8a8f-4841-adf9-96c135332cfa&PrintId=451a9d74-8c8d-47e5-b6c6-abe3b26e41fd
+
+مورد رو ببین که وقتی به این صفحه میایم فاکتور رو کامل میبینیم 
+
+
+
+Request URL
+http://app.pakhshmarket.com/Sale/Print/SingleOrderPrint?OrderId=7417156c-8a8f-4841-adf9-96c135332cfa&PrintId=451a9d74-8c8d-47e5-b6c6-abe3b26e41fd
+Request Method
+GET
+Status Code
+200 OK
+Remote Address
+85.198.23.170:80
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+allow-file-access-from-files
+*
+cache-control
+private
+content-encoding
+gzip
+content-length
+5668
+content-type
+text/html; charset=utf-8
+date
+Mon, 14 Sep 2026 14:22:24 GMT
+server
+Microsoft-IIS/10.0
+set-cookie
+Kara.Common.Request.keySession80=cuh7dvnaCESluoRuiFspKnI1ZGSM6ZS6QpcMb0ovgtqbAQy2xOZahH7cOo7OWk8je5vHhXttkaSG5sFKTLDkoE469o06Ya9dweNqu2hK+9g=; expires=Tue, 15-Sep-2026 23:42:24 GMT; path=/
+vary
+Accept-Encoding
+x-aspnet-version
+4.0.30319
+x-aspnetmvc-version
+3.0
+x-powered-by
+ASP.NET
+accept
+text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+accept-encoding
+gzip, deflate
+accept-language
+en-US,en;q=0.9,fa;q=0.8
+cache-control
+max-age=0
+connection
+keep-alive
+cookie
+Kara.Common.Request.keySession80=cuh7dvnaCESluoRuiFspKnI1ZGSM6ZS6QpcMb0ovgtqbAQy2xOZahH7cOo7OWk8je5vHhXttkaSG5sFKTLDkoE469o06Ya9dweNqu2hK+9g=; .KaraAuthProvider=62B2F94101BFC8F34335CFBB62CECACFDEF39EE2A361DD5D927891F2AC5AA3DEC17C0D0AD8E527B2DDE184C8C9AEA7A4330056A86D2D13B7902E241E63F518DCDF19A7A542088A54E47807C5C5F06AB2AA0459F4BC810386BC95C0276751635D62CAD8E5FF4565C0A9197A6F0C442E39146442AF49604BDF3C1320CA481B5DCA0926471A31E37154A2CA7DC735F6EE7FA39B1090CD85527951EB551C762CA79BE4826C179221F094313BE95ABFCCB3A98BB69B80400D4542FDC4B0488CEA14F5669767FDEEEEDF411D6DA03FE62C88F489116E86C228FC2FFAA2ED5609758C0C328CB144D468CE84E4268E1E2CE2113481C28ABC6945F15031609ED965B4078F114429F36253BBEB02D9500D94500A12D9E391C977A44724A895C1CC7AAB42C83CD1269785AB11C8BCB5AD86F5CCC96813B78C3A52CA51B0957A8CB72BEC743BDDEDE760F6865A4FBCBFFD17F815016E046C9BF3A23A931D9C4FEFBDA12ED56E392AD7635A5830951FD242EAAA9BCB29010F2B79AB5CA56D9E4FFF5DC6D3C621DFF0B9DCF84EB9521B57F9ABCB31268D14B137464F77FF8EC2E5901ACD246EDB689519A449024FFF8DB98075BC930B568FEE1504FA54BBB2BCBFE9EDCB0E06DA2501D0F03B9E757734218E0D9D01003A9696FCF23E2DE5439E9BB1BBD2F1DC9922DB76AAB722795BD9F69C7F64911934F8083DD051BD418FC885173799371C14A9315E9233306C818F2D47D65AE7756AEC914BD938C315489C5F8F8FF04138FBE266F7F6AA54CE7DAEC3F579901CBF40847EE243A6F8BCEBA7A7177A9E8955EF335A20A8738B7EFDC758D61F82CE29E0F120ED319B311515F1C3EC7D1696C605F8959ABBFDA7CA59E82C4BC249692E5F755E6713C3927C22A913EE9DC304C9C7E9EBA6402961B4A0F64F9E586AC106FBFED997A6A3F474C03181C4D8AC46700D7322D492
+host
+app.pakhshmarket.com
+referer
+http://app.pakhshmarket.com/Sale/Order
+upgrade-insecure-requests
+1
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36
+
+
+
+OrderId=7417156c-8a8f-4841-adf9-96c135332cfa&PrintId=451a9d74-8c8d-47e5-b6c6-abe3b26e41fd
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	
+     صورتحساب فروش 
+
+</title>
+    <style type="text/css" media="print">
+        .NoPrint
+        {
+            display:none;
+        }
+    </style>
+    <style>
+        .partition{
+              page-break-before: always;
+          }
+    </style>
+    <link type="text/css" href="../../Content/Print.css" rel="stylesheet" />
+    <script src="../../Scripts/jquery-1.6.4.js"></script>
+    <script>
+        function Zoomin() {
+            var ReportTables = document.getElementsByName('PrintMainContentDIV');
+            for (var i = 0; i < ReportTables.length; i++) {
+                var ReportTable = ReportTables[i];
+                var ZoomPercent = Number(ReportTable.style.fontSize.replace('%', ''));
+                ReportTable.style.fontSize = (ZoomPercent + 10) + '%';
+            }
+        }
+        function Zoomout() {
+            var ReportTables = document.getElementsByName('PrintMainContentDIV');
+            for (var i = 0; i < ReportTables.length; i++) {
+                var ReportTable = ReportTables[i];
+                var ZoomPercent = Number(ReportTable.style.fontSize.replace('%', ''));
+                ReportTable.style.fontSize = (ZoomPercent - 10) + '%';
+            }
+        }
+
+        function ChangeLayout() {
+            var PrintLayoutIcon = document.getElementById('PrintLayoutIcon');
+            var PrintPageDIVs = document.getElementsByName('PrintPageDIV98532');
+            for (var i = 0; i < PrintPageDIVs.length; i++) {
+                var PrintPageDIV = PrintPageDIVs[i];
+                var ClassName = PrintPageDIV.className;
+                if (ClassName.indexOf('Portrait') != -1) {
+                    ClassName = ClassName.replace('Portrait', 'LandScape');
+                    PrintPageDIV.className = ClassName;
+                    PrintLayoutIcon.src = PrintLayoutIcon.src.replace('Portrait', 'Landscape');
+                }
+                else if (ClassName.indexOf('LandScape') != -1) {
+                    ClassName = ClassName.replace('LandScape', 'Portrait');
+                    PrintPageDIV.className = ClassName;
+                    PrintLayoutIcon.src = PrintLayoutIcon.src.replace('Landscape', 'Portrait');
+                }
+            }
+        }
+    </script>
+    </head>
+<body dir="rtl"  >
+    <center >
+        <div name="PrintPageDIV98532" id="PrintPageDIV_83c65fe98cec4da7b3885ad632f2d714" class="PrintPagePortrait"
+            style="border:none; height:auto; font-size:100%; line-height:150%; overflow:visible;">
+            <div style="overflow:visible; font-family:'B Yekan';" id="PrintTitleDIV" class="PrintTitleA4 borderWidth1" style="position:relative;">
+                <table style="height:fit-content; padding-top:10px; width:99%; position:relative;" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="text-align: right;" width="33%">
+                            
+                                <img id="BranchLogo" alt="" src="../../../../../../Uploads/CompanyLogo/kara.png" />
+                            
+                        </td>
+                        <td style="text-align:center; line-height:200%; width:34%;">
+                            
+                            <span style="page-break-inside:avoid; font-size:15pt;">
+                                پخش<span style="font-family: inherit;">&nbsp;</span>مارکت
+                            </span>
+                            <br />
+                            
+                            <span style="font-size: 11pt;">
+                                
+    
+    <span style="line-height: 200%; font-size: 14pt;">
+        صورتحساب فروش
+        <br />
+    </span>
+
+                            </span>
+                        </td>
+                        <td style="font-size: 8pt; font-weight: normal; text-align: left;vertical-align: bottom;" width="33%">
+                            <div class="NoPrint" style="position:relative; top:0px; left:0px;">
+                                <a onclick="Zoomin(); return false;" href="#" ><img src="../../../../Content/Image/Button/Small/Zoomin.png"/></a>
+                                <a onclick="Zoomout(); return false;" href="#" ><img src="../../../../Content/Image/Button/Small/Zoomout.png"/></a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a onclick="ChangeLayout(); return false;" href="#" ><img id="PrintLayoutIcon" src="../../../../Content/Image/Button/Small/Portrait.png"/></a>
+                            </div>
+                            
+    
+    <table cellpadding="0" cellspacing="0" style="line-height: 150%; position: relative; top: -5px; float: left; font-size: 13pt;">
+        
+        <tr>
+            <td colspan="2" style="background: #fff; padding: 3px;">
+                <img src="/Common/Utility/StringToBarcode?height=25" />
+            </td>
+        </tr>
+        
+
+        <tr style="line-height: 100%;">
+            <td style="text-align: right; font-size: 13pt">
+                شماره صورتحساب:
+            </td>
+            <td style="text-align: left; font-size: 13pt">
+                1001739
+            </td>
+        </tr>
+        
+        <tr style="line-height: 100%;">
+            <td style="text-align: right; font-size: 13pt">
+                 تاریخ :
+            </td>
+            <td style="text-align: left; font-size: 13pt">
+                <span dir="ltr">
+                    1405/06/23
+                </span>
+            </td>
+        </tr>
+    </table>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="PrintHeaderDIV" class="PrintHeader borderWidth1" style="font-size:95%;">
+                <table style="width:100%; text-align:right; font-family:'B Nazanin';" cellpadding="0" cellspacing="0" >
+                    
+    
+    <tr style="font-weight: bold;">
+        <td style="border-bottom: 1px solid #888; line-height: 180%;">
+            <table style="width: 100%;">
+                <tr>
+                    
+                    <td> شماره سرجمع : <span dir="ltr"></span></td>
+                    
+                    <td> تاریخ سرجمع : <span dir="ltr">---</span></td>
+                    
+                    <td> تاریخ ارسال : <span dir="ltr">---</span></td>
+                    
+                </tr>
+            </table>
+        </td>
+    </tr>
+    
+    <tr style="font-weight: bold; line-height: 180%;">
+        <td>
+            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                
+                <tr>
+                    <td style="border-bottom: 1px solid #888; border-left: 1px solid #888; text-align: center;">
+                        <b> فروشنده </b>
+                    </td>
+                    <td style="border-bottom: 1px solid #888;">
+                        <table style="width: 100%;">
+                            
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tr>
+                                            
+                                            <td style="width: 30; direction: ltr;">
+                                                پخش مارکت
+                                            </td>
+                                            
+                                            <td style="width: 25; direction: ltr;">
+                                                 شماره ثبت : 678672
+                                            </td>
+                                            
+                                            <td style="width: 25; direction: ltr;">
+                                                 شماره اقتصادی : 14015594080
+                                            </td>
+                                            
+                                            <td style="width: 20; direction: ltr;">
+                                                 کد پستی : 1663816167
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tr>
+                                            
+                                            <td style="width: 45; direction: ltr;">
+                                                 آدرس : تهران، ابتدای خیابان شهید عراقی شمالی، نبش حق گو، پ 11، واحد 6
+                                            </td>
+                                            
+                                            <td style="width: 55; direction: ltr;">
+                                                 تلفن : 83 916 916 021
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tr>
+                                            
+                                            <td style="width: 30; direction: ltr;">
+                                                 نام ویزیتور: طاها امیرشادبر
+                                            </td>
+                                            
+                                            <td style="width: 30; direction: ltr;">
+                                                 موبایل ویزیتور: 09306900294
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td style="border-bottom: 1px solid #888; border-left: 1px solid #888; text-align: center;">
+                        <b> خریدار </b>
+                    </td>
+                    <td style="border-bottom: 1px solid #888; border-right: none;">
+                        <table style="width: 100%;">
+                            
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tr>
+                                            
+                                            <td style="width: 25%">
+                                                 نام : جواد محمدی
+                                            </td>
+                                            
+                                            <td style="width: 30%">
+                                                <b>نام فروشگاه: سوپر مارکت محمدی</b>
+                                            </td>
+                                            
+                                            <td style="width: 20%">
+                                                 کد : 14302032
+                                            </td>
+                                            
+                                            <td style="width: 25%">
+                                                 موبایل : 09920360352
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                        <tr>
+                                            
+                                            <td style="width: 75%">
+                                                 آدرس : سه راه آذری خیابان قدرت پاکی نبش کوچه نبش کوچه محمد علی نیک پی پلاک 195
+                                            </td>
+                                            
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            
+                        </table>
+                    </td>
+                </tr>
+                
+            </table>
+        </td>
+    </tr>
+    
+                </table>
+            </div>
+            <div id="PrintMainContentDIV" name="PrintMainContentDIV" class="PrintContent" style="font-size:90%; font-family:'B Nazanin';">
+                
+    
+    <table cellspacing="0" cellpadding="0" style="width: 100%; font-size: 110%; line-height: 180%;" class="ReportTable borderWidth1">
+        <tbody>
+            <tr style="line-height: 216%;">
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                    
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                    کد
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                     نام کالا 
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                    سری ساخت
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                    تاریخ انقضاء
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                     تعداد 
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                    معادل
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                     فی 
+                </td>
+                
+                <td colspan="1" style="border-width: 1px; background: #ddd; border-top: 1px solid #888;">
+                     مبلغ نهایی 
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    1
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50008100
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    کنسرو تن ماهی 180 گرم برند آرکیکا طعم دودی
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    12 قوطی
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    12 
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    2<span style="font-family: inherit;">,</span>550<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    30<span style="font-family: inherit;">,</span>600<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    2
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50008200
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    کنسرو تن ماهی 180 گرم برند آرکیکا طعم فلفلی
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    12 قوطی
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    12 
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    2<span style="font-family: inherit;">,</span>550<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    30<span style="font-family: inherit;">,</span>600<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    3
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50008800
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    کنسرو تن ماهی 180 گرم برند WA طعم شویدی
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    12 قوطی
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    12 
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    2<span style="font-family: inherit;">,</span>150<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    25<span style="font-family: inherit;">,</span>800<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    4
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50006000
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    آب میوه پاکتی 200 سی سی برند چکر طعم آناناس
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    1 باکس
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    32 عدد
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    5
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50005700
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    آب میوه پاکتی 200 سی سی برند چکر طعم هلو
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    1 باکس
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    32 عدد
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    6
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50005600
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    آب میوه پاکتی 200 سی سی برند چکر طعم پرتقال
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    1 باکس
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    32 عدد
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    7
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50005800
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    آب میوه پاکتی 200 سی سی برند چکر طعم انبه
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    1 باکس
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    32 عدد
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="line-height: 180%;">
+                
+                <td style="border-width: 1px; ">
+                    8
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    50006100
+                </td>
+                
+                <td style="border-width: 1px; white-space:nowrap;">
+                    آب میوه پاکتی 200 سی سی برند چکر طعم سیب موز
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    ---
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    1 باکس
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    32 عدد
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+                <td style="border-width: 1px; ">
+                    5<span style="font-family: inherit;">,</span>760<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="text-align: right; font-weight: bold; background: #ddd; line-height: 180%;">
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    جمع:
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    41
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    196
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    
+                </td>
+                
+                <td colspan="1" style="border-width: 1px;">
+                   
+
+                    115,800,000
+                </td>
+                
+            </tr>
+
+                   <tr style="text-align: right; font-weight: bold; background: #ddd; line-height: 180%;">
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       میانگین:
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+                   <td colspan="1" style="border-width: 1px;">
+                       
+                    
+                </td>
+                
+            </tr>
+
+
+            
+            <tr style="background:#ddd;">
+                
+                <td colspan="8" style="text-align: left;  border-width: 1px;">
+                    تخفیف تسویه نقد(3%):
+                </td>
+                
+                <td colspan="1" style="text-align: right;  border-width: 1px;">
+                    3<span style="font-family: inherit;">,</span>474<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+            <tr style="background:#ddd;">
+                
+                <td colspan="6" style="text-align: right; font-weight: bold; border-width: 1px;">
+                    <span style="font-style: normal; text-decoration: none;">یکصد و دوازده میلیون و سیصد و بیست و شش هزارریال</span>
+                </td>
+                
+                <td colspan="2" style="text-align: left;  border-width: 1px;">
+                     مبلغ نهایی :
+                </td>
+                
+                <td colspan="1" style="text-align: right;  border-width: 1px;">
+                    112<span style="font-family: inherit;">,</span>326<span style="font-family: inherit;">,</span>000
+                </td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
+
+            </div>
+            <div id="PrintTailerDIV" name="PrintTailerDIV" class="PrintContent" style="font-size:90%; 
+                                                                                       font-family:'B Nazanin';">
+                
+    
+
+    <table style="width: 100%; line-height: 180%;">
+        
+        <tr>
+            <td style="text-align: right; font-style: normal; font-weight: normal; background-color: #ddd; border: 2px solid #444; font-weight: bold;">*چهارشنبه 25 شهریور 10 به بعد ارسال شود</td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: right; font-style: normal; background-color: #FFFFFF; ">شماره کارت و شبا جهت واریز وجه: 5859471120675214 - IR540780202010020001023401 (بانک خاورمیانه به نام امیرفرهنگ سراج)<br />کد ملی جهت ثبت چک : 6590002827 (امیرفرهنگ سراج)<br />-----------------------------------------------------------------<br />
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="width: 600px; overflow: hidden; text-align: right; font-style: normal; font-weight: normal; background-color: #FFFFFF;">اعتماد شما، ارزشمندترین سرمایه ماست... امیدواریم این افتخار را داشته باشیم سهمی هر چند کوچک در رونق کسب و کار و موفقیت شما ایفا کنیم. روزتان پر از اتفاقات خوب🧡<br />📌 در صورت نیاز مدیران فروش ما مستقیماً پاسخگوی شما هستند:<span>&emsp;</span><span>&emsp;</span> 4921951 - 0933 (آقای مهتـاب) | 7824935 – 0991 (آقای رحیمی)<br /><br />
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="text-align: right; font-style: normal; font-weight: normal; background-color: #FFFFFF;">
+                <table style="width: 100%; text-align: center;">
+                    <tr><td style="border:1px solid #888; width: 25%; vertical-align: top; height: 90px;">مهر و امضاء واحد فروش<br /></td><td style="border:0px solid #888; width: 25%; vertical-align: top; height: 90px;"><br /></td><td style="border:0px solid #888; width: 25%; vertical-align: top; height: 90px;"><br /></td><td style="border:1px solid #888; width: 25%; vertical-align: top; height: 90px;">مهر و امضاء خریدار<br /></td></tr>
+                </table>
+            </td>
+        </tr>
+
+    </table>
+    
+            </div>
+        </div>
+    </center>
+</body>
+</html>

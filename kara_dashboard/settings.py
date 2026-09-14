@@ -180,6 +180,22 @@ KARA_SALE_ORDERS_DYNAMIC_PARTNER_GROUPS = os.environ.get(
     "KARA_SALE_ORDERS_DYNAMIC_PARTNER_GROUPS", ""
 )
 
+# Official Kara invoice print (SingleOrderPrint)
+KARA_INVOICE_PRINT_ID = os.environ.get(
+    "KARA_INVOICE_PRINT_ID",
+    "451a9d74-8c8d-47e5-b6c6-abe3b26e41fd",
+)
+KARA_INVOICE_PRINT_CACHE_SECONDS = int(
+    os.environ.get("KARA_INVOICE_PRINT_CACHE_SECONDS", "600")
+)
+KARA_INVOICE_PRINT_TOKEN_SECONDS = int(
+    os.environ.get("KARA_INVOICE_PRINT_TOKEN_SECONDS", "900")
+)
+PORTAL_PUBLIC_URL = os.environ.get(
+    "PORTAL_PUBLIC_URL",
+    "https://portal.pakhshmarket.com",
+).rstrip("/")
+
 # Comma-separated UUID lists for stuff_group_sale / monthly_sale (from Network dump)
 KARA_ENTITY_GROUP_IDS = os.environ.get("KARA_ENTITY_GROUP_IDS", "")
 KARA_PARTNER_GROUP_IDS = os.environ.get("KARA_PARTNER_GROUP_IDS", "")

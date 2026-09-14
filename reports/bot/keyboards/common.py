@@ -148,8 +148,16 @@ def invoice_detail_keyboard(
     *,
     has_items: bool = False,
     items_count: int = 0,
+    print_url: str = "",
 ) -> types.InlineKeyboardMarkup:
     kb = types.InlineKeyboardMarkup(row_width=1)
+    if print_url:
+        kb.add(
+            types.InlineKeyboardButton(
+                "🖨 پیش‌فاکتور رسمی",
+                url=print_url,
+            )
+        )
     if has_items or items_count:
         if has_items:
             label = "📄 مشاهده اقلام"

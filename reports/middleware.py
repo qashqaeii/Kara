@@ -27,7 +27,12 @@ class ReportsLoginRequiredMiddleware:
 
         try:
             match = resolve(path)
-            if match.url_name and f"{match.namespace}:{match.url_name}" in self.EXEMPT_NAMES:
+            route_name = (
+                f"{match.namespace}:{match.url_name}" if match.url_name else ""
+            )
+            if route_name in self.EXEMPT_NAMES:
+                return self.get_response(request)
+            if route_name == "reports:invoice_print" and (request.GET.get("token") or "").strip():
                 return self.get_response(request)
         except Resolver404:
             pass

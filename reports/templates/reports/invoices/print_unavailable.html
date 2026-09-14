@@ -1,0 +1,25 @@
+{% extends "reports/base.html" %}
+{% load static %}
+
+{% block title %}چاپ فاکتور{% endblock %}
+
+{% block content %}
+<div class="kara-card" style="max-width: 520px; margin: 2rem auto;">
+    <div class="kara-card-header">
+        <h1 class="h5 mb-0">پیش‌فاکتور رسمی در دسترس نیست</h1>
+    </div>
+    <div class="kara-card-body">
+        <p class="mb-2">
+            {% if order_pre_code %}
+            فاکتور <strong>{{ order_pre_code }}</strong>
+            {% else %}
+            فاکتور <strong>#{{ order_code }}</strong>
+            {% endif %}
+        </p>
+        <p class="text-muted mb-3">{{ reason }}</p>
+        <a href="{% url 'reports:invoice_detail' order_code %}" class="btn btn-outline-kara btn-sm">
+            <i class="bi bi-arrow-right"></i> بازگشت به جزئیات فاکتور
+        </a>
+    </div>
+</div>
+{% endblock %}

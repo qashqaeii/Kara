@@ -2,9 +2,18 @@
 
 from __future__ import annotations
 
+from django.contrib.auth.models import User
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.views import View
 
+from reports.services.invoice_print import (
+    InvoicePrintError,
+    can_print,
+    fetch_print_html,
+    resolve_kara_order_id,
+    verify_print_token,
+)
 from reports.services.invoices import INVOICE_STATUS_FILTER_OPTIONS, InvoiceListFilters, InvoiceService
 from reports.views.mixins import InvoiceAccessMixin
 
@@ -66,6 +75,71 @@ class InvoiceDetailView(InvoiceAccessMixin, View):
                 "lines_page": lines_page,
             },
         )
+
+
+class InvoicePrintView(View):
+    """Proxy Kara's official invoice HTML through the portal."""
+
+    unavailable_template = "reports/invoices/print_unavailable.html"
+
+    def get(self, request, order_code: str):
+        code = (order_code or "").strip()
+        if not code:
+            raise Http404()
+
+        user = self._resolve_user(request, code)
+        if user is None:
+            raise Http404()
+        if not InvoiceService.can_access_order(user, code):
+            raise Http404()
+
+        order = InvoiceService.get_order(user, code)
+        if not order:
+            raise Http404()
+        if not can_print(order):
+            return render(
+                request,
+                self.unavailable_template,
+                {
+                    "order_code": code,
+                    "order_pre_code": order.order_pre_code,
+                    "reason": "شناسه چاپ این فاکتور هنوز از کارا sync نشده است.",
+                },
+                status=404,
+            )
+
+        try:
+            html = fetch_print_html(resolve_kara_order_id(order))
+        except InvoicePrintError as exc:
+            return render(
+                request,
+                self.unavailable_template,
+                {
+                    "order_code": code,
+                    "order_pre_code": order.order_pre_code,
+                    "reason": str(exc),
+                },
+                status=503,
+            )
+
+        response = HttpResponse(html, content_type="text/html; charset=utf-8")
+        response["X-Frame-Options"] = "SAMEORIGIN"
+        return response
+
+    def _resolve_user(self, request, order_code: str) -> User | None:
+        token = (request.GET.get("token") or "").strip()
+        if token:
+            try:
+                token_code, user_id = verify_print_token(token)
+            except InvoicePrintError:
+                return None
+            if token_code != order_code:
+                return None
+            return User.objects.filter(pk=user_id).first()
+
+        if request.user.is_authenticated:
+            return request.user
+        return None
 
 
 _FIELD_LABELS = {

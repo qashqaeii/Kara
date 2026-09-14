@@ -41,7 +41,12 @@ from reports.views.api_views import (
     VisitorRankingAPIView,
 )
 from reports.views.auth_views import LoginView, LogoutView
-from reports.views.invoice_views import InvoiceDetailView, InvoiceListView, InvoicePrintView
+from reports.views.invoice_views import (
+    InvoiceDetailView,
+    InvoiceListView,
+    InvoicePrintContentView,
+    InvoicePrintView,
+)
 from reports.views.report_views import (
     DashboardView,
     ReportDetailView,
@@ -57,6 +62,11 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("invoices/", InvoiceListView.as_view(), name="invoices"),
+    path(
+        "invoices/<str:order_code>/print/content/",
+        InvoicePrintContentView.as_view(),
+        name="invoice_print_content",
+    ),
     path("invoices/<str:order_code>/print/", InvoicePrintView.as_view(), name="invoice_print"),
     path("invoices/<str:order_code>/", InvoiceDetailView.as_view(), name="invoice_detail"),
     path("", DashboardView.as_view(), name="dashboard"),

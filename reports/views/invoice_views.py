@@ -5,12 +5,15 @@ from __future__ import annotations
 from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import View
 
 from reports.services.invoice_print import (
     InvoicePrintError,
+    append_query_token,
     can_print,
     fetch_print_html,
+    print_content_path_for_order,
     resolve_kara_order_id,
     verify_print_token,
 )
@@ -77,25 +80,100 @@ class InvoiceDetailView(InvoiceAccessMixin, View):
         )
 
 
+def _resolve_print_user(request, order_code: str) -> User | None:
+    token = (request.GET.get("token") or "").strip()
+    if token:
+        try:
+            token_code, user_id = verify_print_token(token)
+        except InvoicePrintError:
+            return None
+        if token_code != order_code:
+            return None
+        return User.objects.filter(pk=user_id).first()
+
+    if request.user.is_authenticated:
+        return request.user
+    return None
+
+
+def _get_print_order(request, order_code: str):
+    code = (order_code or "").strip()
+    if not code:
+        raise Http404()
+
+    user = _resolve_print_user(request, code)
+    if user is None:
+        raise Http404()
+    if not InvoiceService.can_access_order(user, code):
+        raise Http404()
+
+    order = InvoiceService.get_order(user, code)
+    if not order:
+        raise Http404()
+    return user, order
+
+
 class InvoicePrintView(View):
-    """Proxy Kara's official invoice HTML through the portal."""
+    """Portal shell around Kara's official invoice print HTML."""
+
+    unavailable_template = "reports/invoices/print_unavailable.html"
+    template_name = "reports/invoices/print.html"
+
+    def get(self, request, order_code: str):
+        code = (order_code or "").strip()
+        try:
+            user, order = _get_print_order(request, code)
+        except Http404:
+            raise
+
+        if not can_print(order):
+            return render(
+                request,
+                self.unavailable_template,
+                {
+                    "order_code": code,
+                    "order_pre_code": order.order_pre_code,
+                    "reason": "شناسه چاپ این فاکتور هنوز از کارا sync نشده است.",
+                },
+                status=404,
+            )
+
+        summary = InvoiceService.to_summary(order, user=user)
+        token = (request.GET.get("token") or "").strip()
+        content_url = append_query_token(print_content_path_for_order(code), token)
+        detail_url = ""
+        if request.user.is_authenticated and not token:
+            detail_url = reverse("reports:invoice_detail", kwargs={"order_code": code})
+
+        return render(
+            request,
+            self.template_name,
+            {
+                "order_code": code,
+                "order_pre_code": summary.order_pre_code,
+                "partner_name": summary.partner_name,
+                "order_date": summary.order_date,
+                "amount_label": summary.amount_label,
+                "status_label": summary.status_label,
+                "content_url": content_url,
+                "detail_url": detail_url,
+                "from_bot": bool(token),
+            },
+        )
+
+
+class InvoicePrintContentView(View):
+    """Raw Kara invoice HTML — embedded in the print shell iframe."""
 
     unavailable_template = "reports/invoices/print_unavailable.html"
 
     def get(self, request, order_code: str):
         code = (order_code or "").strip()
-        if not code:
-            raise Http404()
+        try:
+            _user, order = _get_print_order(request, code)
+        except Http404:
+            raise
 
-        user = self._resolve_user(request, code)
-        if user is None:
-            raise Http404()
-        if not InvoiceService.can_access_order(user, code):
-            raise Http404()
-
-        order = InvoiceService.get_order(user, code)
-        if not order:
-            raise Http404()
         if not can_print(order):
             return render(
                 request,
@@ -125,21 +203,6 @@ class InvoicePrintView(View):
         response = HttpResponse(html, content_type="text/html; charset=utf-8")
         response["X-Frame-Options"] = "SAMEORIGIN"
         return response
-
-    def _resolve_user(self, request, order_code: str) -> User | None:
-        token = (request.GET.get("token") or "").strip()
-        if token:
-            try:
-                token_code, user_id = verify_print_token(token)
-            except InvoicePrintError:
-                return None
-            if token_code != order_code:
-                return None
-            return User.objects.filter(pk=user_id).first()
-
-        if request.user.is_authenticated:
-            return request.user
-        return None
 
 
 _FIELD_LABELS = {

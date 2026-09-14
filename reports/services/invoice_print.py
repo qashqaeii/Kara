@@ -156,3 +156,15 @@ def build_portal_print_url(order_code: str, user_id: int) -> str:
 
 def print_path_for_order(order_code: str) -> str:
     return reverse("reports:invoice_print", kwargs={"order_code": order_code})
+
+
+def print_content_path_for_order(order_code: str) -> str:
+    return reverse("reports:invoice_print_content", kwargs={"order_code": order_code})
+
+
+def append_query_token(url: str, token: str) -> str:
+    token = (token or "").strip()
+    if not token:
+        return url
+    separator = "&" if "?" in url else "?"
+    return f"{url}{separator}token={token}"

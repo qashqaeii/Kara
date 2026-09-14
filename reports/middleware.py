@@ -32,7 +32,10 @@ class ReportsLoginRequiredMiddleware:
             )
             if route_name in self.EXEMPT_NAMES:
                 return self.get_response(request)
-            if route_name == "reports:invoice_print" and (request.GET.get("token") or "").strip():
+            if route_name in (
+                "reports:invoice_print",
+                "reports:invoice_print_content",
+            ) and (request.GET.get("token") or "").strip():
                 return self.get_response(request)
         except Resolver404:
             pass

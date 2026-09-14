@@ -596,21 +596,29 @@ class InvoicePrintServiceTests(TestCase):
             sync_job=job,
             order_code="42",
             order_pre_code="1000042",
+            partner_name="مشتری تست",
             kara_order_id="7417156c-8a8f-4841-adf9-96c135332cfa",
             visitor_code="",
         )
         token = sign_print_token("42", user.pk)
         html = "<html><head><title>صورتحساب</title></head><body>ok</body></html>"
+        client = Client()
 
         with patch(
             "reports.views.invoice_views.fetch_print_html",
             return_value=html,
         ):
-            client = Client()
-            response = client.get(f"/reports/invoices/42/print/?token={token}")
+            shell = client.get(f"/reports/invoices/42/print/?token={token}")
+            content = client.get(f"/reports/invoices/42/print/content/?token={token}")
 
-        self.assertEqual(response.status_code, 200)
-        self.assertIn("صورتحساب", response.content.decode())
+        self.assertEqual(shell.status_code, 200)
+        shell_body = shell.content.decode()
+        self.assertIn("پیش‌فاکتور رسمی", shell_body)
+        self.assertIn("1000042", shell_body)
+        self.assertIn("/print/content/", shell_body)
+
+        self.assertEqual(content.status_code, 200)
+        self.assertIn("صورتحساب", content.content.decode())
 
     def test_merge_sale_order_kara_ids(self):
         from reports.models import KaraReportSnapshot, KaraSyncJob, SaleOrderSnapshot

@@ -110,6 +110,14 @@ class BotInvoiceService:
         )
 
     @classmethod
+    def _jalali_today(cls) -> str:
+        return InvoiceService._jalali_today()
+
+    @classmethod
+    def _jalali_month_prefix(cls) -> str:
+        return InvoiceService._jalali_month_prefix()
+
+    @classmethod
     def _effective_raw_data(cls, order: SaleOrderSnapshot) -> dict:
         return InvoiceService._effective_raw_data(order)
 

@@ -280,6 +280,9 @@ class BotNotificationService:
     @classmethod
     def notify_sync_complete(cls, report_key: str, row_count: int = 0) -> int:
         """Notify connected users about a successful data sync (deduped per 2h window)."""
+        if not getattr(settings, "BALE_NOTIFY_SYNC_COMPLETE", False):
+            return 0
+
         label = SYNC_REPORT_LABELS.get(report_key, "اطلاعات")
         category = (
             BotUserNotification.CATEGORY_SETTLEMENT

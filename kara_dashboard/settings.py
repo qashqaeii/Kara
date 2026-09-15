@@ -253,6 +253,10 @@ BALE_LOGIN_LOCK_MINUTES = int(os.environ.get("BALE_LOGIN_LOCK_MINUTES", "15"))
 BALE_API_URL = os.environ.get("BALE_API_URL", "https://tapi.bale.ai/bot{0}/{1}")
 BALE_CONNECT_TIMEOUT = int(os.environ.get("BALE_CONNECT_TIMEOUT", "10"))
 BALE_READ_TIMEOUT = int(os.environ.get("BALE_READ_TIMEOUT", "30"))
+# Push/inbox alerts when Kara sync finishes (sale_orders, visitor_sale, etc.)
+BALE_NOTIFY_SYNC_COMPLETE = os.environ.get(
+    "BALE_NOTIFY_SYNC_COMPLETE", "False"
+).lower() in ("true", "1", "yes")
 
 from django.contrib.messages import constants as message_constants
 

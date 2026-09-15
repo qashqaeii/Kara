@@ -14,6 +14,7 @@ from reports.models import (
     BaleUserIdentity,
     BotInvoiceWatchState,
     BotNotificationEvent,
+    BotUserNotification,
     BotVisitorCredential,
     KaraReportSnapshot,
     KaraSyncJob,
@@ -172,6 +173,17 @@ class BotInvoiceAccessTests(TestCase):
         self.assertIsNotNone(order)
         summary = BotInvoiceService.to_summary(order)
         self.assertIn("احمدی", summary.partner_name)
+
+    def test_jalali_helpers_delegate_to_invoice_service(self):
+        self.assertTrue(BotInvoiceService._jalali_today())
+        self.assertTrue(BotInvoiceService._jalali_month_prefix().endswith("/"))
+
+    def test_visitor_performance_snapshot(self):
+        from reports.bot.services.performance import BotPerformanceService
+
+        data = BotPerformanceService.snapshot(self.user_a)
+        self.assertEqual(data.get("mode"), "visitor")
+        self.assertTrue(data.get("has_data"))
 
     def test_pagination(self):
         job = self.snap.sync_job
@@ -525,6 +537,28 @@ class BotNotificationTests(TestCase):
         key, label = derive_order_status(order)
         self.assertEqual(key, "TotalReversion")
         self.assertEqual(label, "کاملا مرجوعی")
+
+
+class BotSyncNotificationTests(TestCase):
+    def setUp(self):
+        self.user = _provision_visitor("101", "x", username="sync_visitor")
+        BaleUserIdentity.objects.create(bale_user_id=7001, user=self.user)
+
+    def test_notify_sync_complete_disabled_by_default(self):
+        from reports.bot.services.notifications import BotNotificationService
+
+        notified = BotNotificationService.notify_sync_complete("visitor_sale", 42)
+        self.assertEqual(notified, 0)
+        self.assertEqual(BotUserNotification.objects.count(), 0)
+
+    def test_notify_sync_complete_when_enabled(self):
+        from reports.bot.services.notifications import BotNotificationService
+
+        with self.settings(BALE_NOTIFY_SYNC_COMPLETE=True, BALE_BOT_ENABLED=False):
+            with patch.object(BotNotificationService, "_push_message", return_value=False):
+                notified = BotNotificationService.notify_sync_complete("visitor_sale", 42)
+        self.assertEqual(notified, 1)
+        self.assertEqual(BotUserNotification.objects.count(), 1)
 
 
 class BotNavigationTests(TestCase):
